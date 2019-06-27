@@ -1,6 +1,6 @@
-import React from 'react'
-import { Switch, Route } from 'react-router-dom'
-import HomePage from './pages/homePage.js';
+import React from "react";
+import { Switch, Route } from "react-router-dom";
+import HomePage from "./pages/homePage.js";
 
 // The Main component renders one of the three provided
 // Routes (provided that one matches). Both the /roster
@@ -10,10 +10,10 @@ import HomePage from './pages/homePage.js';
 const Main = () => (
   <main>
     <Switch>
-        <Route exact path='/' component={HomePage} />
-        <Route path="home" component={HomePage} />
+      <Route exact path="/" component={HomePage} />
+      <Route path="home" component={HomePage} />
     </Switch>
   </main>
-)
+);
 
-export default Main
+export default Main;
