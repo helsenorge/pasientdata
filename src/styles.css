@@ -1,0 +1,37 @@
+body {
+  background-color: #FFFFFF !important;
+  font-family: 'Raleway', sans-serif !important;
+  height: 100%;
+  display: flex;
+  /* min-height: 100vh; */
+  flex-direction: column;
+}
+
+.text-generic {
+  color: #FFFFFF;
+  text-align: center;
+  padding: 10px;
+  /*max-width: 85%;*/
+}
+
+.text-color {
+  color: #FFFFFF;
+}
+
+html {
+  height: 100%;
+}
+
+.google-login-button {
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 150px;
+}
+
+.no-margin {
+  margin: 0 !important;
+}
