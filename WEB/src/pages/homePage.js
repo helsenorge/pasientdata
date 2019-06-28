@@ -15,7 +15,8 @@ class homePage extends Component {
       name: "",
       email: "",
       pic: "",
-      dataSet: []
+      dataSet: [],
+      measurements: []
     };
   }
 
@@ -25,11 +26,19 @@ class homePage extends Component {
         headers: { Authorization: "Bearer " + response.accessToken }
       })
       .then(res => {
+        let measurements = [...this.state.measurements];
+        res.data.point.forEach((item, index) =>
+          measurements.push({
+            start: this.formatNanosec(item.startTimeNanos),
+            end: this.formatNanosec(item.endTimeNanos),
+            value: item.value[0].intVal
+          })
+        );
         this.setState({
-          dataSet: res.data.point,
           name: response.profileObj.name,
           email: response.profileObj.email,
-          pic: response.profileObj.imageUrl + "?sz=200"
+          pic: response.profileObj.imageUrl + "?sz=200",
+          measurements: measurements
         });
       })
       .catch(error => {
@@ -42,19 +51,16 @@ class homePage extends Component {
     return momentObject.format("DD/MM-YY | HH:mm:ss");
   }
 
-  createDataList() {
-    return this.state.dataSet.map((item, index) => (
+  formatMeasurements() {
+    return this.state.measurements.map((item, index) => (
       <li key={index}>
         {" "}
-        "Start: " {this.formatNanosec(item.startTimeNanos)} ", End: "{" "}
-        {this.formatNanosec(item.endTimeNanos)} ", Steps: "{" "}
-        {item.value[0].intVal}
+        "Start: " {item.start} ", End: " {item.end} ", Steps: " {item.value}
       </li>
     ));
   }
 
   render() {
-    const list = this.createDataList();
     return (
       <div>
         {
@@ -71,8 +77,8 @@ class homePage extends Component {
           />
         }
         <div>
-          {console.log(this.state.dataSet)}
-          {list}
+          {this.formatMeasurements()}
+          {console.log(this.state.measurements)}
         </div>
       </div>
     );
