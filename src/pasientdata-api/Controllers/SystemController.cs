@@ -7,7 +7,7 @@ using Spark.Service;
 
 namespace Pasientdata.Api.Controllers
 {
-    [Route("fhir/[controller]"), ApiController, EnableCors]
+    [Route("fhir"), ApiController, EnableCors]
     public class SystemController : ControllerBase
     {
         private readonly IFhirService _fhirService;
