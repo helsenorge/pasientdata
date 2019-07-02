@@ -48,7 +48,7 @@ class homePage extends Component {
 
   formatNanosec(ns) {
     let momentObject = moment(ns / 1000000);
-    return momentObject.format("DD/MM-YY | HH:mm:ss");
+    return momentObject.format("YYYY-MM-DDTHH:mm:ss"); // Conforms to FHIR standard
   }
 
   formatMeasurements() {
