@@ -27,7 +27,7 @@ export default function (state = initialState(), action) {
     case CREATE_CONNECTION: {
       let nextState = Object.assign({}, state)
       nextState.accessToken = action.accessToken;
-      return nextState;
+      return {type: userInfo, nextState};
     }
   
     default: return state;
