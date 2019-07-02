@@ -19,7 +19,7 @@ class HomePage extends Component {
     super(props);
     this.responseGoogle = this.responseGoogle.bind(this);
     this.state = {
-      measurements: [],
+      datasets: [],
       redirectProfile: false,
       waiting: false
     };
@@ -37,25 +37,29 @@ class HomePage extends Component {
         headers: { Authorization: "Bearer " + response.accessToken }
       })
       .then(res => {
-        let measurements = [...this.state.measurements];
+        let datasets = [...this.state.datasets];
+        const pic = response.profileObj.imageUrl + '?sz=200';
+
         res.data.point.forEach((item, index) =>
-          measurements.push({
-            start: this.formatNanosec(item.startTimeNanos),
+        datasets.push({
+            name: "adrian",
+            measurements: {start: this.formatNanosec(item.startTimeNanos),
             end: this.formatNanosec(item.endTimeNanos),
-            value: item.value[0].intVal
+            value: item.value[0].intVal}
           })
         );
         this.props.onLoggedIn(
           response.profileObj.googleId,
-          response.name,
-          response.profileObj.image,
+          response.profileObj.givenName,
+          response.profileObj.familyName,
+          pic,
           response.profileObj.email,
-          measurements
+          datasets
         );
         this.setState({ redirectProfile: true });
       })
       .catch(error => {
-        console.log(error.response);
+        console.log(error);
       });
   }
 
@@ -64,14 +68,14 @@ class HomePage extends Component {
     return momentObject.format("YYYY-MM-DDTHH:mm:ss"); // Conforms to FHIR standard
   }
 
-  formatMeasurements() {
-    return this.state.measurements.map((item, index) => (
-      <li key={index}>
-        {" "}
-        "Start: " {item.start} ", End: " {item.end} ", Steps: " {item.value}
-      </li>
-    ));
-  }
+  // formatMeasurements() {
+  //   return this.state.datasets.measurements.map((item, index) => (
+  //     <li key={index}>
+  //       {" "}
+  //       "Start: " {item.start} ", End: " {item.end} ", Steps: " {item.value}
+  //     </li>
+  //   ));
+  // }
 
   render() {
     if (this.state.redirectProfile === true) {
@@ -104,7 +108,7 @@ const mapDispatchToProps = { onLoggedIn, onSetIsWaiting, onCreateConnection };
 
 function mapStateToProps(state) {
   return {
-    isWaiting: state.baseInfo.isWaiting
+    isWaiting: state.baseInfo.isWaiting,
   };
 }
 
