@@ -8,14 +8,14 @@ body {
 }
 
 .text-generic {
-  color: #FFFFFF;
+  color: rgb(0, 0, 0);
   text-align: center;
   padding: 10px;
   /*max-width: 85%;*/
 }
 
 .text-color {
-  color: #FFFFFF;
+  color: rgb(0, 0, 0);
 }
 
 html {
@@ -34,4 +34,34 @@ html {
 
 .no-margin {
   margin: 0 !important;
+}
+
+.login-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 150px;
+}
+
+.index-Image-head {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.index-Image {
+  max-height: 200px;
+  max-width: 85%;
+}
+
+.loader {
+  border: 8px solid #f3f3f3;
+  border-top: 8px solid #114B5F;
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  animation: spin 2s linear infinite;
+  margin: auto;
 }

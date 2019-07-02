@@ -2,25 +2,31 @@ import React, { Component } from "react";
 import { GoogleLogin } from "react-google-login";
 import axios from "axios";
 import moment from "moment";
+import { onLoggedIn, onSetIsWaiting, onCreateConnection } from '../../redux/actions';
+import { Redirect } from 'react-router'
+import { connect } from 'react-redux'
 
-const API =
-  "https://www.googleapis.com/fitness/v1/users/me/dataSources/derived:com.google.step_count.delta:com.google.android.gms:estimated_steps/datasets/";
+const API = "https://www.googleapis.com/fitness/v1/users/me/dataSources/derived:com.google.step_count.delta:com.google.android.gms:estimated_steps/datasets/";
 const DEFAULT_QUERY = "631148400000000000-1735686000000000000";
 
-class homePage extends Component {
+class HomePage extends Component {
   constructor(props) {
     super(props);
     this.responseGoogle = this.responseGoogle.bind(this);
     this.state = {
-      name: "",
-      email: "",
-      pic: "",
-      dataSet: [],
-      measurements: []
+      measurements: [],
+      redirectProfile: false,
+      waiting: false,
     };
   }
 
+  setWaiting() {
+    this.props.onSetIsWaiting(true);
+  }
+
   responseGoogle(response) {
+    this.props.onCreateConnection(response.profileObj.googleId);
+
     axios
       .get(API + DEFAULT_QUERY, {
         headers: { Authorization: "Bearer " + response.accessToken }
@@ -34,12 +40,8 @@ class homePage extends Component {
             value: item.value[0].intVal
           })
         );
-        this.setState({
-          name: response.profileObj.name,
-          email: response.profileObj.email,
-          pic: response.profileObj.imageUrl + "?sz=200",
-          measurements: measurements
-        });
+        this.props.onLoggedIn(response.profileObj.googleId, response.name, response.profileObj.image, response.profileObj.email, measurements);
+        this.setState({ redirectProfile: true });
       })
       .catch(error => {
         console.log(error.response);
@@ -61,7 +63,10 @@ class homePage extends Component {
   }
 
   render() {
-    return (
+    if (this.state.redirectProfile === true) {
+      return <Redirect from='/login' to='/launch'/>
+    } else if (!this.props.isWaiting) {
+      return (
       <div>
         {
           <GoogleLogin
@@ -76,13 +81,21 @@ class homePage extends Component {
             buttonText="Sign in with you google account"
           />
         }
-        <div>
-          {this.formatMeasurements()}
-          {console.log(this.state.measurements)}
-        </div>
       </div>
-    );
+      );
+    } else {
+      return <div></div>
+    }
+    
   }
 }
 
-export default homePage;
+const mapDispatchToProps = { onLoggedIn, onSetIsWaiting, onCreateConnection }
+
+function mapStateToProps(state) {
+  return {
+    isWaiting: state.baseInfo.isWaiting,
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomePage);

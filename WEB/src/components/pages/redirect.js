@@ -25,6 +25,9 @@ export default class Redirect extends React.Component {
           break;
         case "Observation":
           this.addObservation(userId);
+          break;
+        default:
+          return;
       }
     } else {
       this.readObservation(userId);
