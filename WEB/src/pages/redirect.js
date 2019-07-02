@@ -13,10 +13,10 @@ export default class Redirect extends React.Component {
   }
 
   componentDidMount() {
-    var userId = "adriabsv8";
+    var userId = "adriabsv9";
 
-    let resourceType = "Patient";
-    let writeData = true;
+    let resourceType = "Observation";
+    let writeData = false;
 
     if (writeData) {
       switch (resourceType) {
@@ -32,27 +32,18 @@ export default class Redirect extends React.Component {
   }
 
   readObservation = userId => {
-    let desiredObservation = "steps";
-    var optionsRead = {
-      method: "GET",
-      url: "http://localhost:5000/fhir/Observation/" + desiredObservation,
-      qs: { _format: "json", "": "" },
-      headers: {
-        "cache-control": "no-cache",
-        Connection: "keep-alive",
-        "accept-encoding": "gzip, deflate",
-        Host: "localhost:5000",
-        "Cache-Control": "no-cache",
-        Accept: "*/*",
-        "User-Agent": "PostmanRuntime/7.15.0",
-        subject: userId
-      }
-    };
     FHIR.oauth2
       .ready()
       .then(client => {
+        const q1 = new URLSearchParams();
+        //q1.set("code", "http://loinc.org|664-3");
+        q1.set("code", "stepsv2");
+        q1.append("subject", "adriabsv9");
         client
-          .request(optionsRead, (error, response, body) => {})
+          .request(`Observation?${q1}`, {
+            pageLimit: 0,
+            flat: true
+          })
           .then(observations => {
             console.log(observations);
             this.setState({ observations });
@@ -157,7 +148,7 @@ export default class Redirect extends React.Component {
   };
 
   addObservation(userId) {
-    let observationName = "steps";
+    let observationName = "stepsv2";
     let observationId = uuid();
     let unitDisplayString = "Number of steps in time period";
     let observationDisplayName = "Steps";
@@ -176,7 +167,7 @@ export default class Redirect extends React.Component {
         coding: [
           {
             system: "http://todoInsertsystemURL.org",
-            code: "/min",
+            code: observationName,
             display: unitDisplayString
           }
         ],
@@ -192,10 +183,9 @@ export default class Redirect extends React.Component {
         code: unitCode
       },
       effectivePeriod: {
-        start: "2001-01-20T13:40:17",
-        end: "2001-01-20T13:41:17"
-      },
-      code: { coding: { code: observationName } }
+        start: "2001-01-20T13:50:17",
+        end: "2001-01-20T13:51:17"
+      }
     };
 
     let optionsObservation = {
