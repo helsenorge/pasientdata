@@ -1,18 +1,8 @@
 import React, { Component } from 'react';
 import HomePage from './homePage';
-import { connect } from 'react-redux';
-import { onHideMenuBar, onSetActiveLink, onSetIsWaiting } from '../redux/actions';
 
 class Login extends Component {
 
-  componentDidMount() {
-    //this.props.onHideMenuBar(true, true);
-    this.props.onSetActiveLink('');
-  }
-
-  componentWillUnmount() {
-    this.props.onSetIsWaiting(false);
-  }
 
   render() {
     const pic = require('../images/ehelse.svg');
@@ -37,12 +27,4 @@ class Login extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    isWaiting: state.baseInfo.isWaiting
-  };
-}
-
-const mapDispatchToProps = { onHideMenuBar, onSetActiveLink, onSetIsWaiting }
-
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default Login;

@@ -2,13 +2,7 @@ import React, { Component } from "react";
 import { GoogleLogin } from "react-google-login";
 import axios from "axios";
 import moment from "moment";
-import {
-  onLoggedIn,
-  onSetIsWaiting,
-  onCreateConnection
-} from "../redux/actions";
 import { Redirect } from "react-router";
-import { connect } from "react-redux";
 
 const API =
   "https://www.googleapis.com/fitness/v1/users/me/dataSources/derived:com.google.step_count.delta:com.google.android.gms:estimated_steps/datasets/";
@@ -19,19 +13,17 @@ class HomePage extends Component {
     super(props);
     this.responseGoogle = this.responseGoogle.bind(this);
     this.state = {
+      googleId: "",
+      firstname: "",
+      lastname: "",
+      email: "",
+      image: "",
       datasets: [],
       redirectProfile: false,
-      waiting: false
     };
   }
 
-  setWaiting() {
-    this.props.onSetIsWaiting(true);
-  }
-
   responseGoogle(response) {
-    this.props.onCreateConnection(response.profileObj.googleId);
-
     axios
       .get(API + DEFAULT_QUERY, {
         headers: { Authorization: "Bearer " + response.accessToken }
@@ -48,15 +40,15 @@ class HomePage extends Component {
             value: item.value[0].intVal}
           })
         );
-        this.props.onLoggedIn(
-          response.profileObj.googleId,
-          response.profileObj.givenName,
-          response.profileObj.familyName,
-          pic,
-          response.profileObj.email,
-          datasets
-        );
-        this.setState({ redirectProfile: true });
+        this.setState({
+          googleId: response.profileObj.googleId,
+          firstname: response.profileObj.givenName,
+          lastname: response.profileObj.familyName,
+          email: response.profileObj.email,
+          image: pic,
+          datasets: datasets,
+          redirectProfile: true 
+        });
       })
       .catch(error => {
         console.log(error);
@@ -80,7 +72,7 @@ class HomePage extends Component {
   render() {
     if (this.state.redirectProfile === true) {
       return <Redirect from="/login" to="/launch" />;
-    } else if (!this.props.isWaiting) {
+    } else {
       return (
         <div>
           {
@@ -98,21 +90,8 @@ class HomePage extends Component {
           }
         </div>
       );
-    } else {
-      return <div />;
     }
   }
 }
 
-const mapDispatchToProps = { onLoggedIn, onSetIsWaiting, onCreateConnection };
-
-function mapStateToProps(state) {
-  return {
-    isWaiting: state.baseInfo.isWaiting,
-  };
-}
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(HomePage);
+export default HomePage;
