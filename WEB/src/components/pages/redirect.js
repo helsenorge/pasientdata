@@ -8,54 +8,98 @@ export default class Redirect extends React.Component {
     super(props);
 
     this.state = {
-      observations: []
+      userId: "sanne",
+      family: "Helvig",
+      firstName: "Sanne",
+
+      datasets: [
+        {
+          name: "steps",
+          measurements: [
+            {
+              value: 5,
+              start: "2001-01-20T13:50:17",
+              end: "2001-01-20T13:51:17"
+            },
+            {
+              value: 6,
+              start: "2001-01-20T13:51:17",
+              end: "2001-01-20T13:52:17"
+            },
+            {
+              value: 7,
+              start: "2001-01-20T13:52:17",
+              end: "2001-01-20T13:53:17"
+            },
+            {
+              value: 8,
+              start: "2001-01-20T13:53:17",
+              end: "2001-01-20T13:54:17"
+            }
+          ]
+        },
+        {
+          name: "heart-rate",
+          measurements: [
+            {
+              value: 60,
+              start: "2001-01-20T13:50:17",
+              end: "2001-01-20T13:51:17"
+            },
+            {
+              value: 61,
+              start: "2001-01-20T13:51:17",
+              end: "2001-01-20T13:52:17"
+            },
+            {
+              value: 63,
+              start: "2001-01-20T13:52:17",
+              end: "2001-01-20T13:53:17"
+            },
+            {
+              value: 59,
+              start: "2001-01-20T13:53:17",
+              end: "2001-01-20T13:54:17"
+            }
+          ]
+        }
+      ]
     };
   }
 
   componentDidMount() {
-    var userId = "adriabsv8";
+    let writePatient = 0;
+    let writeObservation = 0;
+    let readData = 0;
+    let writeObservations = 1;
 
-    let resourceType = "Patient";
-    let writeData = true;
-
-    if (writeData) {
-      switch (resourceType) {
-        case "Patient":
-          this.addPatient(userId);
-          break;
-        case "Observation":
-          this.addObservation(userId);
-          break;
-        default:
-          return;
-      }
-    } else {
-      this.readObservation(userId);
+    if (writePatient) {
+      this.addPatient();
+    }
+    if (writeObservation) {
+      this.addObservation(0);
+    }
+    if (readData) {
+      this.readObservation();
+    }
+    if (writeObservations) {
+      this.addObservations();
     }
   }
 
-  readObservation = userId => {
-    let desiredObservation = "steps";
-    var optionsRead = {
-      method: "GET",
-      url: "http://localhost:5000/fhir/Observation/" + desiredObservation,
-      qs: { _format: "json", "": "" },
-      headers: {
-        "cache-control": "no-cache",
-        Connection: "keep-alive",
-        "accept-encoding": "gzip, deflate",
-        Host: "localhost:5000",
-        "Cache-Control": "no-cache",
-        Accept: "*/*",
-        "User-Agent": "PostmanRuntime/7.15.0",
-        subject: userId
-      }
-    };
+  readObservation = () => {
     FHIR.oauth2
       .ready()
       .then(client => {
+        const q1 = new URLSearchParams();
+        //q1.set("code", "http://loinc.org|664-3");
+        //q1.set("code", "stepsv2");
+        q1.set("subject", this.state.userId);
         client
-          .request(optionsRead, (error, response, body) => {})
+          .request(`Observation?${q1}`, {
+            pageLimit: 0,
+            flat: true
+          })
           .then(observations => {
             console.log(observations);
             this.setState({ observations });
@@ -64,12 +108,12 @@ export default class Redirect extends React.Component {
       .catch(() => console.error("FHIR error after launch"));
   };
 
-  addPatient = userId => {
+  addPatient = () => {
     let patientJSON = {
       resourceType: "Patient",
-      id: userId,
+      id: this.state.userId,
       meta: {
-        versionId: "3",
+        versionId: "1",
         lastUpdated: moment().format("YYYY-MM-DDThh:mm:ss"),
         security: [
           {
@@ -98,8 +142,8 @@ export default class Redirect extends React.Component {
       name: [
         {
           use: "official",
-          family: "Skibelid",
-          given: ["Adrian Bogen", "Skibelid"]
+          family: this.state.family,
+          given: [this.state.firstName, this.state.family]
         }
       ],
       gender: "other",
@@ -122,7 +166,8 @@ export default class Redirect extends React.Component {
       link: [
         {
           other: {
-            reference: "https://localhost:5001/fhir/Patient/" + userId
+            reference:
+              "https://localhost:5001/fhir/Patient/" + this.state.userId
           },
           type: "seealso"
         }
@@ -130,7 +175,7 @@ export default class Redirect extends React.Component {
     };
     let optionsPatient = {
       method: "PUT",
-      url: "http://localhost:5000/fhir/Patient/" + userId,
+      url: "http://localhost:5000/fhir/Patient/" + this.state.userId,
       headers: {
         "cache-control": "no-cache",
         Connection: "keep-alive",
@@ -153,20 +198,79 @@ export default class Redirect extends React.Component {
           .request(optionsPatient, (error, response, body) => {})
           .then(observations => {
             console.log(observations);
-            this.setState({ observations });
           });
       })
       .catch(() => console.error("FHIR error after launch"));
   };
 
-  addObservation(userId) {
-    let observationName = "steps";
+  addObservations = () => {
+    for (let i = 0; i < this.state.datasets.length; i++) {
+      this.addObservation(i);
+    }
+  };
+
+  displayStringFromLOINC = LOINC => {
+    switch (LOINC) {
+      case "steps":
+        return "Number of steps in time period";
+      case "heart-rate":
+        return "Number of heart beats per minute";
+    }
+  };
+
+  observationDisplayNameFromLOINC = LOINC => {
+    switch (LOINC) {
+      case "steps":
+        return "Steps / period";
+      case "heart-rate":
+        return "Heart beats / min";
+    }
+  };
+
+  unitFromLOINC = LOINC => {
+    switch (LOINC) {
+      case "steps":
+        return "/min";
+      case "heart-rate":
+        return "/min";
+    }
+  };
+
+  addObservation = datasetIndex => {
     let observationId = uuid();
-    let unitDisplayString = "Number of steps in time period";
-    let observationDisplayName = "Steps";
-    let value = 89;
-    let unit = "Steps";
-    let unitCode = "/min";
+    let unitDisplayString = this.displayStringFromLOINC(
+      this.state.datasets[datasetIndex].name
+    );
+    let observationDisplayName = this.observationDisplayNameFromLOINC(
+      this.state.datasets[datasetIndex].name
+    );
+    let unit = this.unitFromLOINC(this.state.datasets[datasetIndex].name);
+    let measurementCode = this.state.datasets[datasetIndex].name;
+
+    let components = [];
+    for (
+      let i = 0;
+      i < this.state.datasets[datasetIndex].measurements.length;
+      i++
+    ) {
+      components.push({
+        valueQuantity: {
+          value: this.state.datasets[datasetIndex].measurements[i].value,
+          unit: unit,
+          system: "http://unitsofmeasure.org",
+          code: "/min"
+        },
+        code: { coding: { code: "value" } }
+      });
+      components.push({
+        valuePeriod: {
+          start: this.state.datasets[datasetIndex].measurements[i].start,
+          end: this.state.datasets[datasetIndex].measurements[i].end
+        },
+        code: { coding: { code: "time" } }
+      });
+    }
+
     let observationJSON = {
       resourceType: "Observation",
       id: observationId,
@@ -179,26 +283,16 @@ export default class Redirect extends React.Component {
         coding: [
           {
             system: "http://todoInsertsystemURL.org",
-            code: "/min",
+            code: measurementCode,
             display: unitDisplayString
           }
         ],
         text: observationDisplayName
       },
       subject: {
-        reference: "https://localhost:5001/fhir/Patient/" + userId
+        reference: "https://localhost:5001/fhir/Patient/" + this.state.userId
       },
-      valueQuantity: {
-        value: value,
-        unit: unit,
-        system: "http://unitsofmeasure.org",
-        code: unitCode
-      },
-      effectivePeriod: {
-        start: "2001-01-20T13:40:17",
-        end: "2001-01-20T13:41:17"
-      },
-      code: { coding: { code: observationName } }
+      component: components
     };
 
     let optionsObservation = {
@@ -228,16 +322,16 @@ export default class Redirect extends React.Component {
           });
       })
       .catch(() => console.error("FHIR error after launch"));
-  }
+  };
 
   render() {
     return (
       <div>
         <div>Testdiv</div>
-        {this.state.observations.length > 0 && (
+        {this.state.datasets.length > 0 && (
           <div>
-            <div>Observations loaded!</div>
-            <div>{JSON.stringify(this.state.observations)}</div>
+            <div>Datasets loaded!</div>
+            <div>{JSON.stringify(this.state.datasets)}</div>
           </div>
         )}
       </div>
