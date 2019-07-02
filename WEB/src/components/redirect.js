@@ -2,7 +2,6 @@ import * as React from "react";
 import * as FHIR from "fhirclient";
 import uuid from "uuid";
 import moment from "moment";
-import { connect } from "react-redux";
 
 class Redirect extends React.Component {
   constructor(props) {
@@ -328,7 +327,6 @@ class Redirect extends React.Component {
   render() {
     return (
       <div>
-        <div>hei {this.props.user.email}</div>
         <div>Testdiv</div>
         {this.state.datasets.length > 0 && (
           <div>
@@ -341,10 +339,4 @@ class Redirect extends React.Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    user: state.userInfo
-  };
-}
-
-export default connect(mapStateToProps)(Redirect);
+export default Redirect;
