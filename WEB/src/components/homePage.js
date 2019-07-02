@@ -6,7 +6,7 @@ import {
   onLoggedIn,
   onSetIsWaiting,
   onCreateConnection
-} from "../../redux/actions";
+} from "../redux/actions";
 import { Redirect } from "react-router";
 import { connect } from "react-redux";
 

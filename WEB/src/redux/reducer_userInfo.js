@@ -3,7 +3,8 @@ import { SET_USER, CREATE_CONNECTION, } from './actionType';
 function initialState() {
   return {
     userId: '',
-    name: '',
+    firstname: '',
+    familyname: '',
     image: '',
     email: '',
     steps: []
@@ -16,7 +17,8 @@ export default function (state = initialState(), action) {
     case SET_USER: {
       let nextState = Object.assign({}, state)
       nextState.userId = action.userId;
-      nextState.name = action.name;
+      nextState.firstname = action.firstname;
+      nextState.familyname = action.familyname;
       nextState.email = action.email;
       nextState.image = action.image;
       nextState.steps = action.steps;

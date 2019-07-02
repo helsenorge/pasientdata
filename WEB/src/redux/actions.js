@@ -1,7 +1,7 @@
 import { CREATE_CONNECTION, SET_ACTIVE_LINK, SET_IS_WAITING, SET_USER, HIDE_MENU_BAR } from './actionType';
 
-export const onLoggedIn = (userId, name, email, image, steps) => {
-    return dispatch => dispatch({ type: SET_USER, userId, name, email, image, steps })
+export const onLoggedIn = (userId, firstname, familyname, email, image, steps) => {
+    return dispatch => dispatch({ type: SET_USER, userId, firstname, familyname, email, image, steps })
 }
 
 export const onCreateConnection = (accessToken) => {

@@ -1,8 +1,8 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
 //import HomePage from "./pages/homePage.js";
-import Login from "./components/pages/login.js";
-import fhirlaunch from "./components/pages/fhirlaunch.js";
+import Login from "./components/login.js";
+import fhirlaunch from "./components/fhirlaunch.js";
 
 // The Main component renders one of the three provided
 // Routes (provided that one matches). Both the /roster

@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import { BrowserRouter, Route } from 'react-router-dom'
 import App from './App';
-import FhirRedirect from './components/pages/redirect';
-import FhirLaunch from './components/pages/fhirlaunch';
+import FhirRedirect from './components/redirect';
+import FhirLaunch from './components/fhirlaunch';
 import thunk from 'redux-thunk';
 import reducers from './redux/reducer_root';
 import { createStore, applyMiddleware, compose } from 'redux';

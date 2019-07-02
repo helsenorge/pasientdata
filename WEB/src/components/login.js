@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import HomePage from './homePage';
 import { connect } from 'react-redux';
-import { onHideMenuBar, onSetActiveLink, onSetIsWaiting } from '../../redux/actions';
+import { onHideMenuBar, onSetActiveLink, onSetIsWaiting } from '../redux/actions';
 
 class Login extends Component {
 
@@ -15,7 +15,7 @@ class Login extends Component {
   }
 
   render() {
-    const pic = require('../../images/ehelse.svg');
+    const pic = require('../images/ehelse.svg');
 
     return (
       <div className="container-fluid">
