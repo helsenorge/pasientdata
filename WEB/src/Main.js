@@ -1,7 +1,6 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
-//import HomePage from "./pages/homePage.js";
-import Login from "./components/login.js";
+import HomePage from "./components/homePage.js";
 import fhirlaunch from "./components/fhirlaunch.js";
 
 // The Main component renders one of the three provided
@@ -13,7 +12,7 @@ const Main = () => (
   <main>
     <Switch>
       <Route exact path="/" component={fhirlaunch} />
-      <Route path="/login" component={Login} />
+      <Route path="/login" component={HomePage} />
       <Route path="/home" component={fhirlaunch} />
     </Switch>
   </main>

@@ -147,6 +147,8 @@ class HomePage extends Component {
   // }
 
   render() {
+    const pic = require("../images/ehelse.svg");
+
     if (this.state.redirectProfile === true) {
       return (
         <Redirect
@@ -159,20 +161,33 @@ class HomePage extends Component {
       );
     } else {
       return (
-        <div>
-          {
-            <GoogleLogin
-              autoLoad={false}
-              clientId="942269849137-5a1bgivhq71c5ni083igrbss4tbpr6sm.apps.googleusercontent.com"
-              scope="https://www.googleapis.com/auth/fitness.activity.read"
-              approvalPrompt="force"
-              onSuccess={this.responseGoogle}
-              onFailure={this.responseGoogle}
-              responseType="id_token"
-              className="google-login-button"
-              buttonText="Sign in with you google account"
-            />
-          }
+        <div className="container-fluid">
+          <div className="row">
+            <div className="col-sm-12 index-Image-head">
+              <img src={pic} alt={"logo"} className="index-Image" />
+            </div>
+            <div className="col-sm-12 text-generic">
+              <p>Logg inn for å registrere din data</p>
+            </div>
+            {this.props.isWaiting ? <div className="loader" /> : null}
+            <div className="col-sm-12 login-buttons">
+              {/* <HomePage onLogin={this.props.onLogin} /> */}
+              {
+              <GoogleLogin
+                autoLoad={false}
+                clientId="942269849137-5a1bgivhq71c5ni083igrbss4tbpr6sm.apps.googleusercontent.com"
+                scope="https://www.googleapis.com/auth/fitness.activity.read"
+                approvalPrompt="force"
+                onSuccess={this.responseGoogle}
+                onFailure={this.responseGoogle}
+                responseType="id_token"
+                className="google-login-button"
+                buttonText="Sign in with you google account"
+                onLogin={this.props.onLogin}
+              />
+              }
+            </div>
+          </div>
         </div>
       );
     }

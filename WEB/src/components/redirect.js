@@ -2,7 +2,7 @@ import * as React from "react";
 import * as FHIR from "fhirclient";
 import uuid from "uuid";
 import moment from "moment";
-import Login from "./login";
+import HomePage from "./homePage";
 
 class Redirect extends React.Component {
   constructor(props) {
@@ -370,6 +370,7 @@ class Redirect extends React.Component {
       userId: googleData.googleId,
       datasets
     });
+    console.log(datasets)
   };
 
   render() {
@@ -387,7 +388,7 @@ class Redirect extends React.Component {
     } else {
       return (
         <div>
-          <Login onLogin={this.handleLogin.bind(this)} />
+          <HomePage onLogin={this.handleLogin.bind(this)} />
         </div>
       );
     }
