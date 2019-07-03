@@ -1,11 +1,9 @@
-import React, { Component } from 'react';
-import HomePage from './homePage';
+import React, { Component } from "react";
+import HomePage from "./homePage";
 
 class Login extends Component {
-
-
   render() {
-    const pic = require('../images/ehelse.svg');
+    const pic = require("../images/ehelse.svg");
 
     return (
       <div className="container-fluid">
@@ -13,13 +11,12 @@ class Login extends Component {
           <div className="col-sm-12 index-Image-head">
             <img src={pic} alt={"logo"} className="index-Image" />
           </div>
-          <div className="col-sm-12 text-generic" >
+          <div className="col-sm-12 text-generic">
             <p>Logg inn for å registrere din data</p>
           </div>
-          {this.props.isWaiting ? <div className="loader"></div> : null
-          }
+          {this.props.isWaiting ? <div className="loader" /> : null}
           <div className="col-sm-12 login-buttons">
-            <HomePage />
+            <HomePage onLogin={this.props.onLogin} />
           </div>
         </div>
       </div>

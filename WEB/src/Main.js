@@ -12,9 +12,9 @@ import fhirlaunch from "./components/fhirlaunch.js";
 const Main = () => (
   <main>
     <Switch>
-      <Route exact path="/" component={Login} />
-      <Route path='/login' component={Login} />
-      <Route path="home" component={fhirlaunch} />
+      <Route exact path="/" component={fhirlaunch} />
+      <Route path="/login" component={Login} />
+      <Route path="/home" component={fhirlaunch} />
     </Switch>
   </main>
 );
