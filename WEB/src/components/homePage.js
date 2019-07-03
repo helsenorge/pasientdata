@@ -154,15 +154,7 @@ class HomePage extends Component {
     const pic = require("../images/ehelse.svg");
 
     if (this.state.redirectProfile === true) {
-      return (
-        <Redirect
-          from="/login"
-          to={{
-            pathname: "/redirect",
-            state: this.state
-          }}
-        />
-      );
+      return <div />;
     } else {
       return (
         <div className="container-fluid">
