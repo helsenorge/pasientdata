@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { GoogleLogin } from "react-google-login";
 import axios from "axios";
 import moment from "moment";
-import { Redirect } from "react-router";
+//import { Redirect } from "react-router";
 
 const API =
   "https://www.googleapis.com/fitness/v1/users/me/dataSources/derived:com.google.step_count.delta:com.google.android.gms:estimated_steps/datasets/";

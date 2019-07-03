@@ -16,6 +16,7 @@ class Redirect extends React.Component {
       image: "",
       googleId: "",
       observations: [],
+      client: "",
       datasets: [
         {
           name: "85354-9",
@@ -92,27 +93,38 @@ class Redirect extends React.Component {
   }
 
   readObservation = () => {
-    //FHIR.oauth2.settings.fullSessionStorageSupport = false;
-    console.log(FHIR.oauth2);
-    FHIR.oauth2
-      .ready()
-      .then(client => {
-        console.log(client.getAuthorizationHeader());
-        const q1 = new URLSearchParams();
-        //q1.set("code", "http://loinc.org|664-3");
-        //q1.set("code", "stepsv2");
-        q1.set("subject", this.state.userId);
-        client
-          .request(`Observation?${q1}`, {
-            pageLimit: 0,
-            flat: true
-          })
-          .then(observations => {
-            console.log(observations);
-            this.setState({ observations });
-          });
-      })
-      .catch(e => console.error("FHIR error after launch", e));
+    if (this.state.client === "") {
+      FHIR.oauth2
+        .ready()
+        .then(client => {
+          console.log("Saving client");
+          //const q1 = new URLSearchParams();
+          //q1.set("subject", this.state.userId);
+          //client
+          //  .request(`Observation?${q1}`, {
+          //    pageLimit: 0,
+          //    flat: true
+          //  })
+          //  .then(observations => {
+          //    console.log(observations);
+          //    this.setState({ observations, client });
+          //  });
+          this.setState({ client });
+        })
+        .catch(e => console.error("FHIR error after launch", e));
+    } else {
+      console.log("Second read call");
+      const q1 = new URLSearchParams();
+      q1.set("subject", this.state.userId);
+      this.state.client
+        .request(`Observation?${q1}`, {
+          pageLimit: 0,
+          flat: true
+        })
+        .then(observations => {
+          console.log(observations);
+        });
+    }
   };
 
   addPatient = () => {
@@ -198,16 +210,26 @@ class Redirect extends React.Component {
       body: JSON.stringify(patientJSON)
     };
 
-    FHIR.oauth2
-      .ready()
-      .then(client => {
-        client
-          .request(optionsPatient, (error, response, body) => {})
-          .then(observations => {
-            console.log(observations);
-          });
-      })
-      .catch(() => console.error("FHIR error after launch"));
+    if (this.state.client === "") {
+      FHIR.oauth2
+        .ready()
+        .then(client => {
+          client
+            .request(optionsPatient, (error, response, body) => {})
+            .then(observations => {
+              console.log(observations);
+              this.setState({ observations });
+            });
+        })
+        .catch(e => console.error("FHIR error when adding patient", e));
+    } else {
+      this.state.client
+        .request(optionsPatient, (error, response, body) => {})
+        .then(observations => {
+          console.log(observations);
+          this.setState({ observations });
+        });
+    }
   };
 
   addObservations = () => {
@@ -370,17 +392,41 @@ class Redirect extends React.Component {
       body: JSON.stringify(observationJSON)
     };
 
-    FHIR.oauth2
-      .ready()
-      .then(client => {
-        client
-          .request(optionsObservation, (error, response, body) => {})
-          .then(observations => {
-            console.log(observations);
-            this.setState({ observations });
-          });
-      })
-      .catch(() => console.error("FHIR error after launch"));
+    //FHIR.oauth2
+    //  .ready()
+    //  .then(client => {
+    //    client
+    //      .request(optionsObservation, (error, response, body) => {})
+    //      .then(observations => {
+    //        console.log(observations);
+    //        this.setState({ observations });
+    //      });
+    //  })
+    //  .catch(() => console.error("FHIR error after launch"));
+    if (this.state.client === "") {
+      console.log(
+        "Right before sending observation without saving client object"
+      );
+      FHIR.oauth2
+        .ready()
+        .then(client => {
+          client
+            .request(optionsObservation, (error, response, body) => {})
+            .then(observations => {
+              console.log(observations);
+              this.setState({ observations, client });
+            });
+        })
+        .catch(e => console.error("FHIR error when adding observation", e));
+    } else {
+      console.log("Right before sending observation with saved client object");
+      this.state.client
+        .request(optionsObservation, (error, response, body) => {})
+        .then(observations => {
+          console.log(observations);
+          this.setState({ observations });
+        });
+    }
   };
 
   handleLogin = (googleData, datasets) => {
@@ -397,10 +443,11 @@ class Redirect extends React.Component {
       userId: googleData.googleId,
       datasets
     });
+    this.addObservations();
+    this.readObservation();
   };
 
   render() {
-    this.readObservation();
     if (this.state.isLoggedIn) {
       return (
         <div>
