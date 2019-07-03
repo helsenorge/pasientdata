@@ -15,6 +15,7 @@ class Redirect extends React.Component {
       email: "",
       image: "",
       googleId: "",
+      observations: [],
       datasets: [
         {
           name: "85354-9",
@@ -70,10 +71,10 @@ class Redirect extends React.Component {
     };
   }
 
-  componentDidMount() {
+  interactWithFHIR() {
     let writePatient = 0;
     let writeObservation = 0;
-    let readData = 0;
+    let readData = 1;
     let writeObservations = 0;
 
     if (writePatient) {
@@ -393,6 +394,7 @@ class Redirect extends React.Component {
       userId: googleData.googleId,
       datasets
     });
+    this.interactWithFHIR();
   };
 
   render() {
