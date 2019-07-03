@@ -2,15 +2,25 @@ import * as React from "react";
 import * as FHIR from "fhirclient";
 import uuid from "uuid";
 import moment from "moment";
+import Login from "./login";
 
 class Redirect extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
       userId: "sanne",
       family: "Helvig",
       firstName: "Sanne",
+      isLoggedIn: false,
+      googleData: {
+        googleId: "",
+        firstname: "",
+        lastname: "",
+        email: "",
+        image: "",
+        datasets: [],
+        redirectProfile: false
+      },
 
       datasets: [
         {
@@ -71,7 +81,7 @@ class Redirect extends React.Component {
     let writePatient = 0;
     let writeObservation = 0;
     let readData = 0;
-    let writeObservations = 1;
+    let writeObservations = 0;
 
     if (writePatient) {
       this.addPatient();
@@ -376,18 +386,31 @@ class Redirect extends React.Component {
       .catch(() => console.error("FHIR error after launch"));
   };
 
+  handleLogin = googleData => {
+    this.setState({ isLoggedIn: true, googleData });
+  };
+
   render() {
-    return (
-      <div>
-        <div>Testdiv</div>
-        {this.state.datasets.length > 0 && (
-          <div>
-            <div>Datasets loaded!</div>
-            <div>{JSON.stringify(this.state.datasets)}</div>
-          </div>
-        )}
-      </div>
-    );
+    if (this.state.isLoggedIn) {
+      console.log(this.state.googleData);
+      return (
+        <div>
+          <div>Testdiv</div>
+          {this.state.datasets.length > 0 && (
+            <div>
+              <div>Datasets loaded!</div>
+              <div>{JSON.stringify(this.state.datasets)}</div>
+            </div>
+          )}
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <Login onLogin={this.handleLogin.bind(this)} />
+        </div>
+      );
+    }
   }
 }
 

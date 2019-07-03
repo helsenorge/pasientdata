@@ -19,7 +19,7 @@ class HomePage extends Component {
       email: "",
       image: "",
       datasets: [],
-      redirectProfile: false,
+      redirectProfile: false
     };
   }
 
@@ -30,16 +30,16 @@ class HomePage extends Component {
       })
       .then(res => {
         let datasets = [...this.state.datasets];
-        const pic = response.profileObj.imageUrl + '?sz=200';
-
-        res.data.point.forEach((item, index) =>
-        datasets.push({
-            name: "adrian",
-            measurements: {start: this.formatNanosec(item.startTimeNanos),
+        const pic = response.profileObj.imageUrl + "?sz=200";
+        let measurements = [];
+        res.data.point.forEach((item, index) => {
+          measurements.push({
+            start: this.formatNanosec(item.startTimeNanos),
             end: this.formatNanosec(item.endTimeNanos),
-            value: item.value[0].intVal}
-          })
-        );
+            value: item.value[0].intVal
+          });
+        });
+        datasets.push({ name: "steps", measurements });
         this.setState({
           googleId: response.profileObj.googleId,
           firstname: response.profileObj.givenName,
@@ -47,7 +47,16 @@ class HomePage extends Component {
           email: response.profileObj.email,
           image: pic,
           datasets: datasets,
-          redirectProfile: true 
+          redirectProfile: true
+        });
+        this.props.onLogin({
+          googleId: response.profileObj.googleId,
+          firstname: response.profileObj.givenName,
+          lastname: response.profileObj.familyName,
+          email: response.profileObj.email,
+          image: pic,
+          datasets: datasets,
+          redirectProfile: true
         });
       })
       .catch(error => {
@@ -71,7 +80,15 @@ class HomePage extends Component {
 
   render() {
     if (this.state.redirectProfile === true) {
-      return <Redirect from="/login" to="/launch" />;
+      return (
+        <Redirect
+          from="/login"
+          to={{
+            pathname: "/redirect",
+            state: this.state
+          }}
+        />
+      );
     } else {
       return (
         <div>
