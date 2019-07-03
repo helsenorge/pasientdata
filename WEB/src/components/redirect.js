@@ -14,7 +14,7 @@ class Redirect extends React.Component {
 
       datasets: [
         {
-          name: "steps",
+          name: "85354-9",
           measurements: [
             {
               value: 5,
@@ -39,7 +39,7 @@ class Redirect extends React.Component {
           ]
         },
         {
-          name: "heart-rate",
+          name: "8867-4",
           measurements: [
             {
               value: 60,
@@ -209,43 +209,95 @@ class Redirect extends React.Component {
     }
   };
 
-  displayStringFromLOINC = LOINC => {
+  getStringsFromLOINC = LOINC => {
+    let strings = {};
     switch (LOINC) {
-      case "steps":
-        return "Number of steps in time period";
-      case "heart-rate":
-        return "Number of heart beats per minute";
+      case "55423-8": // steps
+        strings = {
+          unitDisplayString: "Number of steps in unspecified time Pedometer",
+          observationDisplayName: "Step count",
+          unit: "steps/day",
+          UCUMCode: "/d"
+        };
+        break;
+      case "8867-4": // heart rate
+        strings = {
+          unitDisplayString: "Heart rate",
+          observationDisplayName: "Heart rate",
+          unit: "beats/minute",
+          UCUMCode: "/min"
+        };
+        break;
+      case "2339-0": // blood glucose
+        strings = {
+          unitDisplayString: "Glucose Bld-mCnc",
+          observationDisplayName: "Glucose Bld-mCnc",
+          unit: "mg/dL",
+          UCUMCode: "mg/dL"
+        };
+        break;
+      case "85354-9": // blood pressure
+        strings = {
+          unitDisplayString: "Blood pressure panel with all children optional",
+          observationDisplayName: "Blood pressure systolic & diastolic",
+          unit: "mmHg",
+          UCUMCode: "mm[Hg]"
+        };
+        break;
+      case "8302-2": // height
+        strings = {
+          unitDisplayString: "Body height",
+          observationDisplayName: "Body height",
+          unit: "m",
+          UCUMCode: "m"
+        };
+        break;
+      case "29463-7": // weight
+        strings = {
+          unitDisplayString: "Body weight",
+          observationDisplayName: "Body weight",
+          unit: "kg",
+          UCUMCode: "kg"
+        };
+        break;
+
+      default:
+        console.error("Non-valid LOINC-code");
+        return null;
     }
+    return strings;
   };
 
-  observationDisplayNameFromLOINC = LOINC => {
-    switch (LOINC) {
-      case "steps":
-        return "Steps / period";
-      case "heart-rate":
-        return "Heart beats / min";
-    }
-  };
-
-  unitFromLOINC = LOINC => {
-    switch (LOINC) {
-      case "steps":
-        return "/min";
-      case "heart-rate":
-        return "/min";
+  getLOINCFromFit = FitString => {
+    switch (FitString) {
+      case "step_count":
+        return "55423-8";
+      case "heart_rate":
+        return "8867-4";
+      case "blood_glucose":
+        return "2339-0";
+      case "blood_pressure":
+        return "85354-9";
+      case "body_height":
+        return "8302-2";
+      case "body_weight":
+        return "29463-7";
+      default:
+        console.error("Non-valid Google Fit string");
+        return null;
     }
   };
 
   addObservation = datasetIndex => {
     let observationId = uuid();
-    let unitDisplayString = this.displayStringFromLOINC(
-      this.state.datasets[datasetIndex].name
-    );
-    let observationDisplayName = this.observationDisplayNameFromLOINC(
-      this.state.datasets[datasetIndex].name
-    );
-    let unit = this.unitFromLOINC(this.state.datasets[datasetIndex].name);
-    let measurementCode = this.state.datasets[datasetIndex].name;
+    let {
+      unitDisplayString,
+      observationDisplayName,
+      unit,
+      UCUMCode
+    } = this.getStringsFromLOINC(this.state.datasets[datasetIndex].name);
+
+    let LOINCCode = this.state.datasets[datasetIndex].name;
 
     let components = [];
     for (
@@ -258,7 +310,7 @@ class Redirect extends React.Component {
           value: this.state.datasets[datasetIndex].measurements[i].value,
           unit: unit,
           system: "http://unitsofmeasure.org",
-          code: "/min"
+          code: UCUMCode
         },
         code: { coding: { code: "value" } }
       });
@@ -282,8 +334,8 @@ class Redirect extends React.Component {
       code: {
         coding: [
           {
-            system: "http://todoInsertsystemURL.org",
-            code: measurementCode,
+            system: "http://loinc.org",
+            code: LOINCCode,
             display: unitDisplayString
           }
         ],
