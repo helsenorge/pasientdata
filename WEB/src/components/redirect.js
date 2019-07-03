@@ -1,6 +1,5 @@
 import * as React from "react";
 import * as FHIR from "fhirclient";
-import uuid from "uuid";
 import moment from "moment";
 import HomePage from "./homePage";
 
@@ -183,11 +182,11 @@ class Redirect extends React.Component {
       body: JSON.stringify(patientJSON)
     };
 
+    console.log("Adding patient to FHIR database");
     this.state.client
       .request(optionsPatient, (error, response, body) => {})
-      .then(observations => {
-        console.log(observations);
-        this.setState({ observations });
+      .then(patient => {
+        console.log(patient);
       });
   };
 
@@ -263,15 +262,15 @@ class Redirect extends React.Component {
   };
 
   addObservation = datasetIndex => {
-    let observationId = uuid();
+    let observationId = this.state.datasets[datasetIndex].name;
+    // Note on the above: this can also be set from uuid(), but since we want only one
+    //                    of each dataset type connected to each patient this is better.
     let {
       unitDisplayString,
       observationDisplayName,
       unit,
       UCUMCode
     } = this.getStringsFromLOINC(this.state.datasets[datasetIndex].name);
-
-    let LOINCCode = this.state.datasets[datasetIndex].name;
 
     let components = [];
     for (
@@ -309,7 +308,7 @@ class Redirect extends React.Component {
         coding: [
           {
             system: "http://loinc.org",
-            code: LOINCCode,
+            code: this.state.datasets[datasetIndex].name,
             display: unitDisplayString
           }
         ],
@@ -337,12 +336,12 @@ class Redirect extends React.Component {
       body: JSON.stringify(observationJSON)
     };
 
-    console.log("Adding observation to database");
+    console.log("Adding observation to FHIR database");
     this.state.client
       .request(optionsObservation, (error, response, body) => {})
-      .then(observations => {
-        console.log(observations);
-        this.setState({ observations });
+      .then(observation => {
+        console.log(observation);
+        this.setState({ observation });
       });
   };
 
@@ -359,10 +358,26 @@ class Redirect extends React.Component {
     });
     this.addPatientIfNeeded();
     this.addObservations();
-    this.readObservation();
+    //this.readObservation();
   };
 
-  addPatientIfNeeded = () => {};
+  addPatientIfNeeded = () => {
+    console.log("Reading patient from FHIR database");
+    const q1 = new URLSearchParams();
+    q1.set("id", this.state.userId);
+    this.state.client
+      .request(`Patient/${this.state.userId}`, {
+        pageLimit: 0,
+        flat: true
+      })
+      .then(patient => {
+        console.log(patient);
+      })
+      .catch(() => {
+        console.log("Patient didn't already exist in FHIR database");
+        this.addPatient();
+      });
+  };
 
   render() {
     if (this.state.isLoggedIn) {
