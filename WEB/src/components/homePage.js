@@ -172,7 +172,7 @@ class HomePage extends Component {
                 <GoogleLogin
                   autoLoad={false}
                   clientId="942269849137-5a1bgivhq71c5ni083igrbss4tbpr6sm.apps.googleusercontent.com"
-                  scope="https://www.googleapis.com/auth/fitness.activity.read"
+                  scope="https://www.googleapis.com/auth/fitness.activity.read https://www.googleapis.com/auth/fitness.blood_glucose.read https://www.googleapis.com/auth/fitness.blood_pressure.read https://www.googleapis.com/auth/fitness.body.read"
                   approvalPrompt="force"
                   onSuccess={this.responseGoogle}
                   onFailure={this.responseGoogle}
