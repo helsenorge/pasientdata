@@ -101,12 +101,12 @@ class HomePage extends Component {
             let bloodGlucoseMeasurement = this.structureDatasets(bloodGlucose);
 
             datasets.push(
-              { name: "55423-8", stepMeasurement },
-              { name: "29463-7", weightMeasurement },
-              { name: "8302-2", heightMeasurement },
-              { name: "8867-4", heartBeatMeasurement },
-              { name: "85354-9", bloodPressureMeasurement },
-              { name: "2339-0", bloodGlucoseMeasurement }
+              { name: "55423-8", measurements: stepMeasurement },
+              { name: "29463-7", measurements: weightMeasurement },
+              { name: "8302-2", measurements: heightMeasurement },
+              { name: "8867-4", measurements: heartBeatMeasurement },
+              { name: "85354-9", measurements: bloodPressureMeasurement },
+              { name: "2339-0", measurements: bloodGlucoseMeasurement }
             );
 
             this.setState({
