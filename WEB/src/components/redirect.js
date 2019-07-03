@@ -85,7 +85,7 @@ class Redirect extends React.Component {
       .catch(e => console.error("Error when saving FHIR client", e));
   };
 
-  readObservation = () => {
+  readAllObservations = () => {
     console.log("Reading from FHIR database");
     const q1 = new URLSearchParams();
     q1.set("subject", this.state.userId);
@@ -358,7 +358,7 @@ class Redirect extends React.Component {
     });
     this.addPatientIfNeeded();
     this.addObservations();
-    //this.readObservation();
+    this.readAllObservations();
   };
 
   addPatientIfNeeded = () => {
