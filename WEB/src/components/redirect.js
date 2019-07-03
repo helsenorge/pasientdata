@@ -86,7 +86,9 @@ class Redirect extends React.Component {
   };
 
   readAllObservations = () => {
-    console.log("Reading from FHIR database");
+    console.log(
+      "Reading all observations the patient has in the FHIR database"
+    );
     const q1 = new URLSearchParams();
     q1.set("subject", this.state.userId);
     this.state.client
