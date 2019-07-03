@@ -8,7 +8,7 @@ class Redirect extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      userId: "",
+      userId: "sanne",
       family: "",
       firstName: "",
       isLoggedIn: false,
@@ -71,7 +71,7 @@ class Redirect extends React.Component {
     };
   }
 
-  interactWithFHIR() {
+  componentDidMount() {
     let writePatient = 0;
     let writeObservation = 0;
     let readData = 1;
@@ -92,9 +92,12 @@ class Redirect extends React.Component {
   }
 
   readObservation = () => {
+    //FHIR.oauth2.settings.fullSessionStorageSupport = false;
+    console.log(FHIR.oauth2);
     FHIR.oauth2
       .ready()
       .then(client => {
+        console.log(client.getAuthorizationHeader());
         const q1 = new URLSearchParams();
         //q1.set("code", "http://loinc.org|664-3");
         //q1.set("code", "stepsv2");
@@ -109,7 +112,7 @@ class Redirect extends React.Component {
             this.setState({ observations });
           });
       })
-      .catch(() => console.error("FHIR error after launch"));
+      .catch(e => console.error("FHIR error after launch", e));
   };
 
   addPatient = () => {
@@ -394,10 +397,10 @@ class Redirect extends React.Component {
       userId: googleData.googleId,
       datasets
     });
-    this.interactWithFHIR();
   };
 
   render() {
+    this.readObservation();
     if (this.state.isLoggedIn) {
       return (
         <div>

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { GoogleLogin } from "react-google-login";
 import axios from "axios";
 import moment from "moment";
-//import { Redirect } from "react-router";
+import { Redirect } from "react-router";
 
 const API =
   "https://www.googleapis.com/fitness/v1/users/me/dataSources/derived:com.google.step_count.delta:com.google.android.gms:estimated_steps/datasets/";
@@ -80,35 +80,36 @@ class HomePage extends Component {
   // }
 
   render() {
-    //if (this.state.redirectProfile === true) {
-    //  return (
-    //    <Redirect
-    //      from="/login"
-    //      to={{
-    //        pathname: "/redirect",
-    //        state: this.state
-    //      }}
-    //    />
-    //  );
-    //} else {
-    return (
-      <div>
-        {
-          <GoogleLogin
-            autoLoad={false}
-            clientId="942269849137-5a1bgivhq71c5ni083igrbss4tbpr6sm.apps.googleusercontent.com"
-            scope="https://www.googleapis.com/auth/fitness.activity.read"
-            approvalPrompt="force"
-            onSuccess={this.responseGoogle}
-            onFailure={this.responseGoogle}
-            responseType="id_token"
-            className="google-login-button"
-            buttonText="Sign in with you google account"
-          />
-        }
-      </div>
-    );
-    //}
+    if (this.state.redirectProfile === true) {
+      //return (
+      //  <Redirect
+      //    from="/login"
+      //    to={{
+      //      pathname: "/redirect",
+      //      state: this.state
+      //    }}
+      //  />
+      //);
+      return <div />;
+    } else {
+      return (
+        <div>
+          {
+            <GoogleLogin
+              autoLoad={false}
+              clientId="942269849137-5a1bgivhq71c5ni083igrbss4tbpr6sm.apps.googleusercontent.com"
+              scope="https://www.googleapis.com/auth/fitness.activity.read"
+              approvalPrompt="force"
+              onSuccess={this.responseGoogle}
+              onFailure={this.responseGoogle}
+              responseType="id_token"
+              className="google-login-button"
+              buttonText="Sign in with you google account"
+            />
+          }
+        </div>
+      );
+    }
   }
 }
 
