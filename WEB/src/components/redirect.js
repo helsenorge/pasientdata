@@ -8,20 +8,13 @@ class Redirect extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      userId: "sanne",
-      family: "Helvig",
-      firstName: "Sanne",
+      userId: "",
+      family: "",
+      firstName: "",
       isLoggedIn: false,
-      googleData: {
-        googleId: "",
-        firstname: "",
-        lastname: "",
-        email: "",
-        image: "",
-        datasets: [],
-        redirectProfile: false
-      },
-
+      email: "",
+      image: "",
+      googleId: "",
       datasets: [
         {
           name: "85354-9",
@@ -386,20 +379,30 @@ class Redirect extends React.Component {
       .catch(() => console.error("FHIR error after launch"));
   };
 
-  handleLogin = googleData => {
-    this.setState({ isLoggedIn: true, googleData });
+  handleLogin = (googleData, datasets) => {
+    for (let i = 0; i < datasets.length; i++) {
+      datasets[i].name = this.getLOINCFromFit(datasets[i].name);
+    }
+    this.setState({
+      isLoggedIn: true,
+      firstName: googleData.firstName,
+      family: googleData.family,
+      email: googleData.email,
+      image: googleData.image,
+      googleId: googleData.googleId,
+      userId: googleData.googleId,
+      datasets
+    });
   };
 
   render() {
     if (this.state.isLoggedIn) {
-      console.log(this.state.googleData);
       return (
         <div>
-          <div>Testdiv</div>
           {this.state.datasets.length > 0 && (
             <div>
               <div>Datasets loaded!</div>
-              <div>{JSON.stringify(this.state.datasets)}</div>
+              {/* <div>{JSON.stringify(this.state.datasets)}</div> */}
             </div>
           )}
         </div>

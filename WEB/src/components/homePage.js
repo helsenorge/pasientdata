@@ -39,7 +39,7 @@ class HomePage extends Component {
             value: item.value[0].intVal
           });
         });
-        datasets.push({ name: "steps", measurements });
+        datasets.push({ name: "step_count", measurements });
         this.setState({
           googleId: response.profileObj.googleId,
           firstname: response.profileObj.givenName,
@@ -49,15 +49,16 @@ class HomePage extends Component {
           datasets: datasets,
           redirectProfile: true
         });
-        this.props.onLogin({
-          googleId: response.profileObj.googleId,
-          firstname: response.profileObj.givenName,
-          lastname: response.profileObj.familyName,
-          email: response.profileObj.email,
-          image: pic,
-          datasets: datasets,
-          redirectProfile: true
-        });
+        this.props.onLogin(
+          {
+            googleId: response.profileObj.googleId,
+            firstName: response.profileObj.givenName,
+            family: response.profileObj.familyName,
+            email: response.profileObj.email,
+            image: pic
+          },
+          datasets
+        );
       })
       .catch(error => {
         console.log(error);
