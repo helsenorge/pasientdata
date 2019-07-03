@@ -2,7 +2,7 @@ import * as React from "react";
 import * as FHIR from "fhirclient";
 import uuid from "uuid";
 import moment from "moment";
-import Login from "./login";
+import HomePage from "./homePage";
 
 class Redirect extends React.Component {
   constructor(props) {
@@ -272,26 +272,6 @@ class Redirect extends React.Component {
     return strings;
   };
 
-  getLOINCFromFit = FitString => {
-    switch (FitString) {
-      case "step_count":
-        return "55423-8";
-      case "heart_rate":
-        return "8867-4";
-      case "blood_glucose":
-        return "2339-0";
-      case "blood_pressure":
-        return "85354-9";
-      case "body_height":
-        return "8302-2";
-      case "body_weight":
-        return "29463-7";
-      default:
-        console.error("Non-valid Google Fit string");
-        return null;
-    }
-  };
-
   addObservation = datasetIndex => {
     let observationId = uuid();
     let {
@@ -381,9 +361,6 @@ class Redirect extends React.Component {
   };
 
   handleLogin = (googleData, datasets) => {
-    for (let i = 0; i < datasets.length; i++) {
-      datasets[i].name = this.getLOINCFromFit(datasets[i].name);
-    }
     this.setState({
       isLoggedIn: true,
       firstName: googleData.firstName,
@@ -412,7 +389,7 @@ class Redirect extends React.Component {
     } else {
       return (
         <div>
-          <Login onLogin={this.handleLogin.bind(this)} />
+          <HomePage onLogin={this.handleLogin.bind(this)} />
         </div>
       );
     }
