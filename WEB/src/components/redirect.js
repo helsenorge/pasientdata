@@ -339,6 +339,7 @@ class Redirect extends React.Component {
     };
 
     console.log("Adding observation to FHIR database");
+    //console.log(JSON.stringify(observationJSON));
     this.state.client
       .request(optionsObservation, (error, response, body) => {})
       .then(observation => {

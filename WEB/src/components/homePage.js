@@ -15,48 +15,56 @@ class HomePage extends Component {
       email: "",
       image: "",
       datasets: [],
-      redirectProfile: false
+      redirectProfile: false,
+      urlBase:
+        "https://www.googleapis.com/fitness/v1/users/me/dataSources/derived:com.google."
     };
   }
 
   getUserSteps(response) {
     return axios.get(
-      "https://www.googleapis.com/fitness/v1/users/me/dataSources/derived:com.google.step_count.delta:com.google.android.gms:estimated_steps/datasets/631148400000000000-1735686000000000000",
+      this.state.urlBase +
+        "step_count.delta:com.google.android.gms:estimated_steps/datasets/631148400000000000-1735686000000000000",
       { headers: { Authorization: "Bearer " + response.accessToken } }
     );
   }
 
   getUserWeight(response) {
     return axios.get(
-      "https://www.googleapis.com/fitness/v1/users/me/dataSources/derived:com.google.weight:com.google.android.gms:merge_weight/datasets/631148400000000000-1735686000000000000",
+      this.state.urlBase +
+        "weight:com.google.android.gms:merge_weight/datasets/631148400000000000-1735686000000000000",
       { headers: { Authorization: "Bearer " + response.accessToken } }
     );
   }
 
   getUserHeight(response) {
     return axios.get(
-      "https://www.googleapis.com/fitness/v1/users/me/dataSources/derived:com.google.height:com.google.android.gms:merge_height/datasets/631148400000000000-1735686000000000000",
+      this.state.urlBase +
+        "height:com.google.android.gms:merge_height/datasets/631148400000000000-1735686000000000000",
       { headers: { Authorization: "Bearer " + response.accessToken } }
     );
   }
 
   getUserHeartBeat(response) {
     return axios.get(
-      "https://www.googleapis.com/fitness/v1/users/me/dataSources/derived:com.google.heart_minutes:com.google.android.gms:from_heart_rate<-merge_heart_rate_bpm/datasets/631148400000000000-1735686000000000000",
+      this.state.urlBase +
+        "heart_minutes:com.google.android.gms:from_heart_rate<-merge_heart_rate_bpm/datasets/631148400000000000-1735686000000000000",
       { headers: { Authorization: "Bearer " + response.accessToken } }
     );
   }
 
   getUserBloodPressure(response) {
     return axios.get(
-      "https://www.googleapis.com/fitness/v1/users/me/dataSources/derived:com.google.blood_pressure:com.google.android.gms:merged/datasets/631148400000000000-1735686000000000000",
+      this.state.urlBase +
+        "blood_pressure:com.google.android.gms:merged/datasets/631148400000000000-1735686000000000000",
       { headers: { Authorization: "Bearer " + response.accessToken } }
     );
   }
 
   getUserBloodGlucose(response) {
     return axios.get(
-      "https://www.googleapis.com/fitness/v1/users/me/dataSources/derived:com.google.blood_glucose:com.google.android.gms:merged/datasets/631148400000000000-1735686000000000000",
+      this.state.urlBase +
+        "blood_glucose:com.google.android.gms:merged/datasets/631148400000000000-1735686000000000000",
       { headers: { Authorization: "Bearer " + response.accessToken } }
     );
   }
@@ -172,7 +180,12 @@ class HomePage extends Component {
                 <GoogleLogin
                   autoLoad={false}
                   clientId="942269849137-5a1bgivhq71c5ni083igrbss4tbpr6sm.apps.googleusercontent.com"
-                  scope="https://www.googleapis.com/auth/fitness.activity.read https://www.googleapis.com/auth/fitness.blood_glucose.read https://www.googleapis.com/auth/fitness.blood_pressure.read https://www.googleapis.com/auth/fitness.body.read"
+                  scope={
+                    "https://www.googleapis.com/auth/fitness.activity.read " +
+                    "https://www.googleapis.com/auth/fitness.blood_glucose.read " +
+                    "https://www.googleapis.com/auth/fitness.blood_pressure.read " +
+                    "https://www.googleapis.com/auth/fitness.body.read"
+                  }
                   approvalPrompt="force"
                   onSuccess={this.responseGoogle}
                   onFailure={this.responseGoogle}
