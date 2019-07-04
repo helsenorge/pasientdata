@@ -382,11 +382,11 @@ class Redirect extends React.Component {
   };
 
   render() {
-    return (
-      <div>
-        <Chart datasets={this.state.datasets} />
-      </div>
-    );
+    //return (
+    //  <div>
+    //    <Chart datasets={this.state.datasets} />
+    //  </div>
+    //);
     if (this.state.isLoggedIn) {
       return (
         <div>
@@ -396,6 +396,7 @@ class Redirect extends React.Component {
               {/* <div>{JSON.stringify(this.state.datasets)}</div> */}
             </div>
           )}
+          <Chart datasets={this.state.datasets} />
         </div>
       );
     } else {

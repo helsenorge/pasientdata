@@ -15,7 +15,7 @@ import {
 class Chart extends Component {
   state = { colors: ["#7DB3FF", "#49457B", "#FF7C78"] };
   numberFormatter = item => numeral(item).format("O");
-  dateFormatter = item => moment(item, "YYYY-MM-DDTHH:mm:ss").format("MMM YY");
+  dateFormatter = item => moment(item, "YYYY-MM-DDTHH:mm:ss").format("DD/MM"); // - hh:mm");
   render() {
     console.log(this.props.datasets);
     return (
@@ -27,7 +27,7 @@ class Chart extends Component {
             stackId="a"
             dataKey="value"
             name="Steps"
-            fill={this.state.colors[0]}
+            fill={this.state.colors[1]}
           />
 
           <Legend />
