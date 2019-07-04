@@ -2,6 +2,7 @@ import * as React from "react";
 import * as FHIR from "fhirclient";
 import moment from "moment";
 import HomePage from "./homePage";
+import Chart from "./chart";
 
 class Redirect extends React.Component {
   constructor(props) {
@@ -21,24 +22,24 @@ class Redirect extends React.Component {
           name: "85354-9",
           measurements: [
             {
-              value: 5,
+              value: 9,
               start: "2001-01-20T13:50:17",
               end: "2001-01-20T13:51:17"
             },
             {
               value: 6,
-              start: "2001-01-20T13:51:17",
-              end: "2001-01-20T13:52:17"
+              start: "2001-02-20T13:51:17",
+              end: "2001-02-20T13:52:17"
             },
             {
               value: 7,
-              start: "2001-01-20T13:52:17",
-              end: "2001-01-20T13:53:17"
+              start: "2001-03-20T13:52:17",
+              end: "2001-03-20T13:53:17"
             },
             {
               value: 8,
-              start: "2001-01-20T13:53:17",
-              end: "2001-01-20T13:54:17"
+              start: "2001-04-20T13:53:17",
+              end: "2001-04-20T13:54:17"
             }
           ]
         },
@@ -381,6 +382,11 @@ class Redirect extends React.Component {
   };
 
   render() {
+    //return (
+    //  <div>
+    //    <Chart datasets={this.state.datasets} />
+    //  </div>
+    //);
     if (this.state.isLoggedIn) {
       return (
         <div>
@@ -390,6 +396,7 @@ class Redirect extends React.Component {
               {/* <div>{JSON.stringify(this.state.datasets)}</div> */}
             </div>
           )}
+          <Chart datasets={this.state.datasets} />
         </div>
       );
     } else {
