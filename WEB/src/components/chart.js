@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 //import { VictoryChart, VictoryGroup, VictoryArea } from "victory";
+import numeral from "numeral";
 import moment from "moment";
 import {
   ResponsiveContainer,
@@ -11,41 +12,24 @@ import {
   Bar
 } from "recharts";
 
-const chart = ({ resultSet, colors, dateFormatter, numberFormatter }) => (
-  <ResponsiveContainer width="100%" height={300}>
-    <BarChart data={resultSet.chartPivot()}>
-      <XAxis tickFormatter={dateFormatter} dataKey="x" />
-      <YAxis tickFormatter={numberFormatter} />
-      {resultSet.seriesNames().map((series, i) => (
-        <Bar
-          stackId="a"
-          dataKey={series}
-          name={series.split(",")[0]}
-          fill={colors[i]}
-        />
-      ))}
-      <Legend />
-      <Tooltip labelFormatter={dateFormatter} formatter={numberFormatter} />
-    </BarChart>
-  </ResponsiveContainer>
-);
-
 class Chart extends Component {
   state = { colors: ["#7DB3FF", "#49457B", "#FF7C78"] };
-  numberFormatter = item => item.value;
+  numberFormatter = item => numeral(item).format("O");
   dateFormatter = item => moment(item, "YYYY-MM-DDTHH:mm:ss").format("MMM YY");
   render() {
+    console.log(this.props.datasets);
     return (
       <ResponsiveContainer width="100%" height={300}>
-        <BarChart data={this.props.datasets[0]}>
+        <BarChart data={this.props.datasets[0].measurements}>
           <XAxis tickFormatter={this.dateFormatter} dataKey="start" />
           <YAxis tickFormatter={this.numberFormatter} />
           <Bar
             stackId="a"
             dataKey="value"
-            name="a"
+            name="Steps"
             fill={this.state.colors[0]}
           />
+
           <Legend />
           <Tooltip
             labelFormatter={this.dateFormatter}
