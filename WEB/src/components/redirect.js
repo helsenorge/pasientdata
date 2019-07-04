@@ -2,7 +2,7 @@ import * as React from "react";
 import * as FHIR from "fhirclient";
 import moment from "moment";
 import HomePage from "./homePage";
-import Chart from "./chart";
+import PlotScatter from "./plottScatter";
 
 class Redirect extends React.Component {
   constructor(props) {
@@ -397,7 +397,7 @@ class Redirect extends React.Component {
               {/* <div>{JSON.stringify(this.state.datasets)}</div> */}
             </div>
           )}
-          <Chart datasets={this.state.datasets} />
+          <PlotScatter datasets={this.state.datasets} />
         </div>
       );
     } else {
