@@ -2,6 +2,7 @@ import * as React from "react";
 import * as FHIR from "fhirclient";
 import moment from "moment";
 import HomePage from "./homePage";
+import Chart from "./chart";
 
 class Redirect extends React.Component {
   constructor(props) {
@@ -381,6 +382,11 @@ class Redirect extends React.Component {
   };
 
   render() {
+    return (
+      <div>
+        <Chart datasets={this.state.datasets} />
+      </div>
+    );
     if (this.state.isLoggedIn) {
       return (
         <div>

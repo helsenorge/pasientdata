@@ -14,8 +14,10 @@
     "react-google-login": "^5.0.4",
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.0.1",
+    "recharts": "^1.6.2",
     "tar": "^4.4.10",
-    "uuid": "^3.3.2"
+    "uuid": "^3.3.2",
+    "victory": "^32.3.3"
   },
   "scripts": {
     "start": "react-scripts start",
