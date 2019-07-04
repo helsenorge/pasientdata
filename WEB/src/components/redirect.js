@@ -196,8 +196,7 @@ class Redirect extends React.Component {
     for (let i = 0; i < this.state.datasets.length; i++) {
       if (
         this.state.datasets[i].measurements.length > 1 ||
-        (this.state.datasets[i].measurements.length === 1) &
-          (this.state.datasets[i].measurements.value !== undefined)
+        this.state.datasets[i].measurements.value !== undefined
       ) {
         this.addObservation(i);
       }
