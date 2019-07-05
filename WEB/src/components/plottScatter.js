@@ -58,24 +58,29 @@ class PlotScatter extends Component {
     }
   };
 
+  findMeasurementStartIndex = timeScope => {
+    switch (timeScope) {
+      case "week":
+        return this.findIndexOfOneWeekAgo(this.props.datasets[0].measurements);
+      case "day":
+        return this.findIndexOfOneDayAgo(this.props.datasets[0].measurements);
+      default:
+        return 0;
+    }
+  };
+
   render() {
     //console.log(this.props.datasets);
     let startIndex = 0;
     let timeScope = "week";
-    switch (timeScope) {
-      case "week":
-        startIndex = this.findIndexOfOneWeekAgo(
-          this.props.datasets[0].measurements
-        );
-        break;
-      case "day":
-        startIndex = this.findIndexOfOneDayAgo(
-          this.props.datasets[0].measurements
-        );
-        break;
-      default:
-        break;
-    }
+    startIndex = this.findMeasurementStartIndex(timeScope);
+    //let relevantIndex;
+    //this.props.datasets.forEach((item, i) => {
+    //  if (item.name === "") {
+    //    relevantIndex = i;
+    //  }
+    //});
+
     let slicedData = this.props.datasets[0].measurements.slice(startIndex);
 
     let reformatted = [];
@@ -94,6 +99,7 @@ class PlotScatter extends Component {
     //];
     //console.log(reformatted);
     return (
+      // Below is an example of a barChart.
       //   <ResponsiveContainer width="100%" height={300}>
       //     <ScatterChart
       //       width={730}

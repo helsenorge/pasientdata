@@ -16,6 +16,7 @@ class HomePage extends Component {
       image: "",
       datasets: [],
       redirectProfile: false,
+
       urlBase:
         "https://www.googleapis.com/fitness/v1/users/me/dataSources/derived:com.google."
     };
@@ -84,6 +85,10 @@ class HomePage extends Component {
   }
 
   responseGoogle(response) {
+    if (!localStorage.getItem("googleResponse")) {
+      console.log("Saving google client to localStorage");
+      localStorage.setItem("googleResponse", JSON.stringify(response));
+    }
     axios
       .all([
         this.getUserSteps(response),
@@ -151,8 +156,11 @@ class HomePage extends Component {
 
   render() {
     const pic = require("../images/ehelse.svg");
-
     if (this.state.redirectProfile === true) {
+      return <div />;
+    } else if (localStorage.getItem("googleResponse")) {
+      console.log("Reading google client to localStorage");
+      this.responseGoogle(JSON.parse(localStorage.getItem("googleResponse")));
       return <div />;
     } else {
       return (
