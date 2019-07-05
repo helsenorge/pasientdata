@@ -77,7 +77,7 @@ class PlotScatter extends Component {
         break;
     }
     let slicedData = this.props.datasets[0].measurements.slice(startIndex);
-    let nanos = [];
+
     let reformatted = [];
     for (let i = 0; i < slicedData.length; i++) {
       reformatted.push({
@@ -92,7 +92,7 @@ class PlotScatter extends Component {
     //  { value: 10, start: 1562153446 },
     //  { value: 10, start: 1562153681 }
     //];
-    console.log(reformatted);
+    //console.log(reformatted);
     return (
       //   <ResponsiveContainer width="100%" height={300}>
       //     <ScatterChart

@@ -82,6 +82,7 @@ class Redirect extends React.Component {
       .then(client => {
         console.log("Saving FHIR client");
         this.setState({ client });
+        localStorage.setItem("client", JSON.stringify(this.state.client));
       })
       .catch(e => console.error("Error when saving FHIR client", e));
   };
@@ -380,6 +381,10 @@ class Redirect extends React.Component {
         console.log("Patient didn't already exist in FHIR database");
         this.addPatient();
       });
+  };
+
+  componentWillMount = () => {
+    localStorage.getItem("client");
   };
 
   render() {

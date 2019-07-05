@@ -12,7 +12,7 @@ import dashboard from "./components/dashboard";
 const Main = () => (
   <main>
     <Switch>
-      <Route exact path="/" component={dashboard} />
+      <Route exact path="/" component={fhirlaunch} />
       <Route path="/login" component={HomePage} />
       <Route path="/home" component={fhirlaunch} />
       <Route path="/dashboard" component={dashboard} />
