@@ -3,18 +3,24 @@ import "./styles.css";
 import HomePage from "./loginPage/homePage.js";
 import fhirlaunch from "./api/fhirlaunch.js";
 import dashboard from "./components/dashboard";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, BrowserRouter } from "react-router-dom";
+import Redirect from "./redirect/redirect";
 
 class App extends Component {
   render() {
     return (
       <div>
-        <Switch>
-          <Route exact path="/" component={dashboard} />
-          <Route path="/login" component={HomePage} />
-          <Route path="/home" component={fhirlaunch} />
-          <Route path="/dashboard" component={dashboard} />
-        </Switch>
+        <BrowserRouter>
+          <Switch>
+            <Route exact path="/" component={dashboard} />
+            <Route path="/login" component={HomePage} />
+            <Route path="/launch" component={fhirlaunch} />
+            <Switch>
+              <Route path="/redirect" component={Redirect} />
+            </Switch>
+            <Route path="/dashboard" component={dashboard} />
+          </Switch>
+        </BrowserRouter>
       </div>
     );
   }
