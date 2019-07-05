@@ -2,6 +2,7 @@ import React from "react";
 import { Switch, Route } from "react-router-dom";
 import HomePage from "./components/homePage.js";
 import fhirlaunch from "./components/fhirlaunch.js";
+import dashboard from "./components/dashboard";
 
 // The Main component renders one of the three provided
 // Routes (provided that one matches). Both the /roster
@@ -11,9 +12,10 @@ import fhirlaunch from "./components/fhirlaunch.js";
 const Main = () => (
   <main>
     <Switch>
-      <Route exact path="/" component={fhirlaunch} />
+      <Route exact path="/" component={dashboard} />
       <Route path="/login" component={HomePage} />
       <Route path="/home" component={fhirlaunch} />
+      <Route path="/dashboard" component={dashboard} />
     </Switch>
   </main>
 );

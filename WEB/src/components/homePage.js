@@ -48,7 +48,7 @@ class HomePage extends Component {
   getUserHeartBeat(response) {
     return axios.get(
       this.state.urlBase +
-        "heart_minutes:com.google.android.gms:from_heart_rate<-merge_heart_rate_bpm/datasets/631148400000000000-1735686000000000000",
+        "heart_rate.bpm:com.google.android.gms:merge_heart_rate_bpm/datasets/631148400000000000-1735686000000000000",
       { headers: { Authorization: "Bearer " + response.accessToken } }
     );
   }
@@ -149,15 +149,6 @@ class HomePage extends Component {
     return momentObject.format("YYYY-MM-DDTHH:mm:ss"); // Conforms to FHIR standard
   }
 
-  // formatMeasurements() {
-  //   return this.state.datasets.measurements.map((item, index) => (
-  //     <li key={index}>
-  //       {" "}
-  //       "Start: " {item.start} ", End: " {item.end} ", Steps: " {item.value}
-  //     </li>
-  //   ));
-  // }
-
   render() {
     const pic = require("../images/ehelse.svg");
 
@@ -173,9 +164,7 @@ class HomePage extends Component {
             <div className="col-sm-12 text-generic">
               <p>Logg inn for å registrere din data</p>
             </div>
-            {this.props.isWaiting ? <div className="loader" /> : null}
-            <div className="col-sm-12 login-buttons">
-              {/* <HomePage onLogin={this.props.onLogin} /> */}
+            <div className="col-sm-12 login-button">
               {
                 <GoogleLogin
                   autoLoad={false}
