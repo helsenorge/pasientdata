@@ -1,10 +1,9 @@
 import * as React from "react";
 import * as FHIR from "fhirclient";
 import moment from "moment";
-import HomePage from "./homePage";
-import PlotScatter from "./plottScatter";
-import { Redirect } from "react-router";
-// import { Route } from "react-router-dom";
+import HomePage from "../loginPage/homePage";
+import PlotScatter from "../components/plottScatter";
+import {Redirect} from "react-router"
 
 class Redirecter extends React.Component {
   constructor(props) {
