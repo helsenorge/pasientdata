@@ -122,7 +122,7 @@ class PlotScatter extends Component {
           name="stature"
           unit=""
           domain={["auto", "auto"]}
-          tickFormatter={() => this.timeFormatter(timeScope)}
+          tickFormatter={() => this.dateFormatter(timeScope)}
         />
         <YAxis
           type="number"

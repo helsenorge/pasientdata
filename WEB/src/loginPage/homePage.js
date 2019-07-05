@@ -2,6 +2,14 @@ import React, { Component } from "react";
 import { GoogleLogin } from "react-google-login";
 import axios from "axios";
 import moment from "moment";
+import {
+  getUserSteps,
+  getUserWeight,
+  getUserHeight,
+  getUserHeartBeat,
+  getUserBloodPressure,
+  getUserBloodGlucose
+} from "../api/googleFit";
 //import { Redirect } from "react-router";
 
 class HomePage extends Component {
@@ -15,58 +23,8 @@ class HomePage extends Component {
       email: "",
       image: "",
       datasets: [],
-      redirectProfile: false,
-      urlBase:
-        "https://www.googleapis.com/fitness/v1/users/me/dataSources/derived:com.google."
+      redirectProfile: false
     };
-  }
-
-  getUserSteps(response) {
-    return axios.get(
-      this.state.urlBase +
-        "step_count.delta:com.google.android.gms:estimated_steps/datasets/631148400000000000-1735686000000000000",
-      { headers: { Authorization: "Bearer " + response.accessToken } }
-    );
-  }
-
-  getUserWeight(response) {
-    return axios.get(
-      this.state.urlBase +
-        "weight:com.google.android.gms:merge_weight/datasets/631148400000000000-1735686000000000000",
-      { headers: { Authorization: "Bearer " + response.accessToken } }
-    );
-  }
-
-  getUserHeight(response) {
-    return axios.get(
-      this.state.urlBase +
-        "height:com.google.android.gms:merge_height/datasets/631148400000000000-1735686000000000000",
-      { headers: { Authorization: "Bearer " + response.accessToken } }
-    );
-  }
-
-  getUserHeartBeat(response) {
-    return axios.get(
-      this.state.urlBase +
-        "heart_rate.bpm:com.google.android.gms:merge_heart_rate_bpm/datasets/631148400000000000-1735686000000000000",
-      { headers: { Authorization: "Bearer " + response.accessToken } }
-    );
-  }
-
-  getUserBloodPressure(response) {
-    return axios.get(
-      this.state.urlBase +
-        "blood_pressure:com.google.android.gms:merged/datasets/631148400000000000-1735686000000000000",
-      { headers: { Authorization: "Bearer " + response.accessToken } }
-    );
-  }
-
-  getUserBloodGlucose(response) {
-    return axios.get(
-      this.state.urlBase +
-        "blood_glucose:com.google.android.gms:merged/datasets/631148400000000000-1735686000000000000",
-      { headers: { Authorization: "Bearer " + response.accessToken } }
-    );
   }
 
   structureDatasets(dataType) {
@@ -86,12 +44,12 @@ class HomePage extends Component {
   responseGoogle(response) {
     axios
       .all([
-        this.getUserSteps(response),
-        this.getUserWeight(response),
-        this.getUserHeight(response),
-        this.getUserHeartBeat(response),
-        this.getUserBloodPressure(response),
-        this.getUserBloodGlucose(response)
+        getUserSteps(response),
+        getUserWeight(response),
+        getUserHeight(response),
+        getUserHeartBeat(response),
+        getUserBloodPressure(response),
+        getUserBloodGlucose(response)
       ])
       .then(
         axios.spread(

@@ -1,0 +1,60 @@
+body {
+  background-color: #FFFFFF !important;
+  font-family: 'Raleway', sans-serif !important;
+  height: 100%;
+  display: flex;
+  /* min-height: 100vh; */
+  flex-direction: column;
+}
+
+.text-generic {
+  color: rgb(0, 0, 0);
+  text-align: center;
+  padding: 10px;
+  /*max-width: 85%;*/
+}
+
+.text-color {
+  color: rgb(0, 0, 0);
+}
+
+html {
+  height: 100%;
+}
+
+.google-login-button {
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 150px;
+}
+
+.login-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.index-Image-head {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.index-Image {
+  max-height: 200px;
+  max-width: 85%;
+}
+
+.no-margin {
+  margin: 0 !important;
+}
+
+.no-padding {
+  padding: 0 !important;
+}
