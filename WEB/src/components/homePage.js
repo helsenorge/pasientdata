@@ -85,10 +85,9 @@ class HomePage extends Component {
   }
 
   responseGoogle(response) {
-    if (!localStorage.getItem("googleResponse")) {
-      console.log("Saving google client to localStorage");
-      localStorage.setItem("googleResponse", JSON.stringify(response));
-    }
+    console.log("Saving google client to localStorage");
+    localStorage.setItem("googleResponse", JSON.stringify(response));
+
     axios
       .all([
         this.getUserSteps(response),
@@ -158,45 +157,48 @@ class HomePage extends Component {
     const pic = require("../images/ehelse.svg");
     if (this.state.redirectProfile === true) {
       return <div />;
-    } else if (localStorage.getItem("googleResponse")) {
-      console.log("Reading google client to localStorage");
-      this.responseGoogle(JSON.parse(localStorage.getItem("googleResponse")));
-      return <div />;
-    } else {
-      return (
-        <div className="container-fluid">
-          <div className="row">
-            <div className="col-sm-12 index-Image-head">
-              <img src={pic} alt={"logo"} className="index-Image" />
-            </div>
-            <div className="col-sm-12 text-generic">
-              <p>Logg inn for å registrere din data</p>
-            </div>
-            <div className="col-sm-12 login-button">
-              {
-                <GoogleLogin
-                  autoLoad={false}
-                  clientId="942269849137-5a1bgivhq71c5ni083igrbss4tbpr6sm.apps.googleusercontent.com"
-                  scope={
-                    "https://www.googleapis.com/auth/fitness.activity.read " +
-                    "https://www.googleapis.com/auth/fitness.blood_glucose.read " +
-                    "https://www.googleapis.com/auth/fitness.blood_pressure.read " +
-                    "https://www.googleapis.com/auth/fitness.body.read"
-                  }
-                  approvalPrompt="force"
-                  onSuccess={this.responseGoogle}
-                  onFailure={this.responseGoogle}
-                  responseType="id_token"
-                  className="google-login-button"
-                  buttonText="Sign in with you google account"
-                  onLogin={this.props.onLogin}
-                />
-              }
-            </div>
+    }
+    if (localStorage.getItem("googleResponse")) {
+      console.log("Reading google client from localStorage");
+      let response = JSON.parse(localStorage.getItem("googleResponse"));
+      if (moment().diff(moment.unix(response.Zi.expires_at), "m") < 0) {
+        this.responseGoogle(response);
+        return <div />;
+      } // Else move on to login screen because need new login data.
+    }
+    return (
+      <div className="container-fluid">
+        <div className="row">
+          <div className="col-sm-12 index-Image-head">
+            <img src={pic} alt={"logo"} className="index-Image" />
+          </div>
+          <div className="col-sm-12 text-generic">
+            <p>Logg inn for å registrere din data</p>
+          </div>
+          <div className="col-sm-12 login-button">
+            {
+              <GoogleLogin
+                autoLoad={false}
+                clientId="942269849137-5a1bgivhq71c5ni083igrbss4tbpr6sm.apps.googleusercontent.com"
+                scope={
+                  "https://www.googleapis.com/auth/fitness.activity.read " +
+                  "https://www.googleapis.com/auth/fitness.blood_glucose.read " +
+                  "https://www.googleapis.com/auth/fitness.blood_pressure.read " +
+                  "https://www.googleapis.com/auth/fitness.body.read"
+                }
+                approvalPrompt="force"
+                onSuccess={this.responseGoogle}
+                onFailure={this.responseGoogle}
+                responseType="id_token"
+                className="google-login-button"
+                buttonText="Sign in with you google account"
+                onLogin={this.props.onLogin}
+              />
+            }
           </div>
         </div>
-      );
-    }
+      </div>
+    );
   }
 }
 

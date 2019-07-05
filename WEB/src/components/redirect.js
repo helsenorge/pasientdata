@@ -20,6 +20,7 @@ class Redirecter extends React.Component {
       observations: [],
       client: "",
       fhirNeedsLaunching: false,
+      userLoggedOut: false,
       datasets: [
         {
           name: "85354-9",
@@ -352,7 +353,6 @@ class Redirecter extends React.Component {
     };
 
     console.log("Adding observation to FHIR database");
-    //console.log(JSON.stringify(observationJSON));
     this.state.client
       .request(optionsObservation, (error, response, body) => {})
       .then(observation => {
@@ -400,7 +400,7 @@ class Redirecter extends React.Component {
   };
 
   render() {
-    if (this.state.fhirNeedsLaunching) {
+    if (this.state.fhirNeedsLaunching || this.state.userLoggedOut) {
       return <Redirect to="/" />;
     } else if (this.state.isLoggedIn) {
       return (
@@ -411,6 +411,15 @@ class Redirecter extends React.Component {
             </div>
           )}
           <PlotScatter datasets={this.state.datasets} />
+          <button
+            onClick={() => {
+              localStorage.removeItem("googleResponse");
+              this.setState({ userLoggedOut: true });
+            }}
+            variant="danger"
+          >
+            Log out
+          </button>
         </div>
       );
     } else {
