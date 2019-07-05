@@ -2,7 +2,15 @@ import React, { Component } from "react";
 //import { VictoryChart, VictoryGroup, VictoryArea } from "victory";
 import numeral from "numeral";
 import moment from "moment";
-import { XAxis, YAxis, Legend, Tooltip, ScatterChart, Scatter } from "recharts";
+import {
+  XAxis,
+  YAxis,
+  Legend,
+  Tooltip,
+  ScatterChart,
+  Scatter,
+  ResponsiveContainer
+} from "recharts";
 
 class PlotScatter extends Component {
   state = { colors: ["#7DB3FF", "#49457B", "#FF7C78"] };
@@ -35,7 +43,20 @@ class PlotScatter extends Component {
 
   numberFormatter = item => numeral(item).format("O");
 
-  dateFormatter = item => moment(item, "X").format("HH:mm"); // - hh:mm");
+  //dateFormatter = item => moment(item, "X").format("HH:mm"); // - hh:mm");
+
+  timeFormatter = (timeScope, item) => {
+    switch (timeScope) {
+      case "month":
+        return moment(item, "X").format("DD");
+      case "week":
+        return moment(item, "X").format("ddd");
+      case "day":
+        return moment(item, "X").format("HH:mm");
+      default:
+        return moment(item, "X").format("YYYY-MM-DDTHH:mm:ss");
+    }
+  };
 
   render() {
     //console.log(this.props.datasets);
@@ -111,46 +132,47 @@ class PlotScatter extends Component {
       //       />
       //     </ScatterChart>
       //   </ResponsiveContainer>
-      <ScatterChart
-        width={1000}
-        height={400}
-        margin={{ top: 20, right: 20, bottom: 0, left: 20 }}
-      >
-        <XAxis
-          type="number"
-          dataKey="x"
-          name="stature"
-          unit=""
-          domain={["auto", "auto"]}
-          tickFormatter={() => this.timeFormatter(timeScope)}
-        />
-        <YAxis
-          type="number"
-          dataKey="y"
-          name="weight"
-          unit=""
-          domain={["auto", "auto"]}
-        />
-        {/* <ZAxis
+      <ResponsiveContainer width="100%" height={300}>
+        <ScatterChart
+          width={1000}
+          height={400}
+          margin={{ top: 20, right: 20, bottom: 0, left: 20 }}
+        >
+          <XAxis
+            type="number"
+            dataKey="x"
+            name="stature"
+            unit=""
+            domain={["auto", "auto"]}
+            tickFormatter={item => this.timeFormatter(timeScope, item)}
+          />
+          <YAxis
+            type="number"
+            dataKey="y"
+            name="weight"
+            unit=""
+            domain={["auto", "auto"]}
+          />
+          {/* <ZAxis
           type="number"
           dataKey="z"
           range={[50, 1200]}
           name="score"
           unit="km"
         /> */}
-        {/* <CartesianGrid /> */}
-        <Scatter
-          name="Steps"
-          data={reformatted}
-          fillOpacity={0.9}
-          fill="#ff7300"
-        />
-        <Tooltip />
-        <Legend />
-        {/* <ReferenceArea x1={250} x2={300} alwaysShow label="any label" /> */}
-        {/* <ReferenceLine x={159} stroke="red" /> */}
-        {/* <ReferenceLine y={237.5} stroke="red" /> */}
-        {/* <ReferenceDot
+          {/* <CartesianGrid /> */}
+          <Scatter
+            name="Steps"
+            data={reformatted}
+            fillOpacity={0.9}
+            fill="#ff7300"
+          />
+          <Tooltip />
+          <Legend />
+          {/* <ReferenceArea x1={250} x2={300} alwaysShow label="any label" /> */}
+          {/* <ReferenceLine x={159} stroke="red" /> */}
+          {/* <ReferenceLine y={237.5} stroke="red" /> */}
+          {/* <ReferenceDot
           x={170}
           y={290}
           r={15}
@@ -159,7 +181,8 @@ class PlotScatter extends Component {
           fill="red"
           isFront
         /> */}
-      </ScatterChart>
+        </ScatterChart>
+      </ResponsiveContainer>
     );
   }
 }
