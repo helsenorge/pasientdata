@@ -18,34 +18,34 @@ class HomePage extends Component {
     };
   }
 
-  structureDatasets(dataType) {
-    let measurements = [];
+  // structureDatasets(dataType) {
+  //   let measurements = [];
 
-      dataType.data.point.forEach((item, index) => {
-        if(item.value[0].intVal){
-          measurements.push({
-            start: this.formatNanosec(item.startTimeNanos),
-            end: this.formatNanosec(item.endTimeNanos),
-            value: item.value[0].intVal
-          });
-        }
-        else if(item.value[0].fpVal){
-        measurements.push({
-          start: this.formatNanosec(item.startTimeNanos),
-          end: this.formatNanosec(item.endTimeNanos),
-          value: item.value[0].fpVal
-        });
-        }else {
-          return;
-        }
-      });
-    return measurements;
-  }
+  //     dataType.data.point.forEach((item, index) => {
+  //       if(item.value[0].intVal){
+  //         measurements.push({
+  //           start: this.formatNanosec(item.startTimeNanos),
+  //           end: this.formatNanosec(item.endTimeNanos),
+  //           value: item.value[0].intVal
+  //         });
+  //       }
+  //       else if(item.value[0].fpVal){
+  //       measurements.push({
+  //         start: this.formatNanosec(item.startTimeNanos),
+  //         end: this.formatNanosec(item.endTimeNanos),
+  //         value: item.value[0].fpVal
+  //       });
+  //       }else {
+  //         return;
+  //       }
+  //     });
+  //   return measurements;
+  // }
 
-  formatNanosec(ns) {
-    let momentObject = moment(ns / 1000000);
-    return momentObject.format("YYYY-MM-DDTHH:mm:ss"); // Conforms to FHIR standard
-  }
+  // formatNanosec(ns) {
+  //   let momentObject = moment(ns / 1000000);
+  //   return momentObject.format("YYYY-MM-DDTHH:mm:ss"); // Conforms to FHIR standard
+  // }
 
   render() {
     const pic = require("../images/ehelse.svg");

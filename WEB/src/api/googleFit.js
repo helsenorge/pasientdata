@@ -1,4 +1,5 @@
 import axios from "axios";
+import moment from "moment";
 
 var urlBase =
   "https://www.googleapis.com/fitness/v1/users/me/dataSources/derived:com.google.";
@@ -51,6 +52,35 @@ export function getUserBloodGlucose(response) {
   );
 }
 
+export function formatNanosec(ns) {
+    let momentObject = moment(ns / 1000000);
+    return momentObject.format("YYYY-MM-DDTHH:mm:ss"); // Conforms to FHIR standard
+  }
+
+export function structureDatasets(dataType) {
+  let measurements = [];
+
+    dataType.data.point.forEach((item, index) => {
+      if(item.value[0].intVal){
+        measurements.push({
+          start: formatNanosec(item.startTimeNanos),
+          end: formatNanosec(item.endTimeNanos),
+          value: item.value[0].intVal
+        });
+      }
+      else if(item.value[0].fpVal){
+      measurements.push({
+        start: formatNanosec(item.startTimeNanos),
+        end: formatNanosec(item.endTimeNanos),
+        value: item.value[0].fpVal
+      });
+      }else {
+        return;
+      }
+    });
+  return measurements;
+}
+
 export function responseGoogle(response) {
   console.log("Saving google client to localStorage");
   localStorage.setItem("googleResponse", JSON.stringify(response));
@@ -70,12 +100,12 @@ export function responseGoogle(response) {
           let datasets = [...this.state.datasets];
           const pic = response.profileObj.imageUrl + "?sz=200";
 
-          let stepMeasurement = this.structureDatasets(steps);
-          let weightMeasurement = this.structureDatasets(weight);
-          let heightMeasurement = this.structureDatasets(height);
-          let heartBeatMeasurement = this.structureDatasets(heartBeat);
-          let bloodPressureMeasurement = this.structureDatasets(bloodPressure);
-          let bloodGlucoseMeasurement = this.structureDatasets(bloodGlucose);
+          let stepMeasurement = structureDatasets(steps);
+          let weightMeasurement = structureDatasets(weight);
+          let heightMeasurement = structureDatasets(height);
+          let heartBeatMeasurement = structureDatasets(heartBeat);
+          let bloodPressureMeasurement = structureDatasets(bloodPressure);
+          let bloodGlucoseMeasurement = structureDatasets(bloodGlucose);
 
           datasets.push(
             { name: "55423-8", measurements: stepMeasurement },
