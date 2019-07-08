@@ -50,3 +50,65 @@ export function getUserBloodGlucose(response) {
     { headers: { Authorization: "Bearer " + response.accessToken } }
   );
 }
+
+export function responseGoogle(response) {
+  console.log("Saving google client to localStorage");
+  localStorage.setItem("googleResponse", JSON.stringify(response));
+
+  axios
+    .all([
+      getUserSteps(response),
+      getUserWeight(response),
+      getUserHeight(response),
+      getUserHeartBeat(response),
+      getUserBloodPressure(response),
+      getUserBloodGlucose(response)
+    ])
+    .then(
+      axios.spread(
+        (steps, weight, height, heartBeat, bloodPressure, bloodGlucose) => {
+          let datasets = [...this.state.datasets];
+          const pic = response.profileObj.imageUrl + "?sz=200";
+
+          let stepMeasurement = this.structureDatasets(steps);
+          let weightMeasurement = this.structureDatasets(weight);
+          let heightMeasurement = this.structureDatasets(height);
+          let heartBeatMeasurement = this.structureDatasets(heartBeat);
+          let bloodPressureMeasurement = this.structureDatasets(bloodPressure);
+          let bloodGlucoseMeasurement = this.structureDatasets(bloodGlucose);
+
+          datasets.push(
+            { name: "55423-8", measurements: stepMeasurement },
+            { name: "29463-7", measurements: weightMeasurement },
+            { name: "8302-2", measurements: heightMeasurement },
+            { name: "8867-4", measurements: heartBeatMeasurement },
+            { name: "85354-9", measurements: bloodPressureMeasurement },
+            { name: "2339-0", measurements: bloodGlucoseMeasurement }
+          );
+
+          this.setState({
+            googleId: response.profileObj.googleId,
+            firstname: response.profileObj.givenName,
+            lastname: response.profileObj.familyName,
+            email: response.profileObj.email,
+            image: pic,
+            datasets: datasets,
+            redirectProfile: true
+          });
+          this.props.onLogin(
+            {
+              googleId: response.profileObj.googleId,
+              firstName: response.profileObj.givenName,
+              family: response.profileObj.familyName,
+              email: response.profileObj.email,
+              image: pic
+            },
+            datasets
+          );
+        }
+      )
+    )
+    .catch(error => {
+      console.log(error);
+    });
+}

@@ -3,7 +3,7 @@ import * as FHIR from "fhirclient";
 import moment from "moment";
 import HomePage from "../loginPage/homePage";
 import PlotScatter from "../components/plottScatter";
-import {Redirect} from "react-router"
+import { Redirect } from "react-router";
 
 class Redirecter extends React.Component {
   constructor(props) {

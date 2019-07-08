@@ -1,21 +1,12 @@
 import React, { Component } from "react";
 import { GoogleLogin } from "react-google-login";
-import axios from "axios";
 import moment from "moment";
-import {
-  getUserSteps,
-  getUserWeight,
-  getUserHeight,
-  getUserHeartBeat,
-  getUserBloodPressure,
-  getUserBloodGlucose
-} from "../api/googleFit";
+import { responseGoogle } from "../api/googleFit";
 //import { Redirect } from "react-router";
 
 class HomePage extends Component {
   constructor(props) {
     super(props);
-    this.responseGoogle = this.responseGoogle.bind(this);
     this.state = {
       googleId: "",
       firstname: "",
@@ -30,79 +21,25 @@ class HomePage extends Component {
   structureDatasets(dataType) {
     let measurements = [];
 
-    dataType.data.point.forEach((item, index) => {
-      measurements.push({
-        start: this.formatNanosec(item.startTimeNanos),
-        end: this.formatNanosec(item.endTimeNanos),
-        value: item.value[0].intVal
+      dataType.data.point.forEach((item, index) => {
+        if(item.value[0].intVal){
+          measurements.push({
+            start: this.formatNanosec(item.startTimeNanos),
+            end: this.formatNanosec(item.endTimeNanos),
+            value: item.value[0].intVal
+          });
+        }
+        else if(item.value[0].fpVal){
+        measurements.push({
+          start: this.formatNanosec(item.startTimeNanos),
+          end: this.formatNanosec(item.endTimeNanos),
+          value: item.value[0].fpVal
+        });
+        }else {
+          return;
+        }
       });
-    });
-
     return measurements;
-  }
-
-  responseGoogle(response) {
-    console.log("Saving google client to localStorage");
-    localStorage.setItem("googleResponse", JSON.stringify(response));
-
-    axios
-      .all([
-        getUserSteps(response),
-        getUserWeight(response),
-        getUserHeight(response),
-        getUserHeartBeat(response),
-        getUserBloodPressure(response),
-        getUserBloodGlucose(response)
-      ])
-      .then(
-        axios.spread(
-          (steps, weight, height, heartBeat, bloodPressure, bloodGlucose) => {
-            let datasets = [...this.state.datasets];
-            const pic = response.profileObj.imageUrl + "?sz=200";
-
-            let stepMeasurement = this.structureDatasets(steps);
-            let weightMeasurement = this.structureDatasets(weight);
-            let heightMeasurement = this.structureDatasets(height);
-            let heartBeatMeasurement = this.structureDatasets(heartBeat);
-            let bloodPressureMeasurement = this.structureDatasets(
-              bloodPressure
-            );
-            let bloodGlucoseMeasurement = this.structureDatasets(bloodGlucose);
-
-            datasets.push(
-              { name: "55423-8", measurements: stepMeasurement },
-              { name: "29463-7", measurements: weightMeasurement },
-              { name: "8302-2", measurements: heightMeasurement },
-              { name: "8867-4", measurements: heartBeatMeasurement },
-              { name: "85354-9", measurements: bloodPressureMeasurement },
-              { name: "2339-0", measurements: bloodGlucoseMeasurement }
-            );
-
-            this.setState({
-              googleId: response.profileObj.googleId,
-              firstname: response.profileObj.givenName,
-              lastname: response.profileObj.familyName,
-              email: response.profileObj.email,
-              image: pic,
-              datasets: datasets,
-              redirectProfile: true
-            });
-            this.props.onLogin(
-              {
-                googleId: response.profileObj.googleId,
-                firstName: response.profileObj.givenName,
-                family: response.profileObj.familyName,
-                email: response.profileObj.email,
-                image: pic
-              },
-              datasets
-            );
-          }
-        )
-      )
-      .catch(error => {
-        console.log(error);
-      });
   }
 
   formatNanosec(ns) {
@@ -119,7 +56,7 @@ class HomePage extends Component {
       console.log("Reading google client from localStorage");
       let response = JSON.parse(localStorage.getItem("googleResponse"));
       if (moment().diff(moment.unix(response.Zi.expires_at), "m") < 0) {
-        this.responseGoogle(response);
+        responseGoogle.bind(this)(response);
         return <div />;
       } // Else move on to login screen because need new login data.
     }
@@ -144,8 +81,8 @@ class HomePage extends Component {
                   "https://www.googleapis.com/auth/fitness.body.read"
                 }
                 approvalPrompt="force"
-                onSuccess={this.responseGoogle}
-                onFailure={this.responseGoogle}
+                onSuccess={responseGoogle.bind(this)}
+                onFailure={responseGoogle.bind(this)}
                 responseType="id_token"
                 className="google-login-button"
                 buttonText="Sign in with you google account"
