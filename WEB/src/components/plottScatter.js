@@ -139,27 +139,27 @@ class PlotScatter extends Component {
       //     </ScatterChart>
       //   </ResponsiveContainer>
       <ResponsiveContainer width="100%" height={300}>
-      <ScatterChart
-        width={1000}
-        height={400}
-        margin={{ top: 20, right: 20, bottom: 0, left: 20 }}
-      >
-        <XAxis
-          type="number"
-          dataKey="x"
-          name="stature"
-          unit=""
-          domain={["auto", "auto"]}
-          tickFormatter={() => this.timeFormatter(timeScope)}
-        />
-        <YAxis
-          type="number"
-          dataKey="y"
-          name="weight"
-          unit=""
-          domain={["auto", "auto"]}
-        />
-        {/* <ZAxis
+        <ScatterChart
+          width={1000}
+          height={400}
+          margin={{ top: 20, right: 20, bottom: 0, left: 20 }}
+        >
+          <XAxis
+            type="number"
+            dataKey="x"
+            name="stature"
+            unit=""
+            domain={["auto", "auto"]}
+            tickFormatter={item => this.timeFormatter(timeScope, item)}
+          />
+          <YAxis
+            type="number"
+            dataKey="y"
+            name="weight"
+            unit=""
+            domain={["auto", "auto"]}
+          />
+          {/* <ZAxis
           type="number"
           dataKey="z"
           range={[50, 1200]}
