@@ -2,7 +2,7 @@ import * as React from "react";
 import * as FHIR from "fhirclient";
 import moment from "moment";
 import HomePage from "../loginPage/homePage";
-import PlotScatter from "../components/plottScatter";
+import BarPlotter from "../components/barPlotter";
 
 class Redirecter extends React.Component {
   constructor(props) {
@@ -379,7 +379,12 @@ class Redirecter extends React.Component {
               <div>Datasets loaded!</div>
             </div>
           )}
-          <PlotScatter datasets={this.state.datasets} />
+          <BarPlotter
+            datasets={this.state.datasets}
+            aggregateLength="day"
+            timeScope="week"
+            datasetLOINC="55423-8"
+          />
           <button
             onClick={() => {
               localStorage.removeItem("googleResponse");
