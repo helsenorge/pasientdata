@@ -27,30 +27,15 @@ class NavigationBar extends Component {
     return (
       <div>
         HEI
-        {/* <Fragment>
-          <Tabs
-            ref={(bookingTabs: Tabs) => (this.ctrls.bookingTabs = bookingTabs)}
-          >
+        <Fragment>
+          <Tabs dropdown={true}>
             <Tab title="Gamle sykdommer" className="hei">
               Tab1 innhold
-              <p>
-                Bytt til{" "}
-                <a
-                  onClick={() => {
-                    if (this.ctrls.bookingTabs) {
-                      this.ctrls.bookingTabs.setSelectedIndex(1);
-                    }
-                  }}
-                >
-                  nye sykdommer
-                </a>{" "}
-                tab
-              </p>
             </Tab>
             <Tab title="Nye sykdommer">Tab2 innhold</Tab>
             <Tab title="Alternative behandlere">Tab3 innhold</Tab>
           </Tabs>
-        </Fragment> */}
+        </Fragment>
       </div>
     );
   }

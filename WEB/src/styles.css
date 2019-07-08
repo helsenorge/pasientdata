@@ -1,10 +1,11 @@
 body {
-  background-color: #FFFFFF !important;
-  font-family: 'Raleway', sans-serif !important;
+  background-color: #ffffff !important;
+  font-family: "Raleway", sans-serif !important;
   height: 100%;
   display: flex;
   /* min-height: 100vh; */
   flex-direction: column;
+  color: #000;
 }
 
 .text-generic {

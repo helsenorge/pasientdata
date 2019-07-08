@@ -1,21 +1,24 @@
 import React, { Component } from "react";
-//import NavigationBar from "./navigationBar.js";
+import NavigationBar from "./navigationBar.js";
 
 class Dashboard extends Component {
-//   constructor(props) {
-//     super(props);
-//   }
+  // constructor(props) {
+  //   super(props);
+  // }
 
   render() {
     return (
-      <div />
-      //  <NavigationBar>
-      //    <div className="container-fluid">
-      //      <div className="row">
-      //        <div className="col-sm-12">HELLOO</div>
-      //      </div>
-      //    </div>
-      //  </NavigationBar>
+      <div>
+        <NavigationBar />
+        <div>Hvorfor rendrer ingenting?</div>
+        {/* <NavigationBar>
+          <div className="container-fluid">
+            <div className="row">
+              <div className="col-sm-12">HELLOO</div>
+            </div>
+          </div>
+        </NavigationBar> */}
+      </div>
     );
   }
 }
