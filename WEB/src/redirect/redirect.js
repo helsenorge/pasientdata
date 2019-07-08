@@ -3,7 +3,6 @@ import * as FHIR from "fhirclient";
 import moment from "moment";
 import HomePage from "../loginPage/homePage";
 import PlotScatter from "../components/plottScatter";
-import {Redirect} from "react-router"
 
 class Redirecter extends React.Component {
   constructor(props) {
@@ -17,8 +16,9 @@ class Redirecter extends React.Component {
       image: "",
       googleId: "",
       observations: [],
-      client: "",
-      fhirNeedsLaunching: false,
+      client: FHIR.client({
+        serverUrl: "http://localhost:5000/fhir"
+      }),
       userLoggedOut: false,
       datasets: [
         {
@@ -74,30 +74,6 @@ class Redirecter extends React.Component {
       ]
     };
   }
-
-  saveClient = () => {
-    //console.log(JSON.parse(localStorage.getItem("client")));
-    //if (this.state.client === "") {
-    //  if (localStorage.getItem("client")) {
-    //    this.setState({
-    //      client: JSON.parse(localStorage.getItem("client"))
-    //    });
-    //    console.log("Client ", this.state.client);
-    //  } else {
-    FHIR.oauth2
-      .ready()
-      .then(client => {
-        console.log("Saving FHIR client");
-        this.setState({ client });
-        //        localStorage.setItem("client", JSON.stringify(client));
-      })
-      .catch(e => {
-        console.error("Error when saving FHIR client", e);
-        this.setState({ fhirNeedsLaunching: true });
-      });
-    //  }
-    //}
-  };
 
   readAllObservations = () => {
     console.log(
@@ -394,14 +370,8 @@ class Redirecter extends React.Component {
       });
   };
 
-  componentDidMount = () => {
-    this.saveClient();
-  };
-
   render() {
-    if (this.state.fhirNeedsLaunching || this.state.userLoggedOut) {
-      return <Redirect to="/" />;
-    } else if (this.state.isLoggedIn) {
+    if (this.state.isLoggedIn) {
       return (
         <div>
           {this.state.datasets.length > 0 && (
