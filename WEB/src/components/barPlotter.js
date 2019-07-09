@@ -202,14 +202,7 @@ class BarPlotter extends Component {
       });
       added++;
     }
-    // let temp = [];
-    // for (let i = 0; i < reformatted.length; i++) {
-    //   temp.push({
-    //     y: reformatted[i].y,
-    //     x: moment(reformatted[i].x, "X").format("HH-mm")
-    //   });
-    // }
-    // console.log(temp);
+
     for (let i = 1; i < reformatted.length; i++) {
       if (
         start.diff(
@@ -255,7 +248,7 @@ class BarPlotter extends Component {
     ) {
       aggregated.push({ y: 0, x: start.format(timeFormats.format) });
     }
-    console.log("aggregated", aggregated);
+
     return (
       <ResponsiveContainer width="90%" height={300}>
         <BarChart
@@ -273,38 +266,6 @@ class BarPlotter extends Component {
           <Tooltip cursor={false} />
         </BarChart>
       </ResponsiveContainer>
-      // <ResponsiveContainer width="100%" height={300}>
-      //   <ScatterChart
-      //     width={1000}
-      //     height={400}
-      //     margin={{ top: 20, right: 20, bottom: 0, left: 20 }}
-      //   >
-      //     <XAxis
-      //       type="number"
-      //       dataKey="x"
-      //       name="Unix timestamp"
-      //       unit=""
-      //       domain={["auto", "auto"]}
-      //       tickFormatter={item => this.timeFormatter(timeScope, item)}
-      //     />
-      //     <YAxis
-      //       type="number"
-      //       dataKey="y"
-      //       name="Steps in interval"
-      //       unit=""
-      //       domain={["auto", "auto"]}
-      //     />
-      //     <Scatter
-      //       name="Steps"
-      //       data={reformatted}
-      //       fillOpacity={0.0}
-      //       fill="#ff7300"
-      //       line
-      //     />
-      //     <Tooltip />
-      //     <Legend />
-      //   </ScatterChart>
-      // </ResponsiveContainer>
     );
   }
 }

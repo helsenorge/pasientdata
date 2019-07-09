@@ -16,9 +16,6 @@ class FHIRconnection extends React.Component {
       }),
       userLoggedOut: false
     };
-    // this.addPatientIfNeeded();
-    // this.addObservations();
-    // this.readAllObservations();
   }
 
   readAllObservations = () => {
@@ -290,7 +287,6 @@ class FHIRconnection extends React.Component {
   addPatientIfNeeded = () => {
     console.log("Reading patient from FHIR database");
     const q1 = new URLSearchParams();
-    console.log("googleID=",this.props.patient);
     q1.set("id", this.props.patient.googleId);
     this.state.client
       .request(`Patient/${this.props.patient.googleId}`, {
@@ -340,7 +336,6 @@ class FHIRconnection extends React.Component {
       return (
         <div>
           <HomePage />
-          
         </div>
       );
     }
