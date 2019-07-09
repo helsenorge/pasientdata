@@ -1,28 +1,17 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 //import { GoogleLogout } from 'react-google-login';
 import Tabs from "@helsenorge/toolkit/components/molecules/tabs/index";
 import Tab from "@helsenorge/toolkit/components/molecules/tabs/tab";
 import Burgers from "./burgers";
 import ButtonToolBar from "./ButtonGroup";
-import BarPlotter from "./barPlotter.js";
-import Redirecter from "../FHIRconnection/FHIRconnection";
 
 class NavigationBar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeTab: "1",
       viewButtonClicked: "week",
       intervalButtonClicked: "day"
     };
-  }
-
-  toggle(tab) {
-    if (this.state.activeTab !== tab) {
-      this.setState({
-        activeTab: tab
-      });
-    }
   }
 
   clicked = (buttonType, buttonClicked) => {
@@ -47,7 +36,6 @@ class NavigationBar extends Component {
     );
     return (
       <div>
-        {/* <Fragment> */}
         <Tabs>
           <Tab title="Ian Daly" className="hei">
             Daly started his career with local club Broadford Rovers and spent
@@ -99,16 +87,8 @@ class NavigationBar extends Component {
               onClicked={this.clicked}
               buttonClicked={"interval"}
             />
-            <BarPlotter
-              datasets={this.props.state.datasets}
-              //datasets={}
-              aggregateLength={this.intervalButtonClicked}
-              timeScope={this.viewButtonClicked}
-              datasetLOINC="55423-8"
-            />
           </Tab>
         </Tabs>
-        {/* </Fragment> */}
       </div>
     );
   }

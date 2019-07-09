@@ -2,18 +2,13 @@ import React, { Component } from "react";
 import { GoogleLogin } from "react-google-login";
 import moment from "moment";
 import { responseGoogle } from "../api/googleFit";
-//import { Redirect } from "react-router";
+import { addInfo, onLoggedIn } from "../redux/actions";
+import { connect } from "react-redux";
 
-class HomePage extends Component {
+class LoginPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // googleId: "",
-      // firstname: "",
-      // lastname: "",
-      // email: "",
-      // image: "",
-      // datasets: [],
       redirectProfile: false
     };
   }
@@ -57,7 +52,6 @@ class HomePage extends Component {
                 responseType="id_token"
                 className="google-login-button"
                 buttonText="Sign in with you google account"
-                //onLogin={this.props.onLogin}
               />
             }
           </div>
@@ -67,4 +61,15 @@ class HomePage extends Component {
   }
 }
 
-export default HomePage;
+const mapDispatchToProps = { addInfo, onLoggedIn };
+
+function mapStateToProps(state) {
+  return {
+    patient: state.patient
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(LoginPage);
