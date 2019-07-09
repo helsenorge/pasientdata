@@ -7,6 +7,8 @@ import fhirlaunch from "./api/fhirlaunch.js";
 import Dashboard from "./components/dashboard.js";
 import { Switch, Route, BrowserRouter } from "react-router-dom";
 import Redirecter from "./redirect/redirect";
+import Burgers from "./components/burgers";
+import ButtonToolBar from "./components/ButtonGroup";
 
 class App extends Component {
   render() {
@@ -22,6 +24,10 @@ class App extends Component {
               </Switch>
             </Route>
             <Route path="/dashboard" component={Dashboard} />
+            {/* <Switch> */}
+            <Route path="/burgers" component={Burgers} />
+            <Route path="/steps" component={ButtonToolBar} />
+            {/* </Switch> */}
           </Switch>
         </BrowserRouter>
       </div>
