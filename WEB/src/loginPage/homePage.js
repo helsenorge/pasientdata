@@ -8,12 +8,12 @@ class HomePage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      googleId: "",
-      firstname: "",
-      lastname: "",
-      email: "",
-      image: "",
-      datasets: [],
+      // googleId: "",
+      // firstname: "",
+      // lastname: "",
+      // email: "",
+      // image: "",
+      // datasets: [],
       redirectProfile: false
     };
   }
@@ -57,7 +57,7 @@ class HomePage extends Component {
                 responseType="id_token"
                 className="google-login-button"
                 buttonText="Sign in with you google account"
-                onLogin={this.props.onLogin}
+                //onLogin={this.props.onLogin}
               />
             }
           </div>
