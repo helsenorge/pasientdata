@@ -4,6 +4,8 @@ import Tabs from "@helsenorge/toolkit/components/molecules/tabs/index";
 import Tab from "@helsenorge/toolkit/components/molecules/tabs/tab";
 import Burgers from "./burgers";
 import ButtonToolBar from "./ButtonGroup";
+import BarPlotter from "./barPlotter.js";
+import Redirecter from "../redirect/redirect";
 
 class NavigationBar extends Component {
   constructor(props) {
@@ -96,6 +98,13 @@ class NavigationBar extends Component {
             <ButtonToolBar
               onClicked={this.clicked}
               buttonClicked={"interval"}
+            />
+            <BarPlotter
+              datasets={this.props.state.datasets}
+              //datasets={}
+              aggregateLength={this.intervalButtonClicked}
+              timeScope={this.viewButtonClicked}
+              datasetLOINC="55423-8"
             />
           </Tab>
         </Tabs>
