@@ -1,10 +1,11 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 //import { GoogleLogout } from 'react-google-login';
 import Tabs from "@helsenorge/toolkit/components/molecules/tabs/index";
 import Tab from "@helsenorge/toolkit/components/molecules/tabs/tab";
 import Burgers from "./burgers";
 import ButtonToolBar from "./ButtonGroup";
 import BarPlotter from "./barPlotter.js";
+import Redirecter from "../FHIRconnection/FHIRconnection";
 
 class NavigationBar extends Component {
   constructor(props) {
