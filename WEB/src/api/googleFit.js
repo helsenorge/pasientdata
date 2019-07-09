@@ -53,30 +53,31 @@ export function getUserBloodGlucose(response) {
 }
 
 export function formatNanosec(ns) {
-  let momentObject = moment(ns / 1000000);
-  return momentObject.format("YYYY-MM-DDTHH:mm:ss"); // Conforms to FHIR standard
-}
+    let momentObject = moment(ns / 1000000);
+    return momentObject.format("YYYY-MM-DDTHH:mm:ss"); // Conforms to FHIR standard
+  }
 
 export function structureDatasets(dataType) {
   let measurements = [];
 
-  dataType.data.point.forEach((item, index) => {
-    if (item.value[0].intVal) {
-      measurements.push({
-        start: formatNanosec(item.startTimeNanos),
-        end: formatNanosec(item.endTimeNanos),
-        value: item.value[0].intVal
-      });
-    } else if (item.value[0].fpVal) {
+    dataType.data.point.forEach((item, index) => {
+      if(item.value[0].intVal){
+        measurements.push({
+          start: formatNanosec(item.startTimeNanos),
+          end: formatNanosec(item.endTimeNanos),
+          value: item.value[0].intVal
+        });
+      }
+      else if(item.value[0].fpVal){
       measurements.push({
         start: formatNanosec(item.startTimeNanos),
         end: formatNanosec(item.endTimeNanos),
         value: item.value[0].fpVal
       });
-    } else {
-      return;
-    }
-  });
+      }else {
+        return;
+      }
+    });
   return measurements;
 }
 
@@ -96,7 +97,7 @@ export function responseGoogle(response) {
     .then(
       axios.spread(
         (steps, weight, height, heartBeat, bloodPressure, bloodGlucose) => {
-          let datasets = [];
+          let datasets = [...this.state.datasets];
           const pic = response.profileObj.imageUrl + "?sz=200";
 
           let stepMeasurement = structureDatasets(steps);
@@ -115,36 +116,25 @@ export function responseGoogle(response) {
             { name: "2339-0", measurements: bloodGlucoseMeasurement }
           );
 
-          this.props.addInfo(
-            response.profileObj.googleId,
-            response.profileObj.givenName,
-            response.profileObj.familyName,
-            response.profileObj.email,
-            pic,
+          this.setState({
+            googleId: response.profileObj.googleId,
+            firstname: response.profileObj.givenName,
+            lastname: response.profileObj.familyName,
+            email: response.profileObj.email,
+            image: pic,
+            datasets: datasets,
+            redirectProfile: true
+          });
+          this.props.onLogin(
+            {
+              googleId: response.profileObj.googleId,
+              firstName: response.profileObj.givenName,
+              family: response.profileObj.familyName,
+              email: response.profileObj.email,
+              image: pic
+            },
             datasets
           );
-
-          this.props.onLoggedIn(true);
-
-          // this.setState({
-          //   googleId: response.profileObj.googleId,
-          //   firstname: response.profileObj.givenName,
-          //   lastname: response.profileObj.familyName,
-          //   email: response.profileObj.email,
-          //   image: pic,
-          //   datasets: datasets,
-          //   redirectProfile: true
-          // });
-          // this.props.onLogin(
-          //   {
-          //     googleId: response.profileObj.googleId,
-          //     firstName: response.profileObj.givenName,
-          //     family: response.profileObj.familyName,
-          //     email: response.profileObj.email,
-          //     image: pic
-          //   },
-          //   datasets
-          // );
         }
       )
     )
@@ -152,4 +142,3 @@ export function responseGoogle(response) {
       console.log(error);
     });
 }
-
