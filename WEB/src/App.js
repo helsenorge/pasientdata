@@ -4,12 +4,14 @@ import "./min-helse.css";
 import "./styles.css";
 import dashboard from "./components/dashboard";
 import { Switch, Route, BrowserRouter } from "react-router-dom";
-import Redirecter from "./redirect/redirect";
+import Redirecter from "./FHIRconnection/FHIRconnection";
+import { Provider } from "react-redux";
+import store from "./store";
 
 class App extends Component {
   render() {
     return (
-      <div>
+      <Provider store={store}>
         <BrowserRouter>
           <Switch>
             <Route exact path="/" component={Redirecter} />
@@ -17,7 +19,7 @@ class App extends Component {
             <Route path="/dashboard" component={dashboard} />
           </Switch>
         </BrowserRouter>
-      </div>
+      </Provider>
     );
   }
 }

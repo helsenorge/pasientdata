@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 //import { VictoryChart, VictoryGroup, VictoryArea } from "victory";
 import numeral from "numeral";
 import moment from "moment";
@@ -61,9 +62,9 @@ class PlotScatter extends Component {
   findMeasurementStartIndex = timeScope => {
     switch (timeScope) {
       case "week":
-        return this.findIndexOfOneWeekAgo(this.props.datasets[0].measurements);
+        return this.findIndexOfOneWeekAgo(this.props.patient.datasets[0].measurements);
       case "day":
-        return this.findIndexOfOneDayAgo(this.props.datasets[0].measurements);
+        return this.findIndexOfOneDayAgo(this.props.patient.datasets[0].measurements);
       default:
         return 0;
     }
@@ -81,7 +82,7 @@ class PlotScatter extends Component {
     //  }
     //});
 
-    let slicedData = this.props.datasets[0].measurements.slice(startIndex);
+    let slicedData = this.props.patient.datasets[0].measurements.slice(startIndex);
 
     let reformatted = [];
     for (let i = 0; i < slicedData.length; i++) {
@@ -193,4 +194,10 @@ class PlotScatter extends Component {
   }
 }
 
-export default PlotScatter;
+function mapStateToProps(state) {
+  return {
+    patient: state.patient
+  };
+}
+
+export default connect(mapStateToProps)(PlotScatter);
