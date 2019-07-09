@@ -57,15 +57,42 @@ class BarPlotter extends Component {
     }
   };
 
-  findMeasurementStartIndex = () => {
-    switch (this.props.timeScope) {
-      case "week":
-        return this.findIndexOfOneWeekAgo(this.props.datasets[0].measurements);
-      case "day":
-        return this.findIndexOfOneDayAgo(this.props.datasets[0].measurements);
-      default:
-        return 0;
+  findMeasurementStartIndex = datasetIndex => {
+    // switch (this.props.timeScope) {
+    //   case "month":
+    //     return this.findIndexOfOneMonthAgo(
+    //       this.props.datasets[datasetIndex].measurements
+    //     );
+    //   case "week":
+    //     return this.findIndexOfOneWeekAgo(
+    //       this.props.datasets[datasetIndex].measurements
+    //     );
+    //   case "day":
+    //     return this.findIndexOfOneDayAgo(
+    //       this.props.datasets[datasetIndex].measurements
+    //     );
+    //   default:
+    //     return 0;
+    // }
+
+    for (
+      let i = 0;
+      i < this.props.datasets[datasetIndex].measurements.length;
+      i++
+    ) {
+      if (
+        moment().diff(
+          moment(
+            this.props.datasets[datasetIndex].measurements[i].start,
+            "YYYY-MM-DDTHH:mm:ss"
+          ),
+          this.props.timeScope + "s"
+        ) < 1
+      ) {
+        return i;
+      }
     }
+    return 0;
   };
 
   findDatasetIndexFromLOINC = () => {
@@ -80,18 +107,57 @@ class BarPlotter extends Component {
 
   formatStringsFromAggregateLength = () => {
     switch (this.props.aggregateLength) {
+      case "week":
+        return { startOf: "week", interval: "weeks", format: "ww" };
       case "day":
-        return { startOf: "day", interval: "days", format: "ddd" };
+        if (this.props.timeScope === "month") {
+          return { startOf: "day", interval: "days", format: "DD.MM" };
+        } else {
+          return { startOf: "day", interval: "days", format: "ddd" };
+        }
       case "hour":
-        return { startOf: "hour", interval: "hours", format: "ddd" };
+        if (this.props.timeScope === "month") {
+          return { startOf: "hour", interval: "hours", format: "DD.MM" };
+        } else if (this.props.timeScope === "week") {
+          return { startOf: "hour", interval: "hours", format: "ddd" };
+        } else {
+          return { startOf: "hour", interval: "hours", format: "HH" };
+        }
       default:
-        return { startOf: "day", interval: "days", format: "ddd" };
+    }
+    return { startOf: "day", interval: "days", format: "DD.MM" };
+  };
+
+  convertTimeScopeToNumber = () => {
+    switch (this.props.timeScope) {
+      case "year":
+        switch (this.props.aggregateLength) {
+          case "day":
+            if (moment().isLeapYear()) {
+              return 366;
+            } else {
+              return 365;
+            }
+          case "week":
+            return 52;
+          case "month":
+            return 12;
+        }
+      case "week":
+        return 7;
+      case "day":
+        return 24;
+      case "month":
+        return moment().daysInMonth();
+      default:
+        return 24;
     }
   };
 
   render() {
+    let timeFormats = this.formatStringsFromAggregateLength();
     let datasetIndex = this.findDatasetIndexFromLOINC();
-    let startIndex = this.findMeasurementStartIndex();
+    let startIndex = this.findMeasurementStartIndex(datasetIndex);
 
     let slicedData = this.props.datasets[datasetIndex].measurements.slice(
       startIndex
@@ -112,9 +178,34 @@ class BarPlotter extends Component {
     / Loop through the desired dataset and aggregate
     */
     let aggregated = [];
-    let timeFormats = this.formatStringsFromAggregateLength();
     let sum = reformatted[0].y;
     let start = moment(reformatted[0].x, "X").startOf(timeFormats.startOf);
+    //console.log(start.format(timeFormats.format));
+    // Add empty bars at start if needed
+    let added = 0;
+    while (
+      moment().diff(start, this.props.aggregateLength) + added <
+      this.convertTimeScopeToNumber()
+    ) {
+      aggregated.push({
+        y: 0,
+        x: moment()
+          .subtract(
+            this.convertTimeScopeToNumber() - added,
+            timeFormats.interval
+          )
+          .format(timeFormats.format)
+      });
+      added++;
+    }
+    // let temp = [];
+    // for (let i = 0; i < reformatted.length; i++) {
+    //   temp.push({
+    //     y: reformatted[i].y,
+    //     x: moment(reformatted[i].x, "X").format("HH-mm")
+    //   });
+    // }
+    // console.log(temp);
     for (let i = 1; i < reformatted.length; i++) {
       if (
         start.diff(
@@ -124,14 +215,43 @@ class BarPlotter extends Component {
       ) {
         sum += reformatted[i].y;
       } else {
+        // Add empty bars inbetween if needed
+        let skipped = 0;
         aggregated.push({
           y: sum,
           x: start.format(timeFormats.format)
         });
+        while (
+          moment(start).diff(
+            moment(reformatted[i].x, "X"),
+            timeFormats.interval
+          ) +
+            skipped <
+          -1
+        ) {
+          aggregated.push({
+            y: 0,
+            x: moment(start)
+              .add(1 + skipped, timeFormats.interval)
+              .startOf(timeFormats.startOf)
+              .format(timeFormats.format)
+          });
+          skipped++;
+        }
+
         sum = reformatted[i].y;
         start = moment(reformatted[i].x, "X").startOf(timeFormats.startOf);
       }
     }
+    aggregated.push({ y: sum, x: start.format(timeFormats.format) });
+    // Add empty bars at end if needed
+    while (
+      moment().diff(start.add(1, timeFormats.interval), timeFormats.interval) >
+      0
+    ) {
+      aggregated.push({ y: 0, x: start.format(timeFormats.format) });
+    }
+    console.log("aggregated", aggregated);
     return (
       <ResponsiveContainer width="90%" height={300}>
         <BarChart

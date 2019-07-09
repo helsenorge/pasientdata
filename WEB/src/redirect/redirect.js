@@ -20,58 +20,7 @@ class Redirecter extends React.Component {
         serverUrl: "http://localhost:5000/fhir"
       }),
       userLoggedOut: false,
-      datasets: [
-        {
-          name: "85354-9",
-          measurements: [
-            {
-              value: 9,
-              start: "2001-01-20T13:50:17",
-              end: "2001-01-20T13:51:17"
-            },
-            {
-              value: 6,
-              start: "2001-02-20T13:51:17",
-              end: "2001-02-20T13:52:17"
-            },
-            {
-              value: 7,
-              start: "2001-03-20T13:52:17",
-              end: "2001-03-20T13:53:17"
-            },
-            {
-              value: 8,
-              start: "2001-04-20T13:53:17",
-              end: "2001-04-20T13:54:17"
-            }
-          ]
-        },
-        {
-          name: "8867-4",
-          measurements: [
-            {
-              value: 60,
-              start: "2001-01-20T13:50:17",
-              end: "2001-01-20T13:51:17"
-            },
-            {
-              value: 61,
-              start: "2001-01-20T13:51:17",
-              end: "2001-01-20T13:52:17"
-            },
-            {
-              value: 63,
-              start: "2001-01-20T13:52:17",
-              end: "2001-01-20T13:53:17"
-            },
-            {
-              value: 59,
-              start: "2001-01-20T13:53:17",
-              end: "2001-01-20T13:54:17"
-            }
-          ]
-        }
-      ]
+      datasets: []
     };
   }
 
@@ -382,7 +331,7 @@ class Redirecter extends React.Component {
           <BarPlotter
             datasets={this.state.datasets}
             aggregateLength="day"
-            timeScope="week"
+            timeScope="year"
             datasetLOINC="55423-8"
           />
           <button
