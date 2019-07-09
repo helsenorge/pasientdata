@@ -330,8 +330,8 @@ class Redirecter extends React.Component {
           )}
           <BarPlotter
             datasets={this.state.datasets}
-            aggregateLength="day"
-            timeScope="week"
+            aggregateLength="hour"
+            timeScope="day"
             datasetLOINC="55423-8"
           />
           <button

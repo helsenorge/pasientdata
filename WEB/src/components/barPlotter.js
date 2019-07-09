@@ -261,8 +261,8 @@ class BarPlotter extends Component {
         <BarChart
           width={730}
           height={250}
-          // note that we are throwing away the first element
-          data={aggregated.slice(1, aggregated.length)}
+          // might want to throw away the first element
+          data={aggregated} //{aggregated.slice(1, aggregated.length)}
           margin={{ top: 20, right: 20, bottom: 10, left: 10 }}
         >
           <XAxis dataKey="x" domain={["auto", "auto"]} name="Time" unit="" />
