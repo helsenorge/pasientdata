@@ -125,6 +125,26 @@ export function responseGoogle(response) {
           );
 
           this.props.onLoggedIn(true);
+
+          // this.setState({
+          //   googleId: response.profileObj.googleId,
+          //   firstname: response.profileObj.givenName,
+          //   lastname: response.profileObj.familyName,
+          //   email: response.profileObj.email,
+          //   image: pic,
+          //   datasets: datasets,
+          //   redirectProfile: true
+          // });
+          // this.props.onLogin(
+          //   {
+          //     googleId: response.profileObj.googleId,
+          //     firstName: response.profileObj.givenName,
+          //     family: response.profileObj.familyName,
+          //     email: response.profileObj.email,
+          //     image: pic
+          //   },
+          //   datasets
+          // );
         }
       )
     )
