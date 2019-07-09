@@ -1,27 +1,24 @@
 import * as React from "react";
 import * as FHIR from "fhirclient";
 import moment from "moment";
-import HomePage from "../loginPage/homePage";
 import BarPlotter from "../components/barPlotter";
+import HomePage from "../loginPage/loginPage";
+//import { GoogleLogout } from 'react-google-login';
+//import { addPatient, addObservation } from "../api/FHIRstructure"
+import { connect } from "react-redux";
 
-class Redirecter extends React.Component {
+class FHIRconnection extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      userId: "sanne",
-      family: "",
-      firstName: "",
-      isLoggedIn: false,
-      email: "",
-      image: "",
-      googleId: "",
-      observations: [],
       client: FHIR.client({
         serverUrl: "http://localhost:5000/fhir"
       }),
-      userLoggedOut: false,
-      datasets: []
+      userLoggedOut: false
     };
+    this.addPatientIfNeeded();
+    this.addObservations();
+    this.readAllObservations();
   }
 
   readAllObservations = () => {
@@ -29,7 +26,7 @@ class Redirecter extends React.Component {
       "Reading all observations the patient has in the FHIR database"
     );
     const q1 = new URLSearchParams();
-    q1.set("subject", this.state.userId);
+    q1.set("subject", this.props.patient.googleId);
     this.state.client
       .request(`Observation?${q1}`, {
         pageLimit: 0,
@@ -43,7 +40,7 @@ class Redirecter extends React.Component {
   addPatient = () => {
     let patientJSON = {
       resourceType: "Patient",
-      id: this.state.userId,
+      id: this.props.patient.googleId,
       meta: {
         versionId: "1",
         lastUpdated: moment().format("YYYY-MM-DDThh:mm:ss"),
@@ -99,7 +96,7 @@ class Redirecter extends React.Component {
         {
           other: {
             reference:
-              "https://localhost:5001/fhir/Patient/" + this.state.userId
+              "https://localhost:5001/fhir/Patient/" + this.props.patient.googleId
           },
           type: "seealso"
         }
@@ -107,7 +104,7 @@ class Redirecter extends React.Component {
     };
     let optionsPatient = {
       method: "PUT",
-      url: "http://localhost:5000/fhir/Patient/" + this.state.userId,
+      url: "http://localhost:5000/fhir/Patient/" + this.props.patient.googleId,
       headers: {
         "cache-control": "no-cache",
         Connection: "keep-alive",
@@ -132,10 +129,10 @@ class Redirecter extends React.Component {
   };
 
   addObservations = () => {
-    for (let i = 0; i < this.state.datasets.length; i++) {
+    for (let i = 0; i < this.props.patient.datasets.length; i++) {
       if (
-        this.state.datasets[i].measurements.length > 1 ||
-        this.state.datasets[i].measurements.value !== undefined
+        this.props.patient.datasets[i].measurements.length > 1 ||
+        this.props.patient.datasets[i].measurements.value !== undefined
       ) {
         this.addObservation(i);
       }
@@ -202,7 +199,7 @@ class Redirecter extends React.Component {
   };
 
   addObservation = datasetIndex => {
-    let observationId = this.state.datasets[datasetIndex].name;
+    let observationId = this.props.patient.datasets[datasetIndex].name;
     // Note on the above: this can also be set from uuid(), but since we want only one
     //                    of each dataset type connected to each patient this is better.
     let {
@@ -210,17 +207,17 @@ class Redirecter extends React.Component {
       observationDisplayName,
       unit,
       UCUMCode
-    } = this.getStringsFromLOINC(this.state.datasets[datasetIndex].name);
+    } = this.getStringsFromLOINC(this.props.patient.datasets[datasetIndex].name);
 
     let components = [];
     for (
       let i = 0;
-      i < this.state.datasets[datasetIndex].measurements.length;
+      i < this.props.patient.datasets[datasetIndex].measurements.length;
       i++
     ) {
       components.push({
         valueQuantity: {
-          value: this.state.datasets[datasetIndex].measurements[i].value,
+          value: this.props.patient.datasets[datasetIndex].measurements[i].value,
           unit: unit,
           system: "http://unitsofmeasure.org",
           code: UCUMCode
@@ -229,8 +226,8 @@ class Redirecter extends React.Component {
       });
       components.push({
         valuePeriod: {
-          start: this.state.datasets[datasetIndex].measurements[i].start,
-          end: this.state.datasets[datasetIndex].measurements[i].end
+          start: this.props.patient.datasets[datasetIndex].measurements[i].start,
+          end: this.props.patient.datasets[datasetIndex].measurements[i].end
         },
         code: { coding: { code: "time" } }
       });
@@ -248,14 +245,14 @@ class Redirecter extends React.Component {
         coding: [
           {
             system: "http://loinc.org",
-            code: this.state.datasets[datasetIndex].name,
+            code: this.props.patient.datasets[datasetIndex].name,
             display: unitDisplayString
           }
         ],
         text: observationDisplayName
       },
       subject: {
-        reference: "https://localhost:5001/fhir/Patient/" + this.state.userId
+        reference: "https://localhost:5001/fhir/Patient/" + this.props.patient.googleId
       },
       component: components
     };
@@ -285,28 +282,12 @@ class Redirecter extends React.Component {
       });
   };
 
-  handleLogin = (googleData, datasets) => {
-    this.setState({
-      isLoggedIn: true,
-      firstName: googleData.firstName,
-      family: googleData.family,
-      email: googleData.email,
-      image: googleData.image,
-      googleId: googleData.googleId,
-      userId: googleData.googleId,
-      datasets
-    });
-    this.addPatientIfNeeded();
-    this.addObservations();
-    this.readAllObservations();
-  };
-
   addPatientIfNeeded = () => {
     console.log("Reading patient from FHIR database");
     const q1 = new URLSearchParams();
-    q1.set("id", this.state.userId);
+    q1.set("id", this.props.patient.googleId);
     this.state.client
-      .request(`Patient/${this.state.userId}`, {
+      .request(`Patient/${this.props.patient.googleId}`, {
         pageLimit: 0,
         flat: true
       })
@@ -320,18 +301,18 @@ class Redirecter extends React.Component {
   };
 
   render() {
-    if (this.state.isLoggedIn) {
+    if (this.props.baseInfo.isLoggedin) {
       return (
         <div>
-          {this.state.datasets.length > 0 && (
+          {this.props.patient.datasets.length > 0 && (
             <div>
               <div>Datasets loaded!</div>
             </div>
           )}
           <BarPlotter
-            datasets={this.state.datasets}
-            aggregateLength="hour"
-            timeScope="day"
+            datasets={this.props.patient.datasets}
+            aggregateLength="day"
+            timeScope="week"
             datasetLOINC="55423-8"
           />
           <button
@@ -341,18 +322,25 @@ class Redirecter extends React.Component {
             }}
             variant="danger"
           >
-            Log out
+            Logg ut
           </button>
         </div>
       );
     } else {
       return (
         <div>
-          <HomePage onLogin={this.handleLogin.bind(this)} />
+          <HomePage />
         </div>
       );
     }
   }
 }
 
-export default Redirecter;
+function mapStateToProps(state) {
+  return {
+    patient: state.patient,
+    baseInfo: state.baseInfo
+  };
+}
+
+export default connect(mapStateToProps)(FHIRconnection);
