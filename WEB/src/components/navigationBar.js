@@ -5,7 +5,7 @@ import Tab from "@helsenorge/toolkit/components/molecules/tabs/tab";
 import Burgers from "./burgers";
 import ButtonToolBar from "./ButtonGroup";
 import BarPlotter from "./barPlotter.js";
-import Redirecter from "../redirect/redirect";
+import Redirecter from "../FHIRconnection/FHIRconnection";
 
 class NavigationBar extends Component {
   constructor(props) {
