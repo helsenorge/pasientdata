@@ -112,6 +112,8 @@ class BarPlotter extends Component {
       case "day":
         if (this.props.timeScope === "month") {
           return { startOf: "day", interval: "days", format: "DD.MM" };
+        } else if (this.props.timeScope === "year") {
+          return { startOf: "day", interval: "days", format: "DD.MM" };
         } else {
           return { startOf: "day", interval: "days", format: "ddd" };
         }
@@ -119,7 +121,7 @@ class BarPlotter extends Component {
         if (this.props.timeScope === "month") {
           return { startOf: "hour", interval: "hours", format: "DD.MM" };
         } else if (this.props.timeScope === "week") {
-          return { startOf: "hour", interval: "hours", format: "ddd" };
+          return { startOf: "hour", interval: "hours", format: "DD.MM" };
         } else {
           return { startOf: "hour", interval: "hours", format: "HH" };
         }
@@ -142,7 +144,9 @@ class BarPlotter extends Component {
             return 52;
           case "month":
             return 12;
+          default:
         }
+        break;
       case "week":
         return 7;
       case "day":
@@ -257,7 +261,8 @@ class BarPlotter extends Component {
         <BarChart
           width={730}
           height={250}
-          data={aggregated}
+          // note that we are throwing away the first element
+          data={aggregated.slice(1, aggregated.length)}
           margin={{ top: 20, right: 20, bottom: 10, left: 10 }}
         >
           <XAxis dataKey="x" domain={["auto", "auto"]} name="Time" unit="" />
