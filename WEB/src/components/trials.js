@@ -1,15 +1,15 @@
 import React, { Component } from "react";
 // import Tab from "@helsenorge/toolkit/components/molecules/tabs/tab";
-import Progressbar from "@helsenorge/toolkit/components/atoms/progressbar/index";
-import { ResponsiveContainer } from "recharts";
+//import Progressbar from "@helsenorge/toolkit/components/atoms/progressbar/index";
+//import { ResponsiveContainer } from "recharts";
 import {
   Card,
-  CardHeader,
+  //CardHeader,
   CardTitle,
-  CardImg,
-  CardBody,
-  CardFooter,
-  Button
+  //CardImg,
+  CardBody
+  //CardFooter,
+  //Button
 } from "shards-react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "shards-ui/dist/css/shards.min.css";
@@ -44,7 +44,7 @@ class Trials extends Component {
                   <h3>(78%)</h3>
                 </div>
               </div>
-              <div class="divider" />
+              <div className="divider" />
               <div className="flex-children">
                 <div>Gj.snittligt värde:</div>
                 <div>
@@ -57,7 +57,7 @@ class Trials extends Component {
                   <h3>(8.5)</h3>
                 </div>
               </div>
-              <div class="divider" />
+              <div className="divider" />
               <div className="flex-children">
                 <div>Hba1c:</div>
                 <div>

@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 //import { GoogleLogout } from 'react-google-login';
 import Tabs from "@helsenorge/toolkit/components/molecules/tabs/index";
 import Tab from "@helsenorge/toolkit/components/molecules/tabs/tab";
