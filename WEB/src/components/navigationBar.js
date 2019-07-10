@@ -4,6 +4,7 @@ import Tabs from "@helsenorge/toolkit/components/molecules/tabs/index";
 import Tab from "@helsenorge/toolkit/components/molecules/tabs/tab";
 import Burgers from "./burgers";
 import ButtonToolBar from "./ButtonGroup";
+import Steps from "./steps";
 
 class NavigationBar extends Component {
   constructor(props) {
@@ -46,7 +47,7 @@ class NavigationBar extends Component {
     return (
       <div>
         {/* <Fragment> */}
-        <Tabs>
+        <Tabs initialTabIndex={3}>
           <Tab title="Ian Daly" className="hei">
             Daly started his career with local club Broadford Rovers and spent
             two seasons at Home Farm FC, before joining Manchester City in July
@@ -97,6 +98,9 @@ class NavigationBar extends Component {
               onClicked={this.clicked}
               buttonClicked={"interval"}
             />
+          </Tab>
+          <Tab title="TestTab">
+            <Steps />
           </Tab>
         </Tabs>
         {/* </Fragment> */}
