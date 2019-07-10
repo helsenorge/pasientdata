@@ -8,6 +8,7 @@ import { Switch, Route, BrowserRouter } from "react-router-dom";
 import Redirecter from "./redirect/redirect";
 import Burgers from "./components/burgers";
 import ButtonToolBar from "./components/ButtonGroup";
+import Trials from "./components/trials";
 
 class App extends Component {
   render() {
@@ -16,6 +17,7 @@ class App extends Component {
         <BrowserRouter>
           <Switch>
             <Route exact path="/" component={Redirecter} />
+            <Route path="/trials" component={Trials} />
             <Route path="/login" component={HomePage}>
               <Switch>
                 <Route path="/redirect" component={Redirecter} />
