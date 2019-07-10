@@ -59,24 +59,6 @@ class BarPlotter extends Component {
   };
 
   findMeasurementStartIndex = datasetIndex => {
-    // switch (this.props.timeScope) {
-    //   case "month":
-    //     return this.findIndexOfOneMonthAgo(
-    //       this.props.datasets[datasetIndex].measurements
-    //     );
-    //   case "week":
-    //     return this.findIndexOfOneWeekAgo(
-    //       this.props.datasets[datasetIndex].measurements
-    //     );
-    //   case "day":
-    //     return this.findIndexOfOneDayAgo(
-    //       this.props.datasets[datasetIndex].measurements
-    //     );
-    //   default:
-    //     return 0;
-    // }
-
-    console.log("BARPLOT-PATIENT: ", this.props.patient)
 
     for (
       let i = 0;
@@ -170,7 +152,6 @@ class BarPlotter extends Component {
       startIndex
     );
     let reformatted = [];
-    //console.log(slicedData);
     for (let i = 0; i < slicedData.length; i++) {
       reformatted.push({
         x: parseInt(

@@ -306,10 +306,6 @@ class FHIRconnection extends React.Component {
       });
   };
 
-  goToDashboard() {
-    this.props.history.push('/dashboard')
-  }
-
   loggedOut() {
     localStorage.removeItem('googleResponse');
     this.props.onLoggedIn(false);

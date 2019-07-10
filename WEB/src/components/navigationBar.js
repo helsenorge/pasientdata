@@ -6,14 +6,24 @@ import Burgers from "./burgers";
 import ButtonToolBar from "./ButtonGroup";
 import { connect } from "react-redux";
 import BarPlotter from "./barPlotter";
+import { Link } from 'react-router-dom';
 
 class NavigationBar extends Component {
   constructor(props) {
     super(props);
     this.state = {
       viewButtonClicked: "week",
-      intervalButtonClicked: "day"
+      intervalButtonClicked: "day",
+      activeTab: "4"
     };
+  }
+
+  toggle(tab) {
+    if (this.state.activeTab !== tab) {
+      this.setState({
+        activeTab: tab
+      });
+    }
   }
 
   clicked = (buttonType, buttonClicked) => {
@@ -29,6 +39,8 @@ class NavigationBar extends Component {
   }
 
   render() {
+    const activeLink = this.props.activeLink;
+
     //const { onDay, onWeek, onMonth } = this.props;
     console.log(
       "view: " +
@@ -38,6 +50,13 @@ class NavigationBar extends Component {
     );
     return (
       <div>
+        <div>
+          <div className="row navbar d-block fixed-bottom no-margin no-padding max-width-wrapper">
+            <Link to="/"> Home </Link>
+            <Link to="/burgers"> Burgers </Link>
+            <Link to="/steps"> Steps </Link>
+          </div>
+        </div>
         <Tabs>
           <Tab title="Ian Daly" className="hei">
             Daly started his career with local club Broadford Rovers and spent
@@ -91,8 +110,8 @@ class NavigationBar extends Component {
             />
             <BarPlotter
               datasets={this.props.patient.datasets}
-              aggregateLength={this.intervalButtonClicked}
-              timeScope={this.viewButtonClicked}
+              aggregateLength={this.state.intervalButtonClicked}
+              timeScope={this.state.viewButtonClicked}
               datasetLOINC="55423-8"
             />
           </Tab>

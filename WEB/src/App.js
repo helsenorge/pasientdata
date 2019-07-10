@@ -7,7 +7,7 @@ import { Provider } from "react-redux";
 import store from "./store";
 import Dashboard from "./components/dashboard";
 import Burgers from "./components/burgers";
-import ButtonToolBar from "./components/ButtonGroup";
+import Steps from "./components/steps";
 import Redirecter from "./FHIRconnection/FHIRconnection";
 
 class App extends Component {
@@ -20,7 +20,7 @@ class App extends Component {
             <Route path="/login" component={Redirecter} />
             <Route path="/dashboard" component={Dashboard} />
             <Route path="/burgers" component={Burgers} />
-            <Route path="/steps" component={ButtonToolBar} />
+            <Route path="/steps" component={Steps} />
           </Switch>
         </BrowserRouter>
       </Provider>
