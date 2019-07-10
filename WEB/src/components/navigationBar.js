@@ -6,7 +6,8 @@ import Burgers from "./burgers";
 import ButtonToolBar from "./ButtonGroup";
 import { connect } from "react-redux";
 import BarPlotter from "./barPlotter";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
+import Steps from "./steps";
 
 class NavigationBar extends Component {
   constructor(props) {
@@ -28,9 +29,9 @@ class NavigationBar extends Component {
 
   clicked = (buttonType, buttonClicked) => {
     if (buttonType === "view") {
-      this.setState({ viewButtonClicked: buttonClicked });
+      this.setState({ outline: false, viewButtonClicked: buttonClicked });
     } else {
-      this.setState({ intervalButtonClicked: buttonClicked });
+      this.setState({ outline: false, intervalButtonClicked: buttonClicked });
     }
   };
 
@@ -114,6 +115,9 @@ class NavigationBar extends Component {
               timeScope={this.state.viewButtonClicked}
               datasetLOINC="55423-8"
             />
+          </Tab>
+          <Tab title="TestTab">
+            <Steps />
           </Tab>
         </Tabs>
       </div>

@@ -9,7 +9,7 @@ class Steps extends Component {
     super(props);
     this.state = {
       viewButtonClicked: "week",
-      intervalButtonClicked: "day",
+      intervalButtonClicked: "day"
     };
   }
 
