@@ -9,6 +9,7 @@ import Dashboard from "./components/dashboard";
 import Burgers from "./components/burgers";
 import Steps from "./components/steps";
 import Redirecter from "./FHIRconnection/FHIRconnection";
+import Trials from "./components/trials";
 
 class App extends Component {
   render() {
@@ -17,6 +18,7 @@ class App extends Component {
         <BrowserRouter>
           <Switch>
             <Route exact path="/" component={Redirecter} />
+            <Route path="/trials" component={Trials} />
             <Route path="/login" component={Redirecter} />
             <Route path="/dashboard" component={Dashboard} />
             <Route path="/burgers" component={Burgers} />
