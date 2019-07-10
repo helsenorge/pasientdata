@@ -330,14 +330,14 @@ class Redirecter extends React.Component {
           )}
           <BarPlotter
             datasets={this.state.datasets}
-            aggregateLength="hour"
-            timeScope="day"
+            aggregateLength="day"
+            timeScope="week"
             datasetLOINC="55423-8"
           />
           <button
             onClick={() => {
               localStorage.removeItem("googleResponse");
-              this.setState({ userLoggedOut: true });
+              this.setState({ isLoggedIn: false });
             }}
             variant="danger"
           >

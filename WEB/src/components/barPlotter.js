@@ -14,32 +14,6 @@ import {
 class BarPlotter extends Component {
   state = { colors: ["#7DB3FF", "#49457B", "#FF7C78"] };
 
-  findIndexOfOneWeekAgo(dataset) {
-    for (let i = 0; i < dataset.length; i++) {
-      if (
-        moment().diff(
-          moment(dataset[i].start, "YYYY-MM-DDTHH:mm:ss"),
-          "weeks"
-        ) < 1
-      ) {
-        return i;
-      }
-    }
-    return 0;
-  }
-
-  findIndexOfOneDayAgo(dataset) {
-    for (let i = 0; i < dataset.length; i++) {
-      if (
-        moment().diff(moment(dataset[i].start, "YYYY-MM-DDTHH:mm:ss"), "days") <
-        1
-      ) {
-        return i;
-      }
-    }
-    return 0;
-  }
-
   numberFormatter = item => numeral(item).format("O");
 
   timeFormatter = (timeScope, item) => {
@@ -262,7 +236,7 @@ class BarPlotter extends Component {
           width={730}
           height={250}
           // might want to throw away the first element
-          data={aggregated} //{aggregated.slice(1, aggregated.length)}
+          data={aggregated} //.slice(1, aggregated.length)}
           margin={{ top: 20, right: 20, bottom: 10, left: 10 }}
         >
           <XAxis dataKey="x" domain={["auto", "auto"]} name="Time" unit="" />
