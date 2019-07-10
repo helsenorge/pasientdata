@@ -4,6 +4,8 @@ import Tabs from "@helsenorge/toolkit/components/molecules/tabs/index";
 import Tab from "@helsenorge/toolkit/components/molecules/tabs/tab";
 import Burgers from "./burgers";
 import ButtonToolBar from "./ButtonGroup";
+import { connect } from "react-redux";
+import BarPlotter from "./barPlotter";
 
 class NavigationBar extends Component {
   constructor(props) {
@@ -87,6 +89,12 @@ class NavigationBar extends Component {
               onClicked={this.clicked}
               buttonClicked={"interval"}
             />
+            <BarPlotter
+              datasets={this.props.patient.datasets}
+              aggregateLength={this.intervalButtonClicked}
+              timeScope={this.viewButtonClicked}
+              datasetLOINC="55423-8"
+            />
           </Tab>
         </Tabs>
       </div>
@@ -94,4 +102,10 @@ class NavigationBar extends Component {
   }
 }
 
-export default NavigationBar;
+function mapStateToProps(state) {
+  return {
+    patient: state.patient
+  };
+}
+
+export default connect(mapStateToProps)(NavigationBar);

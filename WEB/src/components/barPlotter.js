@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import numeral from "numeral";
+import { connect } from "react-redux";
 import moment from "moment";
 import {
   XAxis,
@@ -75,15 +76,17 @@ class BarPlotter extends Component {
     //     return 0;
     // }
 
+    console.log("BARPLOT-PATIENT: ", this.props.patient)
+
     for (
       let i = 0;
-      i < this.props.datasets[datasetIndex].measurements.length;
+      i < this.props.patient.datasets[datasetIndex].measurements.length;
       i++
     ) {
       if (
         moment().diff(
           moment(
-            this.props.datasets[datasetIndex].measurements[i].start,
+            this.props.patient.datasets[datasetIndex].measurements[i].start,
             "YYYY-MM-DDTHH:mm:ss"
           ),
           this.props.timeScope + "s"
@@ -96,8 +99,8 @@ class BarPlotter extends Component {
   };
 
   findDatasetIndexFromLOINC = () => {
-    for (let i = 0; i < this.props.datasets.length; i++) {
-      if (this.props.datasets[i].name === this.props.datasetLOINC) {
+    for (let i = 0; i < this.props.patient.datasets.length; i++) {
+      if (this.props.patient.datasets[i].name === this.props.datasetLOINC) {
         return i;
       }
     }
@@ -163,7 +166,7 @@ class BarPlotter extends Component {
     let datasetIndex = this.findDatasetIndexFromLOINC();
     let startIndex = this.findMeasurementStartIndex(datasetIndex);
 
-    let slicedData = this.props.datasets[datasetIndex].measurements.slice(
+    let slicedData = this.props.patient.datasets[datasetIndex].measurements.slice(
       startIndex
     );
     let reformatted = [];
@@ -270,4 +273,10 @@ class BarPlotter extends Component {
   }
 }
 
-export default BarPlotter;
+function mapStateToProps(state) {
+  return {
+    patient: state.patient
+  };
+}
+
+export default connect(mapStateToProps)(BarPlotter);

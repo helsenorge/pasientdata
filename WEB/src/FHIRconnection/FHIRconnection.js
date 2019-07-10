@@ -7,6 +7,7 @@ import HomePage from "../loginPage/loginPage";
 //import { addPatient, addObservation } from "../api/FHIRstructure"
 import { connect } from "react-redux";
 import { onLoggedIn } from "../redux/actions";
+import { Link } from 'react-router-dom';
 
 class FHIRconnection extends React.Component {
   constructor(props) {
@@ -17,6 +18,7 @@ class FHIRconnection extends React.Component {
       }),
       userLoggedOut: false
     };
+    this.loggedOut = this.loggedOut.bind(this);
   }
 
   readAllObservations = () => {
@@ -304,10 +306,17 @@ class FHIRconnection extends React.Component {
       });
   };
 
+  goToDashboard() {
+    this.props.history.push('/dashboard')
+  }
+
+  loggedOut() {
+    localStorage.removeItem('googleResponse');
+    this.props.onLoggedIn(false);
+    this.props.history.push('/');
+  }
+
   render() {
-    // if(this.props.dashredirect){
-    //   return <div><Redirect to="/dashboard"></Redirect></div>
-    // }
     if (this.props.baseInfo.isLoggedin) {
       return (
         <div>
@@ -327,19 +336,17 @@ class FHIRconnection extends React.Component {
             datasetLOINC="55423-8"
           />
           <button
-            onClick={() => {
-              localStorage.removeItem("googleResponse");
-              this.props.onLoggedIn(false);
-              // this.setState({ isLoggedin: false });
-            }}
+            onClick={() => this.loggedOut()}
             variant="danger"
           >
             Logg ut
           </button>
+          
           <div>
-            <a href="/dashboard">
-              <button>Dashboard</button>
-            </a>
+            <Link to="/dashboard">
+            <button >Dashboard</button>
+            </Link>
+              
           </div>
         </div>
       );
