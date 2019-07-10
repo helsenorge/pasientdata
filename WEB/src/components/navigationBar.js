@@ -116,9 +116,6 @@ class NavigationBar extends Component {
               datasetLOINC="55423-8"
             />
           </Tab>
-          <Tab title="TestTab">
-            <Steps />
-          </Tab>
         </Tabs>
       </div>
     );
