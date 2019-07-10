@@ -6,6 +6,7 @@ import HomePage from "../loginPage/loginPage";
 //import { GoogleLogout } from 'react-google-login';
 //import { addPatient, addObservation } from "../api/FHIRstructure"
 import { connect } from "react-redux";
+import { onLoggedIn } from "../redux/actions";
 
 class FHIRconnection extends React.Component {
   constructor(props) {
@@ -93,7 +94,8 @@ class FHIRconnection extends React.Component {
         {
           other: {
             reference:
-              "https://localhost:5001/fhir/Patient/" + this.props.patient.googleId
+              "https://localhost:5001/fhir/Patient/" +
+              this.props.patient.googleId
           },
           type: "seealso"
         }
@@ -303,11 +305,14 @@ class FHIRconnection extends React.Component {
   };
 
   render() {
+    // if(this.props.dashredirect){
+    //   return <div><Redirect to="/dashboard"></Redirect></div>
+    // }
     if (this.props.baseInfo.isLoggedin) {
       return (
         <div>
           {/* moved them here, seems to have solved some issues, gets called after login has saved info to redux */}
-          {this.addPatientIfNeeded()} 
+          {this.addPatientIfNeeded()}
           {this.addObservations()}
           {this.readAllObservations()}
           {this.props.patient.datasets.length > 0 && (
@@ -324,12 +329,18 @@ class FHIRconnection extends React.Component {
           <button
             onClick={() => {
               localStorage.removeItem("googleResponse");
-              this.setState({ userLoggedOut: true });
+              this.props.onLoggedIn(false);
+              // this.setState({ isLoggedin: false });
             }}
             variant="danger"
           >
             Logg ut
           </button>
+          <div>
+            <a href="/dashboard">
+              <button>Dashboard</button>
+            </a>
+          </div>
         </div>
       );
     } else {
@@ -342,6 +353,8 @@ class FHIRconnection extends React.Component {
   }
 }
 
+const mapDispatchToProps = { onLoggedIn };
+
 function mapStateToProps(state) {
   return {
     patient: state.patient,
@@ -349,4 +362,7 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(FHIRconnection);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(FHIRconnection);
