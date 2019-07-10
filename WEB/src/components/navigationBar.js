@@ -12,7 +12,8 @@ class NavigationBar extends Component {
     this.state = {
       activeTab: "1",
       viewButtonClicked: "week",
-      intervalButtonClicked: "day"
+      intervalButtonClicked: "day",
+      outline: true
     };
   }
 
@@ -26,9 +27,9 @@ class NavigationBar extends Component {
 
   clicked = (buttonType, buttonClicked) => {
     if (buttonType === "view") {
-      this.setState({ viewButtonClicked: buttonClicked });
+      this.setState({ outline: false, viewButtonClicked: buttonClicked });
     } else {
-      this.setState({ intervalButtonClicked: buttonClicked });
+      this.setState({ outline: false, intervalButtonClicked: buttonClicked });
     }
   };
 
@@ -47,7 +48,7 @@ class NavigationBar extends Component {
     return (
       <div>
         {/* <Fragment> */}
-        <Tabs initialTabIndex={3}>
+        <Tabs initialTabIndex={2}>
           <Tab title="Ian Daly" className="hei">
             Daly started his career with local club Broadford Rovers and spent
             two seasons at Home Farm FC, before joining Manchester City in July
