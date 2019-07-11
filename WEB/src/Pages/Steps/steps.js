@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import ButtonToolBar from "./ButtonGroup";
-import BarPlotter from "./barPlotter";
+import TimeButtonGroup from "../../components/TimeButtonGroup/timeButtonGroup";
+import BarPlotter from "../../components/Barplotter/barPlotter";
 import { connect } from "react-redux";
-import NavigationBar from "./navigationBar.js";
+import NavigationBar from "../../components/NavigationBar/navigationBar.js";
 
 class Steps extends Component {
   constructor(props) {
@@ -16,11 +16,11 @@ class Steps extends Component {
   render() {
     return (
       <div>
-        {/* <NavigationBar /> */}
+        <NavigationBar />
         <div>View: </div>
-        <ButtonToolBar onClicked={this.clicked} buttonClicked={"view"} />
+        <TimeButtonGroup onClicked={this.clicked} buttonClicked={"view"} />
         <div>Interval: </div>
-        <ButtonToolBar onClicked={this.clicked} buttonClicked={"interval"} />
+        <TimeButtonGroup onClicked={this.clicked} buttonClicked={"interval"} />
         <BarPlotter
           datasets={this.props.patient.datasets}
           aggregateLength={this.intervalButtonClicked}

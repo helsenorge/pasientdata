@@ -15,23 +15,6 @@ import {
 class BarPlotter extends Component {
   state = { colors: ["#7DB3FF", "#49457B", "#FF7C78"] };
 
-  numberFormatter = item => numeral(item).format("O");
-
-  timeFormatter = (timeScope, item) => {
-    switch (timeScope) {
-      case "month":
-        return moment(item, "X").format("DD");
-      case "week":
-        return moment(item, "X").format("ddd");
-      case "day":
-        return moment(item, "X").format("HH:mm");
-      case "hours":
-        return moment(item, "X").format("HH");
-      default:
-        return moment(item, "X").format("YYYY-MM-DDTHH:mm:ss");
-    }
-  };
-
   findMeasurementStartIndex = datasetIndex => {
     for (
       let i = 0;

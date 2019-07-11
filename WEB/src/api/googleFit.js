@@ -124,7 +124,7 @@ export function structureDatasets(dataType) {
 
 export function responseGoogle(response) {
   console.log("Saving google client to localStorage");
-  localStorage.setItem("googleResponse", JSON.stringify(response));
+  sessionStorage.setItem("googleResponse", JSON.stringify(response));
 
   axios
     .all([
