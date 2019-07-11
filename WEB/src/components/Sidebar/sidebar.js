@@ -40,10 +40,11 @@ class SideBar extends Component {
           <Menu fontSize="48px" />
           <Menu variant="warning" />
         </div> */}
-        <BurgerMenu
+        <BurgerMenu 
           {...this.props}
           isOpen={this.state.menuOpen}
           onStateChange={state => this.handleStateChange(state)}
+          right
         >
           <Link onClick={() => this.closeMenu()} className="menu-item" to="/">
             Home
