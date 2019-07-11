@@ -179,8 +179,8 @@ class TimeButtonGroup extends Component {
             Dag
           </Button> */}
           {this.renderMinute(this.props.views.minute)}
-          {this.renderDay(this.props.views.day)}
           {this.renderHour(this.props.views.hour)}
+          {this.renderDay(this.props.views.day)}
           {this.renderWeek(this.props.views.week)}
           {this.renderMonth(this.props.views.month)}
           {this.renderYear(this.props.views.year)}
