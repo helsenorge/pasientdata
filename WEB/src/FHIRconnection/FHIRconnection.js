@@ -2,6 +2,7 @@ import * as React from "react";
 import * as FHIR from "fhirclient";
 import moment from "moment";
 import BarPlotter from "../components/barPlotter";
+import BarPlotterV2 from "../components/barPlotterV2";
 import HomePage from "../loginPage/loginPage";
 //import { GoogleLogout } from 'react-google-login';
 //import { addPatient, addObservation } from "../api/FHIRstructure"
@@ -325,11 +326,12 @@ class FHIRconnection extends React.Component {
               <div>Datasets loaded!</div>
             </div>
           )}
-          <BarPlotter
-            datasets={this.props.patient.datasets}
-            aggregateLength="day"
-            timeScope="week"
-            datasetLOINC="55423-8"
+          <BarPlotterV2
+            start={"2019-06-29T20:08:10"} // 123
+            end={"2019-07-10T07:59:05"} //2246
+            interval="day"
+            data={this.props.patient.datasets[0].measurements}
+            outputFormat="DD/MM"
           />
           <button onClick={() => this.loggedOut()} variant="danger">
             Logg ut
