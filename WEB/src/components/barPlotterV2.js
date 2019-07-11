@@ -27,33 +27,33 @@ import {
 class BarPlotterV2 extends Component {
   findStartAndEndIndex = () => {
     const length = this.props.data.length;
+    const end = this.props.end;
+    const start = this.props.start;
+
     let startIndex = 0;
     let endIndex = length - 1;
     let endIndexFound = false;
 
     if (
-      moment(this.props.end, "YYYY-MM-DDTHH:mm:ss").isAfter(
-        moment(this.props.data[length - 1].start, "YYYY-MM-DDTHH:mm:ss"),
-        this.props.interval
+      moment(end, "YYYY-MM-DDTHH:mm:ss").isAfter(
+        moment(this.props.data[length - 1].start, "YYYY-MM-DDTHH:mm:ss")
       )
     ) {
       endIndexFound = true;
     }
 
-    for (let i = 0; i < this.props.data.length; i++) {
+    for (let i = 0; i < length; i++) {
       if (
-        moment(this.props.data[i].start, "YYYY-MM-DDTHH:mm:ss").isBefore(
-          moment(this.props.start, "YYYY-MM-DDTHH:mm:ss"),
-          this.props.interval
+        moment(start, "YYYY-MM-DDTHH:mm:ss").isAfter(
+          moment(this.props.data[i].start, "YYYY-MM-DDTHH:mm:ss")
         )
       ) {
         startIndex = i; // Index right before the first data point we want to include.
       }
       if (
         !endIndexFound &&
-        moment(this.props.end, "YYYY-MM-DDTHH:mm:ss").isAfter(
-          moment(this.props.data[i].start, "YYYY-MM-DDTHH:mm:ss"),
-          this.props.interval
+        moment(end, "YYYY-MM-DDTHH:mm:ss").isBefore(
+          moment(this.props.data[i].start, "YYYY-MM-DDTHH:mm:ss")
         )
       ) {
         endIndex = i; // Index right after the first data point we want to include.
@@ -66,8 +66,6 @@ class BarPlotterV2 extends Component {
     if (startIndex !== length - 1) {
       startIndex++;
     }
-    console.log("startIndex: ", startIndex);
-    console.log("endIndex: ", endIndex);
 
     return { startIndex: startIndex, endIndex: endIndex };
   };
