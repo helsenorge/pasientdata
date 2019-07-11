@@ -72,17 +72,22 @@ class BarPlotterV2 extends Component {
 
   aggregateData = () => {
     const { startIndex, endIndex } = this.findStartAndEndIndex();
+    // console.log("StartIndex = ", startIndex);
+    // console.log("EndIndex = ", endIndex);
     let slicedData = this.props.data.slice(startIndex, endIndex);
 
     const inputFormat = "YYYY-MM-DDTHH:mm:ss";
     const interval = this.props.interval;
     const startTime = moment(this.props.start, inputFormat);
     const endTime = moment(this.props.end, inputFormat);
-    const numberOfIntervalsInPeriod = moment(startTime).diff(endTime, interval);
+    // console.log("StartTime = ", startTime.format(inputFormat));
+    // console.log("EndTime = ", endTime.format(inputFormat));
+    //const numberOfIntervalsInPeriod = moment(startTime).diff(endTime, interval);
     const slicedLength = slicedData.length;
     const outputFormat = this.props.outputFormat;
 
     let data = slicedData.map(item => ({ x: item.start, y: item.value }));
+    // console.log("SlicedData: ", slicedData);
 
     /*
      * Loop through the desired dataset and aggregate
@@ -94,25 +99,24 @@ class BarPlotterV2 extends Component {
 
     // Add empty bars at start if needed
     let added = 0;
-    while (
-      moment().diff(startTime, interval) + added <
-      numberOfIntervalsInPeriod
-    ) {
+    while (moment(start).diff(startTime, interval + "s") - added > -1) {
       aggregated.push({
         y: 0,
-        x: moment()
-          .subtract(numberOfIntervalsInPeriod - added, interval)
+        x: moment(startTime)
+          .add(added, interval + "s")
           .format(outputFormat)
       });
       added++;
     }
 
+    let currentDataTime;
     for (let i = 1; i < slicedLength; i++) {
+      currentDataTime = moment(data[i].x, inputFormat);
       if (
-        start.diff(
-          moment(data[i].x, inputFormat).startOf(interval),
+        moment(start).diff(
+          currentDataTime.startOf(interval),
           interval + "s"
-        ) > -1
+        ) === 0
       ) {
         sum += data[i].y;
       } else {
@@ -123,8 +127,7 @@ class BarPlotterV2 extends Component {
           x: start.format(outputFormat)
         });
         while (
-          moment(start).diff(moment(data[i].x, inputFormat), interval + "s") +
-            skipped <
+          moment(start).diff(currentDataTime, interval + "s") + skipped <
           -1
         ) {
           aggregated.push({
@@ -138,14 +141,24 @@ class BarPlotterV2 extends Component {
         }
 
         sum = data[i].y;
-        start = moment(data[i].x, inputFormat).startOf(interval);
+        start = currentDataTime.startOf(interval);
       }
     }
     aggregated.push({ y: sum, x: start.format(outputFormat) });
 
     // Add empty bars at end if needed
-    while (moment().diff(start.add(1, interval + "s"), interval + "s") > 0) {
+    while (
+      moment(endTime).diff(start.add(1, interval + "s"), interval + "s") > 0
+    ) {
       aggregated.push({ y: 0, x: start.format(outputFormat) });
+    }
+    if (
+      moment(endTime).diff(start.add(1, interval + "s"), interval + "s") > -1
+    ) {
+      aggregated.push({
+        y: 0,
+        x: start.subtract(1, interval + "s").format(outputFormat)
+      });
     }
     return aggregated;
   };
