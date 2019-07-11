@@ -16,7 +16,7 @@ class Steps extends Component {
   render() {
     return (
       <div>
-        {/* <NavigationBar /> */}
+        <NavigationBar />
         <div>View: </div>
         <ButtonToolBar onClicked={this.clicked} buttonClicked={"view"} />
         <div>Interval: </div>

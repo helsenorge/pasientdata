@@ -6,7 +6,8 @@ import Burgers from "./burgers";
 import ButtonToolBar from "./ButtonGroup";
 import { connect } from "react-redux";
 import BarPlotter from "./barPlotter";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
+import classnames from "classnames";
 import Steps from "./steps";
 
 class NavigationBar extends Component {
@@ -40,7 +41,6 @@ class NavigationBar extends Component {
   }
 
   render() {
-    const activeLink = this.props.activeLink;
 
     //const { onDay, onWeek, onMonth } = this.props;
     console.log(
@@ -51,14 +51,12 @@ class NavigationBar extends Component {
     );
     return (
       <div>
-        <div>
-          <div className="row navbar d-block fixed-bottom no-margin no-padding max-width-wrapper">
-            <Link to="/"> Home </Link>
-            <Link to="/burgers"> Burgers </Link>
-            <Link to="/steps"> Steps </Link>
-          </div>
+        <div className="menu-button-row row navbar d-block max-width-wrapper">
+          <NavLink to="/" > Home </NavLink>
+          <NavLink to="/burgers" > Burgers </NavLink>
+          <NavLink to="/steps"> Steps </NavLink>
         </div>
-        <Tabs>
+        {/* <Tabs>
           <Tab title="Ian Daly" className="hei">
             Daly started his career with local club Broadford Rovers and spent
             two seasons at Home Farm FC, before joining Manchester City in July
@@ -116,7 +114,7 @@ class NavigationBar extends Component {
               datasetLOINC="55423-8"
             />
           </Tab>
-        </Tabs>
+        </Tabs> */}
       </div>
     );
   }

@@ -82,7 +82,7 @@ export function structureDatasets(dataType) {
 
 export function responseGoogle(response) {
   console.log("Saving google client to localStorage");
-  localStorage.setItem("googleResponse", JSON.stringify(response));
+  sessionStorage.setItem("googleResponse", JSON.stringify(response));
 
   axios
     .all([
@@ -122,7 +122,7 @@ export function responseGoogle(response) {
             response.profileObj.email,
             pic,
             datasets
-          ); 
+          );
 
           this.props.onLoggedIn(true);
         }

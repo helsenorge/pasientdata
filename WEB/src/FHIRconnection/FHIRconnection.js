@@ -1,15 +1,13 @@
 import * as React from "react";
 import * as FHIR from "fhirclient";
 import moment from "moment";
-import BarPlotter from "../components/barPlotter";
 import HomePage from "../loginPage/loginPage";
 //import { GoogleLogout } from 'react-google-login';
 //import { addPatient, addObservation } from "../api/FHIRstructure"
 import { connect } from "react-redux";
-import { onLoggedIn } from "../redux/actions";
-import { Link } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 
-class FHIRconnection extends React.Component {
+class FHIRConnection extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -18,7 +16,6 @@ class FHIRconnection extends React.Component {
       }),
       userLoggedOut: false
     };
-    this.loggedOut = this.loggedOut.bind(this);
   }
 
   readAllObservations = () => {
@@ -306,12 +303,6 @@ class FHIRconnection extends React.Component {
       });
   };
 
-  loggedOut() {
-    localStorage.removeItem("googleResponse");
-    this.props.onLoggedIn(false);
-    this.props.history.push("/");
-  }
-
   render() {
     if (this.props.baseInfo.isLoggedin) {
       return (
@@ -325,21 +316,7 @@ class FHIRconnection extends React.Component {
               <div>Datasets loaded!</div>
             </div>
           )}
-          <BarPlotter
-            datasets={this.props.patient.datasets}
-            aggregateLength="day"
-            timeScope="week"
-            datasetLOINC="55423-8"
-          />
-          <button onClick={() => this.loggedOut()} variant="danger">
-            Logg ut
-          </button>
-
-          <div>
-            <Link to="/dashboard">
-              <button>Dashboard</button>
-            </Link>
-          </div>
+          <Redirect to="/dashboard" />
         </div>
       );
     } else {
@@ -352,8 +329,6 @@ class FHIRconnection extends React.Component {
   }
 }
 
-const mapDispatchToProps = { onLoggedIn };
-
 function mapStateToProps(state) {
   return {
     patient: state.patient,
@@ -361,7 +336,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(FHIRconnection);
+export default connect(mapStateToProps)(FHIRConnection);

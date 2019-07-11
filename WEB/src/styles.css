@@ -64,3 +64,26 @@ html {
   max-width: 600px;
   margin: 0 auto !important;
 }
+
+.menu-button-row {
+  justify-content: center;
+  height: 60px;
+  top: 20px;
+}
+
+.menu-button {
+  cursor: pointer;
+  color: #FFFFFF;
+  opacity: 0.7;
+  font-size: 15px;
+  font-weight: bold;
+  text-align: center;
+  padding-top: 18px;
+  letter-spacing: 1px;
+}
+.menu-button:hover,
+.menu-button.active-menu-button {
+  color: #FFFFFF !important;
+  opacity: 1;
+  text-decoration: underline white;
+}

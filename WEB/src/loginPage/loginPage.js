@@ -4,6 +4,7 @@ import moment from "moment";
 import { responseGoogle } from "../api/googleFit";
 import { addInfo, onLoggedIn } from "../redux/actions";
 import { connect } from "react-redux";
+import "./styles.css";
 
 class LoginPage extends Component {
   constructor(props) {
@@ -18,9 +19,9 @@ class LoginPage extends Component {
     if (this.state.redirectProfile === true) {
       return <div />;
     }
-    if (localStorage.getItem("googleResponse")) {
+    if (sessionStorage.getItem("googleResponse")) {
       console.log("Reading google client from localStorage");
-      let response = JSON.parse(localStorage.getItem("googleResponse"));
+      let response = JSON.parse(sessionStorage.getItem("googleResponse"));
       if (moment().diff(moment.unix(response.Zi.expires_at / 1000), "m") < 0) {
         responseGoogle.bind(this)(response);
         return <div />;
