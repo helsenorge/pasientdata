@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import PageNotFound from "../../images/medError.jpg";
+import PageNotFound from "../../Images/medError.jpg";
 import "./NotFoundPage.css";
 
 class NotFoundPage extends React.Component {
