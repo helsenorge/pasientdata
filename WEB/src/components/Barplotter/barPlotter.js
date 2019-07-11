@@ -15,25 +15,7 @@ import {
 class BarPlotter extends Component {
   state = { colors: ["#7DB3FF", "#49457B", "#FF7C78"] };
 
-  numberFormatter = item => numeral(item).format("O");
-
-  timeFormatter = (timeScope, item) => {
-    switch (timeScope) {
-      case "month":
-        return moment(item, "X").format("DD");
-      case "week":
-        return moment(item, "X").format("ddd");
-      case "day":
-        return moment(item, "X").format("HH:mm");
-      case "hours":
-        return moment(item, "X").format("HH");
-      default:
-        return moment(item, "X").format("YYYY-MM-DDTHH:mm:ss");
-    }
-  };
-
   findMeasurementStartIndex = datasetIndex => {
-
     for (
       let i = 0;
       i < this.props.patient.datasets[datasetIndex].measurements.length;
@@ -117,14 +99,14 @@ class BarPlotter extends Component {
     }
   };
 
-  render() {
+  aggregateData = () => {
     let timeFormats = this.formatStringsFromAggregateLength();
     let datasetIndex = this.findDatasetIndexFromLOINC();
     let startIndex = this.findMeasurementStartIndex(datasetIndex);
 
-    let slicedData = this.props.patient.datasets[datasetIndex].measurements.slice(
-      startIndex
-    );
+    let slicedData = this.props.patient.datasets[
+      datasetIndex
+    ].measurements.slice(startIndex);
     let reformatted = [];
     for (let i = 0; i < slicedData.length; i++) {
       reformatted.push({
@@ -137,8 +119,8 @@ class BarPlotter extends Component {
     }
 
     /*
-    / Loop through the desired dataset and aggregate
-    */
+  / Loop through the desired dataset and aggregate
+  */
     let aggregated = [];
     let sum = reformatted[0].y;
     let start = moment(reformatted[0].x, "X").startOf(timeFormats.startOf);
@@ -206,6 +188,11 @@ class BarPlotter extends Component {
     ) {
       aggregated.push({ y: 0, x: start.format(timeFormats.format) });
     }
+    return aggregated;
+  };
+
+  render() {
+    let aggregated = this.aggregateData();
 
     return (
       <ResponsiveContainer width="90%" height={300}>

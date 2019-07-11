@@ -1,13 +1,11 @@
 import React, { Component } from "react";
-//import { GoogleLogout } from 'react-google-login';
 import Tabs from "@helsenorge/toolkit/components/molecules/tabs/index";
 import Tab from "@helsenorge/toolkit/components/molecules/tabs/tab";
-import Burgers from "./burgers";
-import ButtonToolBar from "./ButtonGroup";
 import { connect } from "react-redux";
-import BarPlotter from "./barPlotter";
-import { Link } from "react-router-dom";
-import Steps from "./steps";
+import BarPlotter from "../Barplotter/barPlotter";
+import { NavLink } from "react-router-dom";
+import TimeButtonGroup from "../TimeButtonGroup/timeButtonGroup";
+import "./navigationBar.css"
 
 class NavigationBar extends Component {
   constructor(props) {
@@ -15,7 +13,8 @@ class NavigationBar extends Component {
     this.state = {
       viewButtonClicked: "week",
       intervalButtonClicked: "day",
-      activeTab: "4"
+      activeTab: "4",
+      views: { hour: true, day: false, week: true, month: true, year: false }
     };
   }
 
@@ -40,8 +39,6 @@ class NavigationBar extends Component {
   }
 
   render() {
-    const activeLink = this.props.activeLink;
-
     //const { onDay, onWeek, onMonth } = this.props;
     console.log(
       "view: " +
@@ -49,16 +46,14 @@ class NavigationBar extends Component {
         " interval: " +
         this.state.intervalButtonClicked
     );
+    //console.log(this.state.views.day);
     return (
       <div>
-        <div>
-          <div className="row navbar d-block fixed-bottom no-margin no-padding max-width-wrapper">
-            <Link to="/"> Home </Link>
-            <Link to="/burgers"> Burgers </Link>
-            <Link to="/steps"> Steps </Link>
-          </div>
+        <div className="menu-button-row row navbar d-block max-width-wrapper">
+          <NavLink to="/dashboard" activeClassName="activeTab"> Home </NavLink>
+          <NavLink to="/steps" activeClassName="activeTab"> Steps </NavLink>
         </div>
-        <Tabs>
+        {/* <Tabs>
           <Tab title="Ian Daly" className="hei">
             Daly started his career with local club Broadford Rovers and spent
             two seasons at Home Farm FC, before joining Manchester City in July
@@ -98,16 +93,35 @@ class NavigationBar extends Component {
             was terminated by mutual consent in search of first team
             football.[17]
           </Tab>
-          <Tab title="Ting å tenke på">
-            <Burgers />
+          <Tab title="Tab 2">
+            <div>Tab 2</div>
           </Tab>
           <Tab title="Steps">
             <div>View: </div>
-            <ButtonToolBar onClicked={this.clicked} buttonClicked={"view"} />
+            <TimeButtonGroup
+              onClicked={this.clicked}
+              buttonClicked={"view"}
+              views={{
+                minute: false,
+                hour: true,
+                day: true,
+                week: true,
+                month: true,
+                year: true
+              }}
+            />
             <div>Interval: </div>
-            <ButtonToolBar
+            <TimeButtonGroup
               onClicked={this.clicked}
               buttonClicked={"interval"}
+              views={{
+                minute: true,
+                hour: true,
+                day: true,
+                week: true,
+                month: true,
+                year: false
+              }}
             />
             <BarPlotter
               datasets={this.props.patient.datasets}
@@ -116,7 +130,7 @@ class NavigationBar extends Component {
               datasetLOINC="55423-8"
             />
           </Tab>
-        </Tabs>
+        </Tabs> */}
       </div>
     );
   }

@@ -1,15 +1,14 @@
 import * as React from "react";
 import * as FHIR from "fhirclient";
 import moment from "moment";
-import BarPlotter from "../components/barPlotter";
-import HomePage from "../loginPage/loginPage";
+import BarPlotterV2 from "./components/Barplotter/barPlotterV2";
+import HomePage from "./Pages/LoginPage/loginPage";
 //import { GoogleLogout } from 'react-google-login';
 //import { addPatient, addObservation } from "../api/FHIRstructure"
 import { connect } from "react-redux";
-import { onLoggedIn } from "../redux/actions";
-import { Link } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 
-class FHIRconnection extends React.Component {
+class FHIRCommunication extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -18,7 +17,6 @@ class FHIRconnection extends React.Component {
       }),
       userLoggedOut: false
     };
-    this.loggedOut = this.loggedOut.bind(this);
   }
 
   readAllObservations = () => {
@@ -33,7 +31,7 @@ class FHIRconnection extends React.Component {
         flat: true
       })
       .then(observations => {
-        console.log(observations);
+        //console.log(observations);
       });
   };
 
@@ -125,7 +123,7 @@ class FHIRconnection extends React.Component {
     this.state.client
       .request(optionsPatient, (error, response, body) => {})
       .then(patient => {
-        console.log(patient);
+        //console.log(patient);
       });
   };
 
@@ -283,8 +281,8 @@ class FHIRconnection extends React.Component {
     this.state.client
       .request(optionsObservation, (error, response, body) => {})
       .then(observation => {
-        console.log(observation);
-        this.setState({ observation });
+        // console.log(observation);
+        // this.setState({ observation });
       });
   };
 
@@ -298,19 +296,13 @@ class FHIRconnection extends React.Component {
         flat: true
       })
       .then(patient => {
-        console.log(patient);
+        // console.log(patient);
       })
       .catch(() => {
         console.log("Patient didn't already exist in FHIR database");
         this.addPatient();
       });
   };
-
-  loggedOut() {
-    localStorage.removeItem("googleResponse");
-    this.props.onLoggedIn(false);
-    this.props.history.push("/");
-  }
 
   render() {
     if (this.props.baseInfo.isLoggedin) {
@@ -320,26 +312,8 @@ class FHIRconnection extends React.Component {
           {this.addPatientIfNeeded()}
           {this.addObservations()}
           {this.readAllObservations()}
-          {this.props.patient.datasets.length > 0 && (
-            <div>
-              <div>Datasets loaded!</div>
-            </div>
-          )}
-          <BarPlotter
-            datasets={this.props.patient.datasets}
-            aggregateLength="day"
-            timeScope="week"
-            datasetLOINC="55423-8"
-          />
-          <button onClick={() => this.loggedOut()} variant="danger">
-            Logg ut
-          </button>
 
-          <div>
-            <Link to="/dashboard">
-              <button>Dashboard</button>
-            </Link>
-          </div>
+          <Redirect to="/dashboard" />
         </div>
       );
     } else {
@@ -352,8 +326,6 @@ class FHIRconnection extends React.Component {
   }
 }
 
-const mapDispatchToProps = { onLoggedIn };
-
 function mapStateToProps(state) {
   return {
     patient: state.patient,
@@ -361,7 +333,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(FHIRconnection);
+export default connect(mapStateToProps)(FHIRCommunication);

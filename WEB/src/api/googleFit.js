@@ -1,5 +1,5 @@
 import axios from "axios";
-import moment from "moment";
+import moment, { max } from "moment";
 
 var urlBase =
   "https://www.googleapis.com/fitness/v1/users/me/dataSources/derived:com.google.";
@@ -53,28 +53,70 @@ export function getUserBloodGlucose(response) {
 }
 
 export function formatNanosec(ns) {
-  let momentObject = moment(ns / 1000000);
+  let momentObject = moment(Math.floor(ns / 1000000));
   return momentObject.format("YYYY-MM-DDTHH:mm:ss"); // Conforms to FHIR standard
 }
 
 export function structureDatasets(dataType) {
   let measurements = [];
+  let currentValue;
+  let startTime;
+  let endTime;
+  let intervalSeconds;
+  let secondValue;
+  let currentNano;
+  let currentIntervalLength;
+  let intervalValueSum;
+  let startNanos;
+  let endNanos;
 
+  const nanoSecFactor = 1000000000;
   dataType.data.point.forEach((item, index) => {
     if (item.value[0].intVal) {
-      measurements.push({
-        start: formatNanosec(item.startTimeNanos),
-        end: formatNanosec(item.endTimeNanos),
-        value: item.value[0].intVal
-      });
+      currentValue = item.value[0].intVal;
     } else if (item.value[0].fpVal) {
-      measurements.push({
-        start: formatNanosec(item.startTimeNanos),
-        end: formatNanosec(item.endTimeNanos),
-        value: item.value[0].fpVal
-      });
+      currentValue = item.value[0].fpVal;
     } else {
       return;
+    }
+    startNanos = parseInt(item.startTimeNanos, 10);
+    endNanos = parseInt(item.endTimeNanos, 10);
+    intervalSeconds = (endNanos - startNanos) / nanoSecFactor;
+    if (intervalSeconds <= 60) {
+      startTime = formatNanosec(startNanos);
+      endTime = formatNanosec(endNanos);
+      measurements.push({
+        start: startTime,
+        end: endTime,
+        value: currentValue
+      });
+    } else {
+      secondValue = currentValue / intervalSeconds;
+      currentNano = startNanos;
+      intervalValueSum = 0;
+      while (intervalSeconds > 0) {
+        currentIntervalLength = Math.min(60, intervalSeconds);
+        if (currentIntervalLength === 60) {
+          intervalValueSum += Math.floor(secondValue * currentIntervalLength);
+          measurements.push({
+            start: formatNanosec(currentNano),
+            end: formatNanosec(
+              currentNano + currentIntervalLength * nanoSecFactor
+            ),
+            value: Math.floor(secondValue * currentIntervalLength)
+          });
+        } else {
+          measurements.push({
+            start: formatNanosec(currentNano),
+            end: formatNanosec(
+              currentNano + currentIntervalLength * nanoSecFactor
+            ),
+            value: currentValue - intervalValueSum
+          });
+        }
+        intervalSeconds -= currentIntervalLength;
+        currentNano += currentIntervalLength * nanoSecFactor;
+      }
     }
   });
   return measurements;
@@ -82,7 +124,7 @@ export function structureDatasets(dataType) {
 
 export function responseGoogle(response) {
   console.log("Saving google client to localStorage");
-  localStorage.setItem("googleResponse", JSON.stringify(response));
+  sessionStorage.setItem("googleResponse", JSON.stringify(response));
 
   axios
     .all([
@@ -122,7 +164,7 @@ export function responseGoogle(response) {
             response.profileObj.email,
             pic,
             datasets
-          ); 
+          );
 
           this.props.onLoggedIn(true);
         }

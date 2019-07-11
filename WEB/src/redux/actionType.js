@@ -1,4 +1,2 @@
 export const SET_PATIENT = "PATIENT/SET_PATIENT";
-export const SET_ACTIVE_LINK = 'SET_ACTIVE_LINK';
-export const HIDE_MENU_BAR = 'HIDE_MENU_BAR';
 export const IS_LOGGED_IN = 'IS_LOGGED_IN';

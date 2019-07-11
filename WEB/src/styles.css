@@ -59,8 +59,3 @@ html {
 .no-padding {
   padding: 0 !important;
 }
-
-.max-width-wrapper {
-  max-width: 600px;
-  margin: 0 auto !important;
-}
