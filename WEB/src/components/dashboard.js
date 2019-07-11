@@ -5,7 +5,7 @@ import "./sidebar.css";
 import BarPlotter from "../components/barPlotter";
 import { connect } from "react-redux";
 import { onLoggedIn, addInfo } from "../redux/actions";
-import FHIRConnection from "../FHIRConnection/FHIRConnection";
+import FHIRConnection from "../FHIRconnection/FHIRconnection";
 
 class Dashboard extends Component {
   constructor(props) {

@@ -7,7 +7,7 @@ import { Provider } from "react-redux";
 import store from "./store";
 import Dashboard from "./components/dashboard";
 import Steps from "./components/steps";
-import FHIRConnection from "./FHIRConnection/FHIRConnection";
+import FHIRConnection from "./FHIRconnection/FHIRconnection";
 import Trials from "./components/trials";
 import NotFoundPage from "./NotFoundPage/NotFoundPage";
 
