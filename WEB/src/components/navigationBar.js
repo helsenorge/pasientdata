@@ -105,13 +105,27 @@ class NavigationBar extends Component {
             <TimeButtonGroup
               onClicked={this.clicked}
               buttonClicked={"view"}
-              views={this.state.views}
+              views={{
+                minute: false,
+                hour: true,
+                day: true,
+                week: true,
+                month: true,
+                year: true
+              }}
             />
             <div>Interval: </div>
             <TimeButtonGroup
               onClicked={this.clicked}
               buttonClicked={"interval"}
-              views={this.state.views}
+              views={{
+                minute: true,
+                hour: true,
+                day: true,
+                week: true,
+                month: true,
+                year: false
+              }}
             />
             <BarPlotter
               datasets={this.props.patient.datasets}
