@@ -1,7 +1,7 @@
 import * as React from "react";
 import * as FHIR from "fhirclient";
 import moment from "moment";
-import HomePage from "../Pages/LoginPage/loginPage";
+import HomePage from "./Pages/LoginPage/loginPage";
 //import { GoogleLogout } from 'react-google-login';
 //import { addPatient, addObservation } from "../api/FHIRstructure"
 import { connect } from "react-redux";
