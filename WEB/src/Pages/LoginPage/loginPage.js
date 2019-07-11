@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { GoogleLogin } from "react-google-login";
 import moment from "moment";
-import { responseGoogle } from "../api/googleFit";
-import { addInfo, onLoggedIn } from "../redux/actions";
 import { connect } from "react-redux";
-import "./styles.css";
+import { responseGoogle } from "../../api/googleFit";
+import { addInfo, onLoggedIn } from "../../Redux/actions";
+import "./loginPage.css";
 
 class LoginPage extends Component {
   constructor(props) {
@@ -15,7 +15,7 @@ class LoginPage extends Component {
   }
 
   render() {
-    const pic = require("../images/ehelse.svg");
+    const pic = require("../../Images/ehelse.svg");
     if (this.state.redirectProfile === true) {
       return <div />;
     }

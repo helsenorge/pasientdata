@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import { Button } from "shards-react";
-//import Steps from "./steps";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "shards-ui/dist/css/shards.min.css";
-//import TimeButton from "./timeButton";
+import "./timeButtonGroup.css";
 
 class TimeButtonGroup extends Component {
   constructor(props) {
@@ -35,7 +34,7 @@ class TimeButtonGroup extends Component {
             this.props.onClicked(this.props.buttonClicked, "minute");
           }}
         >
-          Minute
+          Minute 
         </Button>
       );
     }

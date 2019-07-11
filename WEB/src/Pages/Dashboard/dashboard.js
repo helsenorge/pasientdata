@@ -1,11 +1,11 @@
 import React, { Component, Fragment } from "react";
-import NavigationBar from "./navigationBar.js";
-import SideBar from "./sidebar";
-import "./sidebar.css";
-import BarPlotter from "../components/barPlotter";
+import NavigationBar from "../../components/NavigationBar/navigationBar";
+import SideBar from "../../components/Sidebar/sidebar";
+import "../../components/Sidebar/sidebar.css";
+import BarPlotter from "../../components/Barplotter/barPlotter";
 import { connect } from "react-redux";
-import { onLoggedIn, addInfo } from "../redux/actions";
-import FHIRConnection from "../FHIRconnection/FHIRconnection";
+import { onLoggedIn, addInfo } from "../../Redux/actions";
+import FHIRConnection from "../../FHIRCommunication/FHIRCommunication";
 
 class Dashboard extends Component {
   constructor(props) {
@@ -21,8 +21,12 @@ class Dashboard extends Component {
     if (this.props.baseInfo.isLoggedin) {
       return (
         <div>
-          <SideBar pageWrapId={"page-wrap"} outerContainerId={"App"} />
-          <NavigationBar />
+          <div>
+            <NavigationBar />
+          </div>
+          <div>
+            <SideBar pageWrapId={"page-wrap"} outerContainerId={"App"} />
+          </div>
           <BarPlotter
             datasets={this.props.patient.datasets}
             aggregateLength="day"

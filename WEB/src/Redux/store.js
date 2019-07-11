@@ -1,6 +1,6 @@
 import { createStore, combineReducers, applyMiddleware, compose } from "redux";
-import patientReducer from "./redux/patientReducer";
-import baseInfoReducer from "./redux/baseInfoReducer";
+import patientReducer from "./patientReducer";
+import baseInfoReducer from "./baseInfoReducer";
 import thunk from "redux-thunk";
 import persistDataLocally from "./persistData";
 

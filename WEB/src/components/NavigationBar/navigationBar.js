@@ -2,12 +2,10 @@ import React, { Component } from "react";
 import Tabs from "@helsenorge/toolkit/components/molecules/tabs/index";
 import Tab from "@helsenorge/toolkit/components/molecules/tabs/tab";
 import { connect } from "react-redux";
-import BarPlotter from "./barPlotter";
-
+import BarPlotter from "../Barplotter/barPlotter";
 import { NavLink } from "react-router-dom";
-import Steps from "./steps";
-
-import TimeButtonGroup from "./timeButtonGroup";
+import TimeButtonGroup from "../TimeButtonGroup/timeButtonGroup";
+import "./navigationBar.css"
 
 class NavigationBar extends Component {
   constructor(props) {
@@ -52,18 +50,8 @@ class NavigationBar extends Component {
     return (
       <div>
         <div className="menu-button-row row navbar d-block max-width-wrapper">
-          <NavLink to="/dashboard" activeClassName="activeTab">
-            {" "}
-            Home{" "}
-          </NavLink>
-          <NavLink to="/burgers" activeClassName="activeTab">
-            {" "}
-            Burgers{" "}
-          </NavLink>
-          <NavLink to="/steps" activeClassName="activeTab">
-            {" "}
-            Steps{" "}
-          </NavLink>
+          <NavLink to="/dashboard" activeClassName="activeTab"> Home </NavLink>
+          <NavLink to="/steps" activeClassName="activeTab"> Steps </NavLink>
         </div>
         {/* <Tabs>
           <Tab title="Ian Daly" className="hei">

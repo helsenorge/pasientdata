@@ -1,13 +1,13 @@
 import * as React from "react";
 import * as FHIR from "fhirclient";
 import moment from "moment";
-import HomePage from "../loginPage/loginPage";
+import HomePage from "../Pages/LoginPage/loginPage";
 //import { GoogleLogout } from 'react-google-login';
 //import { addPatient, addObservation } from "../api/FHIRstructure"
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 
-class FHIRConnection extends React.Component {
+class FHIRCommunication extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -336,4 +336,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(FHIRConnection);
+export default connect(mapStateToProps)(FHIRCommunication);

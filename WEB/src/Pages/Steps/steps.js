@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import TimeButtonGroup from "./timeButtonGroup";
-import BarPlotter from "./barPlotter";
+import TimeButtonGroup from "../../components/TimeButtonGroup/timeButtonGroup";
+import BarPlotter from "../../components/Barplotter/barPlotter";
 import { connect } from "react-redux";
-import NavigationBar from "./navigationBar.js";
+import NavigationBar from "../../components/NavigationBar/navigationBar.js";
 
 class Steps extends Component {
   constructor(props) {
