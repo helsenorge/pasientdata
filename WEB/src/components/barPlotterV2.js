@@ -98,7 +98,7 @@ class BarPlotterV2 extends Component {
     let start = moment(data[0].x, inputFormat).startOf(interval);
 
     // Add empty bars at start if needed
-    let added = 0;
+    let added = 1;
     while (moment(start).diff(startTime, interval + "s") - added > -1) {
       aggregated.push({
         y: 0,

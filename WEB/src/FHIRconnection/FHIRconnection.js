@@ -327,9 +327,9 @@ class FHIRconnection extends React.Component {
             </div>
           )}
           <BarPlotterV2
-            start={"2019-06-29T18:00:10"}
-            end={"2019-06-29T19:15:05"}
-            interval="minute"
+            start={"2019-06-29T16:00:00"}
+            end={"2019-06-30T19:00:00"}
+            interval="hour"
             data={this.props.patient.datasets[0].measurements}
             outputFormat="HH:mm"
           />

@@ -53,7 +53,7 @@ export function getUserBloodGlucose(response) {
 }
 
 export function formatNanosec(ns) {
-  let momentObject = moment(ns / 1000000);
+  let momentObject = moment(Math.floor(ns / 1000000));
   return momentObject.format("YYYY-MM-DDTHH:mm:ss"); // Conforms to FHIR standard
 }
 
@@ -66,6 +66,10 @@ export function structureDatasets(dataType) {
   let secondValue;
   let currentNano;
   let currentIntervalLength;
+  let intervalValueSum;
+  let startNanos;
+  let endNanos;
+
   const nanoSecFactor = 1000000000;
   dataType.data.point.forEach((item, index) => {
     if (item.value[0].intVal) {
@@ -75,32 +79,43 @@ export function structureDatasets(dataType) {
     } else {
       return;
     }
-    intervalSeconds = (item.endTimeNanos - item.startTimeNanos) / nanoSecFactor;
+    startNanos = parseInt(item.startTimeNanos, 10);
+    endNanos = parseInt(item.endTimeNanos, 10);
+    intervalSeconds = (endNanos - startNanos) / nanoSecFactor;
     if (intervalSeconds <= 60) {
-      startTime = formatNanosec(item.startTimeNanos);
-      endTime = formatNanosec(item.endTimeNanos);
+      startTime = formatNanosec(startNanos);
+      endTime = formatNanosec(endNanos);
       measurements.push({
         start: startTime,
         end: endTime,
         value: currentValue
       });
     } else {
-      console.log("intsec : ", intervalSeconds);
       secondValue = currentValue / intervalSeconds;
-      currentNano = item.startTimeNanos;
+      currentNano = startNanos;
+      intervalValueSum = 0;
       while (intervalSeconds > 0) {
         currentIntervalLength = Math.min(60, intervalSeconds);
-        console.log("currentInt: ", currentIntervalLength);
-        measurements.push({
-          start: formatNanosec(currentNano),
-          end: formatNanosec(
-            currentNano + currentIntervalLength * nanoSecFactor
-          ),
-          value: Math.floor(secondValue * currentIntervalLength)
-        });
+        if (currentIntervalLength === 60) {
+          intervalValueSum += Math.floor(secondValue * currentIntervalLength);
+          measurements.push({
+            start: formatNanosec(currentNano),
+            end: formatNanosec(
+              currentNano + currentIntervalLength * nanoSecFactor
+            ),
+            value: Math.floor(secondValue * currentIntervalLength)
+          });
+        } else {
+          measurements.push({
+            start: formatNanosec(currentNano),
+            end: formatNanosec(
+              currentNano + currentIntervalLength * nanoSecFactor
+            ),
+            value: currentValue - intervalValueSum
+          });
+        }
         intervalSeconds -= currentIntervalLength;
         currentNano += currentIntervalLength * nanoSecFactor;
-        console.log("pushed: ", measurements[measurements.length - 1]);
       }
     }
   });
