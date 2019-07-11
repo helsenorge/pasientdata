@@ -87,3 +87,7 @@ html {
   opacity: 1;
   text-decoration: underline white;
 }
+
+.activeTab{
+  color: red !important;
+}

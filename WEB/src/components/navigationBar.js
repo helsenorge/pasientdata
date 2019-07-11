@@ -52,9 +52,9 @@ class NavigationBar extends Component {
     return (
       <div>
         <div className="menu-button-row row navbar d-block max-width-wrapper">
-          <NavLink to="/" > Home </NavLink>
-          <NavLink to="/burgers" > Burgers </NavLink>
-          <NavLink to="/steps"> Steps </NavLink>
+          <NavLink to="/dashboard" activeClassName="activeTab" > Home </NavLink>
+          <NavLink to="/burgers" activeClassName="activeTab"> Burgers </NavLink>
+          <NavLink to="/steps" activeClassName="activeTab"> Steps </NavLink>
         </div>
         {/* <Tabs>
           <Tab title="Ian Daly" className="hei">
