@@ -7,7 +7,7 @@ import HomePage from "../loginPage/loginPage";
 //import { addPatient, addObservation } from "../api/FHIRstructure"
 import { connect } from "react-redux";
 import { onLoggedIn } from "../redux/actions";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 class FHIRconnection extends React.Component {
   constructor(props) {
@@ -307,9 +307,9 @@ class FHIRconnection extends React.Component {
   };
 
   loggedOut() {
-    localStorage.removeItem('googleResponse');
+    localStorage.removeItem("googleResponse");
     this.props.onLoggedIn(false);
-    this.props.history.push('/');
+    this.props.history.push("/");
   }
 
   render() {
@@ -331,18 +331,14 @@ class FHIRconnection extends React.Component {
             timeScope="week"
             datasetLOINC="55423-8"
           />
-          <button
-            onClick={() => this.loggedOut()}
-            variant="danger"
-          >
+          <button onClick={() => this.loggedOut()} variant="danger">
             Logg ut
           </button>
-          
+
           <div>
             <Link to="/dashboard">
-            <button >Dashboard</button>
+              <button>Dashboard</button>
             </Link>
-              
           </div>
         </div>
       );

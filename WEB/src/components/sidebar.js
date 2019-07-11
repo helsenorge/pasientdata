@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { slide as BurgerMenu } from "react-burger-menu";
-// import Menu from "@helsenorge/toolkit/components/styles/icons/Menu";
-import ButtonToolBar from "./ButtonGroup";
+//import Menu from "@helsenorge/toolkit/components/icons/Menu";
+//import ButtonToolBar from "./ButtonGroup";
 
 class SideBar extends Component {
   constructor(props) {
