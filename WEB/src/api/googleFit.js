@@ -1,5 +1,5 @@
 import axios from "axios";
-import moment from "moment";
+import moment, { max } from "moment";
 
 var urlBase =
   "https://www.googleapis.com/fitness/v1/users/me/dataSources/derived:com.google.";
@@ -59,22 +59,49 @@ export function formatNanosec(ns) {
 
 export function structureDatasets(dataType) {
   let measurements = [];
-
+  let currentValue;
+  let startTime;
+  let endTime;
+  let intervalSeconds;
+  let secondValue;
+  let currentNano;
+  let currentIntervalLength;
+  const nanoSecFactor = 1000000000;
   dataType.data.point.forEach((item, index) => {
     if (item.value[0].intVal) {
-      measurements.push({
-        start: formatNanosec(item.startTimeNanos),
-        end: formatNanosec(item.endTimeNanos),
-        value: item.value[0].intVal
-      });
+      currentValue = item.value[0].intVal;
     } else if (item.value[0].fpVal) {
-      measurements.push({
-        start: formatNanosec(item.startTimeNanos),
-        end: formatNanosec(item.endTimeNanos),
-        value: item.value[0].fpVal
-      });
+      currentValue = item.value[0].fpVal;
     } else {
       return;
+    }
+    intervalSeconds = (item.endTimeNanos - item.startTimeNanos) / nanoSecFactor;
+    if (intervalSeconds <= 60) {
+      startTime = formatNanosec(item.startTimeNanos);
+      endTime = formatNanosec(item.endTimeNanos);
+      measurements.push({
+        start: startTime,
+        end: endTime,
+        value: currentValue
+      });
+    } else {
+      console.log("intsec : ", intervalSeconds);
+      secondValue = currentValue / intervalSeconds;
+      currentNano = item.startTimeNanos;
+      while (intervalSeconds > 0) {
+        currentIntervalLength = Math.min(60, intervalSeconds);
+        console.log("currentInt: ", currentIntervalLength);
+        measurements.push({
+          start: formatNanosec(currentNano),
+          end: formatNanosec(
+            currentNano + currentIntervalLength * nanoSecFactor
+          ),
+          value: Math.floor(secondValue * currentIntervalLength)
+        });
+        intervalSeconds -= currentIntervalLength;
+        currentNano += currentIntervalLength * nanoSecFactor;
+        console.log("pushed: ", measurements[measurements.length - 1]);
+      }
     }
   });
   return measurements;
@@ -122,7 +149,7 @@ export function responseGoogle(response) {
             response.profileObj.email,
             pic,
             datasets
-          ); 
+          );
 
           this.props.onLoggedIn(true);
         }
