@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import BarPlotter from "../Barplotter/barPlotter";
 import { NavLink } from "react-router-dom";
 import TimeButtonGroup from "../TimeButtonGroup/timeButtonGroup";
-import "./navigationBar.css"
+import "./navigationBar.css";
 
 class NavigationBar extends Component {
   constructor(props) {
@@ -26,14 +26,6 @@ class NavigationBar extends Component {
     }
   }
 
-  clicked = (buttonType, buttonClicked) => {
-    if (buttonType === "view") {
-      this.setState({ outline: false, viewButtonClicked: buttonClicked });
-    } else {
-      this.setState({ outline: false, intervalButtonClicked: buttonClicked });
-    }
-  };
-
   loggedOut() {
     localStorage.removeItem("accessToken");
   }
@@ -50,8 +42,14 @@ class NavigationBar extends Component {
     return (
       <div>
         <div className="menu-button-row row navbar d-block max-width-wrapper">
-          <NavLink to="/dashboard" activeClassName="activeTab"> Home </NavLink>
-          <NavLink to="/steps" activeClassName="activeTab"> Steps </NavLink>
+          <NavLink to="/dashboard" activeClassName="activeTab">
+            {" "}
+            Home{" "}
+          </NavLink>
+          <NavLink to="/steps" activeClassName="activeTab">
+            {" "}
+            Steps{" "}
+          </NavLink>
         </div>
         {/* <Tabs>
           <Tab title="Ian Daly" className="hei">

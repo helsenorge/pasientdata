@@ -9,9 +9,9 @@ class NotFoundPage extends React.Component {
       <div className="text">
         <h2>404 - Siden finnes ikke </h2>
         <div className="head-error-image">
-          <img src={PageNotFound} className="error-image"/>
+          <img src={PageNotFound} className="error-image" />
         </div>
-        <p >
+        <p>
           Oi! Siden du ser etter finnes ikke. <br />
           <Link to="/"> Gå til startsiden </Link>
         </p>
