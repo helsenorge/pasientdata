@@ -1,13 +1,10 @@
 import React, { Component } from "react";
-//import { GoogleLogout } from 'react-google-login';
 import Tabs from "@helsenorge/toolkit/components/molecules/tabs/index";
 import Tab from "@helsenorge/toolkit/components/molecules/tabs/tab";
-import Burgers from "./burgers";
-import ButtonToolBar from "./ButtonGroup";
 import { connect } from "react-redux";
 import BarPlotter from "./barPlotter";
 import { Link } from "react-router-dom";
-import Steps from "./steps";
+import TimeButtonGroup from "./timeButtonGroup";
 
 class NavigationBar extends Component {
   constructor(props) {
@@ -15,7 +12,8 @@ class NavigationBar extends Component {
     this.state = {
       viewButtonClicked: "week",
       intervalButtonClicked: "day",
-      activeTab: "4"
+      activeTab: "4",
+      views: { hour: true, day: false, week: true, month: true, year: false }
     };
   }
 
@@ -49,6 +47,7 @@ class NavigationBar extends Component {
         " interval: " +
         this.state.intervalButtonClicked
     );
+    //console.log(this.state.views.day);
     return (
       <div>
         <div>
@@ -58,7 +57,7 @@ class NavigationBar extends Component {
             <Link to="/steps"> Steps </Link>
           </div>
         </div>
-        <Tabs>
+        <Tabs initialTabIndex={2}>
           <Tab title="Ian Daly" className="hei">
             Daly started his career with local club Broadford Rovers and spent
             two seasons at Home Farm FC, before joining Manchester City in July
@@ -98,16 +97,21 @@ class NavigationBar extends Component {
             was terminated by mutual consent in search of first team
             football.[17]
           </Tab>
-          <Tab title="Ting å tenke på">
-            <Burgers />
+          <Tab title="Tab 2">
+            <div>Tab 2</div>
           </Tab>
           <Tab title="Steps">
             <div>View: </div>
-            <ButtonToolBar onClicked={this.clicked} buttonClicked={"view"} />
+            <TimeButtonGroup
+              onClicked={this.clicked}
+              buttonClicked={"view"}
+              views={this.state.views}
+            />
             <div>Interval: </div>
-            <ButtonToolBar
+            <TimeButtonGroup
               onClicked={this.clicked}
               buttonClicked={"interval"}
+              views={this.state.views}
             />
             <BarPlotter
               datasets={this.props.patient.datasets}

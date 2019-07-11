@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from "react";
 import NavigationBar from "./navigationBar.js";
-//import SideBar from "./sidebar";
+import SideBar from "./sidebar";
 import "./sidebar.css";
 
 class Dashboard extends Component {
@@ -12,8 +12,8 @@ class Dashboard extends Component {
     return (
       <div>
         <Fragment>
-          <NavigationBar />
           {/* <SideBar pageWrapId={"page-wrap"} outerContainerId={"App"} /> */}
+          <NavigationBar />
         </Fragment>
         {/* <NavigationBar>
           <div className="container-fluid">
