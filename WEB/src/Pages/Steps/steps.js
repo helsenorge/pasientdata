@@ -5,6 +5,9 @@ import { connect } from "react-redux";
 import NavigationBar from "../../components/NavigationBar/navigationBar.js";
 import moment from "moment";
 import DateSelector from "../../components/DateSelector/dateSelector";
+import ChevronLeftRounded from "@helsenorge/toolkit/components/icons/ChevronLeftRounded";
+import ChevronRightRounded from "@helsenorge/toolkit/components/icons/ChevronRightRounded";
+import "./steps.css";
 
 class Steps extends Component {
   constructor(props) {
@@ -15,7 +18,8 @@ class Steps extends Component {
       format: "ddd",
       start: null,
       end: null,
-      setPeriodFromExactDates: false
+      setPeriodFromExactDates: false,
+      nrOfIntervalsBack: 0
     };
   }
 
@@ -130,6 +134,50 @@ class Steps extends Component {
     }
   };
 
+  formatInterval = interval => {
+    switch (interval) {
+      case "year":
+        return "YYYY";
+      case "month":
+        return "MM";
+      case "week":
+        return "w";
+      case "day":
+        return "DD/MM";
+      case "hour":
+        return "HH:mm";
+      default:
+        return "YYYY-MM-DDTHH:mm:ss";
+    }
+  };
+
+  intervalToString = interval => {
+    switch (interval) {
+      case "year":
+        return "År";
+      case "month":
+        return "Måned:";
+      case "week":
+        return "Uke:";
+      case "day":
+        return "Dag:";
+      case "hour":
+        return "Kl:";
+      default:
+        return "Dato:";
+    }
+  };
+
+  leftClicked = () => {
+    this.setState({ nrOfIntervalsBack: this.state.nrOfIntervalsBack + 1 });
+  };
+
+  rightClicked = () => {
+    if (this.state.nrOfIntervalsBack > 0) {
+      this.setState({ nrOfIntervalsBack: this.state.nrOfIntervalsBack - 1 });
+    }
+  };
+
   render() {
     let viewButtons = {
       minute: true,
@@ -173,7 +221,10 @@ class Steps extends Component {
       start = this.state.start;
       end = this.state.end;
     } else {
-      let startEndTimes = this.getStartEndTimes(this.state.view, 0);
+      let startEndTimes = this.getStartEndTimes(
+        this.state.view,
+        this.state.nrOfIntervalsBack
+      );
       start = startEndTimes.start;
       end = startEndTimes.end;
     }
@@ -188,9 +239,36 @@ class Steps extends Component {
           views={viewButtons}
           outline={outlineViewButtons}
         />
-        <DateSelector
-          startChanged={this.onStartChanged}
-          endChanged={this.onEndChanged}
+        <br />
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <DateSelector
+            class="col-md-6 col-md-offset-3"
+            startChanged={this.onStartChanged}
+            endChanged={this.onEndChanged}
+          />
+        </div>
+        <div className="flex-container">
+          <button className="flex-children" onClick={this.leftClicked}>
+            <ChevronLeftRounded />
+          </button>{" "}
+          <div className="flex-children">
+            {this.intervalToString(this.state.interval)}{" "}
+            {moment()
+              .startOf(this.state.interval)
+              .subtract(this.state.nrOfIntervalsBack, this.state.interval)
+              .format(this.formatInterval(this.state.interval))}
+          </div>
+          <button className="flex-children" onClick={this.rightClicked}>
+            <ChevronRightRounded />{" "}
+          </button>
+        </div>
+
+        <BarPlotterV2
+          start={start}
+          end={end}
+          interval={this.state.interval}
+          outputFormat={this.state.format}
+          data={this.props.patient.datasets[0].measurements}
         />
         <div>Interval: </div>
         <TimeButtonGroup
@@ -198,13 +276,6 @@ class Steps extends Component {
           buttonClicked={"interval"}
           views={intervalButtons}
           outline={outlineIntervalButtons}
-        />
-        <BarPlotterV2
-          start={start}
-          end={end}
-          interval={this.state.interval}
-          outputFormat={this.state.format}
-          data={this.props.patient.datasets[0].measurements}
         />
       </div>
     );

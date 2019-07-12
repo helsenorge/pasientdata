@@ -29,8 +29,8 @@ class BarPlotterV2 extends Component {
     const length = this.props.data.length;
     const end = this.props.end;
     const start = this.props.start;
-    console.log("start: ", start);
-    console.log("end: ", end);
+    // console.log("start: ", start);
+    // console.log("end: ", end);
 
     let startIndex = 0;
     let endIndex = length - 1;
