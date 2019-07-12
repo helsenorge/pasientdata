@@ -7,7 +7,7 @@
   position: fixed;
   transform: translateY(-100%);
   transition: transform 0.5s;
-  box-shadow: 0 0 5px 1px #595959;
+  /* box-shadow: 0 0 5px 1px #595959; */
   background-color: #e9eaec;
 }
 

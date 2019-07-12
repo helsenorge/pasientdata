@@ -8,6 +8,7 @@ import DateSelector from "../../components/DateSelector/dateSelector";
 import ChevronLeftRounded from "@helsenorge/toolkit/components/icons/ChevronLeftRounded";
 import ChevronRightRounded from "@helsenorge/toolkit/components/icons/ChevronRightRounded";
 import "./steps.css";
+import Dashboard from "../Dashboard/dashboard";
 
 class Steps extends Component {
   constructor(props) {
@@ -229,62 +230,71 @@ class Steps extends Component {
       end = startEndTimes.end;
     }
 
-    return (
-      <div>
-        <NavigationBar />
-        <div>View: </div>
-        <TimeButtonGroup
-          onClicked={this.clicked}
-          buttonClicked={"view"}
-          views={viewButtons}
-          outline={outlineViewButtons}
-        />
-        <br />
-        <div style={{ display: "flex", justifyContent: "center" }}>
-          <DateSelector
-            class="col-md-6 col-md-offset-3"
-            startChanged={this.onStartChanged}
-            endChanged={this.onEndChanged}
+    if (this.props.baseInfo.isLoggedin) {
+      return (
+        <div>
+          <NavigationBar />
+          <div>View: </div>
+          <TimeButtonGroup
+            onClicked={this.clicked}
+            buttonClicked={"view"}
+            views={viewButtons}
+            outline={outlineViewButtons}
+          />
+          <br />
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <DateSelector
+              class="col-md-6 col-md-offset-3"
+              startChanged={this.onStartChanged}
+              endChanged={this.onEndChanged}
+            />
+          </div>
+          <div className="flex-container">
+            <button className="flex-children" onClick={this.leftClicked}>
+              <ChevronLeftRounded />
+            </button>{" "}
+            <div className="flex-children">
+              {this.intervalToString(this.state.interval)}{" "}
+              {moment()
+                .startOf(this.state.interval)
+                .subtract(this.state.nrOfIntervalsBack, this.state.interval)
+                .format(this.formatInterval(this.state.interval))}
+            </div>
+            <button className="flex-children" onClick={this.rightClicked}>
+              <ChevronRightRounded />{" "}
+            </button>
+          </div>
+
+          <BarPlotterV2
+            start={start}
+            end={end}
+            interval={this.state.interval}
+            outputFormat={this.state.format}
+            data={this.props.patient.datasets[0].measurements}
+          />
+          <div>Interval: </div>
+          <TimeButtonGroup
+            onClicked={this.clicked}
+            buttonClicked={"interval"}
+            views={intervalButtons}
+            outline={outlineIntervalButtons}
           />
         </div>
-        <div className="flex-container">
-          <button className="flex-children" onClick={this.leftClicked}>
-            <ChevronLeftRounded />
-          </button>{" "}
-          <div className="flex-children">
-            {this.intervalToString(this.state.interval)}{" "}
-            {moment()
-              .startOf(this.state.interval)
-              .subtract(this.state.nrOfIntervalsBack, this.state.interval)
-              .format(this.formatInterval(this.state.interval))}
-          </div>
-          <button className="flex-children" onClick={this.rightClicked}>
-            <ChevronRightRounded />{" "}
-          </button>
+      );
+    } else {
+      return (
+        <div>
+          <Dashboard />
         </div>
-
-        <BarPlotterV2
-          start={start}
-          end={end}
-          interval={this.state.interval}
-          outputFormat={this.state.format}
-          data={this.props.patient.datasets[0].measurements}
-        />
-        <div>Interval: </div>
-        <TimeButtonGroup
-          onClicked={this.clicked}
-          buttonClicked={"interval"}
-          views={intervalButtons}
-          outline={outlineIntervalButtons}
-        />
-      </div>
-    );
+      );
+    }
   }
 }
 
 function mapStateToProps(state) {
   return {
-    patient: state.patient
+    patient: state.patient,
+    baseInfo: state.baseInfo
   };
 }
 

@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import NavigationBar from "../../components/NavigationBar/navigationBar";
 import BarPlotterV2 from "../../components/Barplotter/barPlotterV2";
 import { connect } from "react-redux";
@@ -16,15 +16,6 @@ class Dashboard extends Component {
           <div>
             <NavigationBar />
           </div>
-          {/* <div>
-            <SideBar pageWrapId={"page-wrap"} outerContainerId={"App"} />
-          </div> */}
-          {/* <BarPlotter
-            datasets={this.props.patient.datasets}
-            aggregateLength="day"
-            timeScope="week"
-            datasetLOINC="55423-8"
-          /> */}
           <br />
           <BarPlotterV2
             start={"2019-06-29T16:00:00"}
