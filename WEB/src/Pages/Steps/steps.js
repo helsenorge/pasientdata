@@ -239,6 +239,7 @@ class Steps extends Component {
           views={viewButtons}
           outline={outlineViewButtons}
         />
+        <br />
         <div style={{ display: "flex", justifyContent: "center" }}>
           <DateSelector
             class="col-md-6 col-md-offset-3"
