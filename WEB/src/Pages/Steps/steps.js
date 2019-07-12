@@ -4,6 +4,7 @@ import BarPlotterV2 from "../../components/Barplotter/barPlotterV2";
 import { connect } from "react-redux";
 import NavigationBar from "../../components/NavigationBar/navigationBar.js";
 import moment from "moment";
+import DateSelector from "../../components/DateSelector/dateSelector";
 
 class Steps extends Component {
   constructor(props) {
@@ -137,13 +138,15 @@ class Steps extends Component {
     }
   };
 
-  getStartEndTimes = interval => {
+  getStartEndTimes = (interval, nrOfIntervalsBack) => {
     return {
       start: moment()
         .startOf(interval)
+        .subtract(nrOfIntervalsBack, interval)
         .format("YYYY-MM-DDTHH:mm:ss"),
       end: moment()
         .endOf(interval)
+        .subtract(nrOfIntervalsBack, interval)
         .format("YYYY-MM-DDTHH:mm:ss")
     };
   };
@@ -195,6 +198,7 @@ class Steps extends Component {
           views={viewButtons}
           outline={outlineViewButtons}
         />
+        <DateSelector />
         <div>Interval: </div>
         <TimeButtonGroup
           onClicked={this.clicked}
@@ -203,8 +207,8 @@ class Steps extends Component {
           outline={outlineIntervalButtons}
         />
         <BarPlotterV2
-          start={this.getStartEndTimes(this.state.view).start}
-          end={this.getStartEndTimes(this.state.view).end}
+          start={this.getStartEndTimes(this.state.view, 0).start}
+          end={this.getStartEndTimes(this.state.view, 0).end}
           interval={this.state.interval}
           outputFormat={this.state.format}
           data={this.props.patient.datasets[0].measurements}
