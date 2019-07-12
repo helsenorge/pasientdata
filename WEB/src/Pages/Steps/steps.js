@@ -16,25 +16,74 @@ class Steps extends Component {
   }
 
   clicked = (buttonType, buttonClicked) => {
+    let view = this.state.view;
+    let interval = this.state.interval;
     if (buttonType === "view") {
-      this.setState({ outline: false, view: buttonClicked });
+      this.setState({ view: buttonClicked });
+      view = buttonClicked;
     } else {
-      this.setState({ outline: false, interval: buttonClicked });
+      this.setState({ interval: buttonClicked });
+      interval = buttonClicked;
+    }
+
+    if (view === "hour" && interval === "minute") {
+      this.setState({ format: "HH:mm" });
+    }
+    if (view === "week" && interval === "hour") {
+      this.setState({ format: "HH" });
     }
   };
 
   getStartEndTimes = interval => {
     return {
-      start: moment()
+      start: moment("2019-07-05T00:00:01")
         .startOf(interval)
         .format("YYYY-MM-DDTHH:mm:ss"),
-      end: moment()
+      end: moment("2019-07-05T23:00:01")
         .endOf(interval)
         .format("YYYY-MM-DDTHH:mm:ss")
     };
   };
 
   render() {
+    // console.log(!(this.state.interval === "minute"));
+    //console.log(this.state.interval);
+    let viewButtons = {
+      minute: true,
+      hour: true,
+      day: true,
+      week: true,
+      month: true,
+      year: true
+    };
+
+    let intervalButtons = {
+      minute: true,
+      hour: true,
+      day: true,
+      week: true,
+      month: true,
+      year: true
+    };
+
+    let outlineViewButtons = {
+      minute: !(this.state.view === "minute"),
+      hour: !(this.state.view === "hour"),
+      day: !(this.state.view === "day"),
+      week: !(this.state.view === "week"),
+      month: !(this.state.view === "month"),
+      year: !(this.state.view === "year")
+    };
+
+    let outlineIntervalButtons = {
+      minute: !(this.state.interval === "minute"),
+      hour: !(this.state.interval === "hour"),
+      day: !(this.state.interval === "day"),
+      week: !(this.state.interval === "week"),
+      month: !(this.state.interval === "month"),
+      year: !(this.state.interval === "year")
+    };
+
     return (
       <div>
         <NavigationBar />
@@ -42,27 +91,15 @@ class Steps extends Component {
         <TimeButtonGroup
           onClicked={this.clicked}
           buttonClicked={"view"}
-          views={{
-            minute: true,
-            hour: true,
-            day: true,
-            week: true,
-            month: true,
-            year: true
-          }}
+          views={viewButtons}
+          outline={outlineViewButtons}
         />
         <div>Interval: </div>
         <TimeButtonGroup
           onClicked={this.clicked}
           buttonClicked={"interval"}
-          views={{
-            minute: true,
-            hour: true,
-            day: true,
-            week: true,
-            month: true,
-            year: true
-          }}
+          views={intervalButtons}
+          outline={outlineIntervalButtons}
         />
         <BarPlotterV2
           // datasets={this.props.patient.datasets}
