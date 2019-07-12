@@ -12,92 +12,169 @@ class TimeButtonGroup extends Component {
 
   renderMinute = render => {
     if (render) {
-      return (
-        <DisplayButton
-          //outline={this.props.outline.minute}
-          onClick={() => {
-            this.props.onClicked(this.props.buttonClicked, "minute");
-          }}
-          secondary={"secondary"}
-        >
-          {"Minute"}
-        </DisplayButton>
-      );
+      if (this.props.outline.minute) {
+        return (
+          <DisplayButton
+            onClick={() => {
+              this.props.onClicked(this.props.buttonClicked, "minute");
+            }}
+            primary
+          >
+            Minute
+          </DisplayButton>
+        );
+      } else {
+        return (
+          <DisplayButton
+            onClick={() => {
+              this.props.onClicked(this.props.buttonClicked, "minute");
+            }}
+            secondary
+          >
+            Minute
+          </DisplayButton>
+        );
+      }
     }
   };
 
   renderHour = render => {
     if (render) {
-      return (
-        <Button
-          outline={this.props.outline.hour}
-          onClick={() => {
-            this.props.onClicked(this.props.buttonClicked, "hour");
-          }}
-        >
-          Hour
-        </Button>
-      );
+      if (this.props.outline.hour) {
+        return (
+          <DisplayButton
+            onClick={() => {
+              this.props.onClicked(this.props.buttonClicked, "hour");
+            }}
+            primary
+          >
+            Hour
+          </DisplayButton>
+        );
+      } else {
+        return (
+          <DisplayButton
+            onClick={() => {
+              this.props.onClicked(this.props.buttonClicked, "hour");
+            }}
+            secondary
+          >
+            Hour
+          </DisplayButton>
+        );
+      }
     }
   };
 
   renderDay = renderDay => {
     if (renderDay) {
-      return (
-        <Button
-          outline={this.props.outline.day}
-          onClick={() => {
-            this.props.onClicked(this.props.buttonClicked, "day");
-          }}
-        >
-          Day
-        </Button>
-      );
+      if (this.props.outline.day) {
+        return (
+          <DisplayButton
+            onClick={() => {
+              this.props.onClicked(this.props.buttonClicked, "day");
+            }}
+            primary
+          >
+            Day
+          </DisplayButton>
+        );
+      } else {
+        return (
+          <DisplayButton
+            onClick={() => {
+              this.props.onClicked(this.props.buttonClicked, "day");
+            }}
+            secondary
+          >
+            Day
+          </DisplayButton>
+        );
+      }
     }
   };
 
   renderWeek = render => {
     if (render) {
-      return (
-        <Button
-          outline={this.props.outline.week}
-          onClick={() => {
-            this.props.onClicked(this.props.buttonClicked, "week");
-          }}
-        >
-          Week
-        </Button>
-      );
+      if (this.props.outline.week) {
+        return (
+          <DisplayButton
+            onClick={() => {
+              this.props.onClicked(this.props.buttonClicked, "week");
+            }}
+            primary
+          >
+            Week
+          </DisplayButton>
+        );
+      } else {
+        return (
+          <DisplayButton
+            onClick={() => {
+              this.props.onClicked(this.props.buttonClicked, "week");
+            }}
+            secondary
+          >
+            Week
+          </DisplayButton>
+        );
+      }
     }
   };
 
   renderMonth = render => {
     if (render) {
-      return (
-        <Button
-          outline={this.props.outline.month}
-          onClick={() => {
-            this.props.onClicked(this.props.buttonClicked, "month");
-          }}
-        >
-          Month
-        </Button>
-      );
+      if (this.props.outline.month) {
+        return (
+          <DisplayButton
+            onClick={() => {
+              this.props.onClicked(this.props.buttonClicked, "month");
+            }}
+            primary
+          >
+            Month
+          </DisplayButton>
+        );
+      } else {
+        return (
+          <DisplayButton
+            onClick={() => {
+              this.props.onClicked(this.props.buttonClicked, "month");
+            }}
+            secondary
+          >
+            Month
+          </DisplayButton>
+        );
+      }
     }
   };
 
   renderYear = render => {
     if (render) {
-      return (
-        <Button
-          outline={this.props.outline.year}
-          onClick={() => {
-            this.props.onClicked(this.props.buttonClicked, "year");
-          }}
-        >
-          Year
-        </Button>
-      );
+      if (this.props.outline.year) {
+        return (
+          <DisplayButton
+            onClick={() => {
+              this.props.onClicked(this.props.buttonClicked, "year");
+            }}
+            primary
+          >
+            Year
+          </DisplayButton>
+        );
+      } else {
+        return (
+          <DisplayButton
+            onClick={() => {
+              this.props.onClicked(this.props.buttonClicked, "year");
+            }}
+            secondary
+          >
+            Year
+          </DisplayButton>
+        );
+      }
     }
   };
 

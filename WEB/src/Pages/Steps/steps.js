@@ -25,29 +25,130 @@ class Steps extends Component {
       this.setState({ interval: buttonClicked });
       interval = buttonClicked;
     }
+    this.setState({ format: this.getFormat(view, interval) });
+  };
 
-    if (view === "hour" && interval === "minute") {
-      this.setState({ format: "HH:mm" });
-    }
-    if (view === "week" && interval === "hour") {
-      this.setState({ format: "HH" });
+  getFormat = (view, interval) => {
+    switch (view) {
+      case "minute":
+        switch (interval) {
+          case "minute":
+            return "HH:mm:ss";
+          // case "hour":
+          //   return "YYYY-MM-DDTHH:mm:ss";
+          // case "day":
+          //   return "YYYY-MM-DDTHH:mm:ss";
+          // case "week":
+          //   return "YYYY-MM-DDTHH:mm:ss";
+          // case "month":
+          //   return "YYYY-MM-DDTHH:mm:ss";
+          // case "year":
+          //   return "YYYY-MM-DDTHH:mm:ss";
+          default:
+            return "YYYY-MM-DDTHH:mm:ss";
+        }
+      case "hour":
+        switch (interval) {
+          case "minute":
+            return "HH:mm";
+          case "hour":
+            return "HH:mm";
+          // case "day":
+          //   return "YYYY-MM-DDTHH:mm:ss";
+          // case "week":
+          //   return "YYYY-MM-DDTHH:mm:ss";
+          // case "month":
+          //   return "YYYY-MM-DDTHH:mm:ss";
+          // case "year":
+          //   return "YYYY-MM-DDTHH:mm:ss";
+          default:
+            return "YYYY-MM-DDTHH:mm:ss";
+        }
+      case "day":
+        switch (interval) {
+          case "minute":
+            return "HH:mm";
+          case "hour":
+            return "HH";
+          case "day":
+            return "ddd";
+          // case "week":
+          //   return "YYYY-MM-DDTHH:mm:ss";
+          // case "month":
+          //   return "YYYY-MM-DDTHH:mm:ss";
+          // case "year":
+          //   return "YYYY-MM-DDTHH:mm:ss";
+          default:
+            return "YYYY-MM-DDTHH:mm:ss";
+        }
+      case "week":
+        switch (interval) {
+          case "minute":
+            return "HH:mm:ss";
+          case "hour":
+            return "YYYY-MM-DDTHH:mm:ss";
+          case "day":
+            return "YYYY-MM-DDTHH:mm:ss";
+          case "week":
+            return "YYYY-MM-DDTHH:mm:ss";
+          case "month":
+            return "YYYY-MM-DDTHH:mm:ss";
+          case "year":
+            return "YYYY-MM-DDTHH:mm:ss";
+          default:
+            return "YYYY-MM-DDTHH:mm:ss";
+        }
+      case "month":
+        switch (interval) {
+          case "minute":
+            return "HH:mm:ss";
+          case "hour":
+            return "YYYY-MM-DDTHH:mm:ss";
+          case "day":
+            return "YYYY-MM-DDTHH:mm:ss";
+          case "week":
+            return "YYYY-MM-DDTHH:mm:ss";
+          case "month":
+            return "YYYY-MM-DDTHH:mm:ss";
+          case "year":
+            return "YYYY-MM-DDTHH:mm:ss";
+          default:
+            return "YYYY-MM-DDTHH:mm:ss";
+        }
+      case "year":
+        switch (interval) {
+          case "minute":
+            return "HH:mm:ss";
+          case "hour":
+            return "YYYY-MM-DDTHH:mm:ss";
+          case "day":
+            return "YYYY-MM-DDTHH:mm:ss";
+          case "week":
+            return "YYYY-MM-DDTHH:mm:ss";
+          case "month":
+            return "YYYY-MM-DDTHH:mm:ss";
+          case "year":
+            return "YYYY-MM-DDTHH:mm:ss";
+          default:
+            return "YYYY-MM-DDTHH:mm:ss";
+        }
+      default:
+        return "YYYY-MM-DDTHH:mm:ss";
     }
   };
 
   getStartEndTimes = interval => {
     return {
-      start: moment("2019-07-05T00:00:01")
+      start: moment()
         .startOf(interval)
         .format("YYYY-MM-DDTHH:mm:ss"),
-      end: moment("2019-07-05T23:00:01")
+      end: moment()
         .endOf(interval)
         .format("YYYY-MM-DDTHH:mm:ss")
     };
   };
 
   render() {
-    // console.log(!(this.state.interval === "minute"));
-    //console.log(this.state.interval);
     let viewButtons = {
       minute: true,
       hour: true,
@@ -67,21 +168,21 @@ class Steps extends Component {
     };
 
     let outlineViewButtons = {
-      minute: !(this.state.view === "minute"),
-      hour: !(this.state.view === "hour"),
-      day: !(this.state.view === "day"),
-      week: !(this.state.view === "week"),
-      month: !(this.state.view === "month"),
-      year: !(this.state.view === "year")
+      minute: this.state.view === "minute",
+      hour: this.state.view === "hour",
+      day: this.state.view === "day",
+      week: this.state.view === "week",
+      month: this.state.view === "month",
+      year: this.state.view === "year"
     };
 
     let outlineIntervalButtons = {
-      minute: !(this.state.interval === "minute"),
-      hour: !(this.state.interval === "hour"),
-      day: !(this.state.interval === "day"),
-      week: !(this.state.interval === "week"),
-      month: !(this.state.interval === "month"),
-      year: !(this.state.interval === "year")
+      minute: this.state.interval === "minute",
+      hour: this.state.interval === "hour",
+      day: this.state.interval === "day",
+      week: this.state.interval === "week",
+      month: this.state.interval === "month",
+      year: this.state.interval === "year"
     };
 
     return (
@@ -102,10 +203,6 @@ class Steps extends Component {
           outline={outlineIntervalButtons}
         />
         <BarPlotterV2
-          // datasets={this.props.patient.datasets}
-          // aggregateLength={this.intervalButtonClicked}
-          // timeScope={this.viewButtonClicked}
-          // datasetLOINC="55423-8"
           start={this.getStartEndTimes(this.state.view).start}
           end={this.getStartEndTimes(this.state.view).end}
           interval={this.state.interval}
