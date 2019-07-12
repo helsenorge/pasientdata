@@ -3,217 +3,191 @@ import { Button } from "shards-react";
 //import Steps from "./steps";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "shards-ui/dist/css/shards.min.css";
-//import TimeButton from "./timeButton";
+import { DisplayButton } from "@helsenorge/toolkit/components/atoms/buttons/display-button";
 
 class TimeButtonGroup extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      outlineMinute: true,
-      outlineHour: true,
-      outlineDay: true,
-      outlineWeek: true,
-      outlineMonth: true,
-      outlineYear: true
-    };
   }
 
   renderMinute = render => {
     if (render) {
-      return (
-        <Button
-          outline={this.state.outlineMinute}
-          onClick={() => {
-            this.setState({
-              outlineMinute: false,
-              outlineHour: true,
-              outlineDay: true,
-              outlineWeek: true,
-              outlineMonth: true,
-              outlineYear: true
-            });
-            this.props.onClicked(this.props.buttonClicked, "minute");
-          }}
-        >
-          Minute
-        </Button>
-      );
+      if (this.props.outline.minute) {
+        return (
+          <DisplayButton
+            onClick={() => {
+              this.props.onClicked(this.props.buttonClicked, "minute");
+            }}
+            primary
+          >
+            Minute
+          </DisplayButton>
+        );
+      } else {
+        return (
+          <DisplayButton
+            onClick={() => {
+              this.props.onClicked(this.props.buttonClicked, "minute");
+            }}
+            secondary
+          >
+            Minute
+          </DisplayButton>
+        );
+      }
     }
   };
 
   renderHour = render => {
     if (render) {
-      return (
-        <Button
-          outline={this.state.outlineHour}
-          onClick={() => {
-            this.setState({
-              outlineMinute: true,
-              outlineHour: false,
-              outlineDay: true,
-              outlineWeek: true,
-              outlineMonth: true,
-              outlineYear: true
-            });
-            this.props.onClicked(this.props.buttonClicked, "hour");
-          }}
-        >
-          Hour
-        </Button>
-      );
+      if (this.props.outline.hour) {
+        return (
+          <DisplayButton
+            onClick={() => {
+              this.props.onClicked(this.props.buttonClicked, "hour");
+            }}
+            primary
+          >
+            Hour
+          </DisplayButton>
+        );
+      } else {
+        return (
+          <DisplayButton
+            onClick={() => {
+              this.props.onClicked(this.props.buttonClicked, "hour");
+            }}
+            secondary
+          >
+            Hour
+          </DisplayButton>
+        );
+      }
     }
   };
 
   renderDay = renderDay => {
     if (renderDay) {
-      return (
-        <Button
-          outline={this.state.outlineDay}
-          onClick={() => {
-            this.setState({
-              outlineMinute: true,
-              outlineHour: true,
-              outlineDay: false,
-              outlineWeek: true,
-              outlineMonth: true,
-              outlineYear: true
-            });
-            this.props.onClicked(this.props.buttonClicked, "day");
-          }}
-        >
-          Day
-        </Button>
-      );
+      if (this.props.outline.day) {
+        return (
+          <DisplayButton
+            onClick={() => {
+              this.props.onClicked(this.props.buttonClicked, "day");
+            }}
+            primary
+          >
+            Day
+          </DisplayButton>
+        );
+      } else {
+        return (
+          <DisplayButton
+            onClick={() => {
+              this.props.onClicked(this.props.buttonClicked, "day");
+            }}
+            secondary
+          >
+            Day
+          </DisplayButton>
+        );
+      }
     }
   };
 
   renderWeek = render => {
     if (render) {
-      return (
-        <Button
-          outline={this.state.outlineWeek}
-          onClick={() => {
-            this.setState({
-              outlineMinute: true,
-              outlineHour: true,
-              outlineDay: true,
-              outlineWeek: false,
-              outlineMonth: true,
-              outlineYear: true
-            });
-            this.props.onClicked(this.props.buttonClicked, "week");
-          }}
-        >
-          Week
-        </Button>
-      );
+      if (this.props.outline.week) {
+        return (
+          <DisplayButton
+            onClick={() => {
+              this.props.onClicked(this.props.buttonClicked, "week");
+            }}
+            primary
+          >
+            Week
+          </DisplayButton>
+        );
+      } else {
+        return (
+          <DisplayButton
+            onClick={() => {
+              this.props.onClicked(this.props.buttonClicked, "week");
+            }}
+            secondary
+          >
+            Week
+          </DisplayButton>
+        );
+      }
     }
   };
 
   renderMonth = render => {
     if (render) {
-      return (
-        <Button
-          outline={this.state.outlineMonth}
-          onClick={() => {
-            this.setState({
-              outlineMinute: true,
-              outlineHour: true,
-              outlineDay: true,
-              outlineWeek: true,
-              outlineMonth: false,
-              outlineYear: true
-            });
-            this.props.onClicked(this.props.buttonClicked, "month");
-          }}
-        >
-          Month
-        </Button>
-      );
+      if (this.props.outline.month) {
+        return (
+          <DisplayButton
+            onClick={() => {
+              this.props.onClicked(this.props.buttonClicked, "month");
+            }}
+            primary
+          >
+            Month
+          </DisplayButton>
+        );
+      } else {
+        return (
+          <DisplayButton
+            onClick={() => {
+              this.props.onClicked(this.props.buttonClicked, "month");
+            }}
+            secondary
+          >
+            Month
+          </DisplayButton>
+        );
+      }
     }
   };
 
   renderYear = render => {
     if (render) {
-      return (
-        <Button
-          outline={this.state.outlineYear}
-          onClick={() => {
-            this.setState({
-              outlineMinute: true,
-              outlineHour: true,
-              outlineDay: true,
-              outlineWeek: true,
-              outlineMonth: true,
-              outlineYear: false
-            });
-            this.props.onClicked(this.props.buttonClicked, "year");
-          }}
-        >
-          Year
-        </Button>
-      );
+      if (this.props.outline.year) {
+        return (
+          <DisplayButton
+            onClick={() => {
+              this.props.onClicked(this.props.buttonClicked, "year");
+            }}
+            primary
+          >
+            Year
+          </DisplayButton>
+        );
+      } else {
+        return (
+          <DisplayButton
+            onClick={() => {
+              this.props.onClicked(this.props.buttonClicked, "year");
+            }}
+            secondary
+          >
+            Year
+          </DisplayButton>
+        );
+      }
     }
   };
 
   render() {
-    //let { hour, day, week, month, year } = this.props;
-    //console.log(this.props);
     return (
       <div>
         <div>
-          {/* <TimeButton /> */}
-          {/* <Button
-            outline={this.state.outlineDay}
-            onClick={() => {
-              this.setState({
-                outlineHour: true,
-                outlineDay: false,
-                outlineWeek: true,
-                outlineMonth: true,
-                outlineYear: true
-              });
-              this.props.onClicked(this.props.buttonClicked, "day");
-            }}
-          >
-            Dag
-          </Button> */}
           {this.renderMinute(this.props.views.minute)}
-          {this.renderDay(this.props.views.day)}
           {this.renderHour(this.props.views.hour)}
+          {this.renderDay(this.props.views.day)}
           {this.renderWeek(this.props.views.week)}
           {this.renderMonth(this.props.views.month)}
           {this.renderYear(this.props.views.year)}
-          {/* <Button
-            outline={this.state.outlineWeek}
-            onClick={() => {
-              this.setState({
-                outlineHour: true,
-                outlineDay: true,
-                outlineWeek: false,
-                outlineMonth: true,
-                outlineYear: true
-              });
-              this.props.onClicked(this.props.buttonClicked, "week");
-            }}
-          >
-            Uke
-          </Button>
-          <Button
-            onClick={() => {
-              this.setState({
-                outlineHour: true,
-                outlineDay: true,
-                outlineWeek: true,
-                outlineMonth: false,
-                outlineYear: true
-              });
-              this.props.onClicked(this.props.buttonClicked, "month");
-            }}
-            outline={this.state.outlineMonth}
-          >
-            Måned
-          </Button> */}
         </div>
       </div>
     );
@@ -221,17 +195,3 @@ class TimeButtonGroup extends Component {
 }
 
 export default TimeButtonGroup;
-
-// renderElement(){
-//   if(this.state.value == 'news')
-//      return <Text>data</Text>;
-//   return null;
-// }
-
-// render() {
-//    return (
-//        <View style={styles.container}>
-//            { this.renderElement() }
-//        </View>
-//    )
-// }
