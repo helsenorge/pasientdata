@@ -7,6 +7,7 @@ import moment from "moment";
 import DateSelector from "../../components/DateSelector/dateSelector";
 import ChevronLeftRounded from "@helsenorge/toolkit/components/icons/ChevronLeftRounded";
 import ChevronRightRounded from "@helsenorge/toolkit/components/icons/ChevronRightRounded";
+import "./steps.css";
 
 class Steps extends Component {
   constructor(props) {
@@ -238,10 +239,13 @@ class Steps extends Component {
           views={viewButtons}
           outline={outlineViewButtons}
         />
-        <DateSelector
-          startChanged={this.onStartChanged}
-          endChanged={this.onEndChanged}
-        />
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <DateSelector
+            class="col-md-6 col-md-offset-3"
+            startChanged={this.onStartChanged}
+            endChanged={this.onEndChanged}
+          />
+        </div>
         <div>Interval: </div>
         <TimeButtonGroup
           onClicked={this.clicked}
@@ -249,19 +253,22 @@ class Steps extends Component {
           views={intervalButtons}
           outline={outlineIntervalButtons}
         />
-        <button onClick={this.leftClicked}>
-          <ChevronLeftRounded />
-        </button>{" "}
-        <div>
-          {this.intervalToString(this.state.interval)}{" "}
-          {moment()
-            .startOf(this.state.interval)
-            .subtract(this.state.nrOfIntervalsBack, this.state.interval)
-            .format(this.formatInterval(this.state.interval))}
+        <br />
+        <div className="flex-container">
+          <button className="flex-children" onClick={this.leftClicked}>
+            <ChevronLeftRounded />
+          </button>{" "}
+          <div className="flex-children">
+            {this.intervalToString(this.state.interval)}{" "}
+            {moment()
+              .startOf(this.state.interval)
+              .subtract(this.state.nrOfIntervalsBack, this.state.interval)
+              .format(this.formatInterval(this.state.interval))}
+          </div>
+          <button className="flex-children" onClick={this.rightClicked}>
+            <ChevronRightRounded />{" "}
+          </button>
         </div>
-        <button onClick={this.rightClicked}>
-          <ChevronRightRounded />{" "}
-        </button>
         <BarPlotterV2
           start={start}
           end={end}
