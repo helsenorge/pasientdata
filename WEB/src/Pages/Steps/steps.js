@@ -35,18 +35,6 @@ class Steps extends Component {
         switch (interval) {
           case "minute":
             return "HH:mm:ss";
-          // case "hour":
-          //   return "YYYY-MM-DDTHH:mm:ss";
-          // case "day":
-          //   return "YYYY-MM-DDTHH:mm:ss";
-          // case "week":
-          //   return "YYYY-MM-DDTHH:mm:ss";
-          // case "month":
-          //   return "YYYY-MM-DDTHH:mm:ss";
-          // case "year":
-          //   return "YYYY-MM-DDTHH:mm:ss";
-          default:
-            return "YYYY-MM-DDTHH:mm:ss";
         }
       case "hour":
         switch (interval) {
@@ -54,84 +42,56 @@ class Steps extends Component {
             return "HH:mm";
           case "hour":
             return "HH:mm";
-          // case "day":
-          //   return "YYYY-MM-DDTHH:mm:ss";
-          // case "week":
-          //   return "YYYY-MM-DDTHH:mm:ss";
-          // case "month":
-          //   return "YYYY-MM-DDTHH:mm:ss";
-          // case "year":
-          //   return "YYYY-MM-DDTHH:mm:ss";
           default:
-            return "YYYY-MM-DDTHH:mm:ss";
+            break;
         }
       case "day":
         switch (interval) {
           case "minute":
             return "HH:mm";
           case "hour":
-            return "HH";
+            return "HH:mm";
           case "day":
             return "ddd";
-          // case "week":
-          //   return "YYYY-MM-DDTHH:mm:ss";
-          // case "month":
-          //   return "YYYY-MM-DDTHH:mm:ss";
-          // case "year":
-          //   return "YYYY-MM-DDTHH:mm:ss";
-          default:
-            return "YYYY-MM-DDTHH:mm:ss";
         }
       case "week":
         switch (interval) {
           case "minute":
             return "HH:mm:ss";
           case "hour":
-            return "YYYY-MM-DDTHH:mm:ss";
+            return "ddd HH:mm";
           case "day":
-            return "YYYY-MM-DDTHH:mm:ss";
+            return "ddd";
           case "week":
-            return "YYYY-MM-DDTHH:mm:ss";
-          case "month":
-            return "YYYY-MM-DDTHH:mm:ss";
-          case "year":
-            return "YYYY-MM-DDTHH:mm:ss";
-          default:
-            return "YYYY-MM-DDTHH:mm:ss";
+            return "ww";
         }
       case "month":
         switch (interval) {
           case "minute":
             return "HH:mm:ss";
           case "hour":
-            return "YYYY-MM-DDTHH:mm:ss";
+            return "DD.MM HH:mm";
           case "day":
-            return "YYYY-MM-DDTHH:mm:ss";
+            return "DD.MM";
           case "week":
-            return "YYYY-MM-DDTHH:mm:ss";
+            return "ww";
           case "month":
-            return "YYYY-MM-DDTHH:mm:ss";
-          case "year":
-            return "YYYY-MM-DDTHH:mm:ss";
-          default:
-            return "YYYY-MM-DDTHH:mm:ss";
+            return "MM";
         }
       case "year":
         switch (interval) {
           case "minute":
-            return "HH:mm:ss";
+            return "MM.DD HH:mm";
           case "hour":
-            return "YYYY-MM-DDTHH:mm:ss";
+            return "MM.DD HH:mm";
           case "day":
-            return "YYYY-MM-DDTHH:mm:ss";
+            return "DD.MM";
           case "week":
-            return "YYYY-MM-DDTHH:mm:ss";
+            return "ww";
           case "month":
-            return "YYYY-MM-DDTHH:mm:ss";
+            return "MM.YYYY";
           case "year":
-            return "YYYY-MM-DDTHH:mm:ss";
-          default:
-            return "YYYY-MM-DDTHH:mm:ss";
+            return "YYYY";
         }
       default:
         return "YYYY-MM-DDTHH:mm:ss";
