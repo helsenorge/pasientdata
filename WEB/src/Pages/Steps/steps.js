@@ -12,7 +12,10 @@ class Steps extends Component {
     this.state = {
       view: "week",
       interval: "day",
-      format: "ddd"
+      format: "ddd",
+      start: null,
+      end: null,
+      setPeriodFromExactDates: false
     };
   }
 
@@ -151,6 +154,22 @@ class Steps extends Component {
     };
   };
 
+  onStartChanged = newStart => {
+    if (this.state.end !== null) {
+      this.setState({ start: newStart, setPeriodFromExactDates: true });
+    } else {
+      this.setState({ start: newStart });
+    }
+  };
+
+  onEndChanged = newEnd => {
+    if (this.state.start !== null) {
+      this.setState({ end: newEnd, setPeriodFromExactDates: true });
+    } else {
+      this.setState({ end: newEnd });
+    }
+  };
+
   render() {
     let viewButtons = {
       minute: true,
@@ -188,6 +207,17 @@ class Steps extends Component {
       year: this.state.interval === "year"
     };
 
+    let start;
+    let end;
+    if (this.state.setPeriodFromExactDates) {
+      start = this.state.start;
+      end = this.state.end;
+    } else {
+      let startEndTimes = this.getStartEndTimes(this.state.view, 0);
+      start = startEndTimes.start;
+      end = startEndTimes.end;
+    }
+
     return (
       <div>
         <NavigationBar />
@@ -198,7 +228,10 @@ class Steps extends Component {
           views={viewButtons}
           outline={outlineViewButtons}
         />
-        <DateSelector />
+        <DateSelector
+          startChanged={this.onStartChanged}
+          endChanged={this.onEndChanged}
+        />
         <div>Interval: </div>
         <TimeButtonGroup
           onClicked={this.clicked}
@@ -207,8 +240,8 @@ class Steps extends Component {
           outline={outlineIntervalButtons}
         />
         <BarPlotterV2
-          start={this.getStartEndTimes(this.state.view, 0).start}
-          end={this.getStartEndTimes(this.state.view, 0).end}
+          start={start}
+          end={end}
           interval={this.state.interval}
           outputFormat={this.state.format}
           data={this.props.patient.datasets[0].measurements}

@@ -26,6 +26,12 @@ class DateSelector extends React.Component {
         endDateId="your_unique_end_date_id" // PropTypes.string.isRequired,
         onDatesChange={({ startDate, endDate }) => {
           this.setState({ startDate, endDate });
+          if (startDate !== null) {
+            this.props.startChanged(startDate);
+          }
+          if (endDate !== null) {
+            this.props.endChanged(endDate);
+          }
         }} // PropTypes.func.isRequired,
         focusedInput={this.state.focusedInput} // PropTypes.oneOf([START_DATE, END_DATE]) or null,
         onFocusChange={focusedInput => this.setState({ focusedInput })} // PropTypes.func.isRequired,
