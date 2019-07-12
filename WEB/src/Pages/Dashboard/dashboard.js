@@ -1,20 +1,12 @@
 import React, { Component, Fragment } from "react";
 import NavigationBar from "../../components/NavigationBar/navigationBar";
-import SideBar from "../../components/Sidebar/sidebar";
-import "../../components/Sidebar/sidebar.css";
 import BarPlotterV2 from "../../components/Barplotter/barPlotterV2";
 import { connect } from "react-redux";
-import { onLoggedIn, addInfo } from "../../Redux/actions";
 import FHIRConnection from "../../FHIRCommunication";
 
 class Dashboard extends Component {
   constructor(props) {
     super(props);
-    this.loggedOut = this.loggedOut.bind(this);
-  }
-  loggedOut() {
-    sessionStorage.removeItem("googleResponse");
-    this.props.onLoggedIn(false);
   }
 
   render() {
@@ -41,9 +33,6 @@ class Dashboard extends Component {
             outputFormat="HH:mm"
             data={this.props.patient.datasets[0].measurements}
           />
-          <button onClick={() => this.loggedOut()} variant="danger">
-            Logg ut
-          </button>
         </div>
       );
     } else {
@@ -56,8 +45,6 @@ class Dashboard extends Component {
   }
 }
 
-const mapDispatchToProps = { onLoggedIn, addInfo };
-
 function mapStateToProps(state) {
   return {
     patient: state.patient,
@@ -65,7 +52,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Dashboard);
+export default connect(mapStateToProps)(Dashboard);
