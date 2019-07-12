@@ -14,9 +14,9 @@ import {
 import "bootstrap/dist/css/bootstrap.min.css";
 import "shards-ui/dist/css/shards.min.css";
 import ActionButton from "@helsenorge/toolkit/components/atoms/buttons/action-button";
-import "./insulin.css";
+import "./cards.css";
 
-class InsulinKort extends Component {
+class Trials extends Component {
   state = {};
   render() {
     return (
@@ -32,7 +32,7 @@ class InsulinKort extends Component {
         </ResponsiveContainer> */}
         <Card style={{ maxWidth: "600px", maxHeight: "1000px" }}>
           <CardBody>
-            <CardTitle>Insulin</CardTitle>
+            <CardTitle>Blodsukker</CardTitle>
             <div className="flex-container">
               <div className="flex-children">
                 <div className="third-title">Tid innom gränsvärden:</div>
@@ -87,4 +87,4 @@ class InsulinKort extends Component {
   }
 }
 
-export default InsulinKort;
+export default Trials;

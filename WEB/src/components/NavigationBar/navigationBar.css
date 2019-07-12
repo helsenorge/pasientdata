@@ -1,31 +1,56 @@
 .max-width-wrapper {
-    max-width: 600px;
-    margin: 0 auto !important;
-  }
-  
-  .menu-button-row {
-    justify-content: center;
-    height: 60px;
-    top: 20px;
-  }
-  
-  .menu-button {
-    cursor: pointer;
-    color: #FFFFFF;
-    opacity: 0.7;
-    font-size: 15px;
-    font-weight: bold;
-    text-align: center;
-    padding-top: 18px;
-    letter-spacing: 1px;
-  }
-  .menu-button:hover,
-  .menu-button.active-menu-button {
-    color: #FFFFFF !important;
-    opacity: 1;
-    text-decoration: underline white;
-  }
-  
-  .activeTab{
-    color: red !important;
-  }
+  max-width: 600px;
+  margin: 0 auto !important;
+}
+
+.menu-button-row {
+  justify-content: center;
+  height: 60px;
+  top: 20px;
+}
+
+.li-wrapper {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.556;
+  padding: 5px;
+}
+
+.tab_list {
+  display: flex;
+  flex-direction: row;
+  list-style-type: none;
+  padding: 0 0 0.125rem;
+}
+
+.tab {
+  display: flex;
+  width: auto;
+  background: transparent;
+}
+
+.tab_selected {
+  position: relative;
+  color: black !important;
+  font-weight: 500;
+}
+
+.a:link, a:visited,
+.tab-anchor {
+  border-bottom: 0;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 400;
+  color: #006d84;
+  flex: none;
+  border: 2px solid transparent;
+}
+
+a:hover{
+  text-decoration: none !important;
+}
+
+/* @media screen and (min-width: 59rem) .mol_tabs .tabs__list {
+    white-space: normal;
+    overflow: visible;
+  } */

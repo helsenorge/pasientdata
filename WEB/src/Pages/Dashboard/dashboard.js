@@ -24,9 +24,9 @@ class Dashboard extends Component {
           <div>
             <NavigationBar />
           </div>
-          <div>
+          {/* <div>
             <SideBar pageWrapId={"page-wrap"} outerContainerId={"App"} />
-          </div>
+          </div> */}
           {/* <BarPlotter
             datasets={this.props.patient.datasets}
             aggregateLength="day"
