@@ -246,14 +246,6 @@ class Steps extends Component {
             endChanged={this.onEndChanged}
           />
         </div>
-        <div>Interval: </div>
-        <TimeButtonGroup
-          onClicked={this.clicked}
-          buttonClicked={"interval"}
-          views={intervalButtons}
-          outline={outlineIntervalButtons}
-        />
-        <br />
         <div className="flex-container">
           <button className="flex-children" onClick={this.leftClicked}>
             <ChevronLeftRounded />
@@ -269,12 +261,20 @@ class Steps extends Component {
             <ChevronRightRounded />{" "}
           </button>
         </div>
+
         <BarPlotterV2
           start={start}
           end={end}
           interval={this.state.interval}
           outputFormat={this.state.format}
           data={this.props.patient.datasets[0].measurements}
+        />
+        <div>Interval: </div>
+        <TimeButtonGroup
+          onClicked={this.clicked}
+          buttonClicked={"interval"}
+          views={intervalButtons}
+          outline={outlineIntervalButtons}
         />
       </div>
     );
