@@ -1,4 +1,4 @@
-import React, { Component, useState } from "react";
+import React, { Component, useState, Fragment } from "react";
 import "./menuBar.css";
 import Menu from "@helsenorge/toolkit/components/icons/Menu";
 import Tiles from "@helsenorge/toolkit/components/icons/Tiles";
@@ -27,7 +27,10 @@ class MenuBar extends Component {
 
   render() {
     const pic = require("../../Images/ehelse_hvit.svg");
+    const mobilePic = require("../../Images/ehelse_logo_hvit.svg");
     let menu;
+    let menuBar;
+
     if (this.state.isToggleOn) {
       menu = (
         <div className="menuBar menuBar-open pageLink">
@@ -38,14 +41,16 @@ class MenuBar extends Component {
               </div>
             </li>
             <li className="liBar">
-              <NavLink to="/dashboard" className="menu-link">
+              <NavLink to="/dashboard" className="menu-link" onClick={this.toggle}>
                 Innsikt
               </NavLink>
+              {}
             </li>
             <li className="liBar">
-              <NavLink to="/steps" className="menu-link">
+              <NavLink to="/steps" className="menu-link" onClick={this.toggle}>
                 Sammenlign data
               </NavLink>
+              {}
             </li>
             <li className="liBar">
               <button className="logoutButton" onClick={() => this.loggedOut()}>
@@ -59,18 +64,41 @@ class MenuBar extends Component {
       menu = <div className="menuBar"> </div>;
     }
 
-    return (
-      <div className="header">
+    if (window.innerWidth >= 650) {
+      menuBar = (
         <div className="bar row navbar">
           <div className="menuPos">
-            <img src={pic} className="menuLogo" />
+            <a href="https://ehelse.no/" className="aStyle">
+              <img src={pic} className="menuLogo" />
+            </a>
           </div>
           <div className="menuPos">
             <button className="button" onClick={this.toggle}>
-              <Menu /> Menu
+              <Menu /> Meny
             </button>
           </div>
         </div>
+      );
+    } else {
+      menuBar = (
+        <div className="bar row navbar">
+          <div className="menuPos">
+            <a href="https://ehelse.no/" className="aStyle">
+              <img src={pic} className="menuLogo" />
+            </a>
+          </div>
+          <div className="menuPos">
+            <button className="button" onClick={this.toggle}>
+              <Menu /> Meny
+            </button>
+          </div>
+        </div>
+      );
+    }
+
+    return (
+      <div>
+        {menuBar}
         <div>{menu}</div>
       </div>
     );
@@ -81,7 +109,7 @@ const mapDispatchToProps = { onLoggedIn };
 
 function mapStateToProps(state) {
   return {
-    patient: state.patient,
+    patient: state.patient
   };
 }
 

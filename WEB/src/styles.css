@@ -6,8 +6,15 @@ body {
   /* min-height: 100vh; */
   flex-direction: column;
   color: #000;
+  top: 23%;
 }
 
 html {
   height: 100%;
+}
+
+@media only screen and (max-width: 650px) {
+  body{
+    top: 15%;
+  }
 }
