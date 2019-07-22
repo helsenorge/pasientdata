@@ -1,0 +1,9 @@
+.flex-container {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.flex-children {
+  flex: 1;
+  /* text-align: center; */
+}

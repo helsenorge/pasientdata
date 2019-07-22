@@ -1,11 +1,11 @@
 .flex-container {
   display: flex;
-  margin-bottom: 5px;
 }
 
 .flex-children {
   flex: 1;
   text-align: center;
+  max-width: 50%;
 }
 
 .divider {
@@ -16,4 +16,13 @@
 
 .third-title {
   margin-bottom: 5px;
+}
+
+.flex-card {
+  flex: 1;
+  margin: 0.2rem;
+}
+
+.card {
+  border-radius: 0.25rem;
 }
