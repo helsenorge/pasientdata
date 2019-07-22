@@ -26,7 +26,7 @@ class Dashboard extends Component {
           </div>
 
           <br /> */}
-          <h1>Innsikt</h1>
+          <h1 style={{ "margin-left": "8px" }}>Innsikt</h1>
           <CardComponent title={"Blodsukker"} content={blodsukkerContent()} />
           <div className="flex-container">
             <CardComponent
