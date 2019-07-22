@@ -72,6 +72,15 @@ class NavigationBar extends Component {
                 Karbohydrater
               </NavLink>
             </li>
+            <li className="tab li-wrapper">
+              <NavLink
+                to="/fysiskAktivitet"
+                className="tab-anchor"
+                activeClassName="tab_selected"
+              >
+                Fysisk Aktivitet
+              </NavLink>
+            </li>
           </ul>
         </div>
       </div>
