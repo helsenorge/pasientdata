@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import NavigationBar from "../../../components/NavigationBar/navigationBar.js";
+import OversiktKort from "../../../components/InnsiktsKort/oversiktKort";
+import GrafKort from "../../../components/InnsiktsKort/grafKort";
+import MonsterKort from "../../../components/InnsiktsKort/monsterKort";
 
 class Karbohydrater extends Component {
   state = {};
@@ -7,7 +10,9 @@ class Karbohydrater extends Component {
     return (
       <div>
         <NavigationBar />
-        <div>Karbohydrater</div>
+        <OversiktKort datatype="Karbohydrater" />
+        <GrafKort datatype="Karbohydrater" />
+        <MonsterKort datatype="Karbohydrater" />
       </div>
     );
   }
