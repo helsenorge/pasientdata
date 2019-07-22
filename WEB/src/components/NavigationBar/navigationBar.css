@@ -50,7 +50,6 @@ a:hover{
   text-decoration: none !important;
 }
 
-/* @media screen and (min-width: 59rem) .mol_tabs .tabs__list {
-    white-space: normal;
-    overflow: visible;
-  } */
+@media only screen and (max-width: 600px) {
+  
+}
