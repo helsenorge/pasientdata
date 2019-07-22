@@ -4,18 +4,18 @@ import OversiktKort from "../../../components/InnsiktsKort/oversiktKort";
 import GrafKort from "../../../components/InnsiktsKort/grafKort";
 import MonsterKort from "../../../components/InnsiktsKort/monsterKort";
 
-class Blodsukker extends Component {
+class Karbohydrater extends Component {
   state = {};
   render() {
     return (
       <div>
         <NavigationBar />
-        <OversiktKort datatype="Blodsukker" />
-        <GrafKort datatype="Blodsukker" />
-        <MonsterKort datatype="Blodsukker" />
+        <OversiktKort datatype="Karbohydrater" />
+        <GrafKort datatype="Karbohydrater" />
+        <MonsterKort datatype="Karbohydrater" />
       </div>
     );
   }
 }
 
-export default Blodsukker;
+export default Karbohydrater;

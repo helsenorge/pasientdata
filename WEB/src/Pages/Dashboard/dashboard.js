@@ -59,29 +59,6 @@ class Dashboard extends Component {
               content={fysiskAktivitetContent()}
             />
           </div>
-          <div className="flex-container">
-            <CardComponent
-              className="flex-children"
-              title={"Fysisk aktivitet"}
-              content={fysiskAktivitetContent()}
-            />
-          </div><div className="flex-container">
-            <CardComponent
-              className="flex-children"
-              title={"Fysisk aktivitet"}
-              content={fysiskAktivitetContent()}
-            />
-          </div><div className="flex-container">
-            <CardComponent
-              className="flex-children"
-              title={"Fysisk aktivitet"}
-              content={fysiskAktivitetContent()}
-            />
-          </div>
-
-          <button onClick={() => this.loggedOut()} variant="danger">
-            Logg ut
-          </button>
         </div>
       );
     } else {

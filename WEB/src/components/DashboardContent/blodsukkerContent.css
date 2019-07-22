@@ -1,0 +1,34 @@
+.chevronStyle {
+  position: relative;
+  float: right;
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+
+  /* justify-content: end; */
+}
+
+.divStyle {
+  flex: 1;
+}
+
+.flex-children-button {
+  flex: 1;
+}
+
+.flex-container-button {
+  flex-direction: row;
+  display: flex;
+  align-items: flex-end;
+}
+
+.flex-container-button-icon {
+  flex: 1;
+  /* font-size: 0.02em; */
+  height: 1rem;
+}
+
+.button-style {
+  display: flex;
+  justify-content: flex-end;
+}
