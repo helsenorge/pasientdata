@@ -24,6 +24,7 @@
   flex-direction: row;
   display: flex;
   align-items: flex-end;
+  line-height: 19px;
 }
 
 .flex-container-button-icon {
