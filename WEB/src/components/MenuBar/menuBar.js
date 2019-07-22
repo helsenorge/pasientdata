@@ -43,7 +43,7 @@ class MenuBar extends Component {
               </NavLink>
             </li>
             <li className="liBar">
-              <NavLink to="/steps" className="menu-link">
+              <NavLink to="/skritt" className="menu-link">
                 Sammenlign data
               </NavLink>
             </li>
@@ -81,7 +81,7 @@ const mapDispatchToProps = { onLoggedIn };
 
 function mapStateToProps(state) {
   return {
-    patient: state.patient,
+    patient: state.patient
   };
 }
 

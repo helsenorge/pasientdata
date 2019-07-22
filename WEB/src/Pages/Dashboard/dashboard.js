@@ -24,16 +24,6 @@ class Dashboard extends Component {
           {/* <div>
             <NavigationBar />
           </div>
-<<<<<<< HEAD
-          <br />
-          <BarPlotterV2
-            start={"2019-06-29T16:00:00"}
-            end={"2019-06-30T19:30:00"}
-            interval="hour"
-            outputFormat="HH:mm"
-            data={this.props.patient.datasets[0].measurements}
-          />
-=======
 
           <br /> */}
           <h1>Innsikt</h1>
@@ -72,7 +62,6 @@ class Dashboard extends Component {
           <button onClick={() => this.loggedOut()} variant="danger">
             Logg ut
           </button>
->>>>>>> Jen
         </div>
       );
     } else {
