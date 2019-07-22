@@ -20,7 +20,6 @@ import { connect } from "react-redux";
 class App extends Component {
   render() {
     return (
-      // <Provider store={store}>
       <BrowserRouter>
         {this.props.baseInfo.isLoggedin && <MenuBar />}
         <Switch>
@@ -40,7 +39,6 @@ class App extends Component {
           />
         </Switch>
       </BrowserRouter>
-      // </Provider>
     );
   }
 }

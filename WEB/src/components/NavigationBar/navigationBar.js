@@ -15,8 +15,7 @@ class NavigationBar extends Component {
                 className="tab-anchor"
                 activeClassName="tab_selected"
               >
-                {" "}
-                Home{" "}
+                Home
               </NavLink>
             </li>
             <li className="tab li-wrapper">
@@ -25,8 +24,7 @@ class NavigationBar extends Component {
                 className="tab-anchor"
                 activeClassName="tab_selected"
               >
-                {" "}
-                Blodsukker{" "}
+                Blodsukker
               </NavLink>
             </li>
             <li className="tab li-wrapper">
@@ -35,8 +33,7 @@ class NavigationBar extends Component {
                 className="tab-anchor"
                 activeClassName="tab_selected"
               >
-                {" "}
-                Insulin{" "}
+                Insulin
               </NavLink>
             </li>
             <li className="tab li-wrapper">
@@ -45,8 +42,7 @@ class NavigationBar extends Component {
                 className="tab-anchor"
                 activeClassName="tab_selected"
               >
-                {" "}
-                Skritt{" "}
+                Skritt
               </NavLink>
             </li>
             <li className="tab li-wrapper">
@@ -55,8 +51,7 @@ class NavigationBar extends Component {
                 className="tab-anchor"
                 activeClassName="tab_selected"
               >
-                {" "}
-                Vekt{" "}
+                Vekt
               </NavLink>
             </li>
             <li className="tab li-wrapper">
@@ -65,8 +60,7 @@ class NavigationBar extends Component {
                 className="tab-anchor"
                 activeClassName="tab_selected"
               >
-                {" "}
-                Blodtrykk{" "}
+                Blodtrykk
               </NavLink>
             </li>
             <li className="tab li-wrapper">
@@ -75,8 +69,7 @@ class NavigationBar extends Component {
                 className="tab-anchor"
                 activeClassName="tab_selected"
               >
-                {" "}
-                Karbohydrater{" "}
+                Karbohydrater
               </NavLink>
             </li>
           </ul>
