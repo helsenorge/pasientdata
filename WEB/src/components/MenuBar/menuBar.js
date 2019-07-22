@@ -41,7 +41,11 @@ class MenuBar extends Component {
               </div>
             </li>
             <li className="liBar">
-              <NavLink to="/dashboard" className="menu-link" onClick={this.toggle}>
+              <NavLink
+                to="/dashboard"
+                className="menu-link"
+                onClick={this.toggle}
+              >
                 Innsikt
               </NavLink>
               {}
@@ -64,41 +68,16 @@ class MenuBar extends Component {
       menu = <div className="menuBar"> </div>;
     }
 
-    if (window.innerWidth >= 650) {
-      menuBar = (
-        <div className="bar row navbar">
-          <div className="menuPos">
-            <a href="https://ehelse.no/" className="aStyle">
-              <img src={pic} className="menuLogo" />
-            </a>
-          </div>
-          <div className="menuPos">
-            <button className="button" onClick={this.toggle}>
-              <Menu /> Meny
-            </button>
-          </div>
-        </div>
-      );
-    } else {
-      menuBar = (
-        <div className="bar row navbar">
-          <div className="menuPos">
-            <a href="https://ehelse.no/" className="aStyle">
-              <img src={pic} className="menuLogo" />
-            </a>
-          </div>
-          <div className="menuPos">
-            <button className="button" onClick={this.toggle}>
-              <Menu /> Meny
-            </button>
-          </div>
-        </div>
-      );
-    }
-
     return (
       <div>
-        {menuBar}
+        <div className="bar row navbar">
+          <div className="menuPos textStyle">Helseinnsikt</div>
+          <div className="menuPos">
+            <button className="button" onClick={this.toggle}>
+              <Menu /> Meny
+            </button>
+          </div>
+        </div>
         <div>{menu}</div>
       </div>
     );
