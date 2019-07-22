@@ -6,6 +6,10 @@ body {
   flex-direction: column;
   color: #000;
   top: 23%;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 21px;
 }
 
 html {
@@ -13,7 +17,7 @@ html {
 }
 
 @media only screen and (max-width: 650px) {
-  body{
-    top: 15%;
+  body {
+    top: 55px;
   }
 }
