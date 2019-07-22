@@ -126,6 +126,7 @@ a.menu-link {
     white-space: nowrap;
     margin: 0px;
     text-align: right;
+    flex: 1;
   }
   .menuBar {
     top: 48px;
@@ -143,7 +144,6 @@ a.menu-link {
     box-shadow: 0 0 5px 1px #595959;
   }
   .button {
-    display: block;
     border-radius: 4px;
     border: none;
     color: #ffffff;
@@ -151,11 +151,12 @@ a.menu-link {
     text-align: center;
     font-size: 18px;
     padding: 0px;
-    width: 100%;
+    width: 90px;
     transition: all 0.5s;
     cursor: pointer;
     margin: 0px;
     display: inline-block;
+    flex: 1;
   }
   .aStyle {
     text-decoration: none;
@@ -170,7 +171,7 @@ a.menu-link {
     left: 0;
     height: 48px;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
   }
 
   .textStyle {
@@ -179,5 +180,6 @@ a.menu-link {
     font-weight: bold;
     line-height: 21px;
     color: white;
+    text-align: start;
   }
 }
