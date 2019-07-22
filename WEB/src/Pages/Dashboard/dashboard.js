@@ -59,9 +59,6 @@ class Dashboard extends Component {
               content={fysiskAktivitetContent()}
             />
           </div>
-          <button onClick={() => this.loggedOut()} variant="danger">
-            Logg ut
-          </button>
         </div>
       );
     } else {
