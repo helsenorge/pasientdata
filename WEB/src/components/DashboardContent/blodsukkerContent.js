@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import ActionButton from "@helsenorge/toolkit/components/atoms/buttons/action-button";
+import ChevronRightRounded from "@helsenorge/toolkit/components/icons/ChevronRightRounded";
 import { DisplayButton } from "@helsenorge/toolkit/components/atoms/buttons/display-button";
+import "./blodsukkerContent.css";
 
 const blodsukkerContent = () => {
   return (
@@ -43,14 +44,21 @@ const blodsukkerContent = () => {
           </div>
         </div>
       </div>
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center"
-        }}
-      >
-        <DisplayButton secondary>Utforsk</DisplayButton>
+      <div>
+        <div className="button-style">
+          <DisplayButton
+            style="flex: 1"
+            onClick={() => {
+              /* tom */
+            }}
+            secondary
+          >
+            <div className="flex-container-button">
+              <div className="flex-children-button">Utforsk</div>
+              <ChevronRightRounded className="flex-children-button-icon" />
+            </div>
+          </DisplayButton>
+        </div>
       </div>
     </div>
   );
