@@ -1,8 +1,8 @@
 .menuBar {
-  top: 150px;
+  top: 48px;
   right: 0;
   left: 0;
-  height: 25%;
+  height: 180px;
   z-index: 1;
   position: fixed;
   transform: translateY(-100%);
@@ -17,19 +17,19 @@
 }
 
 .button {
-  display: block;
   border-radius: 4px;
   border: none;
   color: #ffffff;
   background: transparent;
   text-align: center;
   font-size: 28px;
-  padding: 10px;
+  padding: 0px;
   width: 150px;
   transition: all 0.5s;
   cursor: pointer;
-  margin: 5px;
+  margin: 0px;
   display: inline-block;
+  flex: 1;
 }
 
 .bar {
@@ -39,7 +39,9 @@
   top: 0;
   right: 0;
   left: 0;
-  height: 20%;
+  height: 48px;
+  display: flex;
+  align-items: flex-start;
 }
 
 .menuPos {
@@ -47,11 +49,8 @@
   white-space: nowrap;
   margin: 0px;
   text-align: right;
-}
-
-.menuLogo {
-  max-height: 55%;
-  max-width: 85%;
+  flex: 1;
+  line-height: 21px;
 }
 
 .pageLink {
@@ -112,12 +111,13 @@ a.menu-link {
   border-bottom: none !important;
 }
 
-.textStyle{
+.textStyle {
   font-size: 32px;
   font-style: normal;
   font-weight: bold;
   line-height: 21px;
   color: white;
+  text-align: start;
 }
 
 @media only screen and (max-width: 600px) {
@@ -173,7 +173,7 @@ a.menu-link {
     align-items: center;
   }
 
-  .textStyle{
+  .textStyle {
     font-size: 18px;
     font-style: normal;
     font-weight: bold;
