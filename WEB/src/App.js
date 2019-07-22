@@ -12,6 +12,8 @@ import Insulin from "./Pages/Innsikt/Insulin/insulin";
 import Vekt from "./Pages/Innsikt/Vekt/vekt";
 import Blodtrykk from "./Pages/Innsikt/Blodtrykk/blodtrykk";
 import Karbohydrater from "./Pages/Innsikt/Karbohydrater/karbohydrater";
+import FysiskAktivitet from "./Pages/Innsikt/FysiskAktivitet/fysiskAktivitet";
+
 import FHIRCommunication from "./FHIRCommunication";
 import NotFoundPage from "./Pages/NotFoundPage/NotFoundPage";
 import MenuBar from "./components/MenuBar/menuBar";
@@ -32,6 +34,7 @@ class App extends Component {
           <Route path="/vekt" component={Vekt} />
           <Route path="/blodtrykk" component={Blodtrykk} />
           <Route path="/karbohydrater" component={Karbohydrater} />
+          <Route path="/fysiskAktivitet" component={FysiskAktivitet} />
           <Route
             render={() => {
               return <NotFoundPage />;
