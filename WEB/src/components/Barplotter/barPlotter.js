@@ -165,10 +165,10 @@ class BarPlotter extends Component {
 
     if (this.props.page === "Dashboard") {
       return (
-        <ResponsiveContainer width="100%" height={200}>
+        <ResponsiveContainer width="100%" height={120}>
           <BarChart
             width={400}
-            height={250}
+            height={150}
             data={aggregated}
             margin={{ top: 10, right: 5, bottom: 0, left: 0 }}
           >

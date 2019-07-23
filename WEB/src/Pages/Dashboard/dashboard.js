@@ -24,7 +24,9 @@ class Dashboard extends Component {
             <CardComponent
               className="flex-children"
               title={"Insulin"}
-              content={insulinContent()}
+              content={skrittContent(
+                this.props.patient.datasets[0].measurements
+              )}
             />
             <CardComponent
               className="flex-children"
@@ -45,19 +47,25 @@ class Dashboard extends Component {
             <CardComponent
               className="flex-children"
               title={"Karbo"}
-              content={karbohydraterContent()}
+              content={skrittContent(
+                this.props.patient.datasets[3].measurements
+              )}
             />
             <CardComponent
               className="flex-children"
               title={"Vekt"}
-              content={vektContent()}
+              content={skrittContent(
+                this.props.patient.datasets[1].measurements
+              )}
             />
           </div>
           <div className="flex-container">
             <CardComponent
               className="flex-children"
               title={"Fysisk aktivitet"}
-              content={fysiskAktivitetContent()}
+              content={skrittContent(
+                this.props.patient.datasets[3].measurements
+              )}
             />
             <div className="flex-children" style={{ "margin-right": "8px" }} />
           </div>
