@@ -170,7 +170,7 @@ class BarPlotter extends Component {
             width={400}
             height={250}
             data={aggregated}
-            margin={{ top: 10, right: 5, bottom: 0, left: -10 }}
+            margin={{ top: 10, right: 5, bottom: 0, left: 0 }}
           >
             <XAxis dataKey="x" domain={["auto", "auto"]} name="Time" unit="" />
             <Bar dataKey="y" name="Steps/hour" fill="#EF87CE" />
