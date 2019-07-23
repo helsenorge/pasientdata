@@ -1,0 +1,29 @@
+.flex-container-oversikt {
+  display: flex;
+}
+
+.flex-side-container-oversikt {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-children-oversikt {
+  flex: 1;
+}
+
+.trend-pic {
+  max-height: 40px;
+  margin-right: 5px;
+}
+
+.ytre-div-oversikt {
+  width: 100%;
+}
+
+.upper-oversikt-div {
+  border-bottom: 1px solid black;
+}
+
+.lower-oversikt-div {
+  margin-top: 18px;
+}
