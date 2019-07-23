@@ -5,6 +5,8 @@ import Trends from "../../Utils/trends";
 import { PieChart, Pie, Cell, Label, ResponsiveContainer } from "recharts";
 import "./trendGoalsCard.css";
 import { connect } from "react-redux";
+import aggregateData from "../../Utils/aggregateData";
+import moment from "moment";
 
 class Oversiktkort extends Component {
   oversiktContent = () => {
@@ -22,6 +24,7 @@ class Oversiktkort extends Component {
       (timeWithin * 100) / (timeAbove + timeWithin + timeBelow);
     let unit = "%";
     let trends;
+    let hasUpperLimit = true;
     switch (this.props.datatype) {
       case "Blodsukker":
         data = FakeGlucoseData();
@@ -57,17 +60,27 @@ class Oversiktkort extends Component {
       case "Skritt":
         data = this.props.patient.datasets[0].measurements;
         upperLimit = 1000000;
-        lowerLimit = 2000;
+        lowerLimit = 10000;
         trendValue = 200;
-        goalValue = 2000;
-
-        trends = Trends(data, upperLimit, lowerLimit);
+        goalValue = 15000;
+        let aggregated = aggregateData(
+          data,
+          "day",
+          moment()
+            .subtract(1, "week")
+            .format("YYYY-MM-DDTHH:mm:ss"),
+          moment().format("YYYY-MM-DDTHH:mm:ss"),
+          "ddd"
+        );
+        trends = Trends(aggregated, upperLimit, lowerLimit);
+        console.log(trends);
         mean = trends.mean;
         timeAbove = trends.timeAbove;
         timeWithin = trends.timeWithin;
         timeBelow = trends.timeBelow;
         currentValue = mean;
-        unit = "%";
+        unit = " skritt/dag";
+        hasUpperLimit = false;
         break;
       case "Vekt":
         break;
@@ -77,23 +90,34 @@ class Oversiktkort extends Component {
         break;
       default:
     }
-
-    const COLORS = ["#A61E7B", "#569B7E", "#E38B21"];
+    let sum = timeAbove + timeBelow + timeWithin;
+    let COLORS = ["#A61E7B", "#569B7E", "#E38B21"];
+    if (!hasUpperLimit) {
+      COLORS = ["#569B7E", "#E38B21"];
+    }
+    console.log("timewithin: ", timeWithin);
+    console.log("timeBelow: ", timeBelow);
     const goalArrowPic = require("../../Images/goalArrow.svg");
     const downTrianglePic = require("../../Images/downTriangle.svg");
+    let angles = [
+      (-30 * Math.PI) / 180 + ((timeAbove / sum) * 240 * Math.PI) / 180,
+      (-30 * Math.PI) / 180 +
+        (((timeAbove + timeWithin) / sum) * 240 * Math.PI) / 180
+    ];
+    console.log(angles);
     return (
       <div className="flex-container-trend-goals outer-div-trend-goals">
         <ResponsiveContainer
           className="flex-children-trend-goals"
           width={250}
-          height={180}
+          height={200}
         >
           <PieChart width={1000} height={500}>
             <Pie
               data={[
-                { value: timeBelow, name: "Time below" },
+                { value: timeAbove, name: "Time above" },
                 { value: timeWithin, name: "Time within" },
-                { value: timeAbove, name: "Time above" }
+                { value: timeBelow, name: "Time Below" }
               ]}
               dataKey="value"
               nameKey="name"
@@ -111,19 +135,25 @@ class Oversiktkort extends Component {
                 value,
                 index
               }) => {
+                console.log("cx: ", cx);
+                console.log("cy: ", cy);
                 const RADIAN = Math.PI / 180;
                 const radius = 10 + innerRadius + (outerRadius - innerRadius);
-                let x = cx + radius * Math.cos(-midAngle * 2 * RADIAN);
-                let y = cy + radius * Math.sin(-midAngle * 2 * RADIAN);
+                let x = cx + radius * Math.cos(-midAngle * RADIAN);
+                let y = cy + radius * Math.sin(-midAngle * RADIAN);
                 let returnString = "";
-                if (index === 2) {
+                console.log("value: ", value);
+                console.log("midAngle: ", midAngle);
+                const angle = (timeAbove / sum) * 240 * RADIAN;
+                console.log("angle: ", angle);
+                if (index === 0 && hasUpperLimit) {
                   returnString = upperLimit;
-                  x = cx + radius * Math.cos(-midAngle * 1.955 * RADIAN);
-                  y = cy + radius * Math.sin(-midAngle * 1.955 * RADIAN);
+                  x = cx + radius * Math.cos(-angles[index]);
+                  y = cy + radius * Math.sin(-angles[index]);
                 } else if (index === 1) {
                   returnString = lowerLimit;
-                  x = cx + radius * Math.cos(-midAngle * 2 * RADIAN);
-                  y = cy + radius * Math.sin(-midAngle * 2 * RADIAN);
+                  x = cx + radius * Math.cos(-angles[index]);
+                  y = cy + radius * Math.sin(-angles[index]);
                 }
                 return (
                   <text
