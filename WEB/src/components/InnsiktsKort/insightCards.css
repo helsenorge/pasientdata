@@ -1,0 +1,15 @@
+.compare-data-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.goal-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.button-sizing {
+  width: 149px;
+}

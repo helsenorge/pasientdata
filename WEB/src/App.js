@@ -13,6 +13,8 @@ import Vekt from "./Pages/Innsikt/Vekt/vekt";
 import Blodtrykk from "./Pages/Innsikt/Blodtrykk/blodtrykk";
 import Karbohydrater from "./Pages/Innsikt/Karbohydrater/karbohydrater";
 import FysiskAktivitet from "./Pages/Innsikt/FysiskAktivitet/fysiskAktivitet";
+import MyGoals from "./Pages/MyGoalsPage/myGoalsPage";
+import CompareData from "./Pages/CompareDataPage/compareDataPage";
 
 import FHIRCommunication from "./FHIRCommunication";
 import NotFoundPage from "./Pages/NotFoundPage/NotFoundPage";
@@ -35,6 +37,8 @@ class App extends Component {
           <Route path="/blodtrykk" component={Blodtrykk} />
           <Route path="/karbohydrater" component={Karbohydrater} />
           <Route path="/fysiskAktivitet" component={FysiskAktivitet} />
+          <Route path="/comparedata" component={CompareData} />
+          <Route path="/mygoals" component={MyGoals} />
           <Route
             render={() => {
               return <NotFoundPage />;

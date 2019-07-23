@@ -49,7 +49,6 @@ const blodsukkerContent = () => {
         <div className="button-style">
           <Link to={"/blodsukker"} style={{ "border-bottom": "none" }}>
             <DisplayButton
-              style="paddin: 0 0.8rem"
               onClick={() => {
                 /* tom */
               }}
