@@ -16,16 +16,15 @@
 }
 
 .tab_list {
-  display: flex;
-  flex-direction: row;
-  list-style-type: none;
-  padding: 0 0 0.125rem;
-}
-
-.tab {
-  display: flex;
-  width: auto;
-  background: transparent;
+  display: block;
+    flex-direction: row;
+    list-style-type: none;
+    position: relative;
+    list-style: none;
+    padding: 0;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
 }
 
 .tab_selected {
@@ -51,7 +50,13 @@ a:hover {
   color: #a61e7b !important;
 }
 
-@media only screen and (max-width: 650px) {
+@media only screen and (max-width: 750px) {
+  .max-width-wrapper {
+    max-width: 600px;
+    margin: 0 auto !important;
+    position: relative;
+  }
+
   .li-wrapper {
     font-weight: 400;
     font-size: 18px;
@@ -59,11 +64,69 @@ a:hover {
   }
 
   .tab_list {
-    display: flex;
+    display: block;
     flex-direction: row;
     list-style-type: none;
+    position: relative;
+    list-style: none;
+    padding: 0;
     overflow-x: scroll;
     overflow-y: hidden;
     white-space: nowrap;
+    width: 310px;
+  }
+
+  .tab_selected {
+    position: relative;
+    color: black !important;
+    font-weight: 500;
+  }
+
+  .a:link,
+  a:visited,
+  .tab-anchor {
+    border-bottom: 0;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 400;
+    color: #006d84;
+    flex: none;
+    border: 2px solid transparent;
+  }
+
+  a:hover {
+    text-decoration: none !important;
+    color: #a61e7b !important;
+  }
+
+  /* Next & previous buttons */
+  .prev,
+  .next {
+    cursor: pointer;
+    position: absolute;
+    top: 12px;
+    padding: 5px;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+  }
+
+  /* Position the "next button" to the right */
+  .next {
+    right: 10px;
+    border-radius: 3px 0 0 3px;
+  }
+
+  .prev {
+    left: 5px;
+    border-radius: 3px 0 0 3px;
+  }
+
+  /* On hover, add a black background color with a little bit see-through */
+  .prev:hover,
+  .next:hover {
+    background-color: rgba(0, 0, 0, 0.8);
   }
 }
