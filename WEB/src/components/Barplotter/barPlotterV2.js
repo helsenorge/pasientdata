@@ -79,13 +79,8 @@ class BarPlotterV2 extends Component {
     const interval = this.props.interval;
     const startTime = moment(this.props.start, inputFormat);
     const endTime = moment(this.props.end, inputFormat);
-    // console.log("StartTime = ", startTime.format(inputFormat));
-    // console.log("EndTime = ", endTime.format(inputFormat));
-    //const numberOfIntervalsInPeriod = moment(startTime).diff(endTime, interval);
     const slicedLength = slicedData.length;
     const outputFormat = this.props.outputFormat;
-
-    //console.log("SlicedData: ", slicedData);
 
     /*
      * Loop through the desired dataset and aggregate
@@ -94,7 +89,6 @@ class BarPlotterV2 extends Component {
     let aggregated = [];
     let data = slicedData.map(item => ({ x: item.start, y: item.value }));
     if (data === undefined || data.length === 0) {
-      // return aggregated.push({ y: 0, x: moment().format(outputFormat) });
       data.push({ y: 0, x: startTime.format(inputFormat) });
     }
     let sum = data[0].y;
