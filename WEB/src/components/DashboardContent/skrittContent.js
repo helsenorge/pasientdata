@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import InnsiktButton from "../InnsiktButton/innsiktButton";
+import React from "react";
+import InsightButton from "../InsightButton/insightButton";
 import { connect } from "react-redux";
 import moment from "moment";
 import BarPlotter from "../Barplotter/barPlotter";
@@ -18,7 +18,7 @@ const skrittContent = data => {
           page="Dashboard"
         />
       </div>
-      <InnsiktButton linkTo={"/skritt"} />
+      <InsightButton linkTo={"/skritt"} />
     </div>
   );
 };

@@ -1,13 +1,13 @@
-.flex-container-oversikt {
+.flex-container-trend-goals {
   display: flex;
 }
 
-.flex-side-container-oversikt {
+.flex-side-container-trend-goals {
   display: flex;
   flex-direction: column;
 }
 
-.flex-children-oversikt {
+.flex-children-trend-goals {
   flex: 1;
 }
 
@@ -16,14 +16,14 @@
   margin-right: 5px;
 }
 
-.ytre-div-oversikt {
+.outer-div-trend-goals {
   width: 100%;
 }
 
-.upper-oversikt-div {
+.upper-trend-goals-div {
   border-bottom: 1px solid black;
 }
 
-.lower-oversikt-div {
+.lower-trend-goals-div {
   margin-top: 18px;
 }

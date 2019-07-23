@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import NavigationBar from "../../../components/NavigationBar/navigationBar.js";
-import OversiktKort from "../../../components/InnsiktsKort/oversiktKort";
-import GrafKort from "../../../components/InnsiktsKort/grafKort";
-import MonsterKort from "../../../components/InnsiktsKort/monsterKort";
-import VisningsKort from "../../../components/InnsiktsKort/visningsKort";
-import CompareDataCard from "../../../components/InnsiktsKort/compareDataCard";
-import GoalCard from "../../../components/InnsiktsKort/goalCard";
+import TrendGoalsCard from "../../../components/InsightCards/trendGoalsCard";
+import GraphCard from "../../../components/InsightCards/graphCard";
+import PatternCard from "../../../components/InsightCards/patternCard";
+import ViewCard from "../../../components/InsightCards/viewCard";
+import CompareDataCard from "../../../components/InsightCards/compareDataCard";
+import GoalCard from "../../../components/InsightCards/goalCard";
 
 class Insulin extends Component {
   state = {};
@@ -13,10 +13,10 @@ class Insulin extends Component {
     return (
       <div style={{ margin: "0 0 8px" }}>
         <NavigationBar />
-        <VisningsKort />
-        <OversiktKort datatype="Insulin" />
-        <GrafKort datatype="Insulin" />
-        <MonsterKort datatype="Insulin" />
+        <ViewCard />
+        <TrendGoalsCard datatype="Insulin" />
+        <GraphCard datatype="Insulin" />
+        <PatternCard datatype="Insulin" />
         <GoalCard />
         <CompareDataCard />
       </div>

@@ -3,8 +3,8 @@ import CardComponent from "../Card/cardComponent";
 import BarPlotter from "../Barplotter/barPlotter";
 import FakeGlucoseData from "../../Utils/fakeGlucose";
 
-class Oversiktkort extends Component {
-  grafContent = () => {
+class GraphCard extends Component {
+  graphContent = () => {
     if (this.props.datatype === "Blodsukker") {
       const data = FakeGlucoseData();
       return (
@@ -20,8 +20,8 @@ class Oversiktkort extends Component {
     return "Under construction...";
   };
   render() {
-    return <CardComponent title="Graf" content={this.grafContent()} />;
+    return <CardComponent title="Over tid" content={this.graphContent()} />;
   }
 }
 
-export default Oversiktkort;
+export default GraphCard;

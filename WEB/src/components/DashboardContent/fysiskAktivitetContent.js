@@ -1,5 +1,5 @@
 import React from "react";
-import InnsiktButton from "../InnsiktButton/innsiktButton";
+import InsightButton from "../InsightButton/insightButton";
 
 const fysiskAktivitetContent = () => {
   return (
@@ -7,7 +7,7 @@ const fysiskAktivitetContent = () => {
       <div style={{ "margin-right": "40px" }}>
         Her skal det stå noe om fysisk aktivitet
       </div>
-      <InnsiktButton linkTo={"/fysiskAktivitet"} />
+      <InsightButton linkTo={"/fysiskAktivitet"} />
     </div>
   );
 };

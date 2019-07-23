@@ -3,7 +3,7 @@ import ChevronRightRounded from "@helsenorge/toolkit/components/icons/ChevronRig
 import "../DashboardContent/dashboardContent.css";
 import { Link } from "react-router-dom";
 
-class InnsiktButton extends Component {
+class InsightButton extends Component {
   render() {
     return (
       <div
@@ -27,4 +27,4 @@ class InnsiktButton extends Component {
   }
 }
 
-export default InnsiktButton;
+export default InsightButton;

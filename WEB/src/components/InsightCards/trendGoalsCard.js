@@ -3,7 +3,7 @@ import CardComponent from "../Card/cardComponent";
 import FakeGlucoseData from "../../Utils/fakeGlucose";
 import Trends from "../../Utils/trends";
 import { PieChart, Pie, Cell, Label, ResponsiveContainer } from "recharts";
-import "./oversiktKort.css";
+import "./trendGoalsCard.css";
 
 class Oversiktkort extends Component {
   oversiktContent = () => {
@@ -25,9 +25,9 @@ class Oversiktkort extends Component {
         (timeWithin * 100) / (timeAbove + timeWithin + timeBelow);
       const goalValue = 75;
       return (
-        <div className="flex-container-oversikt ytre-div-oversikt">
+        <div className="flex-container-trend-goals outer-div-trend-goals">
           <ResponsiveContainer
-            className="flex-children-oversikt"
+            className="flex-children-trend-goals"
             width={250}
             height={180}
           >
@@ -89,27 +89,27 @@ class Oversiktkort extends Component {
               </Pie>
             </PieChart>
           </ResponsiveContainer>
-          <div className="flex-children-oversikt flex-side-container-oversikt">
-            <div className="flex-children-oversikt flex-container-oversikt upper-oversikt-div">
+          <div className="flex-children-trend-goals flex-side-container-trend-goals">
+            <div className="flex-children-trend-goals flex-container-trend-goals upper-trend-goals-div">
               <img
                 src={goalArrowPic}
                 alt={"logo"}
-                className="index-Image flex-children-oversikt trend-pic"
+                className="index-Image flex-children-trend-goals trend-pic"
               />
-              <div className="flex-children-oversikt flex-side-container-oversikt">
-                <div className="flex-children-oversikt">Mål:</div>
-                <div className="flex-children-oversikt">{goalValue} %</div>
+              <div className="flex-children-trend-goals flex-side-container-trend-goals">
+                <div className="flex-children-trend-goals">Mål:</div>
+                <div className="flex-children-trend-goals">{goalValue} %</div>
               </div>
             </div>
-            <div className="flex-children-oversikt flex-container-oversikt lower-oversikt-div">
+            <div className="flex-children-trend-goals flex-container-trend-goals lower-trend-goals-div">
               <img
                 src={downTrianglePic}
                 alt={"logo"}
                 className="index-Image flex-children trend-pic"
               />
-              <div className="flex-children-oversikt flex-side-container-oversikt">
-                <div className="flex-children-oversikt">Trend:</div>
-                <div className="flex-children-oversikt">{trendValue} %</div>
+              <div className="flex-children-trend-goals flex-side-container-trend-goals">
+                <div className="flex-children-trend-goals">Trend:</div>
+                <div className="flex-children-trend-goals">{trendValue} %</div>
               </div>
             </div>
           </div>

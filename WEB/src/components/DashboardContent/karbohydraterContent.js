@@ -1,6 +1,6 @@
 import React from "react";
 import "./dashboardContent.css";
-import InnsiktButton from "../InnsiktButton/innsiktButton";
+import InsightButton from "../InsightButton/insightButton";
 
 const karbohydraterContent = () => {
   return (
@@ -8,7 +8,7 @@ const karbohydraterContent = () => {
       <div style={{ "margin-right": "40px" }}>
         Her skal det stå noe om karbohydrater
       </div>
-      <InnsiktButton linkTo={"/karbohydrater"} />
+      <InsightButton linkTo={"/karbohydrater"} />
     </div>
   );
 };
