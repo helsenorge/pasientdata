@@ -1,11 +1,10 @@
 import React, { Component } from "react";
-import NavigationBar from "../../components/NavigationBar/navigationBar.js";
 
 class CompareData extends Component {
   render() {
     return (
       <div>
-        <NavigationBar />
+        <h3>HELLOO</h3>
         <div>Her skal det være noe mer data</div>
       </div>
     );

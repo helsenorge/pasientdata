@@ -153,6 +153,7 @@ a:hover {
     overflow-y: hidden;
     white-space: nowrap;
     width: 310px;
+    margin-left: 10px;
   }
 
   .tab_selected {
