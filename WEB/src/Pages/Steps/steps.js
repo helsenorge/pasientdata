@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import TimeButtonGroup from "../../components/TimeButtonGroup/timeButtonGroup";
-import BarPlotterV2 from "../../components/Barplotter/barPlotterV2";
+import BarPlotter from "../../components/Barplotter/barPlotter";
 import { connect } from "react-redux";
 import NavigationBar from "../../components/NavigationBar/navigationBar.js";
 import moment from "moment";
@@ -275,7 +275,7 @@ class Steps extends Component {
             </button>
           </div>
 
-          <BarPlotterV2
+          <BarPlotter
             start={start}
             end={end}
             interval={this.state.interval}
