@@ -9,9 +9,11 @@ import karbohydraterContent from "../../components/DashboardContent/karbohydrate
 import skrittContent from "../../components/DashboardContent/skrittContent";
 import vektContent from "../../components/DashboardContent/vektContent";
 import "./dashboard.css";
+import AddDataContent from "../../components/DashboardContent/addDataContent";
+import changeGoalsContent from "../../components/DashboardContent/changeGoalsContent";
+import compareDataContent from "../../components/DashboardContent/compareDataContent";
 
 class Dashboard extends Component {
-
   render() {
     if (this.props.baseInfo.isLoggedin) {
       return (
@@ -47,6 +49,26 @@ class Dashboard extends Component {
               className="flex-children"
               title={"Fysisk aktivitet"}
               content={fysiskAktivitetContent()}
+            />
+          </div>
+          <div className="single-flex-container">
+            <CardComponent
+              className="flex-children"
+              content={<AddDataContent />}
+            />
+          </div>
+          <div className="single-flex-container">
+            <CardComponent
+              className="flex-children"
+              title={"Sette nye mål?"}
+              content={changeGoalsContent()}
+            />
+          </div>
+          <div className="single-flex-container">
+            <CardComponent
+              className="flex-children"
+              title={"Forstå din data"}
+              content={compareDataContent()}
             />
           </div>
         </div>

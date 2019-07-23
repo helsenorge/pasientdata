@@ -9,8 +9,8 @@ class InnsiktButton extends Component {
       <div
         style={{
           display: "flex",
-          "justify-content": "flex-end",
-          "align-items": "flex-end"
+          "justify-content": "end",
+          "align-items": "end"
         }}
       >
         <Link to={this.props.linkTo} style={{ "border-bottom": "none" }}>

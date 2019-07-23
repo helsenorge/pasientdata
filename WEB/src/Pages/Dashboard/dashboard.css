@@ -7,3 +7,9 @@
   flex: 1;
   /* text-align: center; */
 }
+
+.single-flex-container {
+  flex: 1;
+  margin-top: 0.4rem;
+  margin-bottom: 0.6rem;
+}

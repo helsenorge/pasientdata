@@ -6,7 +6,7 @@ class CompareData extends Component {
     return (
       <div>
         <NavigationBar />
-        <div>Her skal det være noe mer data</div>;
+        <div>Her skal det være noe mer data</div>
       </div>
     );
   }

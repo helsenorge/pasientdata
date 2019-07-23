@@ -6,7 +6,7 @@ class MyGoals extends Component {
     return (
       <div>
         <NavigationBar />
-        <div>Her skal mine mål stå</div>;
+        <div>Her skal mine mål stå</div>
       </div>
     );
   }
