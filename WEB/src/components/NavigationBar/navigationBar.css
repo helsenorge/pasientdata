@@ -1,30 +1,21 @@
 .max-width-wrapper {
-  max-width: 600px;
+  max-width: 700px;
   margin: 0 auto !important;
-}
-
-.menu-button-row {
-  justify-content: center;
-  height: 60px;
+  position: relative;
 }
 
 .li-wrapper {
   font-weight: 400;
   font-size: 18px;
-  line-height: 1.556;
-  padding: 5px;
+  display: inline-block;
 }
 
 .tab_list {
   display: block;
-    flex-direction: row;
-    list-style-type: none;
-    position: relative;
-    list-style: none;
-    padding: 0;
-    overflow-x: scroll;
-    overflow-y: hidden;
-    white-space: nowrap;
+  flex-direction: row;
+  list-style-type: none;
+  position: relative;
+  list-style: none;
 }
 
 .tab_selected {
@@ -42,12 +33,19 @@ a:visited,
   font-weight: 400;
   color: #006d84;
   flex: none;
+  padding: 5px;
   border: 2px solid transparent;
 }
 
 a:hover {
   text-decoration: none !important;
   color: #a61e7b !important;
+}
+
+/* Next & previous buttons */
+.prev,
+.next {
+  display: none;
 }
 
 @media only screen and (max-width: 750px) {
@@ -73,7 +71,7 @@ a:hover {
     overflow-x: scroll;
     overflow-y: hidden;
     white-space: nowrap;
-    width: 310px;
+    width: 600px;
   }
 
   .tab_selected {
@@ -111,6 +109,92 @@ a:hover {
     transition: 0.6s ease;
     border-radius: 0 3px 3px 0;
     user-select: none;
+  }
+
+  /* Position the "next button" to the right */
+  .next {
+    right: 10px;
+    border-radius: 3px 0 0 3px;
+  }
+
+  .prev {
+    left: 5px;
+    border-radius: 3px 0 0 3px;
+  }
+
+  /* On hover, add a black background color with a little bit see-through */
+  .prev:hover,
+  .next:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  .max-width-wrapper {
+    max-width: 600px;
+    margin: 0 auto !important;
+    position: relative;
+  }
+
+  .li-wrapper {
+    font-weight: 400;
+    font-size: 18px;
+    display: inline-block;
+  }
+
+  .tab_list {
+    display: block;
+    flex-direction: row;
+    list-style-type: none;
+    position: relative;
+    list-style: none;
+    padding: 0;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+    width: 310px;
+  }
+
+  .tab_selected {
+    position: relative;
+    color: black !important;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 21px;
+    border-bottom: 1px solid;
+  }
+
+  .a:link,
+  a:visited,
+  .tab-anchor {
+    border-bottom: 0;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 400;
+    color: #006d84;
+    flex: none;
+    border: 2px solid transparent;
+  }
+
+  a:hover {
+    text-decoration: none !important;
+    color: #a61e7b !important;
+  }
+
+  /* Next & previous buttons */
+  .prev,
+  .next {
+    cursor: pointer;
+    position: absolute;
+    top: 12px;
+    padding: 5px;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+    display: flex;
   }
 
   /* Position the "next button" to the right */
