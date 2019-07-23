@@ -170,18 +170,19 @@ class BarPlotterV2 extends Component {
     let aggregated = this.aggregateData();
 
     return (
-      <ResponsiveContainer width="90%" height={300}>
+      <ResponsiveContainer width="100%" height={200}>
         <BarChart
-          width={730}
+          width={400}
           height={250}
           data={aggregated}
-          margin={{ top: 20, right: 20, bottom: 10, left: 10 }}
+          margin={{ top: 10, right: 5, bottom: 0, left: -40 }}
+          //margin={{ top: 20, right: 20, bottom: 10, left: 10 }}
         >
           <XAxis dataKey="x" domain={["auto", "auto"]} name="Time" unit="" />
           <YAxis dataKey="y" name="Steps" unit="" type="number" />
           <Bar dataKey="y" name="Steps/hour" fill="#ff7300" />
 
-          <Legend />
+          {/* <Legend /> */}
           <Tooltip cursor={false} />
         </BarChart>
       </ResponsiveContainer>
