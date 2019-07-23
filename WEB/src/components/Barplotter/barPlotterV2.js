@@ -170,13 +170,10 @@ class BarPlotterV2 extends Component {
             width={400}
             height={250}
             data={aggregated}
-            margin={{ top: 10, right: 5, bottom: 0, left: -10 }} //-40
-            //margin={{ top: 20, right: 20, bottom: 10, left: 10 }}
+            margin={{ top: 10, right: 5, bottom: 0, left: -10 }}
           >
             <XAxis dataKey="x" domain={["auto", "auto"]} name="Time" unit="" />
             <Bar dataKey="y" name="Steps/hour" fill="#EF87CE" />
-
-            {/*if (legend=== "off"){ } else {<Legend /> }*/}
             <Tooltip cursor={false} />
           </BarChart>
         </ResponsiveContainer>
@@ -188,14 +185,13 @@ class BarPlotterV2 extends Component {
             width={400}
             height={250}
             data={aggregated}
-            margin={{ top: 10, right: 5, bottom: 0, left: -40 }} //-40
-            //margin={{ top: 20, right: 20, bottom: 10, left: 10 }}
+            margin={{ top: 10, right: 5, bottom: 0, left: -40 }}
           >
             <XAxis dataKey="x" domain={["auto", "auto"]} name="Time" unit="" />
             <YAxis dataKey="y" name="Steps" unit="" type="number" />
             <Bar dataKey="y" name="Steps/hour" fill="#EF87CE" />
 
-            {/*if (legend=== "off"){ } else {<Legend /> }*/}
+            <Legend />
             <Tooltip cursor={false} />
           </BarChart>
         </ResponsiveContainer>
