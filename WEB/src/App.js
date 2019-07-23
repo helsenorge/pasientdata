@@ -5,6 +5,7 @@ import "./styles.css";
 import { Switch, Route, BrowserRouter } from "react-router-dom";
 import Dashboard from "./Pages/Dashboard/dashboard";
 import Steps from "./Pages/Steps/steps";
+import Skritt from "./Pages/Innsikt/Skritt/skritt";
 import Blodsukker from "./Pages/Innsikt/Blodsukker/blodsukker";
 import Insulin from "./Pages/Innsikt/Insulin/insulin";
 import Vekt from "./Pages/Innsikt/Vekt/vekt";
@@ -30,13 +31,14 @@ class App extends Component {
           <Route path="/dashboard" component={Dashboard} />
           <Route path="/blodsukker" component={Blodsukker} />
           <Route path="/insulin" component={Insulin} />
-          <Route path="/skritt" component={Steps} />
+          <Route path="/skritt" component={Skritt} />
           <Route path="/vekt" component={Vekt} />
           <Route path="/blodtrykk" component={Blodtrykk} />
           <Route path="/karbohydrater" component={Karbohydrater} />
           <Route path="/fysiskAktivitet" component={FysiskAktivitet} />
           <Route path="/comparedata" component={CompareData} />
           <Route path="/mygoals" component={MyGoals} />
+          <Route path="/steps" component={Steps} />
           <Route
             render={() => {
               return <NotFoundPage />;
