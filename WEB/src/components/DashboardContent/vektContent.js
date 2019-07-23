@@ -4,7 +4,7 @@ import InnsiktButton from "../InnsiktButton/innsiktButton";
 const vektContent = () => {
   return (
     <div>
-      <div>Her skal det stå noe om vekt</div>
+      <div style={{ "margin-right": "40px" }}>Her skal det stå noe om vekt</div>
       <InnsiktButton linkTo={"/vekt"} />
     </div>
   );

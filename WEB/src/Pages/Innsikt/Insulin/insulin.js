@@ -11,7 +11,7 @@ class Insulin extends Component {
   state = {};
   render() {
     return (
-      <div>
+      <div style={{ margin: "0 0 8px" }}>
         <NavigationBar />
         <VisningsKort />
         <OversiktKort datatype="Insulin" />

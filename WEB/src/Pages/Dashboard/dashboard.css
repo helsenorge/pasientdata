@@ -10,6 +10,6 @@
 
 .single-flex-container {
   flex: 1;
-  margin-top: 0.4rem;
-  margin-bottom: 0.6rem;
+  /* margin-top: 16px;
+  margin-bottom: 8px; */
 }

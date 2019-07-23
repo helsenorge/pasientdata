@@ -10,7 +10,7 @@ import GoalCard from "../../../components/InnsiktsKort/goalCard";
 class Blodsukker extends Component {
   render() {
     return (
-      <div>
+      <div style={{ margin: "0 0 8px" }}>
         <NavigationBar />
         <VisningsKort />
         <OversiktKort datatype="Blodsukker" />
