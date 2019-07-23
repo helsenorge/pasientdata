@@ -18,33 +18,36 @@ import CompareData from "./Pages/CompareDataPage/compareDataPage";
 import FHIRCommunication from "./FHIRCommunication";
 import NotFoundPage from "./Pages/NotFoundPage/NotFoundPage";
 import MenuBar from "./components/MenuBar/menuBar";
+import StartFromTop from "./StartFromTop";
 import { connect } from "react-redux";
 
 class App extends Component {
   render() {
     return (
       <BrowserRouter>
-        {this.props.baseInfo.isLoggedin && <MenuBar />}
-        <Switch>
-          <Route exact path="/" component={FHIRCommunication} />
-          <Route path="/login" component={FHIRCommunication} />
-          <Route path="/dashboard" component={Dashboard} />
-          <Route path="/blodsukker" component={Blodsukker} />
-          <Route path="/insulin" component={Insulin} />
-          <Route path="/skritt" component={Skritt} />
-          <Route path="/vekt" component={Vekt} />
-          <Route path="/blodtrykk" component={Blodtrykk} />
-          <Route path="/karbohydrater" component={Karbohydrater} />
-          <Route path="/fysiskAktivitet" component={FysiskAktivitet} />
-          <Route path="/comparedata" component={CompareData} />
-          <Route path="/mygoals" component={MyGoals} />
-          <Route path="/steps" component={Steps} />
-          <Route
-            render={() => {
-              return <NotFoundPage />;
-            }}
-          />
-        </Switch>
+        <StartFromTop>
+          {this.props.baseInfo.isLoggedin && <MenuBar />}
+          <Switch>
+            <Route exact path="/" component={FHIRCommunication} />
+            <Route path="/login" component={FHIRCommunication} />
+            <Route path="/dashboard" component={Dashboard} />
+            <Route path="/blodsukker" component={Blodsukker} />
+            <Route path="/insulin" component={Insulin} />
+            <Route path="/skritt" component={Skritt} />
+            <Route path="/vekt" component={Vekt} />
+            <Route path="/blodtrykk" component={Blodtrykk} />
+            <Route path="/karbohydrater" component={Karbohydrater} />
+            <Route path="/fysiskAktivitet" component={FysiskAktivitet} />
+            <Route path="/comparedata" component={CompareData} />
+            <Route path="/mygoals" component={MyGoals} />
+            <Route path="/steps" component={Steps} />
+            <Route
+              render={() => {
+                return <NotFoundPage />;
+              }}
+            />
+          </Switch>
+        </StartFromTop>
       </BrowserRouter>
     );
   }
