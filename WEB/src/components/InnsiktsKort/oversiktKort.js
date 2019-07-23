@@ -23,7 +23,6 @@ class Oversiktkort extends Component {
       const trendValue = 2;
       const currentValue =
         (timeWithin * 100) / (timeAbove + timeWithin + timeBelow);
-      console.log(currentValue);
       const goalValue = 75;
       return (
         <div className="flex-container-oversikt ytre-div-oversikt">
@@ -84,7 +83,7 @@ class Oversiktkort extends Component {
                 labelLine={false}
               >
                 {data.map((entry, index) => (
-                  <Cell fill={COLORS[index % COLORS.length]} />
+                  <Cell key="" fill={COLORS[index % COLORS.length]} />
                 ))}{" "}
                 /> <Label value={currentValue + "%"} position="center" />
               </Pie>
