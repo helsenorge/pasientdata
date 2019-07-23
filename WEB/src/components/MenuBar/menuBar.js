@@ -49,7 +49,7 @@ class MenuBar extends Component {
             </li>
             <li className="liBar">
               <NavLink
-                to="/skritt"
+                to="/blodsukker"
                 className="menu-link click-menuBar-open"
                 onClick={this.toggle}
               >
@@ -72,7 +72,9 @@ class MenuBar extends Component {
     return (
       <div>
         <div className="bar row navbar">
-          <div className="menuPos textStyle">Helseinnsikt</div>
+          <div className="menuPos textStyle">
+            <a className="aStyle" href="/dashboard">Helseinnsikt</a>
+          </div>
           <div className="menuPos">
             <button className="button" onClick={this.toggle}>
               <Menu /> Meny

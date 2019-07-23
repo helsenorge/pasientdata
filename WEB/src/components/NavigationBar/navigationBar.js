@@ -20,15 +20,6 @@ class NavigationBar extends Component {
         <ul className="tab_list" id="tab_list">
           <li className="li-wrapper">
             <NavLink
-              to="/dashboard"
-              className="tab-anchor"
-              activeClassName="tab_selected"
-            >
-              Home
-            </NavLink>
-          </li>
-          <li className="li-wrapper">
-            <NavLink
               to="/blodsukker"
               className="tab-anchor"
               activeClassName="tab_selected"
