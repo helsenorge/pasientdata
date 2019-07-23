@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import moment from "moment";
 import BarPlotter from "../Barplotter/barPlotter";
 
-const skrittContent = data => {
+const skrittContent = (data, link) => {
   return (
     <div>
       <div style={{ "margin-bottom": "40px" }}>
@@ -18,7 +18,7 @@ const skrittContent = data => {
           page="Dashboard"
         />
       </div>
-      <InsightButton linkTo={"/skritt"} />
+      <InsightButton linkTo={link} />
     </div>
   );
 };

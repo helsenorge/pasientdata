@@ -25,14 +25,16 @@ class Dashboard extends Component {
               className="flex-children"
               title={"Insulin"}
               content={skrittContent(
-                this.props.patient.datasets[0].measurements
+                this.props.patient.datasets[0].measurements,
+                "/insulin"
               )}
             />
             <CardComponent
               className="flex-children"
               title={"Skritt"}
               content={skrittContent(
-                this.props.patient.datasets[0].measurements
+                this.props.patient.datasets[0].measurements,
+                "/skritt"
               )}
             />
           </div>
@@ -48,14 +50,16 @@ class Dashboard extends Component {
               className="flex-children"
               title={"Karbo"}
               content={skrittContent(
-                this.props.patient.datasets[3].measurements
+                this.props.patient.datasets[3].measurements,
+                "/karbohydrater"
               )}
             />
             <CardComponent
               className="flex-children"
               title={"Vekt"}
               content={skrittContent(
-                this.props.patient.datasets[1].measurements
+                this.props.patient.datasets[1].measurements,
+                "/vekt"
               )}
             />
           </div>
@@ -64,7 +68,8 @@ class Dashboard extends Component {
               className="flex-children"
               title={"Fysisk aktivitet"}
               content={skrittContent(
-                this.props.patient.datasets[3].measurements
+                this.props.patient.datasets[3].measurements,
+                "/fysiskAktivitet"
               )}
             />
             <div className="flex-children" style={{ "margin-right": "8px" }} />

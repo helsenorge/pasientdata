@@ -1,13 +1,24 @@
 import React, { Component } from "react";
-import { Dropdown } from "@helsenorge/toolkit/components/atoms/dropdown";
 import CardComponent from "../Card/cardComponent";
+import DateDropdown from "../DateDropdown/dateDropdown";
 import "./insightCards.css";
 
 class ViewCard extends Component {
-  render() {
+  state = { view: "To uker" };
+
+  makeContent = () => {
     return (
-      <CardComponent content={<div className="view-div">Viser siste</div>} />
+      <span>
+        <span className="view-div">Viser siste</span>
+        <span>
+          <DateDropdown name={this.state.view} />
+        </span>
+      </span>
     );
+  };
+
+  render() {
+    return <CardComponent content={this.makeContent()} />;
   }
 }
 

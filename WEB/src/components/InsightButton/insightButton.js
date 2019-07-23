@@ -18,7 +18,7 @@ class InsightButton extends Component {
         }}
       >
         <Link to={this.props.linkTo} style={{ "border-bottom": "none" }}>
-          <button onClick={this.onClick} className="shape">
+          <button className="shape">
             <ChevronRightRounded className="chevronStyle" />
           </button>
         </Link>
