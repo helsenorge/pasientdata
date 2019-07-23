@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import NavigationBar from "../../components/NavigationBar/navigationBar";
-import BarPlotterV2 from "../../components/Barplotter/barPlotterV2";
 import { connect } from "react-redux";
 import FHIRConnection from "../../FHIRCommunication";
 import CardComponent from "../../components/Card/cardComponent";
@@ -13,20 +11,12 @@ import vektContent from "../../components/DashboardContent/vektContent";
 import "./dashboard.css";
 
 class Dashboard extends Component {
-  constructor(props) {
-    super(props);
-  }
 
   render() {
     if (this.props.baseInfo.isLoggedin) {
       return (
         <div>
-          {/* <div>
-            <NavigationBar />
-          </div>
-
-          <br /> */}
-          <h1>Innsikt</h1>
+          <h1 style={{ "margin-left": "8px" }}>Innsikt</h1>
           <CardComponent title={"Blodsukker"} content={blodsukkerContent()} />
           <div className="flex-container">
             <CardComponent

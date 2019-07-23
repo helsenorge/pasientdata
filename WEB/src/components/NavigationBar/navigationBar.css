@@ -6,7 +6,6 @@
 .menu-button-row {
   justify-content: center;
   height: 60px;
-  top: 20px;
 }
 
 .li-wrapper {
@@ -35,7 +34,8 @@
   font-weight: 500;
 }
 
-.a:link, a:visited,
+.a:link,
+a:visited,
 .tab-anchor {
   border-bottom: 0;
   text-align: center;
@@ -46,11 +46,24 @@
   border: 2px solid transparent;
 }
 
-a:hover{
+a:hover {
   text-decoration: none !important;
+  color: #a61e7b !important;
 }
 
-/* @media screen and (min-width: 59rem) .mol_tabs .tabs__list {
-    white-space: normal;
-    overflow: visible;
-  } */
+@media only screen and (max-width: 650px) {
+  .li-wrapper {
+    font-weight: 400;
+    font-size: 18px;
+    display: inline-block;
+  }
+
+  .tab_list {
+    display: flex;
+    flex-direction: row;
+    list-style-type: none;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+  }
+}

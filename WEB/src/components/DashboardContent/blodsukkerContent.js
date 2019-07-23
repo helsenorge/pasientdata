@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import ChevronRightRounded from "@helsenorge/toolkit/components/icons/ChevronRightRounded";
 import { DisplayButton } from "@helsenorge/toolkit/components/atoms/buttons/display-button";
 import "./dashboardContent.css";

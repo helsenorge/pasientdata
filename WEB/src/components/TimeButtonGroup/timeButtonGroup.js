@@ -1,14 +1,9 @@
 import React, { Component } from "react";
-import { Button } from "shards-react";
-//import Steps from "./steps";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "shards-ui/dist/css/shards.min.css";
 import { DisplayButton } from "@helsenorge/toolkit/components/atoms/buttons/display-button";
 
 class TimeButtonGroup extends Component {
-  constructor(props) {
-    super(props);
-  }
 
   renderMinute = render => {
     if (render) {
