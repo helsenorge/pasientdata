@@ -17,13 +17,12 @@ class Oversiktkort extends Component {
         upperLimit,
         lowerLimit
       );
-      const COLORS = ["#E38B21", "#569B7E", "#A61E7B"];
+      const COLORS = ["#A61E7B", "#569B7E", "#E38B21"];
       const goalArrowPic = require("../../Images/goalArrow.svg");
       const downTrianglePic = require("../../Images/downTriangle.svg");
       const trendValue = 2;
       const currentValue =
         (timeWithin * 100) / (timeAbove + timeWithin + timeBelow);
-      console.log(currentValue);
       const goalValue = 75;
       return (
         <div className="flex-container-oversikt ytre-div-oversikt">
@@ -84,7 +83,7 @@ class Oversiktkort extends Component {
                 labelLine={false}
               >
                 {data.map((entry, index) => (
-                  <Cell fill={COLORS[index % COLORS.length]} />
+                  <Cell key="" fill={COLORS[index % COLORS.length]} />
                 ))}{" "}
                 /> <Label value={currentValue + "%"} position="center" />
               </Pie>
