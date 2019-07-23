@@ -180,7 +180,7 @@ class BarPlotterV2 extends Component {
         >
           <XAxis dataKey="x" domain={["auto", "auto"]} name="Time" unit="" />
           <YAxis dataKey="y" name="Steps" unit="" type="number" />
-          <Bar dataKey="y" name="Steps/hour" fill="#ff7300" />
+          <Bar dataKey="y" name="Steps/hour" fill="#EF87CE" />
 
           {/* <Legend /> */}
           <Tooltip cursor={false} />

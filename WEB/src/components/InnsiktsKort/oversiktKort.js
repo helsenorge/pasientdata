@@ -17,7 +17,7 @@ class Oversiktkort extends Component {
         upperLimit,
         lowerLimit
       );
-      const COLORS = ["#E38B21", "#569B7E", "#A61E7B"];
+      const COLORS = ["#A61E7B", "#569B7E", "#E38B21"];
       const goalArrowPic = require("../../Images/goalArrow.svg");
       const downTrianglePic = require("../../Images/downTriangle.svg");
       const trendValue = 2;
