@@ -1,16 +1,14 @@
 import React, { Component } from "react";
 import { Dropdown } from "@helsenorge/toolkit/components/atoms/dropdown";
 import CardComponent from "../Card/cardComponent";
-import "./visningsKort.css";
+import "./insightCards.css";
 
-class VisningsKort extends Component {
+class ViewCard extends Component {
   render() {
     return (
-      <CardComponent
-        content={<div className="visnings-div">Viser siste</div>}
-      />
+      <CardComponent content={<div className="view-div">Viser siste</div>} />
     );
   }
 }
 
-export default VisningsKort;
+export default ViewCard;

@@ -1,5 +1,5 @@
 import React from "react";
-import InnsiktButton from "../InnsiktButton/innsiktButton";
+import InsightButton from "../InsightButton/insightButton";
 
 const skrittContent = () => {
   return (
@@ -7,7 +7,7 @@ const skrittContent = () => {
       <div style={{ "margin-right": "40px" }}>
         Her skal det stå noe om antall skritt
       </div>
-      <InnsiktButton linkTo={"/skritt"} />
+      <InsightButton linkTo={"/skritt"} />
     </div>
   );
 };

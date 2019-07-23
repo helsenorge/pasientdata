@@ -1,11 +1,11 @@
 import React from "react";
-import InnsiktButton from "../InnsiktButton/innsiktButton";
+import InsightButton from "../InsightButton/insightButton";
 
 const vektContent = () => {
   return (
     <div>
       <div style={{ "margin-right": "40px" }}>Her skal det stå noe om vekt</div>
-      <InnsiktButton linkTo={"/vekt"} />
+      <InsightButton linkTo={"/vekt"} />
     </div>
   );
 };

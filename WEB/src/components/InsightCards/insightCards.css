@@ -13,3 +13,8 @@
 .button-sizing {
   width: 149px;
 }
+
+.view-div {
+  position: absolute;
+  top: 10px;
+}
