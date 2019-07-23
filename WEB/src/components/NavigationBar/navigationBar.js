@@ -35,7 +35,7 @@ class NavigationBar extends Component {
               Insulin
             </NavLink>
           </li>
-          {/* <li className="tab li-wrapper">
+          <li className="tab li-wrapper">
             <NavLink
               to="/skritt"
               className="tab-anchor"
@@ -70,7 +70,7 @@ class NavigationBar extends Component {
             >
               Karbohydrater
             </NavLink>
-          </li> */}
+          </li>
         </ul>
       </div>
     );

@@ -1,4 +1,4 @@
-import React, { Component, useState, Fragment } from "react";
+import React, { Component } from "react";
 import "./menuBar.css";
 import Menu from "@helsenorge/toolkit/components/icons/Menu";
 import Tiles from "@helsenorge/toolkit/components/icons/Tiles";
@@ -26,10 +26,7 @@ class MenuBar extends Component {
   }
 
   render() {
-    const pic = require("../../Images/ehelse_hvit.svg");
-    const mobilePic = require("../../Images/ehelse_logo_hvit.svg");
     let menu;
-    let menuBar;
 
     if (this.state.isToggleOn) {
       menu = (

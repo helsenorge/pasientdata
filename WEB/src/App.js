@@ -3,17 +3,14 @@ import "./master.css";
 import "./min-helse.css";
 import "./styles.css";
 import { Switch, Route, BrowserRouter } from "react-router-dom";
-import { Provider } from "react-redux";
 import Dashboard from "./Pages/Dashboard/dashboard";
 import Steps from "./Pages/Steps/steps";
 import Blodsukker from "./Pages/Innsikt/Blodsukker/blodsukker";
 import Insulin from "./Pages/Innsikt/Insulin/insulin";
-//import Skritt from "/Pages/Innsikt/skritt";
 import Vekt from "./Pages/Innsikt/Vekt/vekt";
 import Blodtrykk from "./Pages/Innsikt/Blodtrykk/blodtrykk";
 import Karbohydrater from "./Pages/Innsikt/Karbohydrater/karbohydrater";
 import FysiskAktivitet from "./Pages/Innsikt/FysiskAktivitet/fysiskAktivitet";
-
 import FHIRCommunication from "./FHIRCommunication";
 import NotFoundPage from "./Pages/NotFoundPage/NotFoundPage";
 import MenuBar from "./components/MenuBar/menuBar";

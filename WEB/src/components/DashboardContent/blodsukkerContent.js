@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import ChevronRightRounded from "@helsenorge/toolkit/components/icons/ChevronRightRounded";
 import { DisplayButton } from "@helsenorge/toolkit/components/atoms/buttons/display-button";
 import "./dashboardContent.css";
@@ -49,7 +49,7 @@ const blodsukkerContent = () => {
         <div className="button-style">
           <Link to={"/blodsukker"} style={{ "border-bottom": "none" }}>
             <DisplayButton
-              style="paddin: 0 0.8rem"
+              className="atom_displaybutton"
               onClick={() => {
                 /* tom */
               }}

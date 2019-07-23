@@ -1,5 +1,5 @@
 import axios from "axios";
-import moment, { max } from "moment";
+import moment from "moment";
 
 var urlBase =
   "https://www.googleapis.com/fitness/v1/users/me/dataSources/derived:com.google.";

@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import InnsiktButton from "../InnsiktButton/innsiktButton";
 
 const vektContent = () => {

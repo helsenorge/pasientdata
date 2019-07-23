@@ -1,12 +1,9 @@
 import * as React from "react";
 import * as FHIR from "fhirclient";
 import moment from "moment";
-import BarPlotterV2 from "./components/Barplotter/barPlotterV2";
 import HomePage from "./Pages/LoginPage/loginPage";
-//import { GoogleLogout } from 'react-google-login';
-//import { addPatient, addObservation } from "../api/FHIRstructure"
 import { connect } from "react-redux";
-import { Redirect, Link } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 
 class FHIRCommunication extends React.Component {
   constructor(props) {
