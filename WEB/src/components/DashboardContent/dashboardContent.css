@@ -41,3 +41,13 @@
 .atom_displaybutton {
   padding: 0 1rem;
 }
+
+.dashboard-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dashboard-button-sizing {
+  width: 180px;
+}
