@@ -5,7 +5,7 @@ class AddDataContent extends Component {
   state = {};
   render() {
     return (
-      <div>
+      <div className="visnings-div">
         <InlineButton type={"add"}> Legg til ny datakilde</InlineButton>
       </div>
     );
