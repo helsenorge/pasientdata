@@ -29,7 +29,9 @@ class Dashboard extends Component {
             <CardComponent
               className="flex-children"
               title={"Skritt"}
-              content={skrittContent()}
+              content={skrittContent(
+                this.props.patient.datasets[0].measurements
+              )}
             />
           </div>
           <div

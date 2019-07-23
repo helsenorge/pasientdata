@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import numeral from "numeral";
-import { connect } from "react-redux";
 import moment from "moment";
 import {
   XAxis,
@@ -12,181 +10,152 @@ import {
   ResponsiveContainer
 } from "recharts";
 
+/*
+ * The BarPlotter component.
+ * Aggregates the data at the desired granularity in the desired period of time
+ * and renders a barchart of the data.
+ *
+ * Props: dataset, start and end times and interval size (month, week, day, hour).
+ * @prop dataset The dataset containing name and measurements.
+ * @prop start The desired start time in "YYYY-MM-DDTHH:mm:ss".
+ * @prop end The desired end time in "YYYY-MM-DDTHH:mm:ss".
+ * @prop interval The size of each aggregate interval (i.e. the granularity).
+ * @prop outputFormat The desired tick formatter for the bar plot in moment standard.
+ */
+
 class BarPlotter extends Component {
-  state = { colors: ["#7DB3FF", "#49457B", "#FF7C78"] };
+  findStartAndEndIndex = () => {
+    const length = this.props.data.length;
+    const end = this.props.end;
+    const start = this.props.start;
 
-  findMeasurementStartIndex = datasetIndex => {
-    for (
-      let i = 0;
-      i < this.props.patient.datasets[datasetIndex].measurements.length;
-      i++
+    let startIndex = 0;
+    let endIndex = length - 1;
+    let endIndexFound = false;
+
+    if (
+      moment(end, "YYYY-MM-DDTHH:mm:ss").isAfter(
+        moment(this.props.data[length - 1].start, "YYYY-MM-DDTHH:mm:ss")
+      )
     ) {
+      endIndexFound = true;
+    }
+
+    for (let i = 0; i < length; i++) {
       if (
-        moment().diff(
-          moment(
-            this.props.patient.datasets[datasetIndex].measurements[i].start,
-            "YYYY-MM-DDTHH:mm:ss"
-          ),
-          this.props.timeScope + "s"
-        ) < 1
+        moment(start, "YYYY-MM-DDTHH:mm:ss").isAfter(
+          moment(this.props.data[i].start, "YYYY-MM-DDTHH:mm:ss")
+        )
       ) {
-        return i;
+        startIndex = i; // Index right before the first data point we want to include.
       }
-    }
-    return 0;
-  };
-
-  findDatasetIndexFromLOINC = () => {
-    for (let i = 0; i < this.props.patient.datasets.length; i++) {
-      if (this.props.patient.datasets[i].name === this.props.datasetLOINC) {
-        return i;
-      }
-    }
-    console.log("No dataset with desired LOINC!");
-    return 0;
-  };
-
-  formatStringsFromAggregateLength = () => {
-    switch (this.props.aggregateLength) {
-      case "week":
-        return { startOf: "week", interval: "weeks", format: "ww" };
-      case "day":
-        if (this.props.timeScope === "month") {
-          return { startOf: "day", interval: "days", format: "DD.MM" };
-        } else if (this.props.timeScope === "year") {
-          return { startOf: "day", interval: "days", format: "DD.MM" };
-        } else {
-          return { startOf: "day", interval: "days", format: "ddd" };
-        }
-      case "hour":
-        if (this.props.timeScope === "month") {
-          return { startOf: "hour", interval: "hours", format: "DD.MM" };
-        } else if (this.props.timeScope === "week") {
-          return { startOf: "hour", interval: "hours", format: "DD.MM" };
-        } else {
-          return { startOf: "hour", interval: "hours", format: "HH" };
-        }
-      default:
-    }
-    return { startOf: "day", interval: "days", format: "DD.MM" };
-  };
-
-  convertTimeScopeToNumber = () => {
-    switch (this.props.timeScope) {
-      case "year":
-        switch (this.props.aggregateLength) {
-          case "day":
-            if (moment().isLeapYear()) {
-              return 366;
-            } else {
-              return 365;
-            }
-          case "week":
-            return 52;
-          case "month":
-            return 12;
-          default:
-        }
+      if (
+        !endIndexFound &&
+        moment(end, "YYYY-MM-DDTHH:mm:ss").isBefore(
+          moment(this.props.data[i].start, "YYYY-MM-DDTHH:mm:ss")
+        )
+      ) {
+        endIndex = i; // Index right after the first data point we want to include.
         break;
-      case "week":
-        return 7;
-      case "day":
-        return 24;
-      case "month":
-        return moment().daysInMonth();
-      default:
-        return 24;
+      }
     }
+    if (!endIndexFound) {
+      endIndex--;
+    }
+    if (startIndex !== length - 1) {
+      startIndex++;
+    }
+
+    return { startIndex: startIndex, endIndex: endIndex };
   };
 
   aggregateData = () => {
-    let timeFormats = this.formatStringsFromAggregateLength();
-    let datasetIndex = this.findDatasetIndexFromLOINC();
-    let startIndex = this.findMeasurementStartIndex(datasetIndex);
+    const { startIndex, endIndex } = this.findStartAndEndIndex();
+    // console.log("StartIndex = ", startIndex);
+    // console.log("EndIndex = ", endIndex);
+    let slicedData = this.props.data.slice(startIndex, endIndex);
 
-    let slicedData = this.props.patient.datasets[
-      datasetIndex
-    ].measurements.slice(startIndex);
-    let reformatted = [];
-    for (let i = 0; i < slicedData.length; i++) {
-      reformatted.push({
-        x: parseInt(
-          moment(slicedData[i].start, "YYYY-MM-DDTHH:mm:ss").format("X"),
-          10
-        ),
-        y: slicedData[i].value
-      });
-    }
+    const inputFormat = "YYYY-MM-DDTHH:mm:ss";
+    const interval = this.props.interval;
+    const startTime = moment(this.props.start, inputFormat);
+    const endTime = moment(this.props.end, inputFormat);
+    const slicedLength = slicedData.length;
+    const outputFormat = this.props.outputFormat;
 
     /*
-  / Loop through the desired dataset and aggregate
-  */
+     * Loop through the desired dataset and aggregate
+     */
+
     let aggregated = [];
-    let sum = reformatted[0].y;
-    let start = moment(reformatted[0].x, "X").startOf(timeFormats.startOf);
-    //console.log(start.format(timeFormats.format));
+    let data = slicedData.map(item => ({ x: item.start, y: item.value }));
+    if (data === undefined || data.length === 0) {
+      data.push({ y: 0, x: startTime.format(inputFormat) });
+    }
+    let sum = data[0].y;
+    let start = moment(data[0].x, inputFormat).startOf(interval);
+
     // Add empty bars at start if needed
-    let added = 0;
-    while (
-      moment().diff(start, this.props.aggregateLength) + added <
-      this.convertTimeScopeToNumber()
-    ) {
+    let added = 1;
+    while (moment(start).diff(startTime, interval + "s") - added > -1) {
       aggregated.push({
         y: 0,
-        x: moment()
-          .subtract(
-            this.convertTimeScopeToNumber() - added,
-            timeFormats.interval
-          )
-          .format(timeFormats.format)
+        x: moment(startTime)
+          .add(added, interval + "s")
+          .format(outputFormat)
       });
       added++;
     }
 
-    for (let i = 1; i < reformatted.length; i++) {
+    let currentDataTime;
+    for (let i = 1; i < slicedLength; i++) {
+      currentDataTime = moment(data[i].x, inputFormat);
       if (
-        start.diff(
-          moment(reformatted[i].x, "X").startOf(timeFormats.startOf),
-          timeFormats.interval
-        ) > -1
+        moment(start).diff(
+          currentDataTime.startOf(interval),
+          interval + "s"
+        ) === 0
       ) {
-        sum += reformatted[i].y;
+        sum += data[i].y;
       } else {
         // Add empty bars inbetween if needed
         let skipped = 0;
         aggregated.push({
           y: sum,
-          x: start.format(timeFormats.format)
+          x: start.format(outputFormat)
         });
         while (
-          moment(start).diff(
-            moment(reformatted[i].x, "X"),
-            timeFormats.interval
-          ) +
-            skipped <
+          moment(start).diff(currentDataTime, interval + "s") + skipped <
           -1
         ) {
           aggregated.push({
             y: 0,
             x: moment(start)
-              .add(1 + skipped, timeFormats.interval)
-              .startOf(timeFormats.startOf)
-              .format(timeFormats.format)
+              .add(1 + skipped, interval + "s")
+              .startOf(interval)
+              .format(outputFormat)
           });
           skipped++;
         }
 
-        sum = reformatted[i].y;
-        start = moment(reformatted[i].x, "X").startOf(timeFormats.startOf);
+        sum = data[i].y;
+        start = currentDataTime.startOf(interval);
       }
     }
-    aggregated.push({ y: sum, x: start.format(timeFormats.format) });
+    aggregated.push({ y: sum, x: start.format(outputFormat) });
+
     // Add empty bars at end if needed
     while (
-      moment().diff(start.add(1, timeFormats.interval), timeFormats.interval) >
-      0
+      moment(endTime).diff(start.add(1, interval + "s"), interval + "s") > 0
     ) {
-      aggregated.push({ y: 0, x: start.format(timeFormats.format) });
+      aggregated.push({ y: 0, x: start.format(outputFormat) });
+    }
+    if (
+      moment(endTime).diff(start.add(1, interval + "s"), interval + "s") > -1
+    ) {
+      aggregated.push({
+        y: 0,
+        x: start.subtract(1, interval + "s").format(outputFormat)
+      });
     }
     return aggregated;
   };
@@ -194,31 +163,59 @@ class BarPlotter extends Component {
   render() {
     let aggregated = this.aggregateData();
 
-    return (
-      <ResponsiveContainer width="90%" height={300}>
-        <BarChart
-          width={730}
-          height={250}
-          // might want to throw away the first element
-          data={aggregated} //.slice(1, aggregated.length)}
-          margin={{ top: 20, right: 20, bottom: 10, left: 10 }}
-        >
-          <XAxis dataKey="x" domain={["auto", "auto"]} name="Time" unit="" />
-          <YAxis dataKey="y" name="Steps" unit="" type="number" />
-          <Bar dataKey="y" name="Steps/hour" fill="#ff7300" />
+    if (this.props.page === "Dashboard") {
+      return (
+        <ResponsiveContainer width="100%" height={200}>
+          <BarChart
+            width={400}
+            height={250}
+            data={aggregated}
+            margin={{ top: 10, right: 5, bottom: 0, left: 0 }}
+          >
+            <XAxis dataKey="x" domain={["auto", "auto"]} name="Time" unit="" />
+            <Bar dataKey="y" name="Steps/hour" fill="#EF87CE" />
+            <Tooltip cursor={false} />
+          </BarChart>
+        </ResponsiveContainer>
+      );
+    } else if (this.props.page === "Sammenlign") {
+      return (
+        <ResponsiveContainer width="100%" height={400}>
+          <BarChart
+            width={400}
+            height={250}
+            data={aggregated}
+            margin={{ top: 10, right: 5, bottom: 0, left: 0 }}
+          >
+            <XAxis dataKey="x" domain={["auto", "auto"]} name="Time" unit="" />
+            <YAxis dataKey="y" name="Steps" unit="" type="number" />
+            <Bar dataKey="y" name="Steps/hour" fill="#EF87CE" />
 
-          <Legend />
-          <Tooltip cursor={false} />
-        </BarChart>
-      </ResponsiveContainer>
-    );
+            <Legend />
+            <Tooltip cursor={false} />
+          </BarChart>
+        </ResponsiveContainer>
+      );
+    } else {
+      return (
+        <ResponsiveContainer width="100%" height={200}>
+          <BarChart
+            width={400}
+            height={250}
+            data={aggregated}
+            margin={{ top: 10, right: 5, bottom: 0, left: -40 }}
+          >
+            <XAxis dataKey="x" domain={["auto", "auto"]} name="Time" unit="" />
+            <YAxis dataKey="y" name="Steps" unit="" type="number" />
+            <Bar dataKey="y" name="Steps/hour" fill="#EF87CE" />
+
+            <Legend />
+            <Tooltip cursor={false} />
+          </BarChart>
+        </ResponsiveContainer>
+      );
+    }
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    patient: state.patient
-  };
-}
-
-export default connect(mapStateToProps)(BarPlotter);
+export default BarPlotter;
