@@ -1,11 +1,22 @@
-import React from "react";
+import React, { Component } from "react";
 import InnsiktButton from "../InnsiktButton/innsiktButton";
+import { connect } from "react-redux";
+import moment from "moment";
+import BarPlotterV2 from "../../components/Barplotter/barPlotterV2";
 
-const skrittContent = () => {
+const skrittContent = data => {
   return (
     <div>
-      <div style={{ "margin-right": "40px" }}>
-        Her skal det stå noe om antall skritt
+      <div style={{ "margin-bottom": "40px" }}>
+        <BarPlotterV2
+          start={moment().subtract(1, "week")}
+          end={moment()}
+          interval={"day"}
+          outputFormat={"ddd"}
+          data={data}
+          legend="off"
+          page="Dashboard"
+        />
       </div>
       <InnsiktButton linkTo={"/skritt"} />
     </div>
