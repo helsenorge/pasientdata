@@ -40,7 +40,7 @@ class MenuBar extends Component {
             <li className="liBar">
               <NavLink
                 to="/dashboard"
-                className="menu-link"
+                className="menu-link click-menuBar-open"
                 onClick={this.toggle}
               >
                 Innsikt
@@ -48,7 +48,11 @@ class MenuBar extends Component {
               {}
             </li>
             <li className="liBar">
-              <NavLink to="/skritt" className="menu-link" onClick={this.toggle}>
+              <NavLink
+                to="/skritt"
+                className="menu-link click-menuBar-open"
+                onClick={this.toggle}
+              >
                 Sammenlign data
               </NavLink>
               {}
