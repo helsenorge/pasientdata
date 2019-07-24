@@ -8,8 +8,8 @@ import { connect } from "react-redux";
 import aggregateData from "../../Utils/aggregateData";
 import moment from "moment";
 
-class Oversiktkort extends Component {
-  oversiktContent = () => {
+class TrendGoalsCard extends Component {
+  trendGoalsContent = () => {
     let data = FakeGlucoseData();
     let upperLimit = 12;
     let lowerLimit = 5;
@@ -208,7 +208,10 @@ class Oversiktkort extends Component {
 
   render() {
     return (
-      <CardComponent title="Trender og Mål" content={this.oversiktContent()} />
+      <CardComponent
+        title="Trender og Mål"
+        content={this.trendGoalsContent()}
+      />
     );
   }
 }
@@ -220,4 +223,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(Oversiktkort);
+export default connect(mapStateToProps)(TrendGoalsCard);

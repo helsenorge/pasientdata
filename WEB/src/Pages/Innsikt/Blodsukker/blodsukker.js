@@ -6,6 +6,12 @@ import PatternCard from "../../../components/InsightCards/patternCard";
 import ViewCard from "../../../components/InsightCards/viewCard";
 import CompareDataCard from "../../../components/InsightCards/compareDataCard";
 import GoalCard from "../../../components/InsightCards/goalCard";
+import {
+  bloodSugarGreatestChange,
+  bloodSugarFluctuations
+} from "../../../Utils/PatternCalculations/bloodSugarPatterns";
+import { connect } from "react-redux";
+import FakeGlucoseData from "../../../Utils/fakeGlucose";
 
 class Blodsukker extends Component {
   render() {
@@ -15,7 +21,14 @@ class Blodsukker extends Component {
         <ViewCard />
         <TrendGoalsCard datatype="Blodsukker" />
         <GraphCard datatype="Blodsukker" />
-        <PatternCard datatype="Blodsukker" />
+        <PatternCard
+          datatype="Blodsukker"
+          interval={"day"}
+          trianglePic={require("../../../Images/pinkUpTriangle.svg")}
+          fluctuation={bloodSugarFluctuations}
+          greatestChange={bloodSugarGreatestChange}
+          data={FakeGlucoseData()}
+        />
         <GoalCard />
         <CompareDataCard />
       </div>
@@ -23,4 +36,11 @@ class Blodsukker extends Component {
   }
 }
 
-export default Blodsukker;
+function mapStateToProps(state) {
+  return {
+    patient: state.patient,
+    baseInfo: state.baseInfo
+  };
+}
+
+export default connect(mapStateToProps)(Blodsukker);
