@@ -43,56 +43,56 @@ class MenuBar extends Component {
       menu2 = (
         <div className="menuBar2 menuBar-open2 pageLink">
           <ul className="ulBar">
-            <li className="liBar">
+            <li className="liBar2">
               <NavLink
-                to="/blodsukker"
-                className="menu-link click-menuBar-open"
-                onClick={this.toggle2}
+                to="/bloodsugar"
+                className="menu-link2 click-menuBar-open2"
+                onClick={() => {this.toggle2(); this.toggle();}}
               >
                 Blodsukker
               </NavLink>
             </li>
-            <li className="liBar">
+            <li className="liBar2">
               <NavLink
                 to="/insulin"
-                className="menu-link click-menuBar-open"
-                onClick={this.toggle2}
+                className="menu-link2 click-menuBar-open2"
+                onClick={() => {this.toggle2(); this.toggle();}}
               >
                 Insulin
               </NavLink>
             </li>
-            <li className="liBar">
+            <li className="liBar2">
               <NavLink
-                to="/skritt"
-                className="menu-link click-menuBar-open"
-                onClick={this.toggle2}
+                to="/steps"
+                className="menu-link2 click-menuBar-open2"
+                onClick={() => {this.toggle2(); this.toggle();}}
               >
                 Skritt
               </NavLink>
             </li>
-            <li className="liBar">
+            <li className="liBar2">
               <NavLink
-                to="/vekt"
-                className="menu-link click-menuBar-open"
-                onClick={this.toggle2}
+                to="/weight"
+                className="menu-link2 click-menuBar-open2"
+                onClick={() => {this.toggle2(); this.toggle();}}
               >
                 Vekt
               </NavLink>
             </li>
-            <li className="liBar">
+            <li className="liBar2">
               <NavLink
-                to="/blodtrykk"
-                className="menu-link click-menuBar-open"
-                onClick={this.toggle2}
+                to="/bloodpressure"
+                className="menu-link2 click-menuBar-open2"
+                onClick={() => {this.toggle2(); this.toggle();}}
               >
                 Blodtrykk
               </NavLink>
             </li>
-            <li className="liBar">
+            <li className="liBar2">
               <NavLink
-                to="/karbohydrater"
-                className="menu-link click-menuBar-open"
-                onClick={this.toggle2}
+                to="/carbohydrates"
+                className= "menu-link2 click-menuBar-open2"
+                onClick={() => {this.toggle2(); this.toggle();}}
               >
                 Karbohydrater
               </NavLink>
