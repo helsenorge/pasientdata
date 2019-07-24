@@ -1,0 +1,26 @@
+.flex-container-pattern {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.flex-children-pattern-text {
+  flex: 1;
+}
+
+.flex-children-pattern-image {
+  flex-basis: auto;
+
+  width: 60px;
+  margin-right: 15px;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+}
+
+.squiggly-icon {
+  margin-top: 3px;
+}
+
+.arrow-icon {
+  margin-top: 9px;
+}
