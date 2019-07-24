@@ -3,3 +3,8 @@
   justify-content: flex-end;
   align-items: flex-end;
 }
+
+.custom-form-select {
+  border: 3px solid #006d84;
+  border-radius: 0;
+}

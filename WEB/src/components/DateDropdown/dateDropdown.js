@@ -23,7 +23,7 @@ class DateDropdown extends Component {
 
   render() {
     return (
-      <FormSelect>
+      <FormSelect className="custom-form-select">
         <option value="1">Dag</option>
         <option value="2">Uke</option>
         <option value="3">To uker</option>
