@@ -8,3 +8,12 @@
   border: 3px solid #006d84;
   border-radius: 0;
 }
+
+.custom-form-select:active {
+  border: 3px solid #006d84;
+  border-radius: 0;
+}
+
+.custom-control option:hover {
+  background: #006d84;
+}
