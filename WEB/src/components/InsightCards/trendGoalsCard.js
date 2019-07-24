@@ -110,9 +110,9 @@ class Oversiktkort extends Component {
         <ResponsiveContainer
           className="flex-children-trend-goals"
           width={250}
-          height={200}
+          height={220}
         >
-          <PieChart width={1000} height={500}>
+          <PieChart width={1000} height={600}>
             <Pie
               data={[
                 { value: timeAbove, name: "Time above" },
