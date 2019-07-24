@@ -202,8 +202,8 @@ class Oversiktkort extends Component {
                       {returnString}
                     </text>
                     <text
-                      x={125 + 105 * Math.cos((-210 * Math.PI) / 180)}
-                      y={110 + 105 * Math.sin((-210 * Math.PI) / 180)}
+                      x={125 + 100 * Math.cos((-210 * Math.PI) / 180)}
+                      y={110 + 100 * Math.sin((-210 * Math.PI) / 180)}
                       fill="#8884d8"
                       textAnchor="middle" //{x > cx ? "start" : "end"}
                       dominantBaseline="end"
