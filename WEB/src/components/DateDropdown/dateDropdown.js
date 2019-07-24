@@ -23,26 +23,29 @@ class DateDropdown extends Component {
 
   render() {
     return (
-      <FormSelect className="custom-form-select">
-        <option className="custom-control" value="1">
+      <FormSelect
+        onChange={e => console.log(e.target.value)} // Change to a set state or smth when u want to actually use
+        className="custom-form-select"
+      >
+        <option className="custom-control" value="day">
           Dag
         </option>
-        <option className="custom-control" value="2">
+        <option className="custom-control" value="week">
           Uke
         </option>
-        <option className="custom-control" value="3">
+        <option className="custom-control" value="2weeks">
           To uker
         </option>
-        <option className="custom-control" value="4">
+        <option className="custom-control" value="month">
           Måned
         </option>
-        <option className="custom-control" value="5">
+        <option className="custom-control" value="3months">
           Tre måneder
         </option>
-        <option className="custom-control" value="6">
+        <option className="custom-control" value="year">
           År
         </option>
-        <option className="custom-control" value="7">
+        <option className="custom-control" value="custom">
           Tilpass dato...
         </option>
       </FormSelect>

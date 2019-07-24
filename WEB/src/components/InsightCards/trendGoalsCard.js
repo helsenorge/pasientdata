@@ -25,11 +25,16 @@ class TrendGoalsCard extends Component {
     let unit = "%";
     let trends;
     let hasUpperLimit = true;
+    let percentGoal;
+    let upperGoal = 80;
+    let lowerGoal = 70;
+    let pieSideSize = 20;
     switch (this.props.datatype) {
       case "Blodsukker":
         data = FakeGlucoseData();
         upperLimit = 12;
         lowerLimit = 5;
+        percentGoal = 65;
         trendValue = 2;
         goalValue = 75;
         trends = Trends(data, upperLimit, lowerLimit);
@@ -41,6 +46,7 @@ class TrendGoalsCard extends Component {
           (timeWithin * 100) / (timeAbove + timeWithin + timeBelow);
         unit = "%";
         console.log("Blodsukker");
+        hasUpperLimit = false;
         break;
       case "Insulin":
         data = this.props.patient.datasets[0].measurements;
@@ -56,6 +62,8 @@ class TrendGoalsCard extends Component {
         currentValue =
           (timeWithin * 100) / (timeAbove + timeWithin + timeBelow);
         unit = "%";
+        upperGoal = 90;
+        lowerGoal = 70;
         break;
       case "Skritt":
         data = this.props.patient.datasets[0].measurements;
@@ -81,6 +89,7 @@ class TrendGoalsCard extends Component {
         currentValue = mean;
         unit = " skritt/dag";
         hasUpperLimit = false;
+        pieSideSize = 2000;
         break;
       case "Vekt":
         break;
@@ -90,21 +99,86 @@ class TrendGoalsCard extends Component {
         break;
       default:
     }
-    let sum = timeAbove + timeBelow + timeWithin;
+    // let sum = timeAbove + timeBelow + timeWithin;
+
     let COLORS = ["#A61E7B", "#569B7E", "#E38B21"];
     if (!hasUpperLimit) {
-      COLORS = ["#E38B21", "#569B7E"];
+      COLORS = ["#569B7E", "#E38B21"];
     }
-    console.log("timewithin: ", timeWithin);
-    console.log("timeBelow: ", timeBelow);
+
     const goalArrowPic = require("../../Images/goalArrow.svg");
     const downTrianglePic = require("../../Images/greenDownTriangle.svg");
-    let angles = [
-      (-30 * Math.PI) / 180 + ((timeAbove / sum) * 240 * Math.PI) / 180,
-      (-30 * Math.PI) / 180 +
-        (((timeAbove + timeWithin) / sum) * 240 * Math.PI) / 180
-    ];
-    console.log(angles);
+    let angles = [];
+    let pieData;
+    let lowerText;
+    let upperText;
+    let goalText;
+    if (hasUpperLimit) {
+      if (unit === "%") {
+        pieData = [
+          { value: Math.min(pieSideSize, 100 - upperGoal), name: "Time above" },
+          { value: upperGoal - lowerGoal, name: "Time within" },
+          { value: Math.min(pieSideSize, lowerGoal), name: "Time Below" }
+        ];
+        lowerText = Math.max(0, lowerGoal - pieSideSize) + unit;
+        upperText = Math.min(100, upperGoal + pieSideSize) + unit;
+        goalText = lowerGoal + unit + " - " + upperGoal + unit;
+      } else {
+        pieData = [
+          { value: pieSideSize, name: "Time above" },
+          { value: upperGoal - lowerGoal, name: "Time within" },
+          {
+            value: Math.min(
+              currentValue - pieSideSize,
+              lowerGoal - pieSideSize
+            ),
+            name: "Time Below"
+          }
+        ];
+      }
+      angles = [
+        ((-30 +
+          (pieData[0].value /
+            (pieData[0].value + pieData[1].value + pieData[2].value)) *
+            240) *
+          Math.PI) /
+          180,
+        ((-30 +
+          ((pieData[0].value + pieData[1].value) /
+            (pieData[0].value + pieData[1].value + pieData[2].value)) *
+            240) *
+          Math.PI) /
+          180,
+        0
+      ];
+    } else {
+      if (unit === "%") {
+        pieData = [
+          { value: Math.min(pieSideSize, 100 - goalValue), name: "Time above" },
+          { value: Math.min(pieSideSize, goalValue), name: "Time within" }
+        ];
+        lowerText = Math.max(0, goalValue - pieSideSize) + unit;
+        upperText = Math.min(100, goalValue + pieSideSize) + unit;
+        goalText = goalValue + unit;
+      } else {
+        pieData = [
+          { value: pieSideSize, name: "Time above" },
+          { value: pieSideSize, name: "Time within" }
+        ];
+      }
+      angles = [
+        0,
+        ((-30 +
+          (pieData[0].value / (pieData[0].value + pieData[1].value)) * 240) *
+          Math.PI) /
+          180,
+        0
+      ];
+      goalText = goalValue + " " + unit;
+    }
+    console.log("angles: ", angles);
+    console.log("pieData: ", pieData);
+
     return (
       <div className="flex-container-trend-goals outer-div-trend-goals">
         <ResponsiveContainer
@@ -114,11 +188,7 @@ class TrendGoalsCard extends Component {
         >
           <PieChart width={1000} height={600}>
             <Pie
-              data={[
-                { value: timeAbove, name: "Time above" },
-                { value: timeWithin, name: "Time within" },
-                { value: timeBelow, name: "Time Below" }
-              ]}
+              data={pieData}
               dataKey="value"
               nameKey="name"
               startAngle={-30}
@@ -126,39 +196,54 @@ class TrendGoalsCard extends Component {
               innerRadius={60}
               outerRadius={80}
               fill="#979797"
-              label={({
-                cx,
-                cy,
-                midAngle,
-                innerRadius,
-                outerRadius,
-                value,
-                index
-              }) => {
-                const RADIAN = Math.PI / 180;
-                const radius = 10 + innerRadius + (outerRadius - innerRadius);
-                let x = cx + radius * Math.cos(-midAngle * RADIAN);
-                let y = cy + radius * Math.sin(-midAngle * RADIAN);
+              label={({ cx, cy, index }) => {
                 let returnString = "";
-                if (index === 0 && hasUpperLimit) {
-                  returnString = upperLimit;
-                  x = cx + radius * Math.cos(-angles[index]);
-                  y = cy + radius * Math.sin(-angles[index]);
+                if (index === 0) {
+                  if (hasUpperLimit) {
+                    returnString = upperGoal + unit;
+                  } else {
+                    returnString = "";
+                  }
                 } else if (index === 1) {
-                  returnString = lowerLimit;
-                  x = cx + radius * Math.cos(-angles[index]);
-                  y = cy + radius * Math.sin(-angles[index]);
+                  if (hasUpperLimit) {
+                    returnString = lowerGoal + unit;
+                  } else {
+                    returnString = goalValue + unit;
+                  }
+                } else {
+                  returnString = "";
                 }
+
                 return (
-                  <text
-                    x={x}
-                    y={y}
-                    fill="#8884d8"
-                    textAnchor={x > cx ? "start" : "end"}
-                    dominantBaseline="end"
-                  >
-                    {returnString}
-                  </text>
+                  <React.Fragment>
+                    <text
+                      x={cx + 90 * Math.cos(-angles[index])}
+                      y={cy + 90 * Math.sin(-angles[index])}
+                      fill="#8884d8"
+                      textAnchor="middle"
+                      dominantBaseline="end"
+                    >
+                      {returnString}
+                    </text>
+                    <text
+                      x={cx + 100 * Math.cos((-210 * Math.PI) / 180)}
+                      y={cy + 100 * Math.sin((-210 * Math.PI) / 180)}
+                      fill="#8884d8"
+                      textAnchor="middle"
+                      dominantBaseline="end"
+                    >
+                      {lowerText}
+                    </text>
+                    <text
+                      x={cx + 105 * Math.cos((30 * Math.PI) / 180)}
+                      y={cy + 105 * Math.sin((30 * Math.PI) / 180)}
+                      fill="#8884d8"
+                      textAnchor="middle"
+                      dominantBaseline="end"
+                    >
+                      {upperText}
+                    </text>
+                  </React.Fragment>
                 );
               }}
               labelLine={false}
@@ -183,9 +268,7 @@ class TrendGoalsCard extends Component {
             />
             <div className="flex-children-trend-goals flex-side-container-trend-goals">
               <div className="flex-children-trend-goals">Mål:</div>
-              <div className="flex-children-trend-goals">
-                {goalValue} {unit}
-              </div>
+              <div className="flex-children-trend-goals">{goalText}</div>
             </div>
           </div>
           <div className="flex-children-trend-goals flex-container-trend-goals lower-trend-goals-div">
