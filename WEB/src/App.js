@@ -31,13 +31,13 @@ class App extends Component {
             <Route exact path="/" component={FHIRCommunication} />
             <Route path="/login" component={FHIRCommunication} />
             <Route path="/dashboard" component={Dashboard} />
-            <Route path="/blodsukker" component={Blodsukker} />
+            <Route path="/bloodsugar" component={Blodsukker} />
             <Route path="/insulin" component={Insulin} />
-            <Route path="/skritt" component={Skritt} />
-            <Route path="/vekt" component={Vekt} />
-            <Route path="/blodtrykk" component={Blodtrykk} />
-            <Route path="/karbohydrater" component={Karbohydrater} />
-            <Route path="/fysiskAktivitet" component={FysiskAktivitet} />
+            <Route path="/steps" component={Skritt} />
+            <Route path="/weight" component={Vekt} />
+            <Route path="/bloodpressure" component={Blodtrykk} />
+            <Route path="/carbohydrates" component={Karbohydrater} />
+            <Route path="/physicalactivity" component={FysiskAktivitet} />
             <Route path="/comparedata" component={CompareData} />
             <Route path="/mygoals" component={MyGoals} />
             <Route path="/steps" component={Steps} />

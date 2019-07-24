@@ -3,11 +3,11 @@ import { connect } from "react-redux";
 import FHIRConnection from "../../FHIRCommunication";
 import CardComponent from "../../components/Card/cardComponent";
 import blodsukkerContent from "../../components/DashboardContent/blodsukkerContent";
-import fysiskAktivitetContent from "../../components/DashboardContent/fysiskAktivitetContent";
+import PhysicalActivityContent from "../../components/DashboardContent/physicalActivityContent";
 import insulinContent from "../../components/DashboardContent/insulinContent";
-import karbohydraterContent from "../../components/DashboardContent/karbohydraterContent";
-import skrittContent from "../../components/DashboardContent/skrittContent";
-import vektContent from "../../components/DashboardContent/vektContent";
+import carbohydratesContent from "../../components/DashboardContent/carbohydratesContent";
+import stepsContent from "../../components/DashboardContent/stepsContent";
+import weightContent from "../../components/DashboardContent/weightContent";
 import "./dashboard.css";
 import AddDataContent from "../../components/DashboardContent/addDataContent";
 import changeGoalsContent from "../../components/DashboardContent/changeGoalsContent";
@@ -24,7 +24,7 @@ class Dashboard extends Component {
             <CardComponent
               className="flex-children"
               title={"Insulin"}
-              content={skrittContent(
+              content={stepsContent(
                 this.props.patient.datasets[0].measurements,
                 "/insulin"
               )}
@@ -32,9 +32,9 @@ class Dashboard extends Component {
             <CardComponent
               className="flex-children"
               title={"Skritt"}
-              content={skrittContent(
+              content={stepsContent(
                 this.props.patient.datasets[0].measurements,
-                "/skritt"
+                "/steps"
               )}
             />
           </div>
@@ -49,17 +49,17 @@ class Dashboard extends Component {
             <CardComponent
               className="flex-children"
               title={"Karbo"}
-              content={skrittContent(
+              content={stepsContent(
                 this.props.patient.datasets[3].measurements,
-                "/karbohydrater"
+                "/carbohydrates"
               )}
             />
             <CardComponent
               className="flex-children"
               title={"Vekt"}
-              content={skrittContent(
+              content={stepsContent(
                 this.props.patient.datasets[1].measurements,
-                "/vekt"
+                "/weight"
               )}
             />
           </div>
@@ -67,9 +67,9 @@ class Dashboard extends Component {
             <CardComponent
               className="flex-children"
               title={"Fysisk aktivitet"}
-              content={skrittContent(
+              content={stepsContent(
                 this.props.patient.datasets[3].measurements,
-                "/fysiskAktivitet"
+                "/physicalactivity"
               )}
             />
             <div className="flex-children" style={{ "margin-right": "8px" }} />

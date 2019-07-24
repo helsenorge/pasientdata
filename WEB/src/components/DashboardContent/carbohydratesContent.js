@@ -2,15 +2,15 @@ import React from "react";
 import "./dashboardContent.css";
 import InsightButton from "../InsightButton/insightButton";
 
-const karbohydraterContent = () => {
+const carbohydratesContent = () => {
   return (
     <div>
       <div style={{ "margin-right": "40px" }}>
         Her skal det stå noe om karbohydrater
       </div>
-      <InsightButton linkTo={"/karbohydrater"} />
+      <InsightButton linkTo={"/carbohydrates"} />
     </div>
   );
 };
 
-export default karbohydraterContent;
+export default carbohydratesContent;

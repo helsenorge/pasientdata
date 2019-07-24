@@ -3,15 +3,14 @@ import { NavLink } from "react-router-dom";
 import "./navigationBar.css";
 
 class NavigationBar extends Component {
-
   scrollRight() {
     var x = document.getElementById("tab_list");
-    x.scrollBy({ top: 0, left: 100, behavior: 'smooth' });
+    x.scrollBy({ top: 0, left: 100, behavior: "smooth" });
   }
 
   scrollLeft() {
     var x = document.getElementById("tab_list");
-    x.scrollBy({ top: 0, left: -100, behavior: 'smooth' });
+    x.scrollBy({ top: 0, left: -100, behavior: "smooth" });
   }
 
   render() {
@@ -20,7 +19,7 @@ class NavigationBar extends Component {
         <ul className="tab_list" id="tab_list">
           <li className="li-wrapper">
             <NavLink
-              to="/blodsukker"
+              to="/bloodsugar"
               className="tab-anchor"
               activeClassName="tab_selected"
             >
@@ -38,7 +37,7 @@ class NavigationBar extends Component {
           </li>
           <li className="li-wrapper">
             <NavLink
-              to="/skritt"
+              to="/steps"
               className="tab-anchor"
               activeClassName="tab_selected"
             >
@@ -47,7 +46,7 @@ class NavigationBar extends Component {
           </li>
           <li className="li-wrapper">
             <NavLink
-              to="/vekt"
+              to="/weight"
               className="tab-anchor"
               activeClassName="tab_selected"
             >
@@ -56,7 +55,7 @@ class NavigationBar extends Component {
           </li>
           <li className="li-wrapper">
             <NavLink
-              to="/blodtrykk"
+              to="/bloodpressure"
               className="tab-anchor"
               activeClassName="tab_selected"
             >
@@ -65,7 +64,7 @@ class NavigationBar extends Component {
           </li>
           <li className="li-wrapper">
             <NavLink
-              to="/karbohydrater"
+              to="/carbohydrates"
               className="tab-anchor"
               activeClassName="tab_selected"
             >

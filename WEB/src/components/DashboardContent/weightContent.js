@@ -1,13 +1,13 @@
 import React from "react";
 import InsightButton from "../InsightButton/insightButton";
 
-const vektContent = () => {
+const weightContent = () => {
   return (
     <div>
       <div style={{ "margin-right": "40px" }}>Her skal det stå noe om vekt</div>
-      <InsightButton linkTo={"/vekt"} />
+      <InsightButton linkTo={"/weight"} />
     </div>
   );
 };
 
-export default vektContent;
+export default weightContent;

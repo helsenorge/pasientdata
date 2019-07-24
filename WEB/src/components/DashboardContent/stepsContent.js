@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import moment from "moment";
 import BarPlotter from "../Barplotter/barPlotter";
 
-const skrittContent = (data, link) => {
+const stepsContent = (data, link) => {
   return (
     <div>
       <div style={{ "margin-bottom": "40px" }}>
@@ -23,4 +23,4 @@ const skrittContent = (data, link) => {
   );
 };
 
-export default skrittContent;
+export default stepsContent;
