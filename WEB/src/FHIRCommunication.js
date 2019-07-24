@@ -4,6 +4,7 @@ import moment from "moment";
 import HomePage from "./Pages/LoginPage/loginPage";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
+import { setGoals } from "./Redux/actions";
 
 class FHIRCommunication extends React.Component {
   constructor(props) {
@@ -301,14 +302,116 @@ class FHIRCommunication extends React.Component {
       });
   };
 
+  addGoal = () => {
+    let goalId = "testGoal3";
+    // Note on the above: this can also be set from uuid(), but since we want only one
+    //                    of each dataset type connected to each patient this is better.
+    let {
+      unitDisplayString,
+      observationDisplayName,
+      unit,
+      UCUMCode
+    } = this.getStringsFromLOINC(
+      "55423-8" // Steps
+    );
+    let datasetIndex = 0; // steps
+    let lowerOrUpper = "lower";
+    let descriptionText = "Desired minimum number of steps in a day";
+
+    let goalJSON = {
+      resourceType: "Goal",
+      id: goalId,
+      meta: {
+        versionId: "1",
+        lastUpdated: moment().format("YYYY-MM-DDThh:mm:ss")
+      },
+      subject: {
+        reference:
+          "https://localhost:5001/fhir/Patient/" + this.props.patient.googleId
+      },
+      target: {
+        detailQuantity: {
+          value: 14000,
+          unit: unit,
+          system: "http://unitsofmeasure.org",
+          code: UCUMCode
+        }
+      },
+      note: { text: lowerOrUpper },
+      description: { text: descriptionText },
+      lifecycleStatus: "active"
+    };
+
+    let goalOptions = {
+      method: "PUT",
+      url: "http://localhost:5000/fhir/Goal/" + goalId,
+      headers: {
+        "cache-control": "no-cache",
+        Connection: "keep-alive",
+        "accept-encoding": "gzip, deflate",
+        Host: "localhost:5000",
+        "Cache-Control": "no-cache",
+        Accept: "*/*",
+        "Content-Type": "application/json",
+        "User-Agent": "PostmanRuntime/7.15.0"
+      },
+      body: JSON.stringify(goalJSON)
+    };
+
+    console.log("Adding goal to FHIR database");
+    this.state.client
+      .request(goalOptions, (error, response, body) => {})
+      .then(goal => {
+        // console.log("Goal: ", goal);
+        // this.setState({ observation });
+      });
+  };
+
+  readAllGoals = () => {
+    console.log("Reading all goals the patient has in the FHIR database");
+    const q1 = new URLSearchParams();
+    q1.set("subject", this.props.patient.googleId);
+    this.state.client
+      .request(`Goal?${q1}`, {
+        pageLimit: 0,
+        flat: true
+      })
+      .then(goalsMsg => {
+        console.log(goalsMsg);
+        let stateGoals = [];
+        // for (let i = 0; i < goals.length; i++) {}
+        goalsMsg.map((item, index) => {
+          if (item.note[0].text === "range") {
+            stateGoals.push({
+              Name: item.id,
+              type: item.note[0].text,
+              lower: item.target[0].detailRange.low.value,
+              upper: item.target[0].detailRange.upper.value,
+              unit: item.taget[0].detailRange.low.unit
+            });
+          } else {
+            stateGoals.push({
+              Name: item.id,
+              type: item.note[0].text,
+              value: item.target[0].detailQuantity.value,
+              unit: item.target[0].detailQuantity.unit
+            });
+          }
+        });
+        this.props.setGoals(stateGoals);
+      });
+  };
+
   render() {
     if (this.props.baseInfo.isLoggedin) {
       return (
         <div>
           {/* moved them here, seems to have solved some issues, gets called after login has saved info to redux */}
-          {this.addPatientIfNeeded()}
+          {/* {this.addPatientIfNeeded()}
           {this.addObservations()}
-          {this.readAllObservations()}
+          {this.readAllObservations()} */}
+          {/* {this.addGoal()} */}
+          {this.readAllGoals()}
 
           <Redirect to="/dashboard" />
         </div>
@@ -323,6 +426,8 @@ class FHIRCommunication extends React.Component {
   }
 }
 
+const mapDispatchToProps = { setGoals };
+
 function mapStateToProps(state) {
   return {
     patient: state.patient,
@@ -330,4 +435,7 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(FHIRCommunication);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(FHIRCommunication);
