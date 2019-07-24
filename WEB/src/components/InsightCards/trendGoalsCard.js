@@ -93,7 +93,7 @@ class Oversiktkort extends Component {
     let sum = timeAbove + timeBelow + timeWithin;
     let COLORS = ["#A61E7B", "#569B7E", "#E38B21"];
     if (!hasUpperLimit) {
-      COLORS = ["#569B7E", "#E38B21"];
+      COLORS = ["#E38B21", "#569B7E"];
     }
     console.log("timewithin: ", timeWithin);
     console.log("timeBelow: ", timeBelow);
@@ -135,17 +135,11 @@ class Oversiktkort extends Component {
                 value,
                 index
               }) => {
-                console.log("cx: ", cx);
-                console.log("cy: ", cy);
                 const RADIAN = Math.PI / 180;
                 const radius = 10 + innerRadius + (outerRadius - innerRadius);
                 let x = cx + radius * Math.cos(-midAngle * RADIAN);
                 let y = cy + radius * Math.sin(-midAngle * RADIAN);
                 let returnString = "";
-                console.log("value: ", value);
-                console.log("midAngle: ", midAngle);
-                const angle = (timeAbove / sum) * 240 * RADIAN;
-                console.log("angle: ", angle);
                 if (index === 0 && hasUpperLimit) {
                   returnString = upperLimit;
                   x = cx + radius * Math.cos(-angles[index]);
