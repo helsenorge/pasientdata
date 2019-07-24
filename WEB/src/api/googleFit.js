@@ -1,6 +1,5 @@
 import axios from "axios";
 import moment from "moment";
-import { func } from "prop-types";
 
 var urlBase =
   "https://www.googleapis.com/fitness/v1/users/me/dataSources/derived:com.google.";

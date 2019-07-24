@@ -1,4 +1,3 @@
-import React, { Component } from "react";
 import findStartAndEndIndex from "../findStartAndEndIndex";
 import Trends from "../trends";
 import aggregateData from "../aggregateData";

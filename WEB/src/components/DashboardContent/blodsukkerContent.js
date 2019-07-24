@@ -12,7 +12,7 @@ const blodsukkerContent = () => {
           <div className="third-title">Tid innom gränsvärden:</div>
           <div>
             <h1>85%</h1>
-            <br />{" "}
+            <br />
           </div>
           <div>
             <h3>(78%)</h3>

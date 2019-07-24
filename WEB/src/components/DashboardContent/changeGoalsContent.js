@@ -1,7 +1,7 @@
 import React from "react";
 import { DisplayButton } from "@helsenorge/toolkit/components/atoms/buttons/display-button";
 import { Link } from "react-router-dom";
-import "./dashboardContent.css";
+import "./changeGoalsContent.css";
 
 const changeGoalsContent = () => {
   return (
