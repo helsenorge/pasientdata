@@ -1,0 +1,36 @@
+.compare-data-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.goal-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.button-sizing {
+  width: 149px;
+}
+
+.view-div {
+  position: absolute;
+  top: 18px;
+  flex: 1;
+}
+
+.view-child {
+  flex: 1;
+  width: 200px;
+  position: absolute;
+  right: 16px;
+  top: 10px;
+}
+
+.view-parent {
+  display: flex;
+  flex-direction: column;
+  align-items: space-around;
+  height: 20px;
+}

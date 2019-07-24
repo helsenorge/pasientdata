@@ -1,7 +1,8 @@
-import React, { Component } from "react";
+import React from "react";
 import ChevronRightRounded from "@helsenorge/toolkit/components/icons/ChevronRightRounded";
 import { DisplayButton } from "@helsenorge/toolkit/components/atoms/buttons/display-button";
-import "./blodsukkerContent.css";
+import "./dashboardContent.css";
+import { Link } from "react-router-dom";
 
 const blodsukkerContent = () => {
   return (
@@ -46,18 +47,19 @@ const blodsukkerContent = () => {
       </div>
       <div>
         <div className="button-style">
-          <DisplayButton
-            style="flex: 1"
-            onClick={() => {
-              /* tom */
-            }}
-            secondary
-          >
-            <div className="flex-container-button">
-              <div className="flex-children-button">Utforsk</div>
-              <ChevronRightRounded className="flex-children-button-icon" />
-            </div>
-          </DisplayButton>
+          <Link to={"/bloodsugar"} style={{ "border-bottom": "none" }}>
+            <DisplayButton
+              onClick={() => {
+                /* tom */
+              }}
+              secondary
+            >
+              <div className="flex-container-button">
+                <div className="flex-children-button">Utforsk</div>
+                <ChevronRightRounded className="flex-children-button-icon chevronStyle" />
+              </div>
+            </DisplayButton>
+          </Link>
         </div>
       </div>
     </div>

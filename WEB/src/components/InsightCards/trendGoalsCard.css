@@ -1,0 +1,29 @@
+.flex-container-trend-goals {
+  display: flex;
+}
+
+.flex-side-container-trend-goals {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-children-trend-goals {
+  flex: 1;
+}
+
+.trend-pic {
+  max-height: 40px;
+  margin-right: 5px;
+}
+
+.outer-div-trend-goals {
+  width: 100%;
+}
+
+.upper-trend-goals-div {
+  border-bottom: 1px solid black;
+}
+
+.lower-trend-goals-div {
+  margin-top: 18px;
+}

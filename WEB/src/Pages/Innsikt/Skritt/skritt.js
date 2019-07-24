@@ -1,18 +1,24 @@
 import React, { Component } from "react";
 import NavigationBar from "../../../components/NavigationBar/navigationBar.js";
-import OversiktKort from "../../../components/InnsiktsKort/oversiktKort";
-import GrafKort from "../../../components/InnsiktsKort/grafKort";
-import MonsterKort from "../../../components/InnsiktsKort/monsterKort";
+import TrendGoalsCard from "../../../components/InsightCards/trendGoalsCard";
+import GraphCard from "../../../components/InsightCards/graphCard";
+import PatternCard from "../../../components/InsightCards/patternCard";
+import ViewCard from "../../../components/InsightCards/viewCard";
+import CompareDataCard from "../../../components/InsightCards/compareDataCard";
+import GoalCard from "../../../components/InsightCards/goalCard";
 
 class Skritt extends Component {
   state = {};
   render() {
     return (
-      <div>
+      <div style={{ margin: "0 0 8px" }}>
         <NavigationBar />
-        <OversiktKort datatype="Skritt" />
-        <GrafKort datatype="Skritt" />
-        <MonsterKort datatype="Skritt" />
+        <ViewCard />
+        <TrendGoalsCard datatype="Skritt" />
+        <GraphCard datatype="Skritt" />
+        <PatternCard datatype="Skritt" />
+        <GoalCard />
+        <CompareDataCard />
       </div>
     );
   }

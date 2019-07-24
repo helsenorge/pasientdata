@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import TimeButtonGroup from "../../components/TimeButtonGroup/timeButtonGroup";
-import BarPlotterV2 from "../../components/Barplotter/barPlotterV2";
+import BarPlotter from "../../components/Barplotter/barPlotter";
 import { connect } from "react-redux";
 import NavigationBar from "../../components/NavigationBar/navigationBar.js";
 import moment from "moment";
@@ -43,6 +43,8 @@ class Steps extends Component {
         switch (interval) {
           case "minute":
             return "HH:mm:ss";
+          default:
+            return;
         }
       case "hour":
         switch (interval) {
@@ -51,7 +53,7 @@ class Steps extends Component {
           case "hour":
             return "HH:mm";
           default:
-            break;
+            return;
         }
       case "day":
         switch (interval) {
@@ -61,6 +63,8 @@ class Steps extends Component {
             return "HH:mm";
           case "day":
             return "ddd";
+          default:
+            return;
         }
       case "week":
         switch (interval) {
@@ -72,6 +76,8 @@ class Steps extends Component {
             return "ddd";
           case "week":
             return "ww";
+          default:
+            return;
         }
       case "month":
         switch (interval) {
@@ -85,6 +91,8 @@ class Steps extends Component {
             return "ww";
           case "month":
             return "MM";
+          default:
+            return;
         }
       case "year":
         switch (interval) {
@@ -100,6 +108,8 @@ class Steps extends Component {
             return "MM.YYYY";
           case "year":
             return "YYYY";
+          default:
+            return;
         }
       default:
         return "YYYY-MM-DDTHH:mm:ss";
@@ -265,12 +275,13 @@ class Steps extends Component {
             </button>
           </div>
 
-          <BarPlotterV2
+          <BarPlotter
             start={start}
             end={end}
             interval={this.state.interval}
             outputFormat={this.state.format}
             data={this.props.patient.datasets[0].measurements}
+            page="Sammenlign"
           />
           <div>Interval: </div>
           <TimeButtonGroup
