@@ -7,13 +7,16 @@
 .custom-form-select {
   border: 3px solid #006d84;
   border-radius: 0;
+  outline-color: #006d84;
 }
 
-.custom-form-select:active {
+.custom-form-select:enabled {
   border: 3px solid #006d84;
   border-radius: 0;
+  box-shadow: #006d84;
 }
-
-.custom-control option:hover {
+/* 
+.custom-control.hover {
   background: #006d84;
-}
+  color: red;
+} */
