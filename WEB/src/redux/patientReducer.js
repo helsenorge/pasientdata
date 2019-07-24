@@ -25,6 +25,7 @@ export default function patientReducer(state = initialState, action) {
         datasets: action.datasets
       };
     }
+
     case SET_GOALS: {
       return {
         ...state,
