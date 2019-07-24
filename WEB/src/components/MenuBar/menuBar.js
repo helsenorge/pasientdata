@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import "./menuBar.css";
 import Menu from "@helsenorge/toolkit/components/icons/Menu";
-import ChevronDownRounded from "@helsenorge/toolkit/components/icons/ChevronDownRounded";
 import Tiles from "@helsenorge/toolkit/components/icons/Tiles";
 import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
@@ -35,75 +34,75 @@ class MenuBar extends Component {
 
   render() {
     let menu;
-    // let menu2;
+    let menu2;
 
     // Tried to make a inner dropdown, does not work with fliped horizontal view, 
     // and does not close outer dropdown when clicked on inner buttons
-    
-    // if (this.state.isToggleOn2) {
-    //   menu2 = (
-    //     <div className="menuBar2 menuBar-open2 pageLink">
-    //       <ul className="ulBar">
-    //         <li className="liBar">
-    //           <NavLink
-    //             to="/blodsukker"
-    //             className="menu-link click-menuBar-open"
-    //             onClick={this.toggle2}
-    //           >
-    //             Blodsukker
-    //           </NavLink>
-    //         </li>
-    //         <li className="liBar">
-    //           <NavLink
-    //             to="/insulin"
-    //             className="menu-link click-menuBar-open"
-    //             onClick={this.toggle2}
-    //           >
-    //             Insulin
-    //           </NavLink>
-    //         </li>
-    //         <li className="liBar">
-    //           <NavLink
-    //             to="/skritt"
-    //             className="menu-link click-menuBar-open"
-    //             onClick={this.toggle2}
-    //           >
-    //             Skritt
-    //           </NavLink>
-    //         </li>
-    //         <li className="liBar">
-    //           <NavLink
-    //             to="/vekt"
-    //             className="menu-link click-menuBar-open"
-    //             onClick={this.toggle2}
-    //           >
-    //             Vekt
-    //           </NavLink>
-    //         </li>
-    //         <li className="liBar">
-    //           <NavLink
-    //             to="/blodtrykk"
-    //             className="menu-link click-menuBar-open"
-    //             onClick={this.toggle2}
-    //           >
-    //             Blodtrykk
-    //           </NavLink>
-    //         </li>
-    //         <li className="liBar">
-    //           <NavLink
-    //             to="/karbohydrater"
-    //             className="menu-link click-menuBar-open"
-    //             onClick={this.toggle2}
-    //           >
-    //             Karbohydrater
-    //           </NavLink>
-    //         </li>
-    //       </ul>
-    //     </div>
-    //   );
-    // } else {
-    //   menu2 = <div className=""> </div>;
-    // }
+
+    if (this.state.isToggleOn2) {
+      menu2 = (
+        <div className="menuBar2 menuBar-open2 pageLink">
+          <ul className="ulBar">
+            <li className="liBar">
+              <NavLink
+                to="/blodsukker"
+                className="menu-link click-menuBar-open"
+                onClick={this.toggle2}
+              >
+                Blodsukker
+              </NavLink>
+            </li>
+            <li className="liBar">
+              <NavLink
+                to="/insulin"
+                className="menu-link click-menuBar-open"
+                onClick={this.toggle2}
+              >
+                Insulin
+              </NavLink>
+            </li>
+            <li className="liBar">
+              <NavLink
+                to="/skritt"
+                className="menu-link click-menuBar-open"
+                onClick={this.toggle2}
+              >
+                Skritt
+              </NavLink>
+            </li>
+            <li className="liBar">
+              <NavLink
+                to="/vekt"
+                className="menu-link click-menuBar-open"
+                onClick={this.toggle2}
+              >
+                Vekt
+              </NavLink>
+            </li>
+            <li className="liBar">
+              <NavLink
+                to="/blodtrykk"
+                className="menu-link click-menuBar-open"
+                onClick={this.toggle2}
+              >
+                Blodtrykk
+              </NavLink>
+            </li>
+            <li className="liBar">
+              <NavLink
+                to="/karbohydrater"
+                className="menu-link click-menuBar-open"
+                onClick={this.toggle2}
+              >
+                Karbohydrater
+              </NavLink>
+            </li>
+          </ul>
+        </div>
+      );
+    } else {
+      menu2 = <div className=""> </div>;
+    }
 
     if (this.state.isToggleOn) {
       menu = (
@@ -122,10 +121,10 @@ class MenuBar extends Component {
               >
                 Innsikt
               </NavLink>
-              {/* <button className="button2" onClick={this.toggle2}>
+              <button className="button2" onClick={this.toggle2}>
                 <Menu className="menuButton2" />
               </button>
-              <div>{menu2}</div> */}
+              <div>{menu2}</div>
             </li>
             <li className="liBar">
               <NavLink
