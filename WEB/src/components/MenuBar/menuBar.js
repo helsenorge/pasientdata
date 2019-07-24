@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useRef, useEffect } from "react";
 import "./menuBar.css";
 import Menu from "@helsenorge/toolkit/components/icons/Menu";
 import Tiles from "@helsenorge/toolkit/components/icons/Tiles";
@@ -13,6 +13,8 @@ class MenuBar extends Component {
     this.toggle = this.toggle.bind(this);
     this.toggle2 = this.toggle2.bind(this);
     this.loggedOut = this.loggedOut.bind(this);
+    this.setWrapperRef = this.setWrapperRef.bind(this);
+    this.handleClickOutside = this.handleClickOutside.bind(this);
   }
 
   toggle() {
@@ -32,67 +34,108 @@ class MenuBar extends Component {
     this.props.onLoggedIn(false);
   }
 
+  setWrapperRef(node) {
+    this.wrapperRef = node;
+  }
+
+  handleClickOutside(event) {
+    if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
+      if (this.state.isToggleOn) {
+        this.toggle();
+      }
+      if (this.state.isToggleOn2) {
+        this.toggle2();
+      }
+    }
+  }
+
+  componentDidMount() {
+    document.addEventListener("mousedown", this.handleClickOutside);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener("mousedown", this.handleClickOutside);
+  }
+
   render() {
     let menu;
     let menu2;
 
-    // Tried to make a inner dropdown, does not work with fliped horizontal view, 
+    // Tried to make a inner dropdown, does not work with fliped horizontal view,
     // and does not close outer dropdown when clicked on inner buttons
 
     if (this.state.isToggleOn2) {
       menu2 = (
         <div className="menuBar2 menuBar-open2 pageLink">
           <ul className="ulBar">
-            <li className="liBar2">
+            <li className="liBar2 libar2-items">
               <NavLink
                 to="/bloodsugar"
                 className="menu-link2 click-menuBar-open2"
-                onClick={() => {this.toggle2(); this.toggle();}}
+                onClick={() => {
+                  this.toggle2();
+                  this.toggle();
+                }}
               >
                 Blodsukker
               </NavLink>
             </li>
-            <li className="liBar2">
+            <li className="liBar2 libar2-items">
               <NavLink
                 to="/insulin"
                 className="menu-link2 click-menuBar-open2"
-                onClick={() => {this.toggle2(); this.toggle();}}
+                onClick={() => {
+                  this.toggle2();
+                  this.toggle();
+                }}
               >
                 Insulin
               </NavLink>
             </li>
-            <li className="liBar2">
+            <li className="liBar2 libar2-items">
               <NavLink
                 to="/steps"
                 className="menu-link2 click-menuBar-open2"
-                onClick={() => {this.toggle2(); this.toggle();}}
+                onClick={() => {
+                  this.toggle2();
+                  this.toggle();
+                }}
               >
                 Skritt
               </NavLink>
             </li>
-            <li className="liBar2">
+            <li className="liBar2 libar2-items">
               <NavLink
                 to="/weight"
                 className="menu-link2 click-menuBar-open2"
-                onClick={() => {this.toggle2(); this.toggle();}}
+                onClick={() => {
+                  this.toggle2();
+                  this.toggle();
+                }}
               >
                 Vekt
               </NavLink>
             </li>
-            <li className="liBar2">
+            <li className="liBar2 libar2-items">
               <NavLink
                 to="/bloodpressure"
                 className="menu-link2 click-menuBar-open2"
-                onClick={() => {this.toggle2(); this.toggle();}}
+                onClick={() => {
+                  this.toggle2();
+                  this.toggle();
+                }}
               >
                 Blodtrykk
               </NavLink>
             </li>
-            <li className="liBar2">
+            <li className="liBar2 libar2-items">
               <NavLink
                 to="/carbohydrates"
-                className= "menu-link2 click-menuBar-open2"
-                onClick={() => {this.toggle2(); this.toggle();}}
+                className="menu-link2 click-menuBar-open2"
+                onClick={() => {
+                  this.toggle2();
+                  this.toggle();
+                }}
               >
                 Karbohydrater
               </NavLink>
@@ -101,7 +144,7 @@ class MenuBar extends Component {
         </div>
       );
     } else {
-      menu2 = <div className=""> </div>;
+      menu2 = <div className="menuBar2"> </div>;
     }
 
     if (this.state.isToggleOn) {
@@ -109,11 +152,11 @@ class MenuBar extends Component {
         <div className="menuBar menuBar-open pageLink">
           <ul className="ulBar">
             <li className="liBar">
-              <div>
+              <div className="minHelse">
                 <Tiles color="black" /> Min helse
               </div>
             </li>
-            <li className="liBar">
+            <li className="liBar libar-items">
               <NavLink
                 to="/dashboard"
                 className="menu-link click-menuBar-open"
@@ -124,9 +167,9 @@ class MenuBar extends Component {
               <button className="button2" onClick={this.toggle2}>
                 <Menu className="menuButton2" />
               </button>
-              <div>{menu2}</div>
+              {menu2}
             </li>
-            <li className="liBar">
+            <li className="liBar libar-items">
               <NavLink
                 to="/comparedata"
                 className="menu-link click-menuBar-open"
@@ -149,19 +192,21 @@ class MenuBar extends Component {
 
     return (
       <div>
-        <div className="bar row navbar">
-          <div className="menuPos textStyle">
-            <a className="aStyle" href="/dashboard">
-              Helseinnsikt
-            </a>
+        <div ref={this.setWrapperRef}>
+          <div className="bar row navbar">
+            <div className="menuPos textStyle">
+              <a className="aStyle" href="/dashboard">
+                Helseinnsikt
+              </a>
+            </div>
+            <div className="menuPos">
+              <button className="button" onClick={this.toggle}>
+                <Menu /> Meny
+              </button>
+            </div>
           </div>
-          <div className="menuPos">
-            <button className="button" onClick={this.toggle}>
-              <Menu /> Meny
-            </button>
-          </div>
+          <div>{menu}</div>
         </div>
-        <div>{menu}</div>
       </div>
     );
   }

@@ -2,7 +2,6 @@
   top: 48px;
   right: 0;
   left: 0;
-  height: 180px;
   z-index: 1;
   position: fixed;
   transform: translateY(-100%);
@@ -21,24 +20,17 @@
 }
 
 .menuBar2 {
-  top: 90px;
-  right: 0;
-  left: 0;
-  height: 200px;
-  z-index: 2;
-  position: fixed;
-  transform: translateY(-100%);
-  transition: transform 0.5s;
+  height: 0;
+  position: relative;
+  transition: height 0.5s;
   background-color: #e9eaec;
 }
 
 .menuBar-open2 {
-  transform: translateY(0);
-  box-shadow: 0 0 5px 1px #595959;
+  height: auto;
 }
 
 a.menu-link2 {
-  text-align: center;
   color: black;
   text-decoration: none;
   border: 0;
@@ -56,6 +48,29 @@ a.menu-link2 {
   font-weight: 500;
   line-height: 16px;
   font-family: Roboto;
+  padding-bottom: 6px;
+}
+
+.liBar2:first-child {
+  border-top: 0;
+}
+
+.liBar2:last-child {
+  padding-bottom: 6px;
+}
+
+.libar2-items {
+  padding-left: 16px;
+  padding-right: 117px;
+}
+
+.libar-items {
+  padding-left: 44px;
+  padding-right: 19px;
+}
+
+.minHelse {
+  padding-left: 8px;
 }
 
 .button2 {
@@ -119,7 +134,6 @@ a.menu-link2 {
 .pageLink {
   white-space: nowrap;
   margin: 0px auto;
-  text-align: center;
 }
 
 .linkText {
@@ -131,17 +145,28 @@ a.menu-link2 {
 }
 
 .ulBar {
-  padding: 0px;
+  padding-left: 8px;
+  padding-right: 8px;
   list-style-type: none;
   margin: 0;
 }
 
 .liBar {
-  padding: 8px 16px;
+  padding-left: 8px;
   border-top: 1px solid #979797;
   font-size: 18px;
   font-style: normal;
   font-weight: 500;
+  padding-bottom: 4px;
+  padding-top: 4px;
+}
+
+.liBar:first-child {
+  border-top: 0;
+}
+
+.libar-items {
+  padding-left: 44px;
 }
 
 a.menu-link {
@@ -203,8 +228,6 @@ a.menu-link {
     top: 48px;
     right: 0;
     left: 0;
-    height: 180px;
-    z-index: 1;
     position: fixed;
     transform: translateY(-100%);
     transition: transform 0.5s;
@@ -214,33 +237,33 @@ a.menu-link {
     transform: translateY(0);
     box-shadow: 0 0 5px 1px #595959;
   }
+
   .click-menuBar-open {
     transform: translateY(0);
   }
+
   .menuBar2 {
-    top: 90px;
-    right: 0;
-    left: 0;
-    height: 200px;
-    z-index: 2;
-    position: fixed;
-    transform: translateY(-100%);
-    transition: transform 0.5s;
+    height: 0;
+    position: relative;
+    transition: height 0.5s;
     background-color: #e9eaec;
   }
+
   .menuBar-open2 {
-    transform: translateY(0);
-    box-shadow: 0 0 5px 1px #595959;
+    height: auto;
   }
+
   a.menu-link2 {
     text-align: center;
     color: black;
     text-decoration: none;
     border: 0;
   }
+
   .click-menuBar-open2 {
     transform: translateY(0);
   }
+
   .liBar2 {
     padding: 6px 12px;
     border-top: 1px solid #979797;
@@ -249,7 +272,45 @@ a.menu-link {
     font-weight: 500;
     line-height: 16px;
     font-family: Roboto;
+    padding-bottom: 6px;
   }
+
+  .liBar2:first-child {
+    border-top: 0;
+  }
+
+  .liBar2:last-child {
+    padding-bottom: 6px;
+  }
+
+  .libar2-items {
+    padding-left: 16px;
+    padding-right: 117px;
+  }
+
+  .liBar {
+    padding-left: 8px;
+    border-top: 1px solid #979797;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    padding-bottom: 4px;
+    padding-top: 4px;
+  }
+
+  .liBar:first-child {
+    border-top: 0;
+  }
+
+  .libar-items {
+    padding-left: 44px;
+    padding-right: 19px;
+  }
+
+  .minHelse {
+    padding-left: 8px;
+  }
+
   .button {
     border-radius: 4px;
     border: none;
@@ -284,7 +345,7 @@ a.menu-link {
   }
 
   .menuButton2 {
-    width: 250px;
+    width: 450px;
   }
 
   .aStyle {
