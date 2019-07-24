@@ -15,10 +15,8 @@ export function bloodSugarFluctuations(period, data) {
   );
 
   let slicedData = data.slice(startIndex, endIndex);
-
   let dataArray;
   let sum = [];
-
   let start;
   let end;
   let greatestChange = 0;
@@ -26,12 +24,10 @@ export function bloodSugarFluctuations(period, data) {
   for (let i = 0; i < numIntervals * 60; i = i + 60) {
     dataArray = slicedData.slice(i, i + 60);
     let delta = 0;
-    console.log(dataArray);
     for (let j = 1; j < dataArray.length; j++) {
       delta = delta + Math.abs(dataArray[j - 1].value - dataArray[j].value);
     }
     sum.push(delta);
-
     if (delta >= greatestChange) {
       start = moment(dataArray[0].start).format("HH:mm");
       end = moment(dataArray[0].start)
@@ -48,5 +44,6 @@ export function bloodSugarGreatestChange(interval, data) {
   let startPeriod = "STARTPERIOD";
   let endPeriod = "ENDPERIOD";
   let amount = "AMOUNT";
+
   return [startPeriod, endPeriod, amount];
 }
