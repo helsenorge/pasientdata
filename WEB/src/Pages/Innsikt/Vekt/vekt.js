@@ -6,6 +6,11 @@ import PatternCard from "../../../components/InsightCards/patternCard";
 import ViewCard from "../../../components/InsightCards/viewCard";
 import CompareDataCard from "../../../components/InsightCards/compareDataCard";
 import GoalCard from "../../../components/InsightCards/goalCard";
+import {
+  bloodSugarGreatestChange,
+  bloodSugarFluctuations
+} from "../../../Utils/PatternCalculations/bloodSugarPatterns";
+import FakeGlucoseData from "../../../Utils/fakeGlucose";
 
 class Vekt extends Component {
   state = {};
@@ -16,7 +21,14 @@ class Vekt extends Component {
         <ViewCard />
         <TrendGoalsCard datatype="Vekt" />
         <GraphCard datatype="Vekt" />
-        <PatternCard datatype="Vekt" />
+        <PatternCard
+          datatype="Vekt"
+          interval={"day"}
+          trianglePic={require("../../../Images/pinkUpTriangle.svg")}
+          fluctuation={bloodSugarFluctuations}
+          greatestChange={bloodSugarGreatestChange}
+          data={FakeGlucoseData()}
+        />
         <GoalCard />
         <CompareDataCard />
       </div>

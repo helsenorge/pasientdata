@@ -6,6 +6,11 @@ import PatternCard from "../../../components/InsightCards/patternCard";
 import ViewCard from "../../../components/InsightCards/viewCard";
 import CompareDataCard from "../../../components/InsightCards/compareDataCard";
 import GoalCard from "../../../components/InsightCards/goalCard";
+import {
+  bloodSugarGreatestChange,
+  bloodSugarFluctuations
+} from "../../../Utils/PatternCalculations/bloodSugarPatterns";
+import FakeGlucoseData from "../../../Utils/fakeGlucose";
 
 class Skritt extends Component {
   state = {};
@@ -16,7 +21,14 @@ class Skritt extends Component {
         <ViewCard />
         <TrendGoalsCard datatype="Skritt" />
         <GraphCard datatype="Skritt" />
-        <PatternCard datatype="Skritt" />
+        <PatternCard
+          datatype="Skritt"
+          interval={"day"}
+          trianglePic={require("../../../Images/pinkUpTriangle.svg")}
+          fluctuation={bloodSugarFluctuations}
+          greatestChange={bloodSugarGreatestChange}
+          data={FakeGlucoseData()}
+        />
         <GoalCard />
         <CompareDataCard />
       </div>
