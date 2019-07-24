@@ -5,7 +5,6 @@ import "./styles.css";
 import { Switch, Route, BrowserRouter } from "react-router-dom";
 import Dashboard from "./Pages/Dashboard/dashboard";
 import Steps from "./Pages/Steps/steps";
-import Skritt from "./Pages/Innsikt/Skritt/skritt";
 import Blodsukker from "./Pages/Innsikt/Blodsukker/blodsukker";
 import Insulin from "./Pages/Innsikt/Insulin/insulin";
 import Vekt from "./Pages/Innsikt/Vekt/vekt";
