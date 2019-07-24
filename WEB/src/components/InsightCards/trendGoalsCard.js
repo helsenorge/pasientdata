@@ -98,7 +98,7 @@ class Oversiktkort extends Component {
     console.log("timewithin: ", timeWithin);
     console.log("timeBelow: ", timeBelow);
     const goalArrowPic = require("../../Images/goalArrow.svg");
-    const downTrianglePic = require("../../Images/downTriangle.svg");
+    const downTrianglePic = require("../../Images/greenDownTriangle.svg");
     let angles = [
       (-30 * Math.PI) / 180 + ((timeAbove / sum) * 240 * Math.PI) / 180,
       (-30 * Math.PI) / 180 +
