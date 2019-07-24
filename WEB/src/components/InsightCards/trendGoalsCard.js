@@ -26,6 +26,9 @@ class Oversiktkort extends Component {
     let trends;
     let hasUpperLimit = true;
     let percentGoal;
+    let upperGoal = 80;
+    let lowerGoal = 70;
+    let pieSideSize = 20;
     switch (this.props.datatype) {
       case "Blodsukker":
         data = FakeGlucoseData();
@@ -59,6 +62,8 @@ class Oversiktkort extends Component {
         currentValue =
           (timeWithin * 100) / (timeAbove + timeWithin + timeBelow);
         unit = "%";
+        upperGoal = 90;
+        lowerGoal = 70;
         break;
       case "Skritt":
         data = this.props.patient.datasets[0].measurements;
@@ -84,6 +89,7 @@ class Oversiktkort extends Component {
         currentValue = mean;
         unit = " skritt/dag";
         hasUpperLimit = false;
+        pieSideSize = 2000;
         break;
       case "Vekt":
         break;
@@ -102,42 +108,77 @@ class Oversiktkort extends Component {
 
     const goalArrowPic = require("../../Images/goalArrow.svg");
     const downTrianglePic = require("../../Images/greenDownTriangle.svg");
-    // let angles = [
-    //   (-30 * Math.PI) / 180 + ((timeAbove / sum) * 240 * Math.PI) / 180,
-    //   (-30 * Math.PI) / 180 +
-    //     (((timeAbove + timeWithin) / sum) * 240 * Math.PI) / 180
-    // ];
     let angles = [];
-    let sum = 0;
     let pieData;
+    let lowerText;
+    let upperText;
+    let goalText;
     if (hasUpperLimit) {
-      sum = 40 + upperLimit - lowerLimit;
+      if (unit === "%") {
+        pieData = [
+          { value: Math.min(pieSideSize, 100 - upperGoal), name: "Time above" },
+          { value: upperGoal - lowerGoal, name: "Time within" },
+          { value: Math.min(pieSideSize, lowerGoal), name: "Time Below" }
+        ];
+        lowerText = Math.max(0, lowerGoal - pieSideSize) + unit;
+        upperText = Math.min(100, upperGoal + pieSideSize) + unit;
+        goalText = lowerGoal + unit + " - " + upperGoal + unit;
+      } else {
+        pieData = [
+          { value: pieSideSize, name: "Time above" },
+          { value: upperGoal - lowerGoal, name: "Time within" },
+          {
+            value: Math.min(
+              currentValue - pieSideSize,
+              lowerGoal - pieSideSize
+            ),
+            name: "Time Below"
+          }
+        ];
+      }
       angles = [
-        (-30 * Math.PI) / 180 + ((20 / sum) * 240 * Math.PI) / 180,
-        (-30 * Math.PI) / 180 +
-          (((20 + upperLimit - lowerLimit) / sum) * 240 * Math.PI) / 180
-      ];
-      pieData = [
-        { value: 20, name: "Time above" },
-        { value: upperLimit - lowerLimit, name: "Time within" },
-        { value: 20, name: "Time Below" }
+        ((-30 +
+          (pieData[0].value /
+            (pieData[0].value + pieData[1].value + pieData[2].value)) *
+            240) *
+          Math.PI) /
+          180,
+        ((-30 +
+          ((pieData[0].value + pieData[1].value) /
+            (pieData[0].value + pieData[1].value + pieData[2].value)) *
+            240) *
+          Math.PI) /
+          180,
+        0
       ];
     } else {
-      sum = 20 + 100 - percentGoal;
-      angles = [(-30 * Math.PI) / 180, Math.PI / 2, (210 * Math.PI) / 180];
-      pieData = [
-        { value: Math.min(20, 100 - percentGoal), name: "Time above" },
-        { value: Math.min(20, percentGoal), name: "Time within" }
-      ];
+      if (unit === "%") {
+        pieData = [
+          { value: Math.min(pieSideSize, 100 - goalValue), name: "Time above" },
+          { value: Math.min(pieSideSize, goalValue), name: "Time within" }
+        ];
+        lowerText = Math.max(0, goalValue - pieSideSize) + unit;
+        upperText = Math.min(100, goalValue + pieSideSize) + unit;
+        goalText = goalValue + unit;
+      } else {
+        pieData = [
+          { value: pieSideSize, name: "Time above" },
+          { value: pieSideSize, name: "Time within" }
+        ];
+      }
       angles = [
         0,
         ((-30 +
           (pieData[0].value / (pieData[0].value + pieData[1].value)) * 240) *
           Math.PI) /
-          180
+          180,
+        0
       ];
+      goalText = goalValue + " " + unit;
     }
-    console.log(angles);
+    console.log("angles: ", angles);
+    console.log("pieData: ", pieData);
+
     return (
       <div className="flex-container-trend-goals outer-div-trend-goals">
         <ResponsiveContainer
@@ -147,11 +188,6 @@ class Oversiktkort extends Component {
         >
           <PieChart width={1000} height={600}>
             <Pie
-              // data={[
-              //   { value: timeAbove, name: "Time above" },
-              //   { value: timeWithin, name: "Time within" },
-              //   { value: timeBelow, name: "Time Below" }
-              // ]}
               data={pieData}
               dataKey="value"
               nameKey="name"
@@ -160,64 +196,52 @@ class Oversiktkort extends Component {
               innerRadius={60}
               outerRadius={80}
               fill="#979797"
-              label={({
-                cx,
-                cy,
-                midAngle,
-                innerRadius,
-                outerRadius,
-                value,
-                index
-              }) => {
-                const RADIAN = Math.PI / 180;
-                const radius = 10 + innerRadius + (outerRadius - innerRadius);
-                let x = cx + radius * Math.cos(-midAngle * RADIAN);
-                let y = cy + radius * Math.sin(-midAngle * RADIAN);
+              label={({ cx, cy, index }) => {
                 let returnString = "";
                 if (index === 0) {
-                  returnString = ""; //Math.max(20, percentGoal + 20);
-                  x = cx + radius * Math.cos(-angles[index]);
-                  y = cy + radius * Math.sin(-angles[index]);
+                  if (hasUpperLimit) {
+                    returnString = upperGoal + unit;
+                  } else {
+                    returnString = "";
+                  }
                 } else if (index === 1) {
-                  returnString = percentGoal + "%";
-                  x = cx + radius * Math.cos(-angles[index]);
-                  y = cy + radius * Math.sin(-angles[index]);
+                  if (hasUpperLimit) {
+                    returnString = lowerGoal + unit;
+                  } else {
+                    returnString = goalValue + unit;
+                  }
                 } else {
-                  returnString = ""; //Math.min(20, percentGoal - 20);
-                  x = cx + radius * Math.cos(-angles[index]);
-                  y = cy + radius * Math.sin(-angles[index]);
+                  returnString = "";
                 }
-                console.log("cx: ", cx);
-                console.log("cy: ", cy);
-                console.log("radius: ", radius);
+
                 return (
                   <React.Fragment>
                     <text
-                      x={x}
-                      y={y}
+                      x={cx + 90 * Math.cos(-angles[index])}
+                      y={cy + 90 * Math.sin(-angles[index])}
                       fill="#8884d8"
-                      textAnchor="middle" //{x > cx ? "start" : "end"}
+                      textAnchor="middle"
                       dominantBaseline="end"
                     >
                       {returnString}
                     </text>
                     <text
-                      x={125 + 100 * Math.cos((-210 * Math.PI) / 180)}
-                      y={110 + 100 * Math.sin((-210 * Math.PI) / 180)}
+                      x={cx + 100 * Math.cos((-210 * Math.PI) / 180)}
+                      y={cy + 100 * Math.sin((-210 * Math.PI) / 180)}
                       fill="#8884d8"
-                      textAnchor="middle" //{x > cx ? "start" : "end"}
+                      textAnchor="middle"
                       dominantBaseline="end"
                     >
-                      {Math.min(0, percentGoal - 20) + "%"}
+                      {lowerText}
                     </text>
                     <text
-                      x={125 + 105 * Math.cos((30 * Math.PI) / 180)}
-                      y={110 + 105 * Math.sin((30 * Math.PI) / 180)}
+                      x={cx + 105 * Math.cos((30 * Math.PI) / 180)}
+                      y={cy + 105 * Math.sin((30 * Math.PI) / 180)}
                       fill="#8884d8"
-                      textAnchor="middle" //{x > cx ? "start" : "end"}
+                      textAnchor="middle"
                       dominantBaseline="end"
                     >
-                      {Math.max(100, percentGoal + 20) + "%"}
+                      {upperText}
                     </text>
                   </React.Fragment>
                 );
@@ -232,24 +256,6 @@ class Oversiktkort extends Component {
                 value={Math.floor(currentValue) + unit}
                 position="center"
               />
-              <text
-                x={125 + 90 * Math.cos((-210 * Math.PI) / 180)}
-                y={110 + 90 * Math.sin((-210 * Math.PI) / 180)}
-                fill="#8884d8"
-                textAnchor="middle" //{x > cx ? "start" : "end"}
-                dominantBaseline="end"
-              >
-                {Math.min(0, percentGoal - 20)}
-              </text>
-              <text
-                x={125 + 90 * Math.cos((30 * Math.PI) / 180)}
-                y={110 + 90 * Math.sin((30 * Math.PI) / 180)}
-                fill="#8884d8"
-                textAnchor="middle" //{x > cx ? "start" : "end"}
-                dominantBaseline="end"
-              >
-                {Math.max(100, percentGoal + 20)}
-              </text>
             </Pie>
           </PieChart>
         </ResponsiveContainer>
@@ -262,9 +268,7 @@ class Oversiktkort extends Component {
             />
             <div className="flex-children-trend-goals flex-side-container-trend-goals">
               <div className="flex-children-trend-goals">Mål:</div>
-              <div className="flex-children-trend-goals">
-                {percentGoal} {unit}
-              </div>
+              <div className="flex-children-trend-goals">{goalText}</div>
             </div>
           </div>
           <div className="flex-children-trend-goals flex-container-trend-goals lower-trend-goals-div">
