@@ -1,5 +1,5 @@
 import { withRouter } from "react-router";
-import React, { Component } from "react";
+import { Component } from "react";
 
 class StartFromTop extends Component {
     componentDidUpdate(prevProps) {
