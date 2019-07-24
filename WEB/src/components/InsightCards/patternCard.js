@@ -53,7 +53,7 @@ class PatternCard extends Component {
   };
 
   render() {
-    console.log(this.props.data);
+    // console.log(this.props.data);
     return (
       <CardComponent title="Mønster" content={this.patternCardContent()} />
     );

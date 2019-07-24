@@ -45,7 +45,7 @@ class TrendGoalsCard extends Component {
         currentValue =
           (timeWithin * 100) / (timeAbove + timeWithin + timeBelow);
         unit = "%";
-        console.log("Blodsukker");
+        // console.log("Blodsukker");
         hasUpperLimit = false;
         break;
       case "Insulin":
@@ -81,7 +81,7 @@ class TrendGoalsCard extends Component {
           "ddd"
         );
         trends = Trends(aggregated, upperLimit, lowerLimit);
-        console.log(trends);
+        // console.log(trends);
         mean = trends.mean;
         timeAbove = trends.timeAbove;
         timeWithin = trends.timeWithin;
@@ -175,8 +175,8 @@ class TrendGoalsCard extends Component {
       ];
       goalText = goalValue + " " + unit;
     }
-    console.log("angles: ", angles);
-    console.log("pieData: ", pieData);
+    // console.log("angles: ", angles);
+    // console.log("pieData: ", pieData);
 
     return (
       <div className="flex-container-trend-goals outer-div-trend-goals">
