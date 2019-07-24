@@ -33,3 +33,12 @@ Here are some of the datasources regarding Google fit:
 
 #### Get Blood glucose:
 - Endpoint: derived:com.google.blood_glucose:com.google.android.gms:merged
+
+#### Get Activities:
+- Endpoint: derived:com.google.activity.segment:com.google.android.gms:merge_activity_segments
+
+##### Get Batched Activities:
+- Endpoint: derived:com.google.activity.segment:com.google.android.gms:session_activity_segment
+
+##### List of activity types:
+https://developers.google.com/fit/rest/v1/reference/activity-types

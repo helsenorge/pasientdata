@@ -1,5 +1,6 @@
 import axios from "axios";
 import moment from "moment";
+import { func } from "prop-types";
 
 var urlBase =
   "https://www.googleapis.com/fitness/v1/users/me/dataSources/derived:com.google.";
@@ -51,6 +52,22 @@ export function getUserBloodGlucose(response) {
     { headers: { Authorization: "Bearer " + response.accessToken } }
   );
 }
+
+export function getUserActivities(response) {
+  return axios.get(
+    urlBase +
+      "activity.segment:com.google.android.gms:merge_activity_segments/datasets/631148400000000000-1735686000000000000",
+    { headers: { Authorization: "Bearer " + response.accessToken } }
+  );
+}
+
+// export function getUserBatchedActivity(response) {
+//   return axios.get(
+//     urlBase +
+//       "activity.segment:com.google.android.gms:session_activity_segment/datasets/631148400000000000-1735686000000000000",
+//     { headers: { Authorization: "Bearer " + response.accessToken } }
+//   );
+// }
 
 export function formatNanosec(ns) {
   let momentObject = moment(Math.floor(ns / 1000000));
@@ -133,11 +150,22 @@ export function responseGoogle(response) {
       getUserHeight(response),
       getUserHeartBeat(response),
       getUserBloodPressure(response),
-      getUserBloodGlucose(response)
+      getUserBloodGlucose(response),
+      getUserActivities(response)
+      // getUserBatchedActivity(response)
     ])
     .then(
       axios.spread(
-        (steps, weight, height, heartBeat, bloodPressure, bloodGlucose) => {
+        (
+          steps,
+          weight,
+          height,
+          heartBeat,
+          bloodPressure,
+          bloodGlucose,
+          activities,
+          batchedActivities
+        ) => {
           let datasets = [];
           const pic = response.profileObj.imageUrl + "?sz=200";
 
@@ -147,6 +175,8 @@ export function responseGoogle(response) {
           let heartBeatMeasurement = structureDatasets(heartBeat);
           let bloodPressureMeasurement = structureDatasets(bloodPressure);
           let bloodGlucoseMeasurement = structureDatasets(bloodGlucose);
+          let activitiesMeasurement = structureDatasets(activities);
+          // let batchedActivitiesMeasurement = structureDatasets(batchedActivities);
 
           datasets.push(
             { name: "55423-8", measurements: stepMeasurement },
@@ -154,7 +184,9 @@ export function responseGoogle(response) {
             { name: "8302-2", measurements: heightMeasurement },
             { name: "8867-4", measurements: heartBeatMeasurement },
             { name: "85354-9", measurements: bloodPressureMeasurement },
-            { name: "2339-0", measurements: bloodGlucoseMeasurement }
+            { name: "2339-0", measurements: bloodGlucoseMeasurement },
+            { name: "activities", measurements: activitiesMeasurement }
+            // { name: "batchedActivities", measurements: batchedActivitiesMeasurement },
           );
 
           this.props.addInfo(
