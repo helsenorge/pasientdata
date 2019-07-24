@@ -7,6 +7,11 @@ import ViewCard from "../../../components/InsightCards/viewCard";
 import CompareDataCard from "../../../components/InsightCards/compareDataCard";
 import GoalCard from "../../../components/InsightCards/goalCard";
 import "../innsikt.css";
+import {
+  bloodSugarGreatestChange,
+  bloodSugarFluctuations
+} from "../../../Utils/PatternCalculations/bloodSugarPatterns";
+import FakeGlucoseData from "../../../Utils/fakeGlucose";
 
 class Karbohydrater extends Component {
   render() {
@@ -16,7 +21,14 @@ class Karbohydrater extends Component {
         <ViewCard />
         <TrendGoalsCard datatype="Karbohydrater" />
         <GraphCard datatype="Karbohydrater" />
-        <PatternCard datatype="Karbohydrater" />
+        <PatternCard
+          datatype="Karbohydrater"
+          interval={"day"}
+          trianglePic={require("../../../Images/pinkUpTriangle.svg")}
+          fluctuation={bloodSugarFluctuations}
+          greatestChange={bloodSugarGreatestChange}
+          data={FakeGlucoseData()}
+        />
         <GoalCard />
         <CompareDataCard />
       </div>

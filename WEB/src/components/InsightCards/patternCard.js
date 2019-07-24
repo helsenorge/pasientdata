@@ -12,7 +12,7 @@ class PatternCard extends Component {
       interval,
       data
     );
-    let period = this.props.fluctuation(interval, data);
+    let [start, end] = this.props.fluctuation(interval, data);
 
     return (
       <div>
@@ -40,9 +40,11 @@ class PatternCard extends Component {
             <img src={squigglyLinePic} alt={"logo"} className="squiggly-icon" />
           </div>
           <div className="flex-children-pattern-text">
-            {"Masse svingninger i blodsukkeret på " +
-              period +
-              ", slutt å spise så mye pizza og godteri"}
+            {"Mest svingninger i blodsukkeret mellom " +
+              start +
+              " og " +
+              end +
+              " denne dagen."}
           </div>
         </div>
         <div />

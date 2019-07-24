@@ -3,45 +3,47 @@ import findStartAndEndIndex from "../findStartAndEndIndex";
 import moment from "moment";
 
 export function bloodSugarFluctuations(period, data) {
-  /*eksempel for ukesview: 
-      slice data i dager
-      summer alle abs(delta) per dag
-      finn dagen med høyest sum*/
-
-  //slice i ønskede intervaller
   let interval = "hour";
   let numIntervals = 24;
   let { startIndex, endIndex } = findStartAndEndIndex(
     data,
     data.length,
     moment()
-      .subtract(1, "day")
+      .subtract(1, period)
       .format("YYYY-MM-DDTHH:mm:ss"),
     moment().format("YYYY-MM-DDTHH:mm:ss")
   );
+
   let slicedData = data.slice(startIndex, endIndex);
-  console.log(
-    moment()
-      .subtract(1, "day")
-      .format("YYYY-MM-DDTHH:mm:ss")
-  );
-  console.log(moment().format("YYYY-MM-DDTHH:mm:ss"));
-  console.log(startIndex);
-  console.log(endIndex);
-  console.log(slicedData);
+  let dataArray;
+  let sum = [];
+  let start;
+  let end;
+  let greatestChange = 0;
 
-  let periodData = {};
+  for (let i = 0; i < numIntervals * 60; i = i + 60) {
+    dataArray = slicedData.slice(i, i + 60);
+    let delta = 0;
+    for (let j = 1; j < dataArray.length; j++) {
+      delta = delta + Math.abs(dataArray[j - 1].value - dataArray[j].value);
+    }
+    sum.push(delta);
+    if (delta >= greatestChange) {
+      start = moment(dataArray[0].start).format("HH:mm");
+      end = moment(dataArray[0].start)
+        .add(1, interval + "s")
+        .format("HH:mm");
+      greatestChange = delta;
+    }
+  }
 
-  for (let i = 0; i < numIntervals; i++) {}
-
-  let day = "";
-
-  return day;
+  return [start, end];
 }
 
 export function bloodSugarGreatestChange(interval, data) {
   let startPeriod = "STARTPERIOD";
   let endPeriod = "ENDPERIOD";
   let amount = "AMOUNT";
+
   return [startPeriod, endPeriod, amount];
 }
