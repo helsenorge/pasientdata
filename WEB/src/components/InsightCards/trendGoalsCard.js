@@ -99,7 +99,6 @@ class TrendGoalsCard extends Component {
         break;
       default:
     }
-    // let sum = timeAbove + timeBelow + timeWithin;
 
     let COLORS = ["#A61E7B", "#569B7E", "#E38B21"];
     if (!hasUpperLimit) {

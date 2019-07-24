@@ -1,4 +1,4 @@
-import { SET_PATIENT } from './actionType';
+import { SET_PATIENT, SET_GOALS } from "./actionType";
 
 const initialState = {
   googleId: "",
@@ -7,22 +7,29 @@ const initialState = {
   fullname: "",
   email: "",
   image: "",
-  datasets: []
+  datasets: [],
+  goals: []
 };
 
 export default function patientReducer(state = initialState, action) {
   switch (action.type) {
     case SET_PATIENT: {
-      return{
+      return {
         ...state,
         googleId: action.googleId,
-        firstname: action.firstname, 
-        lastname: action.lastname, 
-        fullname: action.firstname + " " + action.lastname, 
+        firstname: action.firstname,
+        lastname: action.lastname,
+        fullname: action.firstname + " " + action.lastname,
         email: action.email,
         image: action.image,
         datasets: action.datasets
-      }
+      };
+    }
+    case SET_GOALS: {
+      return {
+        ...state,
+        goals: action.goals
+      };
     }
 
     default:
