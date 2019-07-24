@@ -1,0 +1,13 @@
+.divStyle {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  align-self: flex-end;
+  position: absolute;
+  bottom: 0px;
+  right: 8px;
+}
+
+.linkStyle {
+  border-bottom: none;
+}

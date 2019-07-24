@@ -1,4 +1,4 @@
-import React, { Component, useRef, useEffect } from "react";
+import React, { Component } from "react";
 import "./menuBar.css";
 import Menu from "@helsenorge/toolkit/components/icons/Menu";
 import Tiles from "@helsenorge/toolkit/components/icons/Tiles";
@@ -176,6 +176,15 @@ class MenuBar extends Component {
                 onClick={this.toggle}
               >
                 Sammenlign data
+              </NavLink>
+            </li>
+            <li className="liBar libar-items">
+              <NavLink
+                to="/mygoals"
+                className="menu-link click-menuBar-open"
+                onClick={this.toggle}
+              >
+                Sett mål
               </NavLink>
             </li>
             <li className="liBar">

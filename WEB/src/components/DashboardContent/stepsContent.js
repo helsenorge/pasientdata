@@ -1,8 +1,8 @@
 import React from "react";
 import InsightButton from "../InsightButton/insightButton";
-import { connect } from "react-redux";
 import moment from "moment";
 import BarPlotter from "../Barplotter/barPlotter";
+import './stepsContent.css';
 
 const stepsContent = (data, link) => {
   return (
