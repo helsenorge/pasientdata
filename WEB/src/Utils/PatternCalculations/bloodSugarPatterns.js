@@ -3,14 +3,13 @@ import Trends from "../trends";
 import aggregateData from "../aggregateData";
 import moment from "moment";
 
-export function bloodSugarFluctuations(period, data) {
+export function bloodSugarFluctuations(view, data, goals) {
   let interval = "hour";
   let numIntervals = 24;
   let { startIndex, endIndex } = findStartAndEndIndex(
     data,
-    data.length,
     moment()
-      .subtract(1, period)
+      .subtract(1, view)
       .format("YYYY-MM-DDTHH:mm:ss"),
     moment().format("YYYY-MM-DDTHH:mm:ss")
   );
@@ -37,24 +36,24 @@ export function bloodSugarFluctuations(period, data) {
       greatestChange = delta;
     }
   }
-
-  return [start, end];
+  return (
+    "Mest svingninger i blodsukkeret mellom " +
+    start +
+    " og " +
+    end +
+    " denne dagen."
+  );
 }
 
-export function bloodSugarGreatestChange(period, data) {
-  let startPeriod = "STARTPERIOD";
-  let endPeriod = "ENDPERIOD";
-  let amount = "AMOUNT";
-
+export function bloodSugarGreatestChange(view, data, goals) {
   let upperLimit = 12;
   let lowerLimit = 5;
 
   let numIntervals = 24;
   let { startIndex, endIndex } = findStartAndEndIndex(
     data,
-    data.length,
     moment()
-      .subtract(1, period)
+      .subtract(1, view)
       .format("YYYY-MM-DDTHH:mm:ss"),
     moment().format("YYYY-MM-DDTHH:mm:ss")
   );
@@ -62,10 +61,13 @@ export function bloodSugarGreatestChange(period, data) {
   let slicedData = data.slice(startIndex, endIndex);
   let dataArray;
   let sum = [];
-  let start;
-  let end;
+  let lowerStart;
+  let lowerEnd;
+  let upperStart;
+  let upperEnd;
   let withinLimits;
-  let sumIndex;
+  let upperIndex;
+  let lowerIndex;
   let greatestChange = 0;
 
   let trends;
@@ -81,36 +83,42 @@ export function bloodSugarGreatestChange(period, data) {
       .format("YYYY-MM-DDTHH:mm:ss"),
     moment().format("YYYY-MM-DDTHH:mm:ss", "ddd")
   );
-  // console.log(aggregated);
 
   for (let i = 0; i < numIntervals * 60; i = i + 60) {
     dataArray = aggregated.slice(i, i + 60);
-
-    // console.log(dataArray);
-
     trends = Trends(dataArray, upperLimit, lowerLimit);
     timeAbove = trends.timeAbove;
     timeWithin = trends.timeWithin;
     timeBelow = trends.timeBelow;
     withinLimits = (timeWithin * 100) / (timeWithin + timeAbove + timeBelow);
     sum.push(withinLimits);
-
-    if (sum[sumIndex] - sum[sumIndex - 1] > greatestChange && sumIndex > 0) {
-      greatestChange = sum[sumIndex] - sum[sumIndex - 1];
+  }
+  let diff;
+  for (let index = 1; index < sum.length; index++) {
+    diff = sum[index] - sum[index - 1];
+    if (diff > greatestChange) {
+      greatestChange = Math.round(diff);
+      upperIndex = index;
+      lowerIndex = index - 1;
     }
-
-    // if (delta >= greatestChange) {
-    //   start = moment(dataArray[0].start).format("HH:mm");
-    //   end = moment(dataArray[0].start)
-    //     .add(1, interval + "s")
-    //     .format("HH:mm");
-    //   greatestChange = delta;
-    // }
-    sumIndex += 1;
   }
 
-  // console.log(sum);
-  // console.log(greatestChange);
+  lowerStart = moment(aggregated[lowerIndex * 60].x).format("HH:mm");
+  upperStart = moment(aggregated[upperIndex * 60].x).format("HH:mm");
+  lowerEnd = moment(aggregated[upperIndex * 60].x)
+    .subtract(1, "minutes")
+    .format("HH:mm");
+  upperEnd = moment(aggregated[upperIndex * 60].x)
+    .add(59, "minutes")
+    .format("HH:mm");
 
-  return [startPeriod, endPeriod, amount];
+  return (
+    "Fra " +
+    lowerStart +
+    " to " +
+    upperStart +
+    " skjedde den største økningen i tid innom grenseverdiene, med en økning på " +
+    greatestChange +
+    "%"
+  );
 }

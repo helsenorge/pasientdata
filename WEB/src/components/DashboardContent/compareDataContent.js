@@ -12,7 +12,7 @@ const compareDataContent = () => {
       </div>
       <br />
       <div className="dashboard-button">
-        <Link to={"/comparedata"} style={{ "border-bottom": "none" }}>
+        <Link to={"/comparedata"} style={{ "borderBottom": "none" }}>
           <DisplayButton secondary>
             <div className={"dashboard-button-sizing"}>
               Gå til Sammenlign data{" "}

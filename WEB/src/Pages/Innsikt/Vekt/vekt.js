@@ -11,6 +11,7 @@ import {
   bloodSugarFluctuations
 } from "../../../Utils/PatternCalculations/bloodSugarPatterns";
 import FakeGlucoseData from "../../../Utils/fakeGlucose";
+import { connect } from "react-redux";
 
 class Vekt extends Component {
   state = {};
@@ -23,11 +24,12 @@ class Vekt extends Component {
         <GraphCard datatype="Vekt" />
         <PatternCard
           datatype="Vekt"
-          interval={"day"}
           trianglePic={require("../../../Images/pinkUpTriangle.svg")}
           fluctuation={bloodSugarFluctuations}
           greatestChange={bloodSugarGreatestChange}
           data={FakeGlucoseData()}
+          view={this.props.baseInfo.view}
+          goals={this.props.patient.goals}
         />
         <GoalCard />
         <CompareDataCard />
@@ -36,4 +38,11 @@ class Vekt extends Component {
   }
 }
 
-export default Vekt;
+function mapStateToProps(state) {
+  return {
+    patient: state.patient,
+    baseInfo: state.baseInfo
+  };
+}
+
+export default connect(mapStateToProps)(Vekt);

@@ -11,6 +11,7 @@ import {
   bloodSugarFluctuations
 } from "../../../Utils/PatternCalculations/bloodSugarPatterns";
 import FakeGlucoseData from "../../../Utils/fakeGlucose";
+import { connect } from "react-redux";
 
 class FysiskAktivitet extends Component {
   state = {};
@@ -23,11 +24,12 @@ class FysiskAktivitet extends Component {
         <GraphCard datatype="FysiskAktivitet" />
         <PatternCard
           datatype="FysiskAktivitet"
-          interval={"day"}
           trianglePic={require("../../../Images/pinkUpTriangle.svg")}
           fluctuation={bloodSugarFluctuations}
           greatestChange={bloodSugarGreatestChange}
           data={FakeGlucoseData()}
+          view={this.props.baseInfo.view}
+          goals={this.props.patient.goals}
         />
         <GoalCard />
         <CompareDataCard />
@@ -36,4 +38,11 @@ class FysiskAktivitet extends Component {
   }
 }
 
-export default FysiskAktivitet;
+function mapStateToProps(state) {
+  return {
+    patient: state.patient,
+    baseInfo: state.baseInfo
+  };
+}
+
+export default connect(mapStateToProps)(FysiskAktivitet);

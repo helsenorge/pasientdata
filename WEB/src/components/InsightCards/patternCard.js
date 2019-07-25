@@ -5,34 +5,39 @@ import "./patternCard.css";
 class PatternCard extends Component {
   patternCardContent = () => {
     const squigglyLinePic = require("../../Images/squigglyPatternIcon.svg");
-    let interval = this.props.interval;
-    let data = this.props.data;
+    const triangleUpPic = require("../../Images/pinkUpTriangle.svg");
+    const triangleDownPic = require("../../Images/pinkDownTriangle.svg");
 
-    let [startPeriod, endPeriod, amount] = this.props.greatestChange(
-      interval,
-      data
-    );
-    let [start, end] = this.props.fluctuation(interval, data);
+    let data = this.props.data;
+    let view = this.props.view;
+    let goals = this.props.goals;
+
+    let fluctuationText;
+    if (this.props.fluctuation != "none") {
+      fluctuationText = this.props.fluctuation(view, data, goals);
+    } else {
+      fluctuationText = "ingen funskjon";
+    }
+
+    let greatestChangeText;
+    if (this.props.greatestChange != "none") {
+      greatestChangeText = this.props.greatestChange(view, data, goals);
+    } else {
+      greatestChangeText = "ingen funksjon";
+    }
+
+    let pic = triangleDownPic;
+    if (this.props.triangle === "up") {
+      pic = triangleUpPic;
+    }
 
     return (
       <div>
         <div className="flex-container-pattern">
           <div className="flex-children-pattern-image">
-            <img
-              src={this.props.trianglePic}
-              alt={"logo"}
-              className="arrow-icon"
-            />
+            <img src={pic} alt={"logo"} className="arrow-icon" />
           </div>
-          <div className="flex-children-pattern-text">
-            {"Fra " +
-              startPeriod +
-              " to " +
-              endPeriod +
-              " skjedde den største økningen i tid innom grenseverdiene, med en økning på " +
-              amount +
-              "%"}
-          </div>
+          <div className="flex-children-pattern-text">{greatestChangeText}</div>
         </div>
         <br />
         <div className="flex-container-pattern">
@@ -40,11 +45,7 @@ class PatternCard extends Component {
             <img src={squigglyLinePic} alt={"logo"} className="squiggly-icon" />
           </div>
           <div className="flex-children-pattern-text">
-            {"Mest svingninger i blodsukkeret mellom " +
-              start +
-              " og " +
-              end +
-              " denne dagen."}
+            <div>{fluctuationText}</div>
           </div>
         </div>
         <div />
