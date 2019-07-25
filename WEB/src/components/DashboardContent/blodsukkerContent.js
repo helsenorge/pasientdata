@@ -47,13 +47,8 @@ const blodsukkerContent = () => {
       </div>
       <div>
         <div className="button-style">
-          <Link to={"/bloodsugar"} style={{ "borderBottom": "none" }}>
-            <DisplayButton
-              onClick={() => {
-                /* tom */
-              }}
-              secondary
-            >
+          <Link to={"/bloodsugar"} style={{ borderBottom: "none" }}>
+            <DisplayButton secondary>
               <div className="flex-container-button">
                 <div className="flex-children-button">Utforsk</div>
                 <ChevronRightRounded className="flex-children-button-icon chevronStyle" />
