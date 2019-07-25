@@ -3,14 +3,13 @@ import Trends from "../trends";
 import aggregateData from "../aggregateData";
 import moment from "moment";
 
-export function bloodSugarFluctuations(period, data) {
+export function bloodSugarFluctuations(view, data, goals) {
   let interval = "hour";
   let numIntervals = 24;
   let { startIndex, endIndex } = findStartAndEndIndex(
     data,
-    data.length,
     moment()
-      .subtract(1, period)
+      .subtract(1, view)
       .format("YYYY-MM-DDTHH:mm:ss"),
     moment().format("YYYY-MM-DDTHH:mm:ss")
   );
@@ -37,20 +36,24 @@ export function bloodSugarFluctuations(period, data) {
       greatestChange = delta;
     }
   }
-
-  return [start, end];
+  return (
+    "Mest svingninger i blodsukkeret mellom " +
+    start +
+    " og " +
+    end +
+    " denne dagen."
+  );
 }
 
-export function bloodSugarGreatestChange(period, data) {
+export function bloodSugarGreatestChange(view, data, goals) {
   let upperLimit = 12;
   let lowerLimit = 5;
 
   let numIntervals = 24;
   let { startIndex, endIndex } = findStartAndEndIndex(
     data,
-    data.length,
     moment()
-      .subtract(1, period)
+      .subtract(1, view)
       .format("YYYY-MM-DDTHH:mm:ss"),
     moment().format("YYYY-MM-DDTHH:mm:ss")
   );
@@ -94,7 +97,7 @@ export function bloodSugarGreatestChange(period, data) {
   for (let index = 1; index < sum.length; index++) {
     diff = sum[index] - sum[index - 1];
     if (diff > greatestChange) {
-      greatestChange = diff;
+      greatestChange = Math.round(diff);
       upperIndex = index;
       lowerIndex = index - 1;
     }
@@ -109,5 +112,13 @@ export function bloodSugarGreatestChange(period, data) {
     .add(59, "minutes")
     .format("HH:mm");
 
-  return [lowerStart, upperStart, greatestChange];
+  return (
+    "Fra " +
+    lowerStart +
+    " to " +
+    upperStart +
+    " skjedde den største økningen i tid innom grenseverdiene, med en økning på " +
+    greatestChange +
+    "%"
+  );
 }

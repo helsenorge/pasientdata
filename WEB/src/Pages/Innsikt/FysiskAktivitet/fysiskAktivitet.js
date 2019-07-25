@@ -24,7 +24,6 @@ class FysiskAktivitet extends Component {
         <GraphCard datatype="FysiskAktivitet" />
         <PatternCard
           datatype="FysiskAktivitet"
-          interval={"day"}
           trianglePic={require("../../../Images/pinkUpTriangle.svg")}
           fluctuation={bloodSugarFluctuations}
           greatestChange={bloodSugarGreatestChange}

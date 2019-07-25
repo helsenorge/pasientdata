@@ -6,11 +6,7 @@ import PatternCard from "../../../components/InsightCards/patternCard";
 import ViewCard from "../../../components/InsightCards/viewCard";
 import CompareDataCard from "../../../components/InsightCards/compareDataCard";
 import GoalCard from "../../../components/InsightCards/goalCard";
-import {
-  bloodSugarGreatestChange,
-  bloodSugarFluctuations
-} from "../../../Utils/PatternCalculations/bloodSugarPatterns";
-import FakeGlucoseData from "../../../Utils/fakeGlucose";
+import { stepsGreatestPeriod } from "../../../Utils/PatternCalculations/stepsPatterns";
 import { connect } from "react-redux";
 
 class Skritt extends Component {
@@ -24,11 +20,10 @@ class Skritt extends Component {
         <GraphCard datatype="Skritt" />
         <PatternCard
           datatype="Skritt"
-          interval={"day"}
           trianglePic={require("../../../Images/pinkUpTriangle.svg")}
-          fluctuation={bloodSugarFluctuations}
-          greatestChange={bloodSugarGreatestChange}
-          data={FakeGlucoseData()}
+          fluctuation={"none"}
+          greatestChange={stepsGreatestPeriod}
+          data={this.props.patient.datasets[0].measurements}
           view={this.props.baseInfo.view}
           goals={this.props.patient.goals}
         />
