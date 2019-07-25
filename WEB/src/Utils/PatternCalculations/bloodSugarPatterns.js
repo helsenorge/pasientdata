@@ -1,4 +1,3 @@
-import React, { Component } from "react";
 import findStartAndEndIndex from "../findStartAndEndIndex";
 import moment from "moment";
 

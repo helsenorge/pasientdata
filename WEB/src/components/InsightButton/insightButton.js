@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import ChevronRightRounded from "@helsenorge/toolkit/components/icons/ChevronRightRounded";
 import "../DashboardContent/dashboardContent.css";
 import { Link } from "react-router-dom";
+import "./insightButton.css";
 
 class InsightButton extends Component {
   render() {
