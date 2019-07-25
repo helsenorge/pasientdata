@@ -2,8 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import "./myGoalsPage.css";
 import CardComponent from "../../components/Card/cardComponent";
-import bloodPressureContent from "../../components/GoalContent/BloodPressureContent";
-import stepsContent from "../../components/DashboardContent/stepsContent";
+import goalContent from "../../components/GoalContent/goalContent";
 
 class MyGoals extends Component {
   render() {
@@ -13,7 +12,13 @@ class MyGoals extends Component {
           <h1 className="h1Style">Sett mål</h1>
           <div className="breadText">Viser status fra siste to uker</div>
         </div>
-        <CardComponent title={"Blodsukker: Tid innenfor grenseverdi"} content={bloodPressureContent()} />
+        <CardComponent title={"Blodsukker: Tid innenfor grenseverdi"} content={goalContent()} />
+        <CardComponent title={"Blodsukker: Gjennomsnittlig nivå"} content={goalContent()} />
+        <CardComponent title={"Skritt"} content={goalContent()} />
+        <CardComponent title={"Vekt"} content={goalContent()} />
+        <CardComponent title={"Fysisk aktivitet"} content={goalContent()} />
+        <CardComponent title={"Karbohydrater"} content={goalContent()} />
+        <CardComponent title={"Blodtrykk"} content={goalContent()} />
       </div>
     );
   }

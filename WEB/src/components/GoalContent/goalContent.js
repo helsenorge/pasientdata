@@ -5,7 +5,10 @@ import { Link } from "react-router-dom";
 import { PieChart, Pie, Cell, Label, ResponsiveContainer } from "recharts";
 import "./goalContent.css";
 
-const bloodPressureContent = (title, data) => {
+const goalContent = (data, link) => {
+  let COLORS = ["#E38B21", "#EEE05D", "#569B7E", "#EEE05D", "#E38B21"];
+  let dataSet=[{ value: 1}, { value: 1}, { value: 1}, { value: 1}, { value: 1}];
+  
   return (
     <div className="flex-container-trend-goals outer-div-trend-goals">
       <div className="split">
@@ -19,26 +22,31 @@ const bloodPressureContent = (title, data) => {
         <div className="pieChartStyle">
           <ResponsiveContainer
             className="flex-children-trend-goals"
-            width={150}
-            height={175}
+            width={175}
+            height={160}
           >
-            <PieChart width={60} height={20}>
+            <PieChart>
               <Pie
-                data={[{ value: 100, name: "hei" }]}
+                data={dataSet}
                 dataKey="value"
                 nameKey="name"
-                innerRadius={60}
+                innerRadius={68}
                 outerRadius={80}
-                startAngle={180}
-                endAngle={0}
+                startAngle={220}
+                endAngle={-40}
                 fill="#8884d8"
-              />
+              >
+                {dataSet.map((entry, index) => (
+                <Cell key="" fill={COLORS[index % COLORS.length]} />
+              ))}
+                <Label value={"status:"} position="center" />
+              </Pie>
             </PieChart>
           </ResponsiveContainer>
         </div>
         <div>
           <div className="button-style">
-            <Link to={"/mygoals"} style={{ borderBottom: "none" }}>
+            <Link to={link} style={{ borderBottom: "none" }}>
               <DisplayButton secondary>
                 <div className="flex-container-button">
                   <EditOutlined className="flex-children-button-icon editOutlinedStyle" />
@@ -53,4 +61,4 @@ const bloodPressureContent = (title, data) => {
   );
 };
 
-export default bloodPressureContent;
+export default goalContent;
