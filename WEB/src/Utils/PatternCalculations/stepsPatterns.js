@@ -48,61 +48,54 @@ import periodFromView from "../periodFromView";
 //   }
 
 export function stepsGreatestPeriod(view, data, goals) {
-  //   let {
-  //     periodName,
-  //     periodNumber,
-  //     intervalName,
-  //     intervalNumber
-  //   } = periodFromView(view);
-  //   let { startIndex, endIndex } = findStartAndEndIndex(
-  //     data,
-  //     moment()
-  //       .subtract(periodNumber, periodName)
-  //       .format("YYYY-MM-DDTHH:mm:ss"),
-  //     moment().format("YYYY-MM-DDTHH:mm:ss")
-  //   );
-  //   console.log(data);
-  //   console.log(startIndex, endIndex);
+  let {
+    periodName,
+    periodNumber,
+    intervalName,
+    intervalNumber
+  } = periodFromView(view);
+  let { startIndex, endIndex } = findStartAndEndIndex(
+    data,
+    data.length,
+    moment()
+      .subtract(periodNumber, periodName)
+      .format("YYYY-MM-DDTHH:mm:ss"),
+    moment().format("YYYY-MM-DDTHH:mm:ss")
+  );
 
-  //   let slicedData = data.slice(startIndex, endIndex);
+  let slicedData = data.slice(startIndex, endIndex);
+  //   console.log(slicedData);
 
-  //   let upperLimit = 12;
-  //   let lowerLimit = 5;
+  let upperLimit = 12;
+  let lowerLimit = 5;
   //   let numIntervals = getIntervalsInPeriod(period, interval);
 
-  //   let dataArray;
-  //   let sum = [];
-  //   let lowerStart;
-  //   let lowerEnd;
-  //   let upperStart;
-  //   let upperEnd;
-  //   let withinLimits;
-  //   let upperIndex;
-  //   let lowerIndex;
-  //   let greatestChange = 0;
+  let dataArray;
 
-  //   let trends;
-  //   let timeAbove;
-  //   let timeWithin;
-  //   let timeBelow;
+  let trends;
+  let timeAbove;
+  let timeWithin;
+  let timeBelow;
 
-  //   let aggregated = aggregateData(
-  //     slicedData,
-  //     interval,
-  //     moment()
-  //       .subtract(periodNumber, period)
-  //       .format("YYYY-MM-DDTHH:mm:ss"),
-  //     moment().format("YYYY-MM-DDTHH:mm:ss", "ddd")
-  //   );
+  let aggregated = aggregateData(
+    slicedData,
+    intervalName,
+    moment()
+      .subtract(periodNumber, periodName)
+      .format("YYYY-MM-DDTHH:mm:ss"),
+    moment().format("YYYY-MM-DDTHH:mm:ss", "ddd")
+  );
+  console.log(aggregated);
 
-  //   for (let i = 0; i < intervalNumber * 60; i = i + 60) {
-  //     dataArray = aggregated.slice(i, i + 60);
-  //     trends = Trends(dataArray, upperLimit, lowerLimit);
-  //     timeAbove = trends.timeAbove;
-  //     timeWithin = trends.timeWithin;
-  //     timeBelow = trends.timeBelow;
-  //     withinLimits = (timeWithin * 100) / (timeWithin + timeAbove + timeBelow);
-  //     sum.push(withinLimits);
+  //   for (let i = 0; i < intervalNumber; i++) {
+  // dataArray = aggregated.slice(i, i + 1);
+  // console.log(dataArray);
+  //   trends = Trends(dataArray, upperLimit, lowerLimit);
+  //   timeAbove = trends.timeAbove;
+  //   timeWithin = trends.timeWithin;
+  //   timeBelow = trends.timeBelow;
+  //   withinLimits = (timeWithin * 100) / (timeWithin + timeAbove + timeBelow);
+  //   sum.push(withinLimits);
   //   }
   //   let diff;
   //   for (let index = 1; index < sum.length; index++) {
@@ -122,8 +115,21 @@ export function stepsGreatestPeriod(view, data, goals) {
   //   upperEnd = moment(aggregated[upperIndex * 60].x)
   //     .add(59, "minutes")
   //     .format("HH:mm");
+  let lowerStart;
+  let lowerEnd;
+  let upperStart;
+  let upperEnd;
+  let withinLimits;
+  let upperIndex;
+  let lowerIndex;
+
+  let greatestValueObject = aggregated.reduce((prev, current) =>
+    prev.y > current.y ? prev : current
+  );
+  let time = moment(greatestValueObject.x).format("DD:MM");
 
   return (
+    "Du gikk flest skritt den " + time + " (" + greatestValueObject.y + ")"
     // "Fra " +
     // lowerStart +
     // " to " +
@@ -131,6 +137,5 @@ export function stepsGreatestPeriod(view, data, goals) {
     // " skjedde den største økningen i tid innom grenseverdiene, med en økning på " +
     // greatestChange +
     // "%"
-    "work in progress"
   );
 }

@@ -25,8 +25,8 @@ class Insulin extends Component {
         <PatternCard
           datatype="Insulin"
           trianglePic={require("../../../Images/pinkUpTriangle.svg")}
-          fluctuation={bloodSugarFluctuations}
-          greatestChange={bloodSugarGreatestChange}
+          fluctuation={"none"}
+          greatestChange={"none"}
           data={FakeGlucoseData()}
           view={this.props.baseInfo.view}
           goals={this.props.patient.goals}
