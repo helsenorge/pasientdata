@@ -2,9 +2,11 @@ import React, { Component } from "react";
 import CardComponent from "../Card/cardComponent";
 
 class MultipleGraphCard extends Component {
-  state = {};
+  makeContent = () => {
+    return <div>masse grafer</div>;
+  };
   render() {
-    return <div>Multiple graph card</div>;
+    return <CardComponent title={"Over tid"} content={this.makeContent()} />;
   }
 }
 
