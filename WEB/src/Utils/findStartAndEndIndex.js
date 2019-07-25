@@ -1,19 +1,19 @@
 import moment from "moment";
 
-export default function findStartAndEndIndex(data, length, start, end) {
+export default function findStartAndEndIndex(data, start, end) {
   let startIndex = 0;
-  let endIndex = length - 1;
+  let endIndex = data.length - 1;
   let endIndexFound = false;
 
   if (
     moment(end, "YYYY-MM-DDTHH:mm:ss").isAfter(
-      moment(data[length - 1].start, "YYYY-MM-DDTHH:mm:ss")
+      moment(data[data.length - 1].start, "YYYY-MM-DDTHH:mm:ss")
     )
   ) {
     endIndexFound = true;
   }
 
-  for (let i = 0; i < length; i++) {
+  for (let i = 0; i < data.length; i++) {
     if (
       moment(start, "YYYY-MM-DDTHH:mm:ss").isAfter(
         moment(data[i].start, "YYYY-MM-DDTHH:mm:ss")
@@ -34,7 +34,7 @@ export default function findStartAndEndIndex(data, length, start, end) {
   if (!endIndexFound) {
     endIndex--;
   }
-  if (startIndex !== length - 1) {
+  if (startIndex !== data.length - 1) {
     startIndex++;
   }
 

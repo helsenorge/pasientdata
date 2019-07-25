@@ -81,7 +81,7 @@ export function bloodSugarGreatestChange(period, data) {
       .format("YYYY-MM-DDTHH:mm:ss"),
     moment().format("YYYY-MM-DDTHH:mm:ss", "ddd")
   );
-  console.log(aggregated);
+  // console.log(aggregated);
 
   for (let i = 0; i < numIntervals * 60; i = i + 60) {
     dataArray = aggregated.slice(i, i + 60);
@@ -109,8 +109,8 @@ export function bloodSugarGreatestChange(period, data) {
     sumIndex += 1;
   }
 
-  console.log(sum);
-  console.log(greatestChange);
+  // console.log(sum);
+  // console.log(greatestChange);
 
   return [startPeriod, endPeriod, amount];
 }
