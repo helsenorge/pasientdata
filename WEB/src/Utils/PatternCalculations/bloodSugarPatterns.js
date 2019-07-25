@@ -8,7 +8,6 @@ export function bloodSugarFluctuations(view, data, goals) {
   let numIntervals = 24;
   let { startIndex, endIndex } = findStartAndEndIndex(
     data,
-    data.length,
     moment()
       .subtract(1, view)
       .format("YYYY-MM-DDTHH:mm:ss"),
@@ -53,7 +52,6 @@ export function bloodSugarGreatestChange(view, data, goals) {
   let numIntervals = 24;
   let { startIndex, endIndex } = findStartAndEndIndex(
     data,
-    data.length,
     moment()
       .subtract(1, view)
       .format("YYYY-MM-DDTHH:mm:ss"),
