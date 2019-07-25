@@ -1,0 +1,19 @@
+.breadText {
+  font-size: 14px;
+  line-height: 16px;
+  text-align: right;
+  margin-left: 34px;
+  margin-top: 34px;
+  margin-right: 16px;
+  color: black;
+}
+
+.headtStyle {
+  margin: 0 4px 8px;
+}
+
+.h1Style {
+  margin-left: 13px;
+  margin-top: 14px;
+  margin-bottom: 20px;
+}

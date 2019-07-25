@@ -40,7 +40,7 @@ class LoginPage extends Component {
             {
               <GoogleLogin
                 autoLoad={false}
-                clientId="942269849137-5a1bgivhq71c5ni083igrbss4tbpr6sm.apps.googleusercontent.com"
+                clientId="977336258298-918fs7q5nkhjg0brjgn30kolrn450nks.apps.googleusercontent.com"
                 scope={
                   "https://www.googleapis.com/auth/fitness.activity.read " +
                   "https://www.googleapis.com/auth/fitness.body.read" //+

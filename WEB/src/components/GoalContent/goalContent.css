@@ -1,0 +1,76 @@
+.flex-container-trend-goals {
+  display: flex;
+}
+
+.flex-children-trend-goals {
+  flex: 1;
+}
+
+.outer-div-trend-goals {
+  width: 100%;
+}
+
+.circleBound {
+  border: 10px solid #85c99e;
+  box-sizing: border-box;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border-radius: 100%;
+  width: 175px;
+  height: 175px;
+}
+
+.goalText {
+  margin-top: 15px;
+  text-align: center;
+  font-size: 12px;
+  line-height: 14px;
+}
+
+.goalPercentText {
+  margin-top: 25px;
+  margin-bottom: 25px;
+  text-align: center;
+  font-size: 36px;
+  line-height: 42px;
+}
+
+.editOutlinedStyle {
+  color: #006d84;
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+  margin-left: 3px;
+}
+
+.flex-container-button {
+  flex-direction: row;
+  display: flex;
+  align-items: flex-end;
+  line-height: 19px;
+}
+
+.flex-children-button {
+  flex: 1;
+}
+
+.button-style {
+  margin-left: 35px;
+}
+
+.editText {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 21px;
+  color: #006d84;
+  margin-right: 7px;
+}
+
+.split {
+  width: 50%;
+}
+
+.pieChartStyle{
+    margin-left: 35px;
+}
