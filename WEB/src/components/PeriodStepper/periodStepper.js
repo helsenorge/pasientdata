@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import formatInterval from "../../Utils/formatInterval";
+import formatPeriod from "../../Utils/formatPeriod";
 import intervalToString from "../../Utils/intervalToString";
 import periodFromView from "../../Utils/periodFromView";
 import { connect } from "react-redux";
@@ -7,6 +7,7 @@ import { setNrOfIntervalsBack } from "../../Redux/actions";
 import ChevronLeftRounded from "@helsenorge/toolkit/components/icons/ChevronLeftRounded";
 import ChevronRightRounded from "@helsenorge/toolkit/components/icons/ChevronRightRounded";
 import moment from "moment";
+import "./periodStepper.css";
 
 class PeriodStepper extends Component {
   leftClicked = () => {
@@ -21,21 +22,62 @@ class PeriodStepper extends Component {
     }
   };
   render() {
-    let intervalName = periodFromView(this.props.baseInfo.view);
+    let { periodName, periodNumber } = periodFromView(this.props.baseInfo.view);
+    let text;
+    if (periodName === "custom") {
+      text =
+        moment(this.props.start, "YYYY-MM-DDTHH:mm:ss").format("dd.MM.YYYY") +
+        " - " +
+        moment(this.props.end, "YYYY-MM-DDTHH:mm:ss").format("dd.MM.YYYY");
+    } else {
+      if (this.props.baseInfo.nrOfIntervalsBack === 0) {
+        if (periodNumber === 1) {
+          text = "siste " + intervalToString(periodName);
+        } else {
+          text = "siste " + periodNumber + " " + intervalToString(periodName);
+        }
+      } else {
+        if (periodNumber === 1) {
+          text =
+            intervalToString(periodName) +
+            " " +
+            moment()
+              .subtract(this.props.baseInfo.nrOfIntervalsBack, periodName)
+              .format(formatPeriod(periodName));
+        } else {
+          text =
+            intervalToString(periodName) +
+            " " +
+            moment()
+              .subtract(
+                this.props.baseInfo.nrOfIntervalsBack + periodNumber - 1,
+                periodName
+              )
+              .format(formatPeriod(periodName)) +
+            " - " +
+            intervalToString(periodName) +
+            " " +
+            moment()
+              .subtract(this.props.baseInfo.nrOfIntervalsBack, periodName)
+              .format(formatPeriod(periodName));
+        }
+      }
+    }
+
     return (
       <div className="flex-container">
-        <button className="flex-children" onClick={this.leftClicked}>
-          <ChevronLeftRounded />
+        <button
+          className="flex-children datestepper-button datestepper-button-left"
+          onClick={this.leftClicked}
+        >
+          <ChevronLeftRounded className="datestepper-chevron" />
         </button>{" "}
-        <div className="flex-children">
-          {intervalToString(intervalName)}{" "}
-          {moment()
-            .startOf(intervalName)
-            .subtract(this.props.baseInfo.nrOfIntervalsBack, intervalName)
-            .format(formatInterval(intervalName))}
-        </div>
-        <button className="flex-children" onClick={this.rightClicked}>
-          <ChevronRightRounded />{" "}
+        <div className="flex-children datestepper-text">{text}</div>
+        <button
+          className="flex-children datestepper-button datestepper-button-right"
+          onClick={this.rightClicked}
+        >
+          <ChevronRightRounded className="datestepper-chevron" />{" "}
         </button>
       </div>
     );

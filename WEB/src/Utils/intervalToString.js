@@ -1,13 +1,13 @@
 export default function intervalToString(interval) {
   switch (interval) {
     case "year":
-      return "År";
+      return "år";
     case "month":
-      return "Måned:";
+      return "måned:";
     case "week":
-      return "Uke:";
+      return "uke:";
     case "day":
-      return "Dag:";
+      return "dag:";
     case "hour":
       return "Kl:";
     default:
