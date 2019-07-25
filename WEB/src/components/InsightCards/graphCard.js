@@ -6,6 +6,7 @@ import getFormat from "../../Utils/getFormat";
 import getStartEndTimes from "../../Utils/getStartEndTimes";
 import periodFromView from "../../Utils/periodFromView";
 import { connect } from "react-redux";
+import PeriodStepper from "../PeriodStepper/periodStepper";
 
 class GraphCard extends Component {
   graphContent = () => {
@@ -33,7 +34,12 @@ class GraphCard extends Component {
     );
   };
   render() {
-    return <CardComponent title="Over tid" content={this.graphContent()} />;
+    return (
+      <div>
+        <CardComponent title="Over tid" content={this.graphContent()} />
+        <PeriodStepper />
+      </div>
+    );
   }
 }
 
