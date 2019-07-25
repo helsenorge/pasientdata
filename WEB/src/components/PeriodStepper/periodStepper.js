@@ -7,6 +7,7 @@ import { setNrOfIntervalsBack } from "../../Redux/actions";
 import ChevronLeftRounded from "@helsenorge/toolkit/components/icons/ChevronLeftRounded";
 import ChevronRightRounded from "@helsenorge/toolkit/components/icons/ChevronRightRounded";
 import moment from "moment";
+import "./periodStepper.css";
 
 class PeriodStepper extends Component {
   leftClicked = () => {
@@ -48,16 +49,16 @@ class PeriodStepper extends Component {
             intervalToString(periodName) +
             " " +
             moment()
-              .subtract(this.props.baseInfo.nrOfIntervalsBack, periodName)
+              .subtract(
+                this.props.baseInfo.nrOfIntervalsBack + periodNumber - 1,
+                periodName
+              )
               .format(formatPeriod(periodName)) +
             " - " +
             intervalToString(periodName) +
             " " +
             moment()
-              .subtract(
-                this.props.baseInfo.nrOfIntervalsBack + periodNumber - 1,
-                periodName
-              )
+              .subtract(this.props.baseInfo.nrOfIntervalsBack, periodName)
               .format(formatPeriod(periodName));
         }
       }
@@ -65,12 +66,18 @@ class PeriodStepper extends Component {
 
     return (
       <div className="flex-container">
-        <button className="flex-children" onClick={this.leftClicked}>
-          <ChevronLeftRounded />
+        <button
+          className="flex-children datestepper-button"
+          onClick={this.leftClicked}
+        >
+          <ChevronLeftRounded className="datestepper-chevron" />
         </button>{" "}
-        <div className="flex-children">{text}</div>
-        <button className="flex-children" onClick={this.rightClicked}>
-          <ChevronRightRounded />{" "}
+        <div className="flex-children datestepper-text">{text}</div>
+        <button
+          className="flex-children datestepper-button"
+          onClick={this.rightClicked}
+        >
+          <ChevronRightRounded className="datestepper-chevron" />{" "}
         </button>
       </div>
     );

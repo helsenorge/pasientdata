@@ -9,10 +9,10 @@ export default function formatPeriod(period) {
     case "week":
       return "ww";
     case "day":
-      return "dd/MM";
+      return "DD/MM";
     case "hour":
-      return "dd.MM h:00";
+      return "DD.MM h:00";
     default:
-      return "dd.MM.YYYY hh:00";
+      return "DD.MM.YYYY hh:00";
   }
 }

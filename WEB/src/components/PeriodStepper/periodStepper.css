@@ -1,0 +1,11 @@
+.datestepper-button {
+  border: none;
+}
+
+.datestepper-chevron {
+  color: #006d84;
+}
+
+.datestepper-text {
+  flex: 2;
+}
