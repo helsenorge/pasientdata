@@ -184,7 +184,7 @@ export function responseGoogle(response) {
             { name: "8867-4", measurements: heartBeatMeasurement },
             { name: "85354-9", measurements: bloodPressureMeasurement },
             { name: "2339-0", measurements: bloodGlucoseMeasurement },
-            { name: "activities", measurements: activitiesMeasurement }
+            { name: "77595-7", measurements: activitiesMeasurement }
             // { name: "batchedActivities", measurements: batchedActivitiesMeasurement },
           );
 
