@@ -17,6 +17,21 @@ import moment from "moment";
 import periodFromView from "../../Utils/periodFromView";
 
 class TrendGoalsCard extends Component {
+  displayUnit = () => {
+    switch (this.props.datatype) {
+      case "Blodsukker":
+        return "%";
+      case "Insulin":
+        return "%";
+      case "Skritt":
+        return "skritt/dag";
+      case "Blodsukker":
+        return "%";
+      default:
+        return "Default";
+    }
+  };
+
   trendGoalsContent = () => {
     let data = FakeGlucoseData();
     let upperLimit = 12;
@@ -97,7 +112,7 @@ class TrendGoalsCard extends Component {
         timeWithin = trends.timeWithin;
         timeBelow = trends.timeBelow;
         currentValue = mean;
-        unit = " skritt/dag";
+        unit = "";
         hasUpperLimit = false;
         pieSideSize = 2000;
         break;
@@ -182,6 +197,11 @@ class TrendGoalsCard extends Component {
           180,
         0
       ];
+      console.log("lg: ", lowerGoal);
+      console.log("pss: ", pieSideSize);
+      console.log("ug: ", upperGoal);
+      lowerTextValue = Math.max(0, goalValue - pieSideSize);
+      upperTextValue = goalValue + pieSideSize;
       goalText = goalValue + " " + unit;
     }
     lowerText = lowerTextValue + unit;
@@ -189,10 +209,11 @@ class TrendGoalsCard extends Component {
 
     let arrowAngle;
     let arrowOutsideRangeSpacing = 5;
+
     if (currentValue < lowerTextValue) {
-      arrowAngle = 210 + arrowOutsideRangeSpacing;
+      arrowAngle = ((210 + arrowOutsideRangeSpacing) * Math.PI) / 180;
     } else if (currentValue > upperTextValue) {
-      arrowAngle = -30 - arrowOutsideRangeSpacing;
+      arrowAngle = ((-30 - arrowOutsideRangeSpacing) * Math.PI) / 180;
     } else {
       arrowAngle =
         ((-30 +
@@ -202,6 +223,7 @@ class TrendGoalsCard extends Component {
           Math.PI) /
         180;
     }
+    console.log(arrowAngle);
 
     let triangleAngle = (70 * Math.PI) / 180;
     let r = 20;
@@ -347,7 +369,7 @@ class TrendGoalsCard extends Component {
   render() {
     return (
       <CardComponent
-        title="Trender og Mål"
+        title={"Trender og Mål: " + this.displayUnit()}
         content={this.trendGoalsContent()}
       />
     );
