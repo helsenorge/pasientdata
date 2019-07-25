@@ -1,4 +1,5 @@
 import { SET_PATIENT, SET_GOALS } from "./actionType";
+import defaultGoals from "../defaultGoals.js";
 
 const initialState = {
   googleId: "",
@@ -8,7 +9,7 @@ const initialState = {
   email: "",
   image: "",
   datasets: [],
-  goals: []
+  goals: defaultGoals
 };
 
 export default function patientReducer(state = initialState, action) {

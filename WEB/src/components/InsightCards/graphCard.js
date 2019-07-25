@@ -6,6 +6,7 @@ import getFormat from "../../Utils/getFormat";
 import getStartEndTimes from "../../Utils/getStartEndTimes";
 import periodFromView from "../../Utils/periodFromView";
 import { connect } from "react-redux";
+import PeriodStepper from "../PeriodStepper/periodStepper";
 
 class GraphCard extends Component {
   graphContent = () => {
@@ -23,17 +24,24 @@ class GraphCard extends Component {
     let end = startEndTimes.end;
     let { periodName, intervalName } = periodFromView(this.props.baseInfo.view);
     return (
-      <BarPlotter
-        start={start}
-        end={end}
-        interval={intervalName}
-        outputFormat={getFormat(periodName, intervalName)}
-        data={data}
-      />
+      <div>
+        <BarPlotter
+          start={start}
+          end={end}
+          interval={intervalName}
+          outputFormat={getFormat(periodName, intervalName)}
+          data={data}
+        />
+        <PeriodStepper start={start} end={end} periodName={periodName} />
+      </div>
     );
   };
   render() {
-    return <CardComponent title="Over tid" content={this.graphContent()} />;
+    return (
+      <div>
+        <CardComponent title="Over tid" content={this.graphContent()} />
+      </div>
+    );
   }
 }
 

@@ -35,7 +35,8 @@ export const setView = view => {
   return dispatch => dispatch({ type: SET_VIEW, view });
 };
 
-export const setNrOfIntervalsBack = setNrOfIntervalsBack => {
+export const setNrOfIntervalsBack = nrOfIntervalsBack => {
+  console.log("Nr of intervals back:", nrOfIntervalsBack);
   return dispatch =>
-    dispatch({ type: SET_NR_OF_INTERVALS_BACK, setNrOfIntervalsBack });
+    dispatch({ type: SET_NR_OF_INTERVALS_BACK, nrOfIntervalsBack });
 };

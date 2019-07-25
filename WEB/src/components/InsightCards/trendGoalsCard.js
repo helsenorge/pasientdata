@@ -2,7 +2,14 @@ import React, { Component } from "react";
 import CardComponent from "../Card/cardComponent";
 import FakeGlucoseData from "../../Utils/fakeGlucose";
 import Trends from "../../Utils/trends";
-import { PieChart, Pie, Cell, Label, ResponsiveContainer } from "recharts";
+import {
+  PieChart,
+  Pie,
+  Cell,
+  Label,
+  ResponsiveContainer,
+  Polygon
+} from "recharts";
 import "./trendGoalsCard.css";
 import { connect } from "react-redux";
 import aggregateData from "../../Utils/aggregateData";
@@ -10,6 +17,21 @@ import moment from "moment";
 import periodFromView from "../../Utils/periodFromView";
 
 class TrendGoalsCard extends Component {
+  displayUnit = () => {
+    switch (this.props.datatype) {
+      case "Blodsukker":
+        return "%";
+      case "Insulin":
+        return "%";
+      case "Skritt":
+        return "skritt/dag";
+      case "Blodsukker":
+        return "%";
+      default:
+        return "Default";
+    }
+  };
+
   trendGoalsContent = () => {
     let data = FakeGlucoseData();
     let upperLimit = 12;
@@ -90,7 +112,7 @@ class TrendGoalsCard extends Component {
         timeWithin = trends.timeWithin;
         timeBelow = trends.timeBelow;
         currentValue = mean;
-        unit = " skritt/dag";
+        unit = "";
         hasUpperLimit = false;
         pieSideSize = 2000;
         break;
@@ -112,23 +134,25 @@ class TrendGoalsCard extends Component {
     const downTrianglePic = require("../../Images/greenDownTriangle.svg");
     let angles = [];
     let pieData;
+    let lowerTextValue;
+    let upperTextValue;
     let lowerText;
     let upperText;
     let goalText;
     if (hasUpperLimit) {
       if (unit === "%") {
         pieData = [
-          { value: Math.min(pieSideSize, 100 - upperGoal), name: "Time above" },
-          { value: upperGoal - lowerGoal, name: "Time within" },
-          { value: Math.min(pieSideSize, lowerGoal), name: "Time Below" }
+          { value: Math.min(pieSideSize, 100 - upperGoal) },
+          { value: upperGoal - lowerGoal },
+          { value: Math.min(pieSideSize, lowerGoal) }
         ];
-        lowerText = Math.max(0, lowerGoal - pieSideSize) + unit;
-        upperText = Math.min(100, upperGoal + pieSideSize) + unit;
+        lowerTextValue = Math.max(0, lowerGoal - pieSideSize);
+        upperTextValue = Math.min(100, upperGoal + pieSideSize);
         goalText = lowerGoal + unit + " - " + upperGoal + unit;
       } else {
         pieData = [
-          { value: pieSideSize, name: "Time above" },
-          { value: upperGoal - lowerGoal, name: "Time within" },
+          { value: pieSideSize },
+          { value: upperGoal - lowerGoal },
           {
             value: Math.min(
               currentValue - pieSideSize,
@@ -156,17 +180,14 @@ class TrendGoalsCard extends Component {
     } else {
       if (unit === "%") {
         pieData = [
-          { value: Math.min(pieSideSize, 100 - goalValue), name: "Time above" },
-          { value: Math.min(pieSideSize, goalValue), name: "Time within" }
+          { value: Math.min(pieSideSize, 100 - goalValue) },
+          { value: Math.min(pieSideSize, goalValue) }
         ];
-        lowerText = Math.max(0, goalValue - pieSideSize) + unit;
-        upperText = Math.min(100, goalValue + pieSideSize) + unit;
+        lowerTextValue = Math.max(0, goalValue - pieSideSize);
+        upperTextValue = Math.min(100, goalValue + pieSideSize);
         goalText = goalValue + unit;
       } else {
-        pieData = [
-          { value: pieSideSize, name: "Time above" },
-          { value: pieSideSize, name: "Time within" }
-        ];
+        pieData = [{ value: pieSideSize }, { value: pieSideSize }];
       }
       angles = [
         0,
@@ -176,10 +197,57 @@ class TrendGoalsCard extends Component {
           180,
         0
       ];
+      console.log("lg: ", lowerGoal);
+      console.log("pss: ", pieSideSize);
+      console.log("ug: ", upperGoal);
+      lowerTextValue = Math.max(0, goalValue - pieSideSize);
+      upperTextValue = goalValue + pieSideSize;
       goalText = goalValue + " " + unit;
     }
-    // console.log("angles: ", angles);
-    // console.log("pieData: ", pieData);
+    lowerText = lowerTextValue + unit;
+    upperText = upperTextValue + unit;
+
+    let arrowAngle;
+    let arrowOutsideRangeSpacing = 5;
+
+    if (currentValue < lowerTextValue) {
+      arrowAngle = ((210 + arrowOutsideRangeSpacing) * Math.PI) / 180;
+    } else if (currentValue > upperTextValue) {
+      arrowAngle = ((-30 - arrowOutsideRangeSpacing) * Math.PI) / 180;
+    } else {
+      arrowAngle =
+        ((-30 +
+          ((upperTextValue - currentValue) /
+            (upperTextValue - lowerTextValue)) *
+            240) *
+          Math.PI) /
+        180;
+    }
+    console.log(arrowAngle);
+
+    let triangleAngle = (70 * Math.PI) / 180;
+    let r = 20;
+    let theta = 9;
+    let radius = 40;
+
+    let centerX = 125 + radius * Math.cos(-arrowAngle);
+    let centerY = 110 + radius * Math.sin(-arrowAngle);
+    let x1 = Math.floor(centerX + r * Math.cos(-arrowAngle));
+    let y1 = Math.floor(centerY + r * Math.sin(-arrowAngle));
+    let x2 = Math.floor(
+      centerX + theta * Math.cos(-arrowAngle - triangleAngle)
+    );
+    let y2 = Math.floor(
+      centerY + theta * Math.sin(-arrowAngle - triangleAngle)
+    );
+    let x3 = Math.floor(
+      centerX + theta * Math.cos(-arrowAngle + triangleAngle)
+    );
+    let y3 = Math.floor(
+      centerY + theta * Math.sin(-arrowAngle + triangleAngle)
+    );
+
+    let pointString = x1 + " " + y1 + " " + x2 + " " + y2 + " " + x3 + " " + y3;
 
     return (
       <div className="flex-container-trend-goals outer-div-trend-goals">
@@ -259,6 +327,13 @@ class TrendGoalsCard extends Component {
                 position="center"
               />
             </Pie>
+            <svg>
+              <polygon
+                points={pointString}
+                fill="#4F4F4F"
+                className="trend-polygon"
+              />{" "}
+            </svg>
           </PieChart>
         </ResponsiveContainer>
         <div className="flex-children-trend-goals flex-side-container-trend-goals">
@@ -294,7 +369,7 @@ class TrendGoalsCard extends Component {
   render() {
     return (
       <CardComponent
-        title="Trender og Mål"
+        title={"Trender og Mål: " + this.displayUnit()}
         content={this.trendGoalsContent()}
       />
     );
