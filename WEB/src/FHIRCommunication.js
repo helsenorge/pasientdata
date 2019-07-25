@@ -195,6 +195,7 @@ class FHIRCommunication extends React.Component {
           unit: "unitless",
           UCUMCode: "unitless"
         };
+        return;
 
       default:
         strings = {
@@ -335,14 +336,14 @@ class FHIRCommunication extends React.Component {
     // Note on the above: this can also be set from uuid(), but since we want only one
     //                    of each dataset type connected to each patient this is better.
     let {
-      unitDisplayString,
-      observationDisplayName,
+      // unitDisplayString,
+      // observationDisplayName,
       unit,
       UCUMCode
     } = this.getStringsFromLOINC(
       "55423-8" // Steps
     );
-    let datasetIndex = 0; // steps
+    // let datasetIndex = 0; // steps
     let lowerOrUpper = "lower";
     let descriptionText = "Desired minimum number of steps in a day";
 
