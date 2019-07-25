@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import formatInterval from "../../Utils/formatInterval";
+import formatPeriod from "../../Utils/formatPeriod";
 import intervalToString from "../../Utils/intervalToString";
 import periodFromView from "../../Utils/periodFromView";
 import { connect } from "react-redux";
@@ -21,19 +21,54 @@ class PeriodStepper extends Component {
     }
   };
   render() {
-    let intervalName = periodFromView(this.props.baseInfo.view);
+    let { periodName, periodNumber } = periodFromView(this.props.baseInfo.view);
+    let text;
+    if (periodName === "custom") {
+      text =
+        moment(this.props.start, "YYYY-MM-DDTHH:mm:ss").format("dd.MM.YYYY") +
+        " - " +
+        moment(this.props.end, "YYYY-MM-DDTHH:mm:ss").format("dd.MM.YYYY");
+    } else {
+      if (this.props.baseInfo.nrOfIntervalsBack === 0) {
+        if (periodNumber === 1) {
+          text = "siste " + intervalToString(periodName);
+        } else {
+          text = "siste " + periodNumber + " " + intervalToString(periodName);
+        }
+      } else {
+        if (periodNumber === 1) {
+          text =
+            intervalToString(periodName) +
+            " " +
+            moment()
+              .subtract(this.props.baseInfo.nrOfIntervalsBack, periodName)
+              .format(formatPeriod(periodName));
+        } else {
+          text =
+            intervalToString(periodName) +
+            " " +
+            moment()
+              .subtract(this.props.baseInfo.nrOfIntervalsBack, periodName)
+              .format(formatPeriod(periodName)) +
+            " - " +
+            intervalToString(periodName) +
+            " " +
+            moment()
+              .subtract(
+                this.props.baseInfo.nrOfIntervalsBack + periodNumber - 1,
+                periodName
+              )
+              .format(formatPeriod(periodName));
+        }
+      }
+    }
+
     return (
       <div className="flex-container">
         <button className="flex-children" onClick={this.leftClicked}>
           <ChevronLeftRounded />
         </button>{" "}
-        <div className="flex-children">
-          {intervalToString(intervalName)}{" "}
-          {moment()
-            .startOf(intervalName)
-            .subtract(this.props.baseInfo.nrOfIntervalsBack, intervalName)
-            .format(formatInterval(intervalName))}
-        </div>
+        <div className="flex-children">{text}</div>
         <button className="flex-children" onClick={this.rightClicked}>
           <ChevronRightRounded />{" "}
         </button>

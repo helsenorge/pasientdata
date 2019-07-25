@@ -84,7 +84,7 @@ export function stepsGreatestPeriod(view, data, goals) {
       .format("YYYY-MM-DDTHH:mm:ss"),
     moment().format("YYYY-MM-DDTHH:mm:ss", "ddd")
   );
-  console.log(aggregated);
+  // console.log(aggregated);
 
   //   for (let i = 0; i < intervalNumber; i++) {
   // dataArray = aggregated.slice(i, i + 1);
