@@ -22,7 +22,7 @@ class LoginPage extends Component {
     if (sessionStorage.getItem("googleResponse")) {
       console.log("Reading google client from localStorage");
       let response = JSON.parse(sessionStorage.getItem("googleResponse"));
-      if (moment().diff(moment.unix(response.Zi.expires_at / 1000), "m") < 0) {
+      if (response.Zi && moment().diff(moment.unix(response.Zi.expires_at / 1000), "m") < 0) {
         responseGoogle.bind(this)(response);
         return <div />;
       } // Else move on to login screen because need new login data.
