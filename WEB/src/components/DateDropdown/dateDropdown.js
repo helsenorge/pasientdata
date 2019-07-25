@@ -28,6 +28,7 @@ class DateDropdown extends Component {
       <FormSelect
         onChange={e => this.props.setView(e.target.value)} // Change to a set state or smth when u want to actually use
         className="custom-form-select"
+        defaultValue={this.props.baseInfo.view}
       >
         <option className="custom-control" value="day">
           Dag
