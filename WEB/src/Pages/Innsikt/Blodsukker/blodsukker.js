@@ -24,10 +24,12 @@ class Blodsukker extends Component {
         <PatternCard
           datatype="Blodsukker"
           interval={"day"}
-          trianglePic={require("../../../Images/pinkUpTriangle.svg")}
+          triangle={"up"}
           fluctuation={bloodSugarFluctuations}
           greatestChange={bloodSugarGreatestChange}
           data={FakeGlucoseData()}
+          view={this.props.baseInfo.view}
+          goals={this.props.patient.goals}
         />
         <GoalCard />
         <CompareDataCard />

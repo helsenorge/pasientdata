@@ -11,6 +11,7 @@ import {
   bloodSugarFluctuations
 } from "../../../Utils/PatternCalculations/bloodSugarPatterns";
 import FakeGlucoseData from "../../../Utils/fakeGlucose";
+import { connect } from "react-redux";
 
 class Skritt extends Component {
   state = {};
@@ -28,6 +29,8 @@ class Skritt extends Component {
           fluctuation={bloodSugarFluctuations}
           greatestChange={bloodSugarGreatestChange}
           data={FakeGlucoseData()}
+          view={this.props.baseInfo.view}
+          goals={this.props.patient.goals}
         />
         <GoalCard />
         <CompareDataCard />
@@ -36,4 +39,11 @@ class Skritt extends Component {
   }
 }
 
-export default Skritt;
+function mapStateToProps(state) {
+  return {
+    patient: state.patient,
+    baseInfo: state.baseInfo
+  };
+}
+
+export default connect(mapStateToProps)(Skritt);

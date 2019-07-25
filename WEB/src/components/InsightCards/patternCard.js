@@ -5,24 +5,32 @@ import "./patternCard.css";
 class PatternCard extends Component {
   patternCardContent = () => {
     const squigglyLinePic = require("../../Images/squigglyPatternIcon.svg");
+    const triangleUpPic = require("../../Images/pinkUpTriangle.svg");
+    const triangleDownPic = require("../../Images/pinkDownTriangle.svg");
+
     let interval = this.props.interval;
     let data = this.props.data;
+    let view = this.props.view;
+    let goals = this.props.goals;
 
     let [startPeriod, endPeriod, amount] = this.props.greatestChange(
       interval,
-      data
+      data,
+      view,
+      goals
     );
-    let [start, end] = this.props.fluctuation(interval, data);
+    let [start, end] = this.props.fluctuation(interval, data, view, goals);
+
+    let pic = triangleDownPic;
+    if (this.props.triangle === "up") {
+      pic = triangleUpPic;
+    }
 
     return (
       <div>
         <div className="flex-container-pattern">
           <div className="flex-children-pattern-image">
-            <img
-              src={this.props.trianglePic}
-              alt={"logo"}
-              className="arrow-icon"
-            />
+            <img src={pic} alt={"logo"} className="arrow-icon" />
           </div>
           <div className="flex-children-pattern-text">
             {"Fra " +

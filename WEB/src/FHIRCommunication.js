@@ -410,7 +410,7 @@ class FHIRCommunication extends React.Component {
           {/* {this.addPatientIfNeeded()}
           {this.addObservations()}
           {this.readAllObservations()} */}
-          {/* {this.addGoal()} */}
+          {this.addGoal()}
           {this.readAllGoals()}
 
           <Redirect to="/dashboard" />
