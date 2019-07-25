@@ -67,14 +67,14 @@ class PeriodStepper extends Component {
     return (
       <div className="flex-container">
         <button
-          className="flex-children datestepper-button"
+          className="flex-children datestepper-button datestepper-button-left"
           onClick={this.leftClicked}
         >
           <ChevronLeftRounded className="datestepper-chevron" />
         </button>{" "}
         <div className="flex-children datestepper-text">{text}</div>
         <button
-          className="flex-children datestepper-button"
+          className="flex-children datestepper-button datestepper-button-right"
           onClick={this.rightClicked}
         >
           <ChevronRightRounded className="datestepper-chevron" />{" "}
