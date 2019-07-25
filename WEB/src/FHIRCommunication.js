@@ -131,7 +131,7 @@ class FHIRCommunication extends React.Component {
         this.props.patient.datasets[i].measurements.length > 1 ||
         this.props.patient.datasets[i].measurements.value !== undefined
       ) {
-        console.log(this.props.patient.datasets[i].name);
+        // console.log(this.props.patient.datasets[i].name);
         this.addObservation(i);
       }
     }
@@ -409,21 +409,24 @@ class FHIRCommunication extends React.Component {
         let stateGoals = [];
         // for (let i = 0; i < goals.length; i++) {}
         goalsMsg.map((item, index) => {
-          if (item.note[0].text === "range") {
-            stateGoals.push({
-              Name: item.id,
-              type: item.note[0].text,
-              lower: item.target[0].detailRange.low.value,
-              upper: item.target[0].detailRange.upper.value,
-              unit: item.taget[0].detailRange.low.unit
-            });
-          } else {
-            stateGoals.push({
-              Name: item.id,
-              type: item.note[0].text,
-              value: item.target[0].detailQuantity.value,
-              unit: item.target[0].detailQuantity.unit
-            });
+          // console.log("item: ", item);
+          if (item.note) {
+            if (item.note[0].text === "range") {
+              stateGoals.push({
+                Name: item.id,
+                type: item.note[0].text,
+                lower: item.target[0].detailRange.low.value,
+                upper: item.target[0].detailRange.upper.value,
+                unit: item.taget[0].detailRange.low.unit
+              });
+            } else {
+              stateGoals.push({
+                Name: item.id,
+                type: item.note[0].text,
+                value: item.target[0].detailQuantity.value,
+                unit: item.target[0].detailQuantity.unit
+              });
+            }
           }
         });
         this.props.setGoals(stateGoals);
@@ -435,12 +438,12 @@ class FHIRCommunication extends React.Component {
       return (
         <div>
           {/* moved them here, seems to have solved some issues, gets called after login has saved info to redux */}
-          {/* {{this.addPatientIfNeeded()} */}
+          {this.addPatientIfNeeded()}
           {this.addObservations()}
           {/* {this.readAllObservations()} } */}
           {/* {this.addGoal()} */}
-          {/* {this.readAllGoals()} */}
-          {/* <Redirect to="/dashboard" /> */}
+          {this.readAllGoals()}
+          <Redirect to="/dashboard" />
         </div>
       );
     } else {
