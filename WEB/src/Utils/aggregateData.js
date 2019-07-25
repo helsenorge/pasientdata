@@ -10,7 +10,6 @@ export default function aggregateData(
 ) {
   const { startIndex, endIndex } = findStartAndEndIndex(
     inData,
-    inData.length,
     startString,
     endString
   );

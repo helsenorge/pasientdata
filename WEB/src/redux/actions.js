@@ -1,4 +1,10 @@
-import { SET_PATIENT, IS_LOGGED_IN, SET_GOALS, SET_VIEW } from "./actionType";
+import {
+  SET_PATIENT,
+  IS_LOGGED_IN,
+  SET_GOALS,
+  SET_VIEW,
+  SET_NR_OF_INTERVALS_BACK
+} from "./actionType";
 
 export const addInfo = (
   googleId,
@@ -27,4 +33,9 @@ export const setGoals = goals => {
 };
 export const setView = view => {
   return dispatch => dispatch({ type: SET_VIEW, view });
+};
+
+export const setNrOfIntervalsBack = setNrOfIntervalsBack => {
+  return dispatch =>
+    dispatch({ type: SET_NR_OF_INTERVALS_BACK, setNrOfIntervalsBack });
 };
