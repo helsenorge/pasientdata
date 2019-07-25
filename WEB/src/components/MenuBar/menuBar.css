@@ -24,6 +24,7 @@
   position: relative;
   transition: height 0.5s;
   background-color: #e9eaec;
+  width: 100%;
 }
 
 .menuBar-open2 {
@@ -59,16 +60,6 @@ a.menu-link2 {
   padding-bottom: 6px;
 }
 
-.libar2-items {
-  padding-left: 16px;
-  padding-right: 117px;
-}
-
-.libar-items {
-  padding-left: 44px;
-  padding-right: 19px;
-}
-
 .minHelse {
   padding-left: 8px;
 }
@@ -91,7 +82,7 @@ a.menu-link2 {
 }
 
 .menuButton2 {
-  width: 500px;
+  float: right;
 }
 
 .button {
@@ -120,6 +111,8 @@ a.menu-link2 {
   height: 48px;
   display: flex;
   align-items: flex-start;
+  justify-content: center;
+  padding: 0 16px;
 }
 
 .menuPos {
@@ -157,8 +150,10 @@ a.menu-link2 {
   font-size: 18px;
   font-style: normal;
   font-weight: 500;
-  padding-bottom: 4px;
-  padding-top: 4px;
+  padding: 12px 16px 12px 44px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
 .liBar:first-child {
@@ -185,10 +180,8 @@ a.menu-link {
   background: transparent;
   text-align: center;
   font-size: 18px;
-  width: 150px;
   transition: all 0.5s;
   cursor: pointer;
-  margin: 5px;
   display: inline-block;
   line-height: 21px;
   font-weight: 500;
@@ -199,9 +192,9 @@ a.menu-link {
 .aStyle:visited {
   text-decoration: none;
   border-bottom: none !important;
-  font-size: 32px;
+  font-size: 18px;
   font-style: normal;
-  font-weight: bold;
+  font-weight: medium;
   line-height: 21px;
   color: white !important;
   text-align: start;
@@ -283,28 +276,22 @@ a.menu-link {
     padding-bottom: 6px;
   }
 
-  .libar2-items {
-    padding-left: 16px;
-    padding-right: 117px;
-  }
-
   .liBar {
     padding-left: 8px;
     border-top: 1px solid #979797;
     font-size: 18px;
     font-style: normal;
     font-weight: 500;
-    padding-bottom: 4px;
-    padding-top: 4px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 12px 16px 12px 44px;
   }
 
   .liBar:first-child {
     border-top: 0;
-  }
-
-  .libar-items {
-    padding-left: 44px;
-    padding-right: 19px;
+    padding: 12px 0;
   }
 
   .minHelse {
@@ -344,10 +331,6 @@ a.menu-link {
     background-color: transparent;
   }
 
-  .menuButton2 {
-    width: 450px;
-  }
-
   .aStyle {
     text-decoration: none;
     border-bottom: none !important;
@@ -367,7 +350,8 @@ a.menu-link {
     left: 0;
     height: 48px;
     display: flex;
-    align-items: flex-start;
+    align-items: center;
+    padding: 0 16px;
   }
 
   .textStyle {
