@@ -18,7 +18,7 @@ class Dashboard extends Component {
     if (this.props.baseInfo.isLoggedin) {
       return (
         <div style={{ margin: "0 4px 8px" }}>
-          <h1 style={{ "margin-left": "8px" }}>Innsikt</h1>
+          <h1 style={{ "marginLeft": "8px" }}>Innsikt</h1>
           <CardComponent title={"Blodsukker"} content={blodsukkerContent()} />
           <div className="flex-container">
             <CardComponent
@@ -72,7 +72,7 @@ class Dashboard extends Component {
                 "/physicalactivity"
               )}
             />
-            <div className="flex-children" style={{ "margin-right": "8px" }} />
+            <div className="flex-children" style={{ "marginRight": "8px" }} />
           </div>
           <div className="single-flex-container">
             <CardComponent

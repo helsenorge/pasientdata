@@ -47,7 +47,7 @@ const blodsukkerContent = () => {
       </div>
       <div>
         <div className="button-style">
-          <Link to={"/bloodsugar"} style={{ "border-bottom": "none" }}>
+          <Link to={"/bloodsugar"} style={{ "borderBottom": "none" }}>
             <DisplayButton
               onClick={() => {
                 /* tom */

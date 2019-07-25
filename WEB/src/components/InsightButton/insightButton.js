@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import ChevronRightRounded from "@helsenorge/toolkit/components/icons/ChevronRightRounded";
 import "../DashboardContent/dashboardContent.css";
 import { Link } from "react-router-dom";
-import "./insightButton.css";
 
 class InsightButton extends Component {
   render() {
@@ -10,15 +9,15 @@ class InsightButton extends Component {
       <div
         style={{
           display: "flex",
-          "justify-content": "flex-end",
-          "align-items": "flex-end",
-          "align-self": "flex-end",
+          "justifyContent": "flex-end",
+          "alignItems": "flex-end",
+          "alignSelf": "flex-end",
           position: "absolute",
           bottom: "8px",
           right: "8px"
         }}
       >
-        <Link to={this.props.linkTo} style={{ "border-bottom": "none" }}>
+        <Link to={this.props.linkTo} style={{ "borderBottom": "none" }}>
           <button className="shape">
             <ChevronRightRounded className="chevronStyle" />
           </button>

@@ -1,7 +1,6 @@
 import React from "react";
 import { DisplayButton } from "@helsenorge/toolkit/components/atoms/buttons/display-button";
 import { Link } from "react-router-dom";
-import "./changeGoalsContent.css";
 
 const changeGoalsContent = () => {
   return (
@@ -12,7 +11,7 @@ const changeGoalsContent = () => {
       </div>
       <br />
       <div className="dashboard-button">
-        <Link to={"/mygoals"} style={{ "border-bottom": "none" }}>
+        <Link to={"/mygoals"} style={{ "borderBottom": "none" }}>
           <DisplayButton secondary>
             <div className={"dashboard-button-sizing"}>Gå til Mine mål </div>
           </DisplayButton>
