@@ -7,6 +7,7 @@ import "./trendGoalsCard.css";
 import { connect } from "react-redux";
 import aggregateData from "../../Utils/aggregateData";
 import moment from "moment";
+import periodFromView from "../../Utils/periodFromView";
 
 class TrendGoalsCard extends Component {
   trendGoalsContent = () => {
@@ -29,6 +30,9 @@ class TrendGoalsCard extends Component {
     let upperGoal = 80;
     let lowerGoal = 70;
     let pieSideSize = 20;
+    let { periodName, periodNumber, intervalName } = periodFromView(
+      this.props.baseInfo.view
+    );
     switch (this.props.datatype) {
       case "Blodsukker":
         data = FakeGlucoseData();
@@ -45,7 +49,6 @@ class TrendGoalsCard extends Component {
         currentValue =
           (timeWithin * 100) / (timeAbove + timeWithin + timeBelow);
         unit = "%";
-        // console.log("Blodsukker");
         hasUpperLimit = false;
         break;
       case "Insulin":
@@ -73,9 +76,9 @@ class TrendGoalsCard extends Component {
         goalValue = 15000;
         let aggregated = aggregateData(
           data,
-          "day",
+          intervalName,
           moment()
-            .subtract(1, "week")
+            .subtract(periodNumber, periodName)
             .format("YYYY-MM-DDTHH:mm:ss"),
           moment().format("YYYY-MM-DDTHH:mm:ss"),
           "ddd"
