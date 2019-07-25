@@ -14,6 +14,7 @@ class Skritt extends Component {
   render() {
     return (
       <div style={{ margin: "0 0 8px" }}>
+        <h1 style={{ marginLeft: "8px" }}>Innsikt</h1>
         <NavigationBar />
         <ViewCard />
         <TrendGoalsCard datatype="Skritt" />

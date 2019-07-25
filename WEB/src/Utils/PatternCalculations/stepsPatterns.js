@@ -56,7 +56,6 @@ export function stepsGreatestPeriod(view, data, goals) {
   } = periodFromView(view);
   let { startIndex, endIndex } = findStartAndEndIndex(
     data,
-    data.length,
     moment()
       .subtract(periodNumber, periodName)
       .format("YYYY-MM-DDTHH:mm:ss"),
@@ -129,7 +128,11 @@ export function stepsGreatestPeriod(view, data, goals) {
   let time = moment(greatestValueObject.x).format("DD:MM");
 
   return (
-    "Du gikk flest skritt den " + time + " (" + greatestValueObject.y + ")"
+    "Du gikk flest skritt den " +
+    time +
+    " (" +
+    greatestValueObject.y +
+    ") i denne perioden"
     // "Fra " +
     // lowerStart +
     // " to " +
