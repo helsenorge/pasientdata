@@ -50,7 +50,9 @@ class PeriodStepper extends Component {
             " " +
             moment()
               .subtract(
-                this.props.baseInfo.nrOfIntervalsBack + periodNumber - 1,
+                parseInt(this.props.baseInfo.nrOfIntervalsBack) +
+                  periodNumber -
+                  1,
                 periodName
               )
               .format(formatPeriod(periodName)) +

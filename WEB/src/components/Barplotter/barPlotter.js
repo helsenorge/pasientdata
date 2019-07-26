@@ -32,7 +32,7 @@ class BarPlotter extends Component {
       this.props.end,
       this.props.outputFormat
     );
-
+    //console.log(aggregated);
     if (this.props.page === "Dashboard") {
       return (
         <ResponsiveContainer width="100%" height={96}>
