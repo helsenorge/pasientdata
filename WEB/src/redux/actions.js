@@ -4,6 +4,13 @@ import {
   SET_GOALS,
   SET_VIEW,
   SET_NR_OF_INTERVALS_BACK,
+  SET_BLOOD_SUGAR_CHECKED,
+  SET_INSULIN_CHECKED,
+  SET_STEPS_CHECKED,
+  SET_WEIGHT_CHECKED,
+  SET_PHYSICAL_ACTIVITY_CHECKED,
+  SET_CARBOHYDRATES_CHECKED,
+  SET_NUMBER_CHECKED,
   SET_START_END
 } from "./actionType";
 
@@ -43,4 +50,36 @@ export const setNrOfIntervalsBack = nrOfIntervalsBack => {
   console.log("Nr of intervals back:", nrOfIntervalsBack);
   return dispatch =>
     dispatch({ type: SET_NR_OF_INTERVALS_BACK, nrOfIntervalsBack });
+};
+
+export const setBloodSugarChecked = bloodSugarChecked => {
+  return dispatch =>
+    dispatch({ type: SET_BLOOD_SUGAR_CHECKED, bloodSugarChecked });
+};
+
+export const setInsulinChecked = insulinChecked => {
+  return dispatch => dispatch({ type: SET_INSULIN_CHECKED, insulinChecked });
+};
+
+export const setStepsChecked = stepsChecked => {
+  return dispatch => dispatch({ type: SET_STEPS_CHECKED, stepsChecked });
+};
+
+export const setWeightChecked = weightChecked => {
+  return dispatch => dispatch({ type: SET_WEIGHT_CHECKED, weightChecked });
+};
+
+export const setPhysicalActivityChecked = physicalActivityChecked => {
+  return dispatch =>
+    dispatch({ type: SET_PHYSICAL_ACTIVITY_CHECKED, physicalActivityChecked });
+};
+
+export const setCarbohydratesChecked = carbohydratesChecked => {
+  return dispatch =>
+    dispatch({ type: SET_CARBOHYDRATES_CHECKED, carbohydratesChecked });
+};
+
+export const setNumberChecked = numberChecked => {
+  console.log(numberChecked);
+  return dispatch => dispatch({ type: SET_NUMBER_CHECKED, numberChecked });
 };

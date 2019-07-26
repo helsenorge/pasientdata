@@ -2,15 +2,35 @@ import {
   IS_LOGGED_IN,
   SET_VIEW,
   SET_NR_OF_INTERVALS_BACK,
+<<<<<<< HEAD
+  SET_BLOOD_SUGAR_CHECKED,
+  SET_INSULIN_CHECKED,
+  SET_STEPS_CHECKED,
+  SET_WEIGHT_CHECKED,
+  SET_PHYSICAL_ACTIVITY_CHECKED,
+  SET_CARBOHYDRATES_CHECKED,
+  SET_NUMBER_CHECKED
+=======
   SET_START_END
+>>>>>>> a56305cbd4c99bf23bda7ba0052493ee231ad0e7
 } from "./actionType";
 
 const initialState = {
   isLoggedin: false,
   view: "2weeks",
   nrOfIntervalsBack: "0",
+<<<<<<< HEAD
+  bloodSugarChecked: false,
+  insulinChecked: false,
+  stepsChecked: false,
+  weightChecked: false,
+  physicalActivityChecked: false,
+  carbohydratesChecked: false,
+  numberChecked: 0
+=======
   start: "",
   end: ""
+>>>>>>> a56305cbd4c99bf23bda7ba0052493ee231ad0e7
 };
 
 export default function baseInfoReducer(state = initialState, action) {
@@ -37,6 +57,36 @@ export default function baseInfoReducer(state = initialState, action) {
       };
     }
 
+    case SET_BLOOD_SUGAR_CHECKED: {
+      return { ...state, bloodSugarChecked: action.bloodSugarChecked };
+    }
+
+    case SET_INSULIN_CHECKED: {
+      return { ...state, insulinChecked: action.insulinChecked };
+    }
+
+    case SET_STEPS_CHECKED: {
+      return { ...state, stepsChecked: action.stepsChecked };
+    }
+
+    case SET_WEIGHT_CHECKED: {
+      return { ...state, weightChecked: action.weightChecked };
+    }
+
+    case SET_PHYSICAL_ACTIVITY_CHECKED: {
+      return {
+        ...state,
+        physicalActivityChecked: action.physicalActivityChecked
+      };
+    }
+
+    case SET_CARBOHYDRATES_CHECKED: {
+      return { ...state, carbohydratesChecked: action.carbohydratesChecked };
+    }
+
+    case SET_NUMBER_CHECKED: {
+      return { ...state, numberChecked: action.numberChecked };
+    }
     case SET_START_END: {
       return {
         ...state,
