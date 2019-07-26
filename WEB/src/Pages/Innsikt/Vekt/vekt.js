@@ -12,6 +12,7 @@ import {
 } from "../../../Utils/PatternCalculations/bloodSugarPatterns";
 import FakeGlucoseData from "../../../Utils/fakeGlucose";
 import { connect } from "react-redux";
+import DateSelectorCard from "../../../components/DateSelectorCard/dateSelectorCard";
 
 class Vekt extends Component {
   state = {};
@@ -21,6 +22,7 @@ class Vekt extends Component {
         <h1 style={{ marginLeft: "8px" }}>Innsikt</h1>
         <NavigationBar />
         <ViewCard />
+        <DateSelectorCard />
         <TrendGoalsCard datatype="Vekt" />
         <GraphCard datatype="Vekt" />
         <PatternCard

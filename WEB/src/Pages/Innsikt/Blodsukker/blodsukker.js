@@ -6,6 +6,8 @@ import PatternCard from "../../../components/InsightCards/patternCard";
 import ViewCard from "../../../components/InsightCards/viewCard";
 import CompareDataCard from "../../../components/InsightCards/compareDataCard";
 import GoalCard from "../../../components/InsightCards/goalCard";
+import DateSelectorCard from "../../../components/DateSelectorCard/dateSelectorCard";
+
 import {
   bloodSugarGreatestChange,
   bloodSugarFluctuations
@@ -20,6 +22,7 @@ class Blodsukker extends Component {
         <h1 style={{ marginLeft: "8px" }}>Innsikt</h1>
         <NavigationBar />
         <ViewCard />
+        <DateSelectorCard />
         <TrendGoalsCard datatype="Blodsukker" />
         <GraphCard datatype="Blodsukker" />
         <PatternCard

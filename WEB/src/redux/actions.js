@@ -10,7 +10,8 @@ import {
   SET_WEIGHT_CHECKED,
   SET_PHYSICAL_ACTIVITY_CHECKED,
   SET_CARBOHYDRATES_CHECKED,
-  SET_NUMBER_CHECKED
+  SET_NUMBER_CHECKED,
+  SET_START_END
 } from "./actionType";
 
 export const addInfo = (
@@ -40,6 +41,9 @@ export const setGoals = goals => {
 };
 export const setView = view => {
   return dispatch => dispatch({ type: SET_VIEW, view });
+};
+export const setStartEnd = (start, end) => {
+  return dispatch => dispatch({ type: SET_START_END, start, end });
 };
 
 export const setNrOfIntervalsBack = nrOfIntervalsBack => {

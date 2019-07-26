@@ -2,6 +2,7 @@ import {
   IS_LOGGED_IN,
   SET_VIEW,
   SET_NR_OF_INTERVALS_BACK,
+<<<<<<< HEAD
   SET_BLOOD_SUGAR_CHECKED,
   SET_INSULIN_CHECKED,
   SET_STEPS_CHECKED,
@@ -9,12 +10,16 @@ import {
   SET_PHYSICAL_ACTIVITY_CHECKED,
   SET_CARBOHYDRATES_CHECKED,
   SET_NUMBER_CHECKED
+=======
+  SET_START_END
+>>>>>>> a56305cbd4c99bf23bda7ba0052493ee231ad0e7
 } from "./actionType";
 
 const initialState = {
   isLoggedin: false,
   view: "2weeks",
   nrOfIntervalsBack: "0",
+<<<<<<< HEAD
   bloodSugarChecked: false,
   insulinChecked: false,
   stepsChecked: false,
@@ -22,6 +27,10 @@ const initialState = {
   physicalActivityChecked: false,
   carbohydratesChecked: false,
   numberChecked: 0
+=======
+  start: "",
+  end: ""
+>>>>>>> a56305cbd4c99bf23bda7ba0052493ee231ad0e7
 };
 
 export default function baseInfoReducer(state = initialState, action) {
@@ -78,6 +87,14 @@ export default function baseInfoReducer(state = initialState, action) {
     case SET_NUMBER_CHECKED: {
       return { ...state, numberChecked: action.numberChecked };
     }
+    case SET_START_END: {
+      return {
+        ...state,
+        start: action.start,
+        end: action.end
+      };
+    }
+
     default:
       return state;
   }

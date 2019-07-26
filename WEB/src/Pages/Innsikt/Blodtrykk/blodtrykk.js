@@ -12,6 +12,7 @@ import {
 } from "../../../Utils/PatternCalculations/bloodSugarPatterns";
 import FakeGlucoseData from "../../../Utils/fakeGlucose";
 import { connect } from "react-redux";
+import DateSelectorCard from "../../../components/DateSelectorCard/dateSelectorCard";
 
 class Blodtrykk extends Component {
   state = {};
@@ -21,6 +22,7 @@ class Blodtrykk extends Component {
         <h1 style={{ marginLeft: "8px" }}>Innsikt</h1>
         <NavigationBar />
         <ViewCard />
+        <DateSelectorCard />
         <OversiktKort datatype="Blodtrykk" />
         <GraphCard datatype="Blodtrykk" />
         <PatternCard

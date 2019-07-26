@@ -3,6 +3,7 @@ import ViewCard from "../../components/InsightCards/viewCard";
 import MultipleGraphCard from "../../components/CompareDataCards/multipleGraphCard";
 import DataTypeCard from "../../components/CompareDataCards/dataTypeCard";
 import GoToInsightCard from "../../components/CompareDataCards/goToInsightCard";
+import DateSelectorCard from "../../components/DateSelectorCard/dateSelectorCard";
 
 class CompareData extends Component {
   render() {
@@ -10,6 +11,7 @@ class CompareData extends Component {
       <div style={{ margin: "0 0 8px" }}>
         <h1 style={{ marginLeft: "8px" }}>Sammenlign data</h1>
         <ViewCard />
+        <DateSelectorCard />
         <MultipleGraphCard />
         <DataTypeCard />
         <GoToInsightCard />
