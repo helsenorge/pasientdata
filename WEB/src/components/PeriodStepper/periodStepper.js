@@ -67,7 +67,6 @@ class PeriodStepper extends Component {
     }
 
     let chevronColor;
-    console.log(this.props.baseInfo.nrOfIntervalsBack);
     if (this.props.baseInfo.nrOfIntervalsBack > 0) {
       chevronColor = "#006d84";
     }
