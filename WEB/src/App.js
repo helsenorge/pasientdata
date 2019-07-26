@@ -4,7 +4,6 @@ import "./min-helse.css";
 import "./styles.css";
 import { Switch, Route, BrowserRouter } from "react-router-dom";
 import Dashboard from "./Pages/Dashboard/dashboard";
-import Steps from "./Pages/Steps/steps";
 import Blodsukker from "./Pages/Innsikt/Blodsukker/blodsukker";
 import Skritt from "./Pages/Innsikt/Skritt/skritt";
 import Insulin from "./Pages/Innsikt/Insulin/insulin";
@@ -40,7 +39,6 @@ class App extends Component {
             <Route path="/physicalactivity" component={FysiskAktivitet} />
             <Route path="/comparedata" component={CompareData} />
             <Route path="/mygoals" component={MyGoals} />
-            <Route path="/steps" component={Steps} />
             <Route
               render={() => {
                 return <NotFoundPage />;

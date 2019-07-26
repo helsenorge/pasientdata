@@ -1,9 +1,16 @@
-import { IS_LOGGED_IN, SET_VIEW, SET_NR_OF_INTERVALS_BACK } from "./actionType";
+import {
+  IS_LOGGED_IN,
+  SET_VIEW,
+  SET_NR_OF_INTERVALS_BACK,
+  SET_START_END
+} from "./actionType";
 
 const initialState = {
   isLoggedin: false,
   view: "2weeks",
-  nrOfIntervalsBack: "0"
+  nrOfIntervalsBack: "0",
+  start: "",
+  end: ""
 };
 
 export default function baseInfoReducer(state = initialState, action) {
@@ -27,6 +34,14 @@ export default function baseInfoReducer(state = initialState, action) {
       return {
         ...state,
         nrOfIntervalsBack: action.nrOfIntervalsBack
+      };
+    }
+
+    case SET_START_END: {
+      return {
+        ...state,
+        start: action.start,
+        end: action.end
       };
     }
 

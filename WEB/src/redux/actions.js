@@ -3,7 +3,8 @@ import {
   IS_LOGGED_IN,
   SET_GOALS,
   SET_VIEW,
-  SET_NR_OF_INTERVALS_BACK
+  SET_NR_OF_INTERVALS_BACK,
+  SET_START_END
 } from "./actionType";
 
 export const addInfo = (
@@ -33,6 +34,9 @@ export const setGoals = goals => {
 };
 export const setView = view => {
   return dispatch => dispatch({ type: SET_VIEW, view });
+};
+export const setStartEnd = (start, end) => {
+  return dispatch => dispatch({ type: SET_START_END, start, end });
 };
 
 export const setNrOfIntervalsBack = nrOfIntervalsBack => {

@@ -3,3 +3,4 @@ export const IS_LOGGED_IN = "IS_LOGGED_IN";
 export const SET_GOALS = "SET_GOALS";
 export const SET_VIEW = "SET_VIEW";
 export const SET_NR_OF_INTERVALS_BACK = "SET_NR_OF_INTERVALS_BACK";
+export const SET_START_END = "SET_START_END";

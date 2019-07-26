@@ -106,7 +106,6 @@ class TrendGoalsCard extends Component {
           "ddd"
         );
         trends = Trends(aggregated, upperLimit, lowerLimit);
-        // console.log(trends);
         mean = trends.mean;
         timeAbove = trends.timeAbove;
         timeWithin = trends.timeWithin;
@@ -197,9 +196,6 @@ class TrendGoalsCard extends Component {
           180,
         0
       ];
-      console.log("lg: ", lowerGoal);
-      console.log("pss: ", pieSideSize);
-      console.log("ug: ", upperGoal);
       lowerTextValue = Math.max(0, goalValue - pieSideSize);
       upperTextValue = goalValue + pieSideSize;
       goalText = goalValue + " " + unit;
@@ -223,7 +219,6 @@ class TrendGoalsCard extends Component {
           Math.PI) /
         180;
     }
-    console.log(arrowAngle);
 
     let triangleAngle = (70 * Math.PI) / 180;
     let r = 20;
