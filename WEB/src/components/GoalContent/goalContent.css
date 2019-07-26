@@ -54,8 +54,9 @@
 }
 
 .button-style {
-  margin-top: -30px;
-  margin-left: 35px;
+  /* position: absolute; */
+  margin-top: -15px;
+  margin-left: 25px;
 }
 
 .editText {
@@ -68,9 +69,42 @@
 }
 
 .split {
-  width: 50%;
+  width: 60%;
 }
 
 .pieChartStyle {
-  margin-left: 25px;
+  margin-left: 15px;
+}
+
+@media only screen and (min-width: 700px) {
+  .circleBound {
+    border: 10px solid #85c99e;
+    box-sizing: border-box;
+    margin-left: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-radius: 100%;
+    width: 175px;
+    height: 175px;
+  }
+
+  .pieChartStyle {
+    margin-left: 0px;
+    height: 65%;
+  }
+
+  .row {
+    margin-right: -15px;
+    margin-left: -15px;
+  }
+
+  .button-style {
+    position: absolute;
+    margin-top: 15px;
+    margin-left: 10px;
+  }
+
+  .split {
+    width: 40%;
+  }
 }
