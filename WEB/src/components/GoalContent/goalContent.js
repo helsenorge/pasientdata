@@ -93,7 +93,7 @@ class GoalContent extends Component {
         goal = "80%";
         xPos = 72;
         data = FakeGlucoseData();
-        upperLimit = 20;
+        upperLimit = 12;
         lowerLimit = 5;
         trendValue = 2;
         goalValue = 80;
@@ -116,13 +116,13 @@ class GoalContent extends Component {
       case "Skritt":
         COLORS = physicalActiveColors;
         dataSet = [{ value: 1 }, { value: 2 }, { value: 2 }];
-        goal = this.props.patient.goals[0].value;
+        goal = 10000;
         xPos = 48;
         data = this.props.patient.datasets[0].measurements;
-        upperLimit = 1000000;
-        lowerLimit = 10000;
-        trendValue = 200;
-        goalValue = 14000;
+        upperLimit = 100000;
+        lowerLimit = 1000;
+        trendValue = 2;
+        goalValue = 10000;
         let aggregated = aggregateData(
           data,
           intervalName,
@@ -140,7 +140,7 @@ class GoalContent extends Component {
         currentValue = mean;
         unit = " \n skritt";
         hasUpperLimit = false;
-        pieSideSize = 2000;
+        pieSideSize = 700;
         break;
       case "Vekt":
         COLORS = generalColors;
@@ -265,7 +265,7 @@ class GoalContent extends Component {
     let triangleAngle = (70 * Math.PI) / 180; // går og litt på bredde
     let r = 20; // lengde pil
     let theta = 9; // ish bredde
-    let radius = 40; // hvor langt unna center
+    let radius = 90; // hvor langt unna center
 
     let centerX = 125 + radius * Math.cos(-arrowAngle);
     let centerY = 110 + radius * Math.sin(-arrowAngle);
