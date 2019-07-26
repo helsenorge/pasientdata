@@ -1,0 +1,8 @@
+.flex-container-multiple-graph {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.flex-children-multiple-graph {
+  flex: 1;
+}
