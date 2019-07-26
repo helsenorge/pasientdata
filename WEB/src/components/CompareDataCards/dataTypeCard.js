@@ -57,10 +57,8 @@ class DataTypeCard extends Component {
         if (this.state.numberChecked < 3 || e.checked === true) {
           if (e.checked === true) {
             counter = counter - 1;
-            console.log("counter decrement: ", counter);
           } else {
             counter += 1;
-            console.log("counter increment: ", counter);
           }
           e.checked = !e.checked;
           changed = e;
@@ -194,8 +192,6 @@ class DataTypeCard extends Component {
   };
 
   render() {
-    console.log("state number checked: ", this.state.numberChecked);
-
     return <CardComponent title={""} content={this.makeContent()} />;
   }
 }
