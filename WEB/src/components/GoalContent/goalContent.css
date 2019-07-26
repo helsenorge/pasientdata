@@ -21,32 +21,15 @@
 }
 
 .goalText {
-  font-family: Roboto;
-  font-style: normal;
-  font-weight: normal;
   margin-top: 15px;
   text-align: center;
   font-size: 12px;
   line-height: 14px;
-  letter-spacing: 0.5625px;
-  color: #000000;
-}
-
-.unitText {
-  margin-top: 10px;
-  text-align: center;
-  font-size: 14px;
-  line-height: 16px;
-  letter-spacing: 0.5625px;
-  font-family: Roboto;
-  font-style: normal;
-  font-weight: normal;
-  color: #000000;
 }
 
 .goalPercentText {
-  margin-top: 20px;
-  margin-bottom: 20px;
+  margin-top: 25px;
+  margin-bottom: 25px;
   text-align: center;
   font-size: 36px;
   line-height: 42px;
@@ -73,7 +56,7 @@
 .button-style {
   /* position: absolute; */
   margin-top: -15px;
-  margin-left: 15px;
+  margin-left: 25px;
 }
 
 .editText {
@@ -90,7 +73,7 @@
 }
 
 .pieChartStyle {
-  margin-left: 5px;
+  margin-left: 15px;
 }
 
 @media only screen and (min-width: 700px) {
@@ -107,19 +90,21 @@
 
   .pieChartStyle {
     margin-left: 0px;
-    margin-top: 25px;
+    height: 65%;
   }
 
   .row {
-    flex-wrap: nowrap;
+    margin-right: -15px;
+    margin-left: -15px;
   }
 
   .button-style {
-    margin-top: 60px;
-    margin-left: 60px;
+    position: absolute;
+    margin-top: 15px;
+    margin-left: 10px;
   }
 
   .split {
-    width: 30%;
+    width: 40%;
   }
 }
