@@ -6,7 +6,7 @@ import BarPlotter from "../Barplotter/barPlotter";
 const stepsContent = (data, link) => {
   return (
     <div>
-      <div style={{ "marginBottom": "40px" }}>
+      <div style={{ "marginBottom": "12px" }}>
         <BarPlotter
           start={moment().subtract(1, "week")}
           end={moment()}

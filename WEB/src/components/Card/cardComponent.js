@@ -15,8 +15,9 @@ import "./cardComponent.css";
 
 class CardComponent extends Component {
   render() {
+    const cardClassName = this.props.className ? ("flex-card " + this.props.className) : "flex-card";
     return (
-      <Card className="flex-card">
+      <Card className={cardClassName}>
         <CardBody>
           <CardTitle>{this.props.title}</CardTitle>
           {this.props.content}
