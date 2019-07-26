@@ -9,8 +9,7 @@ import {
   Pie,
   Cell,
   Label,
-  ResponsiveContainer,
-  Polygon
+  ResponsiveContainer
 } from "recharts";
 import CardComponent from "../../components/Card/cardComponent";
 import FakeGlucoseData from "../../Utils/fakeGlucose";
@@ -81,7 +80,6 @@ class GoalContent extends Component {
     let unit = "%";
     let trends;
     let hasUpperLimit = true;
-    let percentGoal;
     let upperGoal = 80;
     let lowerGoal = 70;
     let pieSideSize = 20;
@@ -95,11 +93,10 @@ class GoalContent extends Component {
         goal = "80%";
         xPos = 72;
         data = FakeGlucoseData();
-        upperLimit = 14;
+        upperLimit = 20;
         lowerLimit = 5;
-        percentGoal = 65;
         trendValue = 2;
-        goalValue = 85;
+        goalValue = 80;
         trends = Trends(data, upperLimit, lowerLimit);
         mean = trends.mean;
         timeAbove = trends.timeAbove;
@@ -125,7 +122,7 @@ class GoalContent extends Component {
         upperLimit = 1000000;
         lowerLimit = 10000;
         trendValue = 200;
-        goalValue = 15000;
+        goalValue = 14000;
         let aggregated = aggregateData(
           data,
           intervalName,
