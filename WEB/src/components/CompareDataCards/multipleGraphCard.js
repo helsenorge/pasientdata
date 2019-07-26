@@ -127,32 +127,40 @@ class MultipleGraphCard extends Component {
         end,
         formatInterval(intervalName)
     );
-    return (
-      <div>
-        <div className="flex-container-multiple-graph">
-          {this.makeBloodSugarGraph(bloodSugar)}
-          {this.makeInsulinGraph(insulin)}
-          {this.makeStepsGraph(steps)}
-          {this.makeWeightGraph(weight)}
-          {this.makePhysicalActivityGraph(physicalActivity)}
-          {this.makeCarbohydratesGraph(carbohydrates)}
-          <ResponsiveContainer width="100%" height={30}>
-            <BarChart width={350} height={30} data={xAxisTicks}
-                margin={{top:0, right: 30, left: 40, bottom: 0}}>
-                <XAxis dataKey="x" tick={{fontSize: '12px'}}/>
-            </BarChart>
-          </ResponsiveContainer>
+    const noDataTypesChecked = (bloodSugar || insulin || steps || weight || physicalActivity || carbohydrates) == false;
+
+    if(noDataTypesChecked) {
+      return (
+        <span>Valg de datatyper som du vill se sammelign mellan i listan nedan.</span>
+      );
+    } else {
+        return (
+        <div>
+          <div className="flex-container-multiple-graph">
+            {this.makeBloodSugarGraph(bloodSugar)}
+            {this.makeInsulinGraph(insulin)}
+            {this.makeStepsGraph(steps)}
+            {this.makeWeightGraph(weight)}
+            {this.makePhysicalActivityGraph(physicalActivity)}
+            {this.makeCarbohydratesGraph(carbohydrates)}
+            <ResponsiveContainer width="100%" height={30}>
+              <BarChart width={350} height={30} data={xAxisTicks}
+                  margin={{top:0, right: 30, left: 40, bottom: 0}}>
+                  <XAxis dataKey="x" tick={{fontSize: '12px'}}/>
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
+          {this.makePeriodStepper(
+            bloodSugar ||
+              insulin ||
+              steps ||
+              weight ||
+              physicalActivity ||
+              carbohydrates
+          )}
         </div>
-        {this.makePeriodStepper(
-          bloodSugar ||
-            insulin ||
-            steps ||
-            weight ||
-            physicalActivity ||
-            carbohydrates
-        )}
-      </div>
-    );
+      );
+    } 
   };
 
   render() {
