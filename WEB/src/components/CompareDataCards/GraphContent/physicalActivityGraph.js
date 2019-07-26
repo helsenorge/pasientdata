@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-class WeightGraph extends Component {
+class PhysicalActivityGraph extends Component {
   render() {
-    return <div>Her skal vektgrafen</div>;
+    return <div>Her skal fysisk aktivitet-grafen</div>;
   }
 }
 
@@ -14,4 +14,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(WeightGraph);
+export default connect(mapStateToProps)(PhysicalActivityGraph);

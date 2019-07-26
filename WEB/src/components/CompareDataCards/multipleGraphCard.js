@@ -3,11 +3,21 @@ import CardComponent from "../Card/cardComponent";
 import { connect } from "react-redux";
 import PeriodStepper from "../PeriodStepper/periodStepper";
 import weightContent from "../DashboardContent/weightContent";
+import BloodSugarGraph from "./GraphContent/bloodSugarGraph";
+import InsulinGraph from "./GraphContent/insulinGraph";
+import StepsGraph from "./GraphContent/stepsGraph";
+import WeightGraph from "./GraphContent/weightGraph";
+import PhysicalActivityGraph from "./GraphContent/physicalActivityGraph";
+import CarbohydratesGraph from "./GraphContent/carbohydratesGraph";
 
 class MultipleGraphCard extends Component {
   makeBloodSugarGraph = bloodSugar => {
     if (bloodSugar) {
-      return <div>blodsukkergraf</div>;
+      return (
+        <div className="flex-children-multiple-graph">
+          <BloodSugarGraph />
+        </div>
+      );
     } else {
       return <div />;
     }
@@ -15,7 +25,11 @@ class MultipleGraphCard extends Component {
 
   makeInsulinGraph = insulin => {
     if (insulin) {
-      return <div>insulingraf</div>;
+      return (
+        <div className="flex-children-multiple-graph">
+          <InsulinGraph />
+        </div>
+      );
     } else {
       return <div />;
     }
@@ -23,7 +37,11 @@ class MultipleGraphCard extends Component {
 
   makeStepsGraph = steps => {
     if (steps) {
-      return <div>skrittgraf</div>;
+      return (
+        <div className="flex-children-multiple-graph">
+          <StepsGraph />
+        </div>
+      );
     } else {
       return <div />;
     }
@@ -32,7 +50,9 @@ class MultipleGraphCard extends Component {
   makeWeightGraph = weight => {
     if (weight) {
       return (
-        <div>{weightContent(this.props.patient.datasets[3].measurements)}</div>
+        <div className="flex-children-multiple-graph">
+          <WeightGraph />
+        </div>
       );
     } else {
       return <div />;
@@ -41,7 +61,11 @@ class MultipleGraphCard extends Component {
 
   makePhysicalActivityGraph = physicalActivity => {
     if (physicalActivity) {
-      return <div>fysiskaktivitetgraf</div>;
+      return (
+        <div className="flex-children-multiple-graph">
+          <PhysicalActivityGraph />
+        </div>
+      );
     } else {
       return <div />;
     }
@@ -49,7 +73,11 @@ class MultipleGraphCard extends Component {
 
   makeCarbohydratesGraph = carbohydrates => {
     if (carbohydrates) {
-      return <div>karbohydratgraf</div>;
+      return (
+        <div className="flex-children-multiple-graph">
+          <CarbohydratesGraph />
+        </div>
+      );
     } else {
       return <div />;
     }
