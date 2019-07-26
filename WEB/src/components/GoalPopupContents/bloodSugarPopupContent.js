@@ -5,7 +5,6 @@ import { DisplayButton } from "@helsenorge/toolkit/components/atoms/buttons/disp
 class BloodSugarPopupContent extends Component {
   constructor(props) {
     super(props);
-    this.handleSingleChange = this.handleSingleChange.bind(this);
 
     this.state = {
       single: "",
@@ -16,7 +15,7 @@ class BloodSugarPopupContent extends Component {
   handleSave = () => {
     console.log(this.state.single);
     console.log(this.state.double1);
-    console.log(this.state.double2);
+    console.log(this.state.single);
   };
   handleSingleChange = event => {
     this.setState({ single: event.target.value });
