@@ -62,7 +62,7 @@ class TrendGoalsCard extends Component {
         lowerLimit = 5;
         percentGoal = 65;
         trendValue = 2;
-        goalValue = 75;
+        goalValue = 85;
         trends = Trends(data, upperLimit, lowerLimit);
         mean = trends.mean;
         timeAbove = trends.timeAbove;
@@ -177,6 +177,7 @@ class TrendGoalsCard extends Component {
         0
       ];
     } else {
+      // only lower limit
       if (unit === "%") {
         pieData = [
           { value: Math.min(pieSideSize, 100 - goalValue) },
@@ -187,6 +188,8 @@ class TrendGoalsCard extends Component {
         goalText = goalValue + unit;
       } else {
         pieData = [{ value: pieSideSize }, { value: pieSideSize }];
+        lowerTextValue = Math.max(0, goalValue - pieSideSize);
+        upperTextValue = goalValue + pieSideSize;
       }
       angles = [
         0,
@@ -196,8 +199,7 @@ class TrendGoalsCard extends Component {
           180,
         0
       ];
-      lowerTextValue = Math.max(0, goalValue - pieSideSize);
-      upperTextValue = goalValue + pieSideSize;
+
       goalText = goalValue + " " + unit;
     }
     lowerText = lowerTextValue + unit;
@@ -278,7 +280,7 @@ class TrendGoalsCard extends Component {
                 } else {
                   returnString = "";
                 }
-
+                console.log(upperText);
                 return (
                   <React.Fragment>
                     <text

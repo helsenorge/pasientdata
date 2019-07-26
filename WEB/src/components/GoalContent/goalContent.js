@@ -46,7 +46,8 @@ const goalContent = (data, link) => {
         </div>
         <div>
           <div className="button-style">
-            <Link to={link} style={{ borderBottom: "none" }}>
+            {/* <Link to={link} style={{ borderBottom: "none" }}> */}
+            <Link to="" style={{ borderBottom: "none" }}>
               <DisplayButton secondary>
                 <div className="flex-container-button">
                   <EditOutlined className="flex-children-button-icon editOutlinedStyle" />
@@ -62,3 +63,34 @@ const goalContent = (data, link) => {
 };
 
 export default goalContent;
+
+// let triangleAngle = (70 * Math.PI) / 180; // går og litt på bredde
+// let r = 20; // lengde pil
+// let theta = 9; // ish bredde
+// let radius = 40; // hvor langt unna center
+
+// let centerX = 125 + radius * Math.cos(-arrowAngle);
+// let centerY = 110 + radius * Math.sin(-arrowAngle);
+// let x1 = Math.floor(centerX + r * Math.cos(-arrowAngle));
+// let y1 = Math.floor(centerY + r * Math.sin(-arrowAngle));
+// let x2 = Math.floor(
+//   centerX + theta * Math.cos(-arrowAngle - triangleAngle)
+// );
+// let y2 = Math.floor(
+//   centerY + theta * Math.sin(-arrowAngle - triangleAngle)
+// );
+// let x3 = Math.floor(
+//   centerX + theta * Math.cos(-arrowAngle + triangleAngle)
+// );
+// let y3 = Math.floor(
+//   centerY + theta * Math.sin(-arrowAngle + triangleAngle)
+// );
+
+
+// <svg>
+// <polygon
+//   points={pointString}
+//   fill="#4F4F4F"
+//   className="trend-polygon"
+// />{" "}
+// </svg>

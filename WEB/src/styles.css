@@ -5,11 +5,11 @@ body {
   display: flex;
   flex-direction: column;
   color: #000;
-  top: 55px;
   font-size: 18px;
   font-style: normal;
   font-weight: 500;
   line-height: 21px;
+  padding-top: 72px;
 }
 
 h1 {
@@ -36,6 +36,6 @@ html {
 
 @media only screen and (max-width: 650px) {
   body {
-    top: 55px;
+    padding-top: 56px;
   }
 }
