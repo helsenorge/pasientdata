@@ -1,0 +1,21 @@
+.sugar-input-div-parent {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.sugar-input-div-child {
+  flex: 1;
+}
+
+.popup-content-center-text {
+  text-align: center;
+}
+
+.goal-input {
+  margin: 6px;
+}
+
+/* .goal-save-button {
+  margin-top: 4px;
+} */

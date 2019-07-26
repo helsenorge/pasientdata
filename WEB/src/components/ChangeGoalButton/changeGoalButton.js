@@ -79,7 +79,7 @@ class ChangeGoalButton extends Component {
         medium={false}
         large={false}
       >
-        <h3>{"Rediger mål for:"}</h3>
+        <text>{"Rediger mål for:"}</text>
         {this.popupContent()}
       </LightBox>
     );
