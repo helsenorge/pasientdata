@@ -1,0 +1,124 @@
+.flex-container-trend-goals {
+  display: flex;
+}
+
+.flex-children-trend-goals {
+  flex: 1;
+}
+
+.outer-div-trend-goals {
+  width: 100%;
+}
+
+.circleBound {
+  border: 10px solid #85c99e;
+  box-sizing: border-box;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border-radius: 100%;
+  width: 175px;
+  height: 175px;
+}
+
+.goalText {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  margin-top: 15px;
+  text-align: center;
+  font-size: 12px;
+  line-height: 14px;
+  letter-spacing: 0.5625px;
+  color: #000000;
+}
+
+.unitText {
+  margin-top: 10px;
+  text-align: center;
+  font-size: 14px;
+  line-height: 16px;
+  letter-spacing: 0.5625px;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  color: #000000;
+}
+
+.goalPercentText {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 36px;
+  line-height: 42px;
+}
+
+.editOutlinedStyle {
+  color: #006d84;
+  width: 27px;
+  height: 27px;
+  margin-right: 7px;
+}
+
+.flex-container-button {
+  flex-direction: row;
+  display: flex;
+  align-items: flex-end;
+  line-height: 19px;
+}
+
+.flex-children-button {
+  flex: 1;
+}
+
+.button-style {
+  margin-top: -15px;
+  margin-left: 15px;
+}
+
+.editText {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 27px;
+  color: #006d84;
+  margin-right: 7px;
+}
+
+.split {
+  width: 60%;
+}
+
+.pieChartStyle {
+  margin-left: 5px;
+}
+
+@media only screen and (min-width: 700px) {
+  .circleBound {
+    border: 10px solid #85c99e;
+    box-sizing: border-box;
+    margin-left: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-radius: 100%;
+    width: 175px;
+    height: 175px;
+  }
+
+  .pieChartStyle {
+    margin-left: 0px;
+    margin-top: 25px;
+  }
+
+  .row {
+    flex-wrap: nowrap;
+  }
+
+  .button-style {
+    margin-top: 60px;
+    margin-left: 60px;
+  }
+
+  .split {
+    width: 30%;
+  }
+}

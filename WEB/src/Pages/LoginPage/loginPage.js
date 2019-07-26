@@ -22,7 +22,7 @@ class LoginPage extends Component {
     if (sessionStorage.getItem("googleResponse")) {
       console.log("Reading google client from localStorage");
       let response = JSON.parse(sessionStorage.getItem("googleResponse"));
-      if (moment().diff(moment.unix(response.Zi.expires_at / 1000), "m") < 0) {
+      if (response.Zi && moment().diff(moment.unix(response.Zi.expires_at / 1000), "m") < 0) {
         responseGoogle.bind(this)(response);
         return <div />;
       } // Else move on to login screen because need new login data.
@@ -40,7 +40,7 @@ class LoginPage extends Component {
             {
               <GoogleLogin
                 autoLoad={false}
-                clientId="942269849137-5a1bgivhq71c5ni083igrbss4tbpr6sm.apps.googleusercontent.com"
+                clientId="977336258298-918fs7q5nkhjg0brjgn30kolrn450nks.apps.googleusercontent.com"
                 scope={
                   "https://www.googleapis.com/auth/fitness.activity.read " +
                   "https://www.googleapis.com/auth/fitness.body.read" //+

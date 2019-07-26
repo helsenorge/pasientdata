@@ -1,15 +1,33 @@
 body {
   background-color: #e9e9e9 !important;
-  font-family: "Roboto", sans-serif;
+  font-family: "Roboto", sans-serif !important;
   height: 100%;
   display: flex;
   flex-direction: column;
   color: #000;
-  top: 55px;
-  font-size: 18px;
+  font-size: 14px !important;;
   font-style: normal;
   font-weight: 500;
   line-height: 21px;
+  padding-top: 72px;
+}
+
+h1 {
+  font-family: "Roboto", sans-serif !important;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 36px !important;
+  line-height: 42px;
+  letter-spacing: 0.5625px;
+}
+
+h5 {
+  font-family: "Roboto", sans-serif !important;;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px !important;
+  line-height: 21px;
+  letter-spacing: 0.5625px;
 }
 
 html {
@@ -18,6 +36,6 @@ html {
 
 @media only screen and (max-width: 650px) {
   body {
-    top: 55px;
+    padding-top: 56px;
   }
 }

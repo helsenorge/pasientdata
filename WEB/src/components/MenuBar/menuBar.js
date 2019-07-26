@@ -1,7 +1,8 @@
-import React, { Component, useRef, useEffect } from "react";
+import React, { Component } from "react";
 import "./menuBar.css";
 import Menu from "@helsenorge/toolkit/components/icons/Menu";
 import Tiles from "@helsenorge/toolkit/components/icons/Tiles";
+import ChevronDownRounded from "@helsenorge/toolkit/components/icons/ChevronDownRounded";
 import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { onLoggedIn } from "../../Redux/actions";
@@ -66,7 +67,7 @@ class MenuBar extends Component {
 
     if (this.state.isToggleOn2) {
       menu2 = (
-        <div className="menuBar2 menuBar-open2 pageLink">
+        <div className="menuBar2 menuBar-open2">
           <ul className="ulBar">
             <li className="liBar2 libar2-items">
               <NavLink
@@ -148,15 +149,16 @@ class MenuBar extends Component {
     }
 
     if (this.state.isToggleOn) {
+      const menuBar2OpenStyle = {height: 'auto', padding: '12px 16px 4px 44px'};
       menu = (
         <div className="menuBar menuBar-open pageLink">
           <ul className="ulBar">
             <li className="liBar">
               <div className="minHelse">
-                <Tiles color="black" /> Min helse
+                <Tiles color="black" /> <span className="smallMarginLeft">Min helse</span>
               </div>
             </li>
-            <li className="liBar libar-items">
+            <li className="liBar libar-items" style={this.state.isToggleOn2 ? menuBar2OpenStyle: {}}>
               <NavLink
                 to="/dashboard"
                 className="menu-link click-menuBar-open"
@@ -165,7 +167,7 @@ class MenuBar extends Component {
                 Innsikt
               </NavLink>
               <button className="button2" onClick={this.toggle2}>
-                <Menu className="menuButton2" />
+                <ChevronDownRounded className="menuButton2" color="blue" style={this.state.isToggleOn2 ? {transform: 'rotate(180deg)'}: {}} />
               </button>
               {menu2}
             </li>
@@ -178,10 +180,19 @@ class MenuBar extends Component {
                 Sammenlign data
               </NavLink>
             </li>
-            <li className="liBar">
-              <button className="logoutButton" onClick={() => this.loggedOut()}>
+            <li className="liBar libar-items">
+              <NavLink
+                to="/mygoals"
+                className="menu-link click-menuBar-open"
+                onClick={this.toggle}
+              >
+                Sett mål
+              </NavLink>
+            </li>
+            <li className="liBar libar-items">
+              <span className="logoutButton" onClick={() => this.loggedOut()}>
                 Logg ut
-              </button>
+              </span>
             </li>
           </ul>
         </div>
@@ -193,7 +204,7 @@ class MenuBar extends Component {
     return (
       <div>
         <div ref={this.setWrapperRef}>
-          <div className="bar row navbar">
+          <div className="bar navbar">
             <div className="menuPos textStyle">
               <a className="aStyle" href="/dashboard">
                 Helseinnsikt

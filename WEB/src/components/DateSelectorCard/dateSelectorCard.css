@@ -1,0 +1,34 @@
+.custom-date-parent {
+  flex-direction: column;
+  align-items: space-around;
+}
+
+.custom-date-child {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  /* top: -6px; */
+  position: relative;
+}
+
+#your_unique_end_date_id {
+  border: 5px;
+}
+
+#your_unique_start_date_id {
+  border: 5px;
+}
+
+.custom-date-card {
+  height: 0px;
+  transition: height 0.5s;
+}
+
+.custom-date-card-active {
+  height: 120px;
+}
+
+.date-selector-card {
+  margin-top: 0px;
+}
+/* input#your_unique_end_date_id.DateInput_input.DateInput_input_1 { */

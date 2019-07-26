@@ -282,6 +282,7 @@ class Steps extends Component {
             outputFormat={this.state.format}
             data={this.props.patient.datasets[0].measurements}
             page="Sammenlign"
+            color={"#3C7E72"}
           />
           <div>Interval: </div>
           <TimeButtonGroup

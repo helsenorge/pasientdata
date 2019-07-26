@@ -1,13 +1,12 @@
 import React from "react";
 import InsightButton from "../InsightButton/insightButton";
-import { connect } from "react-redux";
 import moment from "moment";
 import BarPlotter from "../Barplotter/barPlotter";
 
 const stepsContent = (data, link) => {
   return (
     <div>
-      <div style={{ "margin-bottom": "40px" }}>
+      <div style={{ marginBottom: "12px" }}>
         <BarPlotter
           start={moment().subtract(1, "week")}
           end={moment()}
@@ -16,6 +15,7 @@ const stepsContent = (data, link) => {
           data={data}
           legend="off"
           page="Dashboard"
+          color={"rgba(89, 195, 255, 0.8)"}
         />
       </div>
       <InsightButton linkTo={link} />

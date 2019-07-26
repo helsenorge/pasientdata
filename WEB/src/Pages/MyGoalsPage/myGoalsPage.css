@@ -1,0 +1,46 @@
+.breadText {
+  font-size: 14px;
+  line-height: 16px;
+  text-align: right;
+  margin-left: 35px;
+  margin-top: 40px;
+  margin-right: 10px;
+  color: black;
+}
+
+.headtStyle {
+  margin: 0 4px 8px;
+}
+
+.h1Style {
+  margin-left: 13px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+@media only screen and (min-width: 600px) {
+  .breadText {
+    margin-right: 0px;
+    margin-top: 40px;
+    margin-left: 300px;
+  }
+
+  .h1Style {
+    margin-top: 0px;
+    margin-bottom: 0px;
+  }
+}
+
+@media only screen and (min-width: 700px) {
+  .breadText {
+    margin-left: 350px;
+    margin-right: 50px;
+    margin-top: 40px;
+  }
+
+  .h1Style {
+    margin-left: 30px;
+    margin-top: 5px;
+    margin-bottom: 0px;
+  }
+}

@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import moment from "moment";
 import {
   XAxis,
   YAxis,
@@ -33,19 +32,18 @@ class BarPlotter extends Component {
       this.props.end,
       this.props.outputFormat
     );
-
+    //console.log(aggregated);
     if (this.props.page === "Dashboard") {
       return (
-        <ResponsiveContainer width="100%" height={120}>
+        <ResponsiveContainer width="100%" height={96}>
           <BarChart
             width={400}
-            height={150}
+            height={96}
             data={aggregated}
             margin={{ top: 10, right: 5, bottom: 0, left: 0 }}
           >
-            <XAxis dataKey="x" domain={["auto", "auto"]} name="Time" unit="" />
-            <Bar dataKey="y" name="Steps/hour" fill="#EF87CE" />
-            <Tooltip cursor={false} />
+            <XAxis height={2} dataKey="x" tick={false} />
+            <Bar dataKey="y" name="Steps/hour" fill={this.props.color} />
           </BarChart>
         </ResponsiveContainer>
       );
@@ -60,7 +58,7 @@ class BarPlotter extends Component {
           >
             <XAxis dataKey="x" domain={["auto", "auto"]} name="Time" unit="" />
             <YAxis dataKey="y" name="Steps" unit="" type="number" />
-            <Bar dataKey="y" name="Steps/hour" fill="#EF87CE" />
+            <Bar dataKey="y" name="Steps/hour" fill={this.props.color} />
 
             <Legend />
             <Tooltip cursor={false} />
@@ -74,13 +72,13 @@ class BarPlotter extends Component {
             width={400}
             height={250}
             data={aggregated}
-            margin={{ top: 10, right: 5, bottom: 0, left: -40 }}
+            margin={{ top: 10, right: 5, bottom: 0, left: -10 }}
           >
             <XAxis dataKey="x" domain={["auto", "auto"]} name="Time" unit="" />
             <YAxis dataKey="y" name="Steps" unit="" type="number" />
-            <Bar dataKey="y" name="Steps/hour" fill="#EF87CE" />
+            <Bar dataKey="y" name="Steps/hour" fill={this.props.color} />
 
-            <Legend />
+            {/* <Legend /> */}
             <Tooltip cursor={false} />
           </BarChart>
         </ResponsiveContainer>

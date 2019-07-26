@@ -12,7 +12,7 @@ const blodsukkerContent = () => {
           <div className="third-title">Tid innom gränsvärden:</div>
           <div>
             <h1>85%</h1>
-            <br />{" "}
+            <br />
           </div>
           <div>
             <h3>(78%)</h3>
@@ -47,13 +47,8 @@ const blodsukkerContent = () => {
       </div>
       <div>
         <div className="button-style">
-          <Link to={"/bloodsugar"} style={{ "border-bottom": "none" }}>
-            <DisplayButton
-              onClick={() => {
-                /* tom */
-              }}
-              secondary
-            >
+          <Link to={"/bloodsugar"} style={{ borderBottom: "none" }}>
+            <DisplayButton secondary>
               <div className="flex-container-button">
                 <div className="flex-children-button">Utforsk</div>
                 <ChevronRightRounded className="flex-children-button-icon chevronStyle" />
