@@ -1,14 +1,22 @@
 import React, { Component } from "react";
+import moment from 'moment';
 import CardComponent from "../Card/cardComponent";
 import { connect } from "react-redux";
+import {
+  XAxis,
+  BarChart,
+  ResponsiveContainer
+} from "recharts";
 import PeriodStepper from "../PeriodStepper/periodStepper";
-import weightContent from "../DashboardContent/weightContent";
 import BloodSugarGraph from "./GraphContent/bloodSugarGraph";
 import InsulinGraph from "./GraphContent/insulinGraph";
 import StepsGraph from "./GraphContent/stepsGraph";
 import WeightGraph from "./GraphContent/weightGraph";
 import PhysicalActivityGraph from "./GraphContent/physicalActivityGraph";
 import CarbohydratesGraph from "./GraphContent/carbohydratesGraph";
+import periodFromView from '../../Utils/periodFromView';
+import formatInterval from '../../Utils/formatInterval';
+import aggregateData from "../../Utils/aggregateData";
 
 class MultipleGraphCard extends Component {
   makeBloodSugarGraph = bloodSugar => {
@@ -51,7 +59,7 @@ class MultipleGraphCard extends Component {
     if (weight) {
       return (
         <div className="flex-children-multiple-graph">
-          <WeightGraph />
+          <WeightGraph data={this.props.patient.datasets[1].measurements} view={this.props.baseInfo.view} />
         </div>
       );
     } else {
@@ -104,6 +112,14 @@ class MultipleGraphCard extends Component {
     let physicalActivity = dataTypes.physicalActivityChecked;
     let carbohydrates = dataTypes.carbohydratesChecked;
 
+    let {periodName, periodNumber, intervalName} = periodFromView(this.props.baseInfo.view);
+    let xAxisTicks = aggregateData(
+        [{value: 0, start: moment().subtract(periodNumber, periodName).format('YYYY-MM-DDTHH:mm:ss')}],
+        intervalName,
+        moment().subtract(periodNumber, periodName),
+        moment(),
+        formatInterval(intervalName)
+    );
     return (
       <div>
         <div className="flex-container-multiple-graph">
@@ -113,6 +129,12 @@ class MultipleGraphCard extends Component {
           {this.makeWeightGraph(weight)}
           {this.makePhysicalActivityGraph(physicalActivity)}
           {this.makeCarbohydratesGraph(carbohydrates)}
+          <ResponsiveContainer width="100%" height={30}>
+            <BarChart width={350} height={30} data={xAxisTicks}
+                margin={{top:0, right: 30, left: 40, bottom: 0}}>
+                <XAxis dataKey="x" tick={{fontSize: '12px'}}/>
+            </BarChart>
+          </ResponsiveContainer>
         </div>
         {this.makePeriodStepper(
           bloodSugar ||
