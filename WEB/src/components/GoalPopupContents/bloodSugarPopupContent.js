@@ -1,32 +1,47 @@
 import React, { Component } from "react";
 import "./popupContent.css";
 import { DisplayButton } from "@helsenorge/toolkit/components/atoms/buttons/display-button";
+import { connect } from "react-redux";
+import { changeGoal } from "../../Redux/actions";
 
 class BloodSugarPopupContent extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      single: "",
-      double1: "",
-      double2: ""
+      percentGoal: "",
+      lowerLimit: "",
+      upperLimit: ""
     };
   }
   handleSave = () => {
-    console.log(this.state.single);
-    console.log(this.state.double1);
-    console.log(this.state.single);
-  };
-  handleSingleChange = event => {
-    this.setState({ single: event.target.value });
+    if (
+      this.state.percentGoal !== "" &&
+      this.state.lowerLimit !== "" &&
+      this.state.upperLimit !== ""
+    ) {
+      let goalRange = {
+        type: "range",
+        lower: this.state.lowerLimit,
+        upper: this.state.upperLimit
+      };
+      this.props.changeGoal("BloodSugarRangeGoal", goalRange);
+
+      let percentGoal = { type: "lower", value: this.state.percentGoal };
+      this.props.changeGoal("BloodSugarWithinRangePercentageGoal", percentGoal);
+    }
   };
 
-  handleDouble1Change = event => {
-    this.setState({ double1: event.target.value });
+  handlepercentGoalChange = event => {
+    this.setState({ percentGoal: event.target.value });
   };
 
-  handleDouble2Change = event => {
-    this.setState({ double2: event.target.value });
+  handlelowerLimitChange = event => {
+    this.setState({ lowerLimit: event.target.value });
+  };
+
+  handleupperLimitChange = event => {
+    this.setState({ upperLimit: event.target.value });
   };
 
   render = () => {
@@ -40,9 +55,9 @@ class BloodSugarPopupContent extends Component {
           <input
             type="number"
             className="goal-input"
-            id="single-input"
-            value={this.state.single}
-            onChange={this.handleSingleChange}
+            id="percentGoal-input"
+            value={this.state.percentGoal}
+            onChange={this.handlepercentGoalChange}
           />
           prosent av tiden innenfor grenseverdien
           <hr />
@@ -52,16 +67,16 @@ class BloodSugarPopupContent extends Component {
               type="number"
               className="sugar-input-child goal-input"
               id="double-input1"
-              value={this.state.double1}
-              onChange={this.handleDouble1Change}
+              value={this.state.lowerLimit}
+              onChange={this.handlelowerLimitChange}
             />
             <div className="sugar-input-child"> og </div>
             <input
               type="number"
               className="sugar-input-child goal-input"
               id="double-input2"
-              value={this.state.double2}
-              onChange={this.handleDouble2Change}
+              value={this.state.upperLimit}
+              onChange={this.handleupperLimitChange}
             />
           </div>
           mmol/l
@@ -80,4 +95,15 @@ class BloodSugarPopupContent extends Component {
   };
 }
 
-export default BloodSugarPopupContent;
+const mapDispatchToProps = { changeGoal };
+
+function mapStateToProps(state) {
+  return {
+    pasientInfo: state.pasientInfo
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(BloodSugarPopupContent);
