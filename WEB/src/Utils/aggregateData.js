@@ -8,23 +8,27 @@ export default function aggregateData(
   endString,
   outputFormat
 ) {
+  //console.log("inputs: ", startString, endString);
   const { startIndex, endIndex } = findStartAndEndIndex(
     inData,
     startString,
     endString
   );
   let slicedData = inData.slice(startIndex, endIndex);
-
+  // console.log("startindex: ", startIndex, "endindex: ", endIndex);
   const inputFormat = "YYYY-MM-DDTHH:mm:ss";
   const startTime = moment(startString, inputFormat);
   const endTime = moment(endString, inputFormat);
   const slicedLength = slicedData.length;
+  //console.log("start time: ", startTime);
 
   /*
    * Loop through the desired dataset and aggregate
    */
 
   let aggregated = [];
+  //console.log(aggregated.length);
+  // console.log(slicedData);
   let data = slicedData.map(item => ({ x: item.start, y: item.value }));
   if (data === undefined || data.length === 0) {
     data.push({ y: 0, x: startTime.format(inputFormat) });

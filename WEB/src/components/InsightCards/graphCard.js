@@ -17,12 +17,11 @@ class GraphCard extends Component {
       data = this.props.patient.datasets[0].measurements;
     }
     let { periodName, intervalName } = periodFromView(this.props.baseInfo.view);
-    let startEndTimes = getStartEndTimes(
+    let { start, end } = getStartEndTimes(
       this.props.baseInfo.view,
       this.props.baseInfo.nrOfIntervalsBack
     );
-    let start = startEndTimes.start;
-    let end = startEndTimes.end;
+    // console.log(start, end);
     if (
       this.props.baseInfo.view === "custom" &&
       this.props.baseInfo.start !== "" &&
@@ -31,6 +30,7 @@ class GraphCard extends Component {
       start = this.props.baseInfo.start;
       end = this.props.baseInfo.end;
     }
+
     return (
       <div>
         <BarPlotter

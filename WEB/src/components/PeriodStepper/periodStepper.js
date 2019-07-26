@@ -50,7 +50,9 @@ class PeriodStepper extends Component {
             " " +
             moment()
               .subtract(
-                this.props.baseInfo.nrOfIntervalsBack + periodNumber - 1,
+                parseInt(this.props.baseInfo.nrOfIntervalsBack) +
+                  periodNumber -
+                  1,
                 periodName
               )
               .format(formatPeriod(periodName)) +
@@ -64,20 +66,25 @@ class PeriodStepper extends Component {
       }
     }
 
+    let chevronColor;
+    if (this.props.baseInfo.nrOfIntervalsBack > 0) {
+      chevronColor = "#006d84";
+    }
+
     return (
       <div className="flex-container">
         <button
           className="flex-children datestepper-button datestepper-button-left"
           onClick={this.leftClicked}
         >
-          <ChevronLeftRounded className="datestepper-chevron" />
+          <ChevronLeftRounded className="datestepper-chevron-left" />
         </button>{" "}
         <div className="flex-children datestepper-text">{text}</div>
         <button
           className="flex-children datestepper-button datestepper-button-right"
           onClick={this.rightClicked}
         >
-          <ChevronRightRounded className="datestepper-chevron" />{" "}
+          <ChevronRightRounded style={{ color: chevronColor }} />{" "}
         </button>
       </div>
     );

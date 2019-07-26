@@ -24,23 +24,28 @@ class DataTypeCard extends Component {
       checkboxes: [
         {
           id: "bloodSugar",
+          label: "",
           checked: this.props.baseInfo.bloodSugarChecked
         },
         {
           id: "insulin",
+          label: "",
           checked: this.props.baseInfo.insulinChecked
         },
-        { id: "steps", checked: this.props.baseInfo.stepsChecked },
+        { id: "steps", label: "", checked: this.props.baseInfo.stepsChecked },
         {
           id: "weight",
+          label: "",
           checked: this.props.baseInfo.weightChecked
         },
         {
           id: "physicalActivity",
+          label: "",
           checked: this.props.baseInfo.physicalActivityChecked
         },
         {
           id: "carbohydrates",
+          label: "",
           checked: this.props.baseInfo.carbohydratesChecked
         }
       ],
@@ -57,10 +62,8 @@ class DataTypeCard extends Component {
         if (this.state.numberChecked < 3 || e.checked === true) {
           if (e.checked === true) {
             counter = counter - 1;
-            console.log("counter decrement: ", counter);
           } else {
             counter += 1;
-            console.log("counter increment: ", counter);
           }
           e.checked = !e.checked;
           changed = e;
@@ -194,8 +197,6 @@ class DataTypeCard extends Component {
   };
 
   render() {
-    console.log("state number checked: ", this.state.numberChecked);
-
     return <CardComponent title={""} content={this.makeContent()} />;
   }
 }

@@ -48,7 +48,6 @@ export const setStartEnd = (start, end) => {
 };
 
 export const setNrOfIntervalsBack = nrOfIntervalsBack => {
-  console.log("Nr of intervals back:", nrOfIntervalsBack);
   return dispatch =>
     dispatch({ type: SET_NR_OF_INTERVALS_BACK, nrOfIntervalsBack });
 };
@@ -81,7 +80,6 @@ export const setCarbohydratesChecked = carbohydratesChecked => {
 };
 
 export const setNumberChecked = numberChecked => {
-  console.log(numberChecked);
   return dispatch => dispatch({ type: SET_NUMBER_CHECKED, numberChecked });
 };
 
