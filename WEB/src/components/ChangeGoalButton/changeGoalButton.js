@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { DisplayButton } from "@helsenorge/toolkit/components/atoms/buttons/display-button";
 import EditOutlined from "@helsenorge/toolkit/components/icons/EditOutlined";
 import { LightBox } from "@helsenorge/toolkit/components/molecules/lightbox";
-import bloodSugarPopupContent from "../GoalPopupContents/bloodSugarPopupContent";
+import BloodSugarPopupContent from "../GoalPopupContents/bloodSugarPopupContent";
 import bloodSugarMeanPopupContent from "../GoalPopupContents/bloodSugarMeanPopupContent";
 import carbsPopupContent from "../GoalPopupContents/carbsPopupContent";
 import physicalActivityPopupContent from "../GoalPopupContents/physicalActivityPopupContent";
@@ -35,7 +35,7 @@ class ChangeGoalButton extends Component {
   popupContent() {
     switch (this.props.datatype) {
       case "Blodsukker":
-        return bloodSugarPopupContent();
+        return <BloodSugarPopupContent />;
         break;
       case "BlodsukkerAvg":
         return bloodSugarMeanPopupContent();
@@ -80,7 +80,7 @@ class ChangeGoalButton extends Component {
         large={false}
       >
         <text>{"Rediger mål for:"}</text>
-        {this.popupContent()}
+        <BloodSugarPopupContent />
       </LightBox>
     );
 
