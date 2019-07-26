@@ -5,6 +5,16 @@ import CheckBoxGroup, {
   Option
 } from "@helsenorge/toolkit/components/atoms/checkbox-group";
 import "./compareDataCards.css";
+import { connect } from "react-redux";
+import {
+  setBloodSugarChecked,
+  setInsulinChecked,
+  setStepsChecked,
+  setWeightChecked,
+  setPhysicalActivityChecked,
+  setCarbohydratesChecked,
+  setNumberChecked
+} from "../../Redux/actions";
 
 class DataTypeCard extends Component {
   constructor(props) {
@@ -12,27 +22,81 @@ class DataTypeCard extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.state = {
       checkboxes: [
-        { id: "1", label: " ", checked: false },
-        { id: "2", label: " ", checked: false },
-        { id: "3", label: " ", checked: false },
-        { id: "4", label: " ", checked: false },
-        { id: "5", label: " ", checked: false },
-        { id: "6", label: " ", checked: false }
-      ]
+        {
+          id: "bloodSugar",
+          checked: this.props.baseInfo.bloodSugarChecked
+        },
+        {
+          id: "insulin",
+          checked: this.props.baseInfo.insulinChecked
+        },
+        { id: "steps", checked: this.props.baseInfo.stepsChecked },
+        {
+          id: "weight",
+          checked: this.props.baseInfo.weightChecked
+        },
+        {
+          id: "physicalActivity",
+          checked: this.props.baseInfo.physicalActivityChecked
+        },
+        {
+          id: "carbohydrates",
+          checked: this.props.baseInfo.carbohydratesChecked
+        }
+      ],
+      numberChecked: this.props.baseInfo.numberChecked,
+      errorMessage: false
     };
   }
 
   handleChange = id => {
+    let counter = this.state.numberChecked;
     let changed;
     let newCheckboxes = this.state.checkboxes.map(e => {
       if (e.id === id) {
-        e.checked = !e.checked;
-        changed = e;
+        if (this.state.numberChecked < 3 || e.checked === true) {
+          if (e.checked === true) {
+            counter = counter - 1;
+            console.log("counter decrement: ", counter);
+          } else {
+            counter += 1;
+            console.log("counter increment: ", counter);
+          }
+          e.checked = !e.checked;
+          changed = e;
+          this.setState({ errorMessage: false });
+        } else {
+          this.setState({ errorMessage: true });
+        }
+        this.setState({ numberChecked: counter });
+        this.props.setNumberChecked(counter);
+        switch (e.id) {
+          case "bloodSugar":
+            this.props.setBloodSugarChecked(this.state.checkboxes[0].checked);
+            break;
+          case "insulin":
+            this.props.setInsulinChecked(this.state.checkboxes[1].checked);
+            break;
+          case "steps":
+            this.props.setStepsChecked(this.state.checkboxes[2].checked);
+            break;
+          case "weight":
+            this.props.setWeightChecked(this.state.checkboxes[3].checked);
+            break;
+          case "physicalActivity":
+            this.props.setPhysicalActivityChecked(
+              this.state.checkboxes[4].checked
+            );
+            break;
+          case "carbohydrates":
+            this.props.setCarbohydratesChecked(
+              this.state.checkboxes[5].checked
+            );
+            break;
+        }
       }
       return e;
     });
-
-    this.setState({ checkboxes: newCheckboxes });
   };
 
   makeCheckBox = () => {
@@ -42,12 +106,23 @@ class DataTypeCard extends Component {
           className="datatype-checkbox atom_fieldset mol_validation"
           id="1"
           handleChange={this.handleChange}
-          errorMessage="Du kan bare velge tre datakilder av gangen"
           max={3}
           checkboxes={this.state.checkboxes}
         />
       </React.Fragment>
     );
+  };
+
+  makeErrorMessage = () => {
+    if (this.state.errorMessage) {
+      return (
+        <div className="datatypes-error-message">
+          Du kan kun velge tre datakilder av gangen
+        </div>
+      );
+    } else {
+      return <div />;
+    }
   };
 
   makeColorCategories = () => {
@@ -103,18 +178,46 @@ class DataTypeCard extends Component {
 
   makeContent = () => {
     return (
-      <div className="flex-container-datatypes">
-        {this.makeColorCategories()}
-        <div className="flex-children-datatypes-checkboxes">
-          {this.makeCheckBox()}
+      <div>
+        <div className="flex-container-datatypes">
+          {this.makeColorCategories()}
+          <div className="flex-children-datatypes-checkboxes">
+            {this.makeCheckBox()}
+          </div>
+        </div>
+
+        <div className="flex-container-datatypes-error-message">
+          {this.makeErrorMessage()}
         </div>
       </div>
     );
   };
 
   render() {
+    console.log("state number checked: ", this.state.numberChecked);
+
     return <CardComponent title={""} content={this.makeContent()} />;
   }
 }
 
-export default DataTypeCard;
+const mapDispatchToProps = {
+  setBloodSugarChecked,
+  setInsulinChecked,
+  setStepsChecked,
+  setWeightChecked,
+  setPhysicalActivityChecked,
+  setCarbohydratesChecked,
+  setNumberChecked
+};
+
+function mapStateToProps(state) {
+  return {
+    patient: state.patient,
+    baseInfo: state.baseInfo
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(DataTypeCard);

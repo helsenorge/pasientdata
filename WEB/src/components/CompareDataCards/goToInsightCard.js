@@ -14,7 +14,7 @@ class GoToInsightCard extends Component {
         </div>
         <br />
         <div className="go-to-insight-card">
-          <Link to={"/bloodsugar"} style={{ "border-bottom": "none" }}>
+          <Link to={"/dashboard"} style={{ borderBottom: "none" }}>
             <DisplayButton secondary>
               <div className={"button-sizing-go-to-insight-card"}>Innsikt</div>
             </DisplayButton>
@@ -23,6 +23,7 @@ class GoToInsightCard extends Component {
       </div>
     );
   };
+
   render() {
     return (
       <CardComponent
