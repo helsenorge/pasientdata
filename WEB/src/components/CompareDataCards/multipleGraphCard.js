@@ -17,6 +17,7 @@ import CarbohydratesGraph from "./GraphContent/carbohydratesGraph";
 import periodFromView from '../../Utils/periodFromView';
 import formatInterval from '../../Utils/formatInterval';
 import aggregateData from "../../Utils/aggregateData";
+import getStartEndTimes from "../../Utils/getStartEndTimes";
 
 class MultipleGraphCard extends Component {
   makeBloodSugarGraph = bloodSugar => {
@@ -59,7 +60,7 @@ class MultipleGraphCard extends Component {
     if (weight) {
       return (
         <div className="flex-children-multiple-graph">
-          <WeightGraph data={this.props.patient.datasets[1].measurements} view={this.props.baseInfo.view} />
+          <WeightGraph data={this.props.patient.datasets[1].measurements} baseInfo={this.props.baseInfo} />
         </div>
       );
     } else {
@@ -83,7 +84,7 @@ class MultipleGraphCard extends Component {
     if (carbohydrates) {
       return (
         <div className="flex-children-multiple-graph">
-          <CarbohydratesGraph />
+          <CarbohydratesGraph baseInfo={this.props.baseInfo} />
         </div>
       );
     } else {
@@ -113,11 +114,17 @@ class MultipleGraphCard extends Component {
     let carbohydrates = dataTypes.carbohydratesChecked;
 
     let {periodName, periodNumber, intervalName} = periodFromView(this.props.baseInfo.view);
+    let startEndTimes = getStartEndTimes(
+        this.props.baseInfo.view,
+        this.props.baseInfo.nrOfIntervalsBack
+    );
+    let start = startEndTimes.start;
+    let end = startEndTimes.end;
     let xAxisTicks = aggregateData(
         [{value: 0, start: moment().subtract(periodNumber, periodName).format('YYYY-MM-DDTHH:mm:ss')}],
         intervalName,
-        moment().subtract(periodNumber, periodName),
-        moment(),
+        start,
+        end,
         formatInterval(intervalName)
     );
     return (
