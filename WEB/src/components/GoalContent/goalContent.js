@@ -133,7 +133,7 @@ class GoalContent extends Component {
           <div>
             <div className="button-style">
               {/* <Link to={link} style={{ borderBottom: "none" }}> */}
-              <ChangeGoalButton />
+              <ChangeGoalButton datatype={this.props.datatype} />
             </div>
           </div>
         </div>
