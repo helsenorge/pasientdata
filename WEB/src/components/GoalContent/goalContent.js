@@ -19,6 +19,19 @@ import periodFromView from "../../Utils/periodFromView";
 import aggregateData from "../../Utils/aggregateData";
 
 class GoalContent extends Component {
+  CustomLabel(value1, value2, xPos) {
+    return (
+      <text dominantBaseline="central">
+        <tspan x={65} y={70} alignmentBaseline="middle" fontSize="16">
+          {value1}
+        </tspan>
+        <tspan x={xPos} y={90} alignmentBaseline="middle" fontSize="18">
+          {value2}
+        </tspan>
+      </text>
+    );
+  }
+
   displayUnit = () => {
     switch (this.props.datatype) {
       case "Blodsukker":
@@ -52,6 +65,7 @@ class GoalContent extends Component {
       { value: 1 }
     ];
     let goal;
+    let xPos;
     let data = FakeGlucoseData();
     let upperLimit = 12;
     let lowerLimit = 5;
@@ -79,6 +93,7 @@ class GoalContent extends Component {
       case "Blodsukker":
         COLORS = generalColors;
         goal = "80%";
+        xPos = 72;
         data = FakeGlucoseData();
         upperLimit = 14;
         lowerLimit = 5;
@@ -92,17 +107,20 @@ class GoalContent extends Component {
         timeBelow = trends.timeBelow;
         currentValue =
           (timeWithin * 100) / (timeAbove + timeWithin + timeBelow);
-        unit = "%";
+        unit = " %";
         hasUpperLimit = false;
         break;
       case "BlodsukkerAvg":
         COLORS = generalColors;
         goal = 7;
+        unit = " mmol/l";
+        xPos = 48;
         break;
       case "Skritt":
         COLORS = physicalActiveColors;
         dataSet = [{ value: 1 }, { value: 2 }, { value: 2 }];
         goal = this.props.patient.goals[0].value;
+        xPos = 48;
         data = this.props.patient.datasets[0].measurements;
         upperLimit = 1000000;
         lowerLimit = 10000;
@@ -123,26 +141,34 @@ class GoalContent extends Component {
         timeWithin = trends.timeWithin;
         timeBelow = trends.timeBelow;
         currentValue = mean;
-        unit = " skritt";
+        unit = " \n skritt";
         hasUpperLimit = false;
         pieSideSize = 2000;
         break;
       case "Vekt":
         COLORS = generalColors;
         goal = 65;
+        unit = " kg";
+        xPos = 67;
         break;
       case "FysiskAktivitet":
         COLORS = physicalActiveColors;
         dataSet = [{ value: 1 }, { value: 2 }, { value: 2 }];
         goal = 90;
+        unit = " min";
+        xPos = 62;
         break;
       case "Karbohydrater":
         COLORS = generalColors;
         goal = 280;
+        unit = " g";
+        xPos = 70;
         break;
       case "Blodtrykk":
         COLORS = generalColors;
         goal = "number?";
+        unit = " mmHg";
+        xPos = 50;
         break;
       default:
         return;
@@ -294,8 +320,12 @@ class GoalContent extends Component {
                     <Cell key="" fill={COLORS[index % COLORS.length]} />
                   ))}
                   <Label
-                    value={Math.floor(currentValue) + unit}
                     position="center"
+                    content={this.CustomLabel(
+                      "Status: ",
+                      Math.floor(currentValue) + unit,
+                      xPos
+                    )}
                   />
                 </Pie>
                 <svg>

@@ -52,6 +52,13 @@
   line-height: 42px;
 }
 
+.labelText{
+  /* position: absolute; */
+  /* margin-top: -10px; */
+  /* font-size: 14px;
+  color: black; */
+}
+
 .editOutlinedStyle {
   color: #006d84;
   width: 27px;
