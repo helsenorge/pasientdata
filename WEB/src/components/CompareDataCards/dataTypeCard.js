@@ -24,23 +24,28 @@ class DataTypeCard extends Component {
       checkboxes: [
         {
           id: "bloodSugar",
+          label: "",
           checked: this.props.baseInfo.bloodSugarChecked
         },
         {
           id: "insulin",
+          label: "",
           checked: this.props.baseInfo.insulinChecked
         },
-        { id: "steps", checked: this.props.baseInfo.stepsChecked },
+        { id: "steps", label: "", checked: this.props.baseInfo.stepsChecked },
         {
           id: "weight",
+          label: "",
           checked: this.props.baseInfo.weightChecked
         },
         {
           id: "physicalActivity",
+          label: "",
           checked: this.props.baseInfo.physicalActivityChecked
         },
         {
           id: "carbohydrates",
+          label: "",
           checked: this.props.baseInfo.carbohydratesChecked
         }
       ],

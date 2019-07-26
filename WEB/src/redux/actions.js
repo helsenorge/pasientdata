@@ -11,7 +11,8 @@ import {
   SET_PHYSICAL_ACTIVITY_CHECKED,
   SET_CARBOHYDRATES_CHECKED,
   SET_NUMBER_CHECKED,
-  SET_START_END
+  SET_START_END,
+  CHANGE_GOAL
 } from "./actionType";
 
 export const addInfo = (
@@ -47,7 +48,6 @@ export const setStartEnd = (start, end) => {
 };
 
 export const setNrOfIntervalsBack = nrOfIntervalsBack => {
-  console.log("Nr of intervals back:", nrOfIntervalsBack);
   return dispatch =>
     dispatch({ type: SET_NR_OF_INTERVALS_BACK, nrOfIntervalsBack });
 };
@@ -80,6 +80,11 @@ export const setCarbohydratesChecked = carbohydratesChecked => {
 };
 
 export const setNumberChecked = numberChecked => {
-  console.log(numberChecked);
   return dispatch => dispatch({ type: SET_NUMBER_CHECKED, numberChecked });
+};
+
+export const changeGoal = (goalName, goal) => {
+  console.log("gn: ", goalName);
+  console.log("g: ", goal);
+  return dispatch => dispatch({ type: CHANGE_GOAL, goalName, goal });
 };

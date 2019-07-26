@@ -1,18 +1,22 @@
 import React, { Component } from "react";
 import "./popupContent.css";
 import { DisplayButton } from "@helsenorge/toolkit/components/atoms/buttons/display-button";
+import { connect } from "react-redux";
+import { changeGoal } from "../../Redux/actions";
 
 class StepsPopupContent extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      value: ""
+      goal: ""
     };
   }
   handleSave = () => {
-    console.log(this.state.value);
+    let goal = { type: "lower", value: this.state.percentGoal };
+    this.props.changeGoal("StepsGoal", goal);
   };
+
   handleChange = event => {
     this.setState({ value: event.target.value });
   };
@@ -47,4 +51,15 @@ class StepsPopupContent extends Component {
   };
 }
 
-export default StepsPopupContent;
+const mapDispatchToProps = { changeGoal };
+
+function mapStateToProps(state) {
+  return {
+    pasientInfo: state.pasientInfo
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(StepsPopupContent);

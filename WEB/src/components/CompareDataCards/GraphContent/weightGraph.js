@@ -9,14 +9,23 @@ import {
 import aggregateData from "../../../Utils/aggregateData";
 import periodFromView from '../../../Utils/periodFromView';
 import formatInterval from '../../../Utils/formatInterval';
+import getStartEndTimes from '../../../Utils/getStartEndTimes';
 
-const WeightGraph = ({data, view}) => {
-    let {periodName, periodNumber, intervalName} = periodFromView(view);
+const WeightGraph = ({data, baseInfo}) => {
+    let {intervalName} = periodFromView(baseInfo.view);
+    let startEndTimes = getStartEndTimes(
+        baseInfo.view,
+        baseInfo.nrOfIntervalsBack
+      );
+    let start = startEndTimes.start;
+    let end = startEndTimes.end;
+
+
     let aggregated = aggregateData(
         data,
         intervalName,
-        moment().subtract(periodNumber, periodName),
-        moment(),
+        start,
+        end,
         formatInterval(intervalName)
     );
     const noRecentData = aggregated.filter(data => data.y > 0).length === 0;
@@ -25,10 +34,11 @@ const WeightGraph = ({data, view}) => {
     /*const lastDataPoint = data[data.length - 1].value;
     aggregated = aggregated.map(data => ({x: data.x, y: lastDataPoint}));*/
     
-    aggregated = aggregated.map((data, index) => ({x: data.x[0], y: fakeWeightData[index]}));
+    aggregated = aggregated.map((data, index) => ({x: data.x[0], y: fakeWeightData[index % fakeWeightData.length]}));
     }
     const minWeight = aggregated.map(data => data.y).reduce((a, b) => Math.min(a, b));
     const maxWeight = aggregated.map(data => data.y).reduce((a, b) => Math.max(a, b));
+
     return (
         <div>
             <ResponsiveContainer width="100%" height={150}>
