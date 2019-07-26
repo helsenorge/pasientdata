@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-class WeightGraph extends Component {
+class CarbohydratesGraph extends Component {
   render() {
-    return <div>Her skal vektgrafen</div>;
+    return <div>Her skal karbohydratgrafen</div>;
   }
 }
 
@@ -14,4 +14,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(WeightGraph);
+export default connect(mapStateToProps)(CarbohydratesGraph);
