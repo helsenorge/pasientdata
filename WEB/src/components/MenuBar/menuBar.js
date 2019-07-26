@@ -67,7 +67,7 @@ class MenuBar extends Component {
 
     if (this.state.isToggleOn2) {
       menu2 = (
-        <div className="menuBar2 menuBar-open2 pageLink">
+        <div className="menuBar2 menuBar-open2">
           <ul className="ulBar">
             <li className="liBar2 libar2-items">
               <NavLink
@@ -149,15 +149,16 @@ class MenuBar extends Component {
     }
 
     if (this.state.isToggleOn) {
+      const menuBar2OpenStyle = {height: 'auto', padding: '12px 16px 4px 44px'};
       menu = (
         <div className="menuBar menuBar-open pageLink">
           <ul className="ulBar">
             <li className="liBar">
               <div className="minHelse">
-                <Tiles color="black" /> Min helse
+                <Tiles color="black" /> <span className="smallMarginLeft">Min helse</span>
               </div>
             </li>
-            <li className="liBar libar-items" style={this.state.isToggleOn2 ? {height: 'auto'}: {}}>
+            <li className="liBar libar-items" style={this.state.isToggleOn2 ? menuBar2OpenStyle: {}}>
               <NavLink
                 to="/dashboard"
                 className="menu-link click-menuBar-open"
