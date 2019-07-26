@@ -1,9 +1,8 @@
 import "./goalContent.css";
 import React, { Component } from "react";
-import { DisplayButton } from "@helsenorge/toolkit/components/atoms/buttons/display-button";
-import EditOutlined from "@helsenorge/toolkit/components/icons/EditOutlined";
+
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import ChangeGoalButton from "../../components/ChangeGoalButton/changeGoalButton";
 import {
   PieChart,
   Pie,
@@ -134,14 +133,7 @@ class GoalContent extends Component {
           <div>
             <div className="button-style">
               {/* <Link to={link} style={{ borderBottom: "none" }}> */}
-              <Link to="" style={{ borderBottom: "none" }}>
-                <DisplayButton secondary>
-                  <div className="flex-container-button">
-                    <EditOutlined className="flex-children-button-icon editOutlinedStyle" />
-                    <div className="flex-children-button editText">Rediger</div>
-                  </div>
-                </DisplayButton>
-              </Link>
+              <ChangeGoalButton />
             </div>
           </div>
         </div>
