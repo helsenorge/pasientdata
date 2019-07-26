@@ -8,6 +8,7 @@ import CompareDataCard from "../../../components/InsightCards/compareDataCard";
 import GoalCard from "../../../components/InsightCards/goalCard";
 import { stepsGreatestPeriod } from "../../../Utils/PatternCalculations/stepsPatterns";
 import { connect } from "react-redux";
+import DateSelectorCard from "../../../components/DateSelectorCard/dateSelectorCard";
 
 class Skritt extends Component {
   state = {};
@@ -17,6 +18,7 @@ class Skritt extends Component {
         <h1 style={{ marginLeft: "8px" }}>Innsikt</h1>
         <NavigationBar />
         <ViewCard />
+        <DateSelectorCard />
         <TrendGoalsCard datatype="Skritt" />
         <GraphCard datatype="Skritt" />
         <PatternCard
