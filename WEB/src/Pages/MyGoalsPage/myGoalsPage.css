@@ -2,9 +2,9 @@
   font-size: 14px;
   line-height: 16px;
   text-align: right;
-  margin-left: 34px;
-  margin-top: 34px;
-  margin-right: 16px;
+  margin-left: 35px;
+  margin-top: 40px;
+  margin-right: 10px;
   color: black;
 }
 
@@ -15,5 +15,32 @@
 .h1Style {
   margin-left: 13px;
   margin-top: 14px;
-  margin-bottom: 20px;
+  margin-bottom: 0px;
+}
+
+@media only screen and (min-width: 600px) {
+  .breadText {
+    margin-right: 0px;
+    margin-top: 40px;
+    margin-left: 300px;
+  }
+
+  .h1Style {
+    margin-top: 0px;
+    margin-bottom: 0px;
+  }
+}
+
+@media only screen and (min-width: 700px) {
+  .breadText {
+    margin-left: 700px;
+    margin-right: 50px;
+    margin-top: 40px;
+  }
+
+  .h1Style {
+    margin-left: 30px;
+    margin-top: 5px;
+    margin-bottom: 0px;
+  }
 }
