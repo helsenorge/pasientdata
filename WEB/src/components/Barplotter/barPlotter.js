@@ -43,7 +43,7 @@ class BarPlotter extends Component {
             margin={{ top: 10, right: 5, bottom: 0, left: 0 }}
           >
             <XAxis height={2} dataKey="x" tick={false} />
-            <Bar dataKey="y" name="Steps/hour" fill="#EF87CE" />
+            <Bar dataKey="y" name="Steps/hour" fill={this.props.color} />
           </BarChart>
         </ResponsiveContainer>
       );
@@ -58,7 +58,7 @@ class BarPlotter extends Component {
           >
             <XAxis dataKey="x" domain={["auto", "auto"]} name="Time" unit="" />
             <YAxis dataKey="y" name="Steps" unit="" type="number" />
-            <Bar dataKey="y" name="Steps/hour" fill="#EF87CE" />
+            <Bar dataKey="y" name="Steps/hour" fill={this.props.color} />
 
             <Legend />
             <Tooltip cursor={false} />
@@ -76,7 +76,7 @@ class BarPlotter extends Component {
           >
             <XAxis dataKey="x" domain={["auto", "auto"]} name="Time" unit="" />
             <YAxis dataKey="y" name="Steps" unit="" type="number" />
-            <Bar dataKey="y" name="Steps/hour" fill="#EF87CE" />
+            <Bar dataKey="y" name="Steps/hour" fill={this.props.color} />
 
             {/* <Legend /> */}
             <Tooltip cursor={false} />

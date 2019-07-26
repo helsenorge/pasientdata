@@ -39,6 +39,7 @@ class GraphCard extends Component {
           interval={intervalName}
           outputFormat={getFormat(periodName, intervalName)}
           data={data}
+          color={"#3C7E72"}
         />
         <PeriodStepper start={start} end={end} periodName={periodName} />
       </div>
