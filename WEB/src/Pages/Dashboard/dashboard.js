@@ -8,7 +8,7 @@ import blodsukkerContent from "../../components/DashboardContent/blodsukkerConte
 // import insulinContent from "../../components/DashboardContent/insulinContent";
 // import carbohydratesContent from "../../components/DashboardContent/carbohydratesContent";
 import stepsContent from "../../components/DashboardContent/stepsContent";
-// import weightContent from "../../components/DashboardContent/weightContent";
+import weightContent from "../../components/DashboardContent/weightContent";
 import AddDataContent from "../../components/DashboardContent/addDataContent";
 import changeGoalsContent from "../../components/DashboardContent/changeGoalsContent";
 import compareDataContent from "../../components/DashboardContent/compareDataContent";
@@ -22,7 +22,7 @@ class Dashboard extends Component {
           <CardComponent title={"Blodsukker"} content={blodsukkerContent()} />
           <div className="flex-container">
             <CardComponent
-              className="flex-children"
+              className="dashboard-card"
               title={"Insulin"}
               content={stepsContent(
                 this.props.patient.datasets[0].measurements,
@@ -30,7 +30,7 @@ class Dashboard extends Component {
               )}
             />
             <CardComponent
-              className="flex-children"
+              className="dashboard-card"
               title={"Skritt"}
               content={stepsContent(
                 this.props.patient.datasets[0].measurements,
@@ -47,7 +47,7 @@ class Dashboard extends Component {
             }}
           >
             <CardComponent
-              className="flex-children"
+              className="dashboard-card"
               title={"Karbo"}
               content={stepsContent(
                 this.props.patient.datasets[3].measurements,
@@ -55,9 +55,9 @@ class Dashboard extends Component {
               )}
             />
             <CardComponent
-              className="flex-children"
+              className="dashboard-card"
               title={"Vekt"}
-              content={stepsContent(
+              content={weightContent(
                 this.props.patient.datasets[1].measurements,
                 "/weight"
               )}
@@ -65,7 +65,7 @@ class Dashboard extends Component {
           </div>
           <div className="flex-container">
             <CardComponent
-              className="flex-children"
+              className="dashboard-card"
               title={"Fysisk aktivitet"}
               content={stepsContent(
                 this.props.patient.datasets[3].measurements,
@@ -76,20 +76,17 @@ class Dashboard extends Component {
           </div>
           <div className="single-flex-container">
             <CardComponent
-              className="flex-children"
               content={<AddDataContent />}
             />
           </div>
           <div className="single-flex-container">
             <CardComponent
-              className="flex-children"
               title={"Sette nye mål?"}
               content={changeGoalsContent()}
             />
           </div>
           <div className="single-flex-container">
             <CardComponent
-              className="flex-children"
               title={"Forstå din data"}
               content={compareDataContent()}
             />

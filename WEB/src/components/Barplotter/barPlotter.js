@@ -35,16 +35,15 @@ class BarPlotter extends Component {
 
     if (this.props.page === "Dashboard") {
       return (
-        <ResponsiveContainer width="100%" height={120}>
+        <ResponsiveContainer width="100%" height={96}>
           <BarChart
             width={400}
-            height={150}
+            height={96}
             data={aggregated}
             margin={{ top: 10, right: 5, bottom: 0, left: 0 }}
           >
-            <XAxis dataKey="x" domain={["auto", "auto"]} name="Time" unit="" />
+            <XAxis height={2} dataKey="x" tick={false} />
             <Bar dataKey="y" name="Steps/hour" fill="#EF87CE" />
-            <Tooltip cursor={false} />
           </BarChart>
         </ResponsiveContainer>
       );
