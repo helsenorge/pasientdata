@@ -6,7 +6,7 @@ import BloodSugarPopupContent from "../GoalPopupContents/bloodSugarPopupContent"
 import bloodSugarMeanPopupContent from "../GoalPopupContents/bloodSugarMeanPopupContent";
 import carbsPopupContent from "../GoalPopupContents/carbsPopupContent";
 import physicalActivityPopupContent from "../GoalPopupContents/physicalActivityPopupContent";
-import stepsPopupContent from "../GoalPopupContents/stepsPopupContent";
+import StepsPopupContent from "../GoalPopupContents/stepsPopupContent";
 import weightPopupContent from "../GoalPopupContents/weightPopupContent";
 import bloodPressurePopupContent from "../GoalPopupContents/bloodPressurePopupContent";
 import "./changeGoalButton.css";
@@ -41,7 +41,7 @@ class ChangeGoalButton extends Component {
         return bloodSugarMeanPopupContent();
         break;
       case "Skritt":
-        return stepsPopupContent();
+        return <StepsPopupContent />;
         break;
       case "Vekt":
         return weightPopupContent();
@@ -80,7 +80,7 @@ class ChangeGoalButton extends Component {
         large={false}
       >
         <text>{"Rediger mål for:"}</text>
-        <BloodSugarPopupContent />
+        {this.popupContent()}
       </LightBox>
     );
 
