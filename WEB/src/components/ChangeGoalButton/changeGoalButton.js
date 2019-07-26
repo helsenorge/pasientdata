@@ -2,6 +2,14 @@ import React, { Component } from "react";
 import { DisplayButton } from "@helsenorge/toolkit/components/atoms/buttons/display-button";
 import EditOutlined from "@helsenorge/toolkit/components/icons/EditOutlined";
 import { LightBox } from "@helsenorge/toolkit/components/molecules/lightbox";
+import bloodSugarPopupContent from "../GoalPopupContents/bloodSugarPopupContent";
+import bloodSugarMeanPopupContent from "../GoalPopupContents/bloodSugarMeanPopupContent";
+import carbsPopupContent from "../GoalPopupContents/carbsPopupContent";
+import physicalActivityPopupContent from "../GoalPopupContents/physicalActivityPopupContent";
+import stepsPopupContent from "../GoalPopupContents/stepsPopupContent";
+import weightPopupContent from "../GoalPopupContents/weightPopupContent";
+import bloodPressurePopupContent from "../GoalPopupContents/bloodPressurePopupContent";
+import "./changeGoalButton.css";
 
 class ChangeGoalButton extends Component {
   constructor(props) {
@@ -21,6 +29,34 @@ class ChangeGoalButton extends Component {
     }
     if (event) {
       event.preventDefault();
+    }
+  }
+
+  popupContent() {
+    switch (this.props.datatype) {
+      case "Blodsukker":
+        return bloodSugarPopupContent();
+        break;
+      case "BlodsukkerAvg":
+        return bloodSugarMeanPopupContent();
+        break;
+      case "Skritt":
+        return stepsPopupContent();
+        break;
+      case "Vekt":
+        return weightPopupContent();
+        break;
+      case "FysiskAktivitet":
+        return physicalActivityPopupContent();
+        break;
+      case "Karbohydrater":
+        return carbsPopupContent();
+        break;
+      case "Blodtrykk":
+        return bloodPressurePopupContent();
+        break;
+      default:
+        return;
     }
   }
   render() {
@@ -43,13 +79,8 @@ class ChangeGoalButton extends Component {
         medium={false}
         large={false}
       >
-        <h3>{"Lightbox example"}</h3>
-        <p>{"Dette er en demo av lightbox"}</p>
-        <ul>
-          <li>{"Her er litt"}</li>
-          <li>{"data i form"}</li>
-          <li>{"av en liste"}</li>
-        </ul>
+        <h3>{"Rediger mål for:"}</h3>
+        {this.popupContent()}
       </LightBox>
     );
 
