@@ -40,7 +40,6 @@ const WeightGraph = ({ data, baseInfo }) => {
   const maxWeight = aggregated
     .map(data => data.y)
     .reduce((a, b) => Math.max(a, b));
-  console.log(Math.ceil(maxWeight));
 
   return (
     <div>
