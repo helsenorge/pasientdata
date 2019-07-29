@@ -103,9 +103,15 @@ class TrendGoalsCard extends Component {
         lowerGoal = 70;
         break;
       case "Skritt":
+        hasUpperLimit = false;
         data = this.props.patient.datasets[0].measurements;
-        upperLimit = 1000000;
-        lowerLimit = 10000;
+        upperLimit = 10000000;
+        if (this.props.patient.goals.StepsGoal) {
+          lowerLimit = this.props.patient.goals.StepsGoal.value;
+        } else {
+          console.log("No steps goal found in redux store.");
+          lowerLimit = 15000; // default case if no goal exist in redux store.
+        }
         trendValue = 200;
         goalValue = 15000;
         aggregated = aggregateData(data, "day", start, end, "ddd");
@@ -116,7 +122,6 @@ class TrendGoalsCard extends Component {
         timeBelow = trends.timeBelow;
         currentValue = mean;
         unit = "";
-        hasUpperLimit = false;
         pieSideSize = 2000;
         break;
       case "Vekt":

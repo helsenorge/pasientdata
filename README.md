@@ -17,7 +17,23 @@ To access google data you will need to log into: concole.developers.google.com. 
 How to set up credentials:
 * Select a project -> new project
     * set project name (let location be default: No organization) -> create
-    * s
+* Select your new project
+    * Click "APIs & Services" on the left
+        * Click "+ ENABLE APIS AND SERVICES"
+        * Search and select "Fitness API", then enable it
+        * Go back by entering "https://console.developers.google.com/apis/dashboard" in the url
+    * Click on "Credentials" on the left
+        * Click on "OAuth consent screen" from the tabs
+            * Fill in application name
+            * Click "add scope" and add the APIs needed (our case: activity.read, body.read and nutrition.read. You will need to add one at the time.)
+            * Click save
+        * Click the "Credentials" from the tabs 
+            * Click "Create credentials", then "Oauth client ID"
+            * Choose "Web application"
+            * Give it a name
+            * Add "Authorized JavaScript origins" (http://localhost:3000, if you are still in development environment)
+            * Add "Authorized redirect URIs" (also	http://localhost:3000 if you have a single page app)
+* Copy your clientID and paste it over the clientID in the "[googleFit.js](https://github.com/helsenorgelab/pasientdata/blob/master/WEB/src/api/googleFit.js)" file under the [api folder](https://github.com/helsenorgelab/pasientdata/tree/master/WEB/src/api).
 
 
 ## Additional information

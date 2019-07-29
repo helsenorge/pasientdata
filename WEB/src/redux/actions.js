@@ -84,7 +84,7 @@ export const setNumberChecked = numberChecked => {
 };
 
 export const changeGoal = (goalName, goal) => {
-  console.log("gn: ", goalName);
-  console.log("g: ", goal);
+  // console.log("gn: ", goalName);
+  // console.log("g: ", goal);
   return dispatch => dispatch({ type: CHANGE_GOAL, goalName, goal });
 };

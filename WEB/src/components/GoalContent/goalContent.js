@@ -49,6 +49,7 @@ class GoalContent extends Component {
   goalContent = () => {
     let generalColors = ["#E38B21", "#EEE05D", "#569B7E", "#EEE05D", "#E38B21"];
     let physicalActiveColors = ["#E38B21", "#EEE05D", "#569B7E"];
+    let weightColors = ["#569B7E", "#EEE05D", "#E38B21"];
     let COLORS = [];
     let dataSet = [
       { value: 1 },
@@ -57,12 +58,11 @@ class GoalContent extends Component {
       { value: 1 },
       { value: 1 }
     ];
-    let goal;
     let xPos;
     let data = FakeGlucoseData();
     let upperLimit = 12;
     let lowerLimit = 5;
-    let goalValue = 80;
+    let goalValue = "undefined";
     let { mean, timeAbove, timeWithin, timeBelow } = Trends(
       data,
       upperLimit,
@@ -79,25 +79,32 @@ class GoalContent extends Component {
     switch (this.props.datatype) {
       case "Blodsukker":
         COLORS = generalColors;
-        goal = "80%";
+        goalValue = 80;
+        if (
+          this.props.patient.goals.BloodSugarWithinRangePercentageGoal !== {}
+        ) {
+          goalValue = this.props.patient.goals
+            .BloodSugarWithinRangePercentageGoal.value;
+        }
         xPos = 72;
         data = FakeGlucoseData();
         upperLimit = 12;
         lowerLimit = 5;
-        goalValue = 80;
         currentValue =
           (timeWithin * 100) / (timeAbove + timeWithin + timeBelow);
         unit = " %";
         break;
       case "BlodsukkerAvg":
         COLORS = generalColors;
-        goal = 7;
+        goalValue = 7;
+        if (this.props.patient.goals.MeanGlucoseGoal !== {}) {
+          goalValue = this.props.patient.goals.MeanGlucoseGoal.value;
+        }
         unit = " mmol/l";
         xPos = 48;
         data = FakeGlucoseData();
         upperLimit = 12;
         lowerLimit = 6.2;
-        goalValue = 7;
         trends = Trends(data, upperLimit, lowerLimit);
         mean = trends.mean;
         currentValue = mean;
@@ -105,12 +112,14 @@ class GoalContent extends Component {
       case "Skritt":
         COLORS = physicalActiveColors;
         dataSet = [{ value: 1 }, { value: 2 }, { value: 2 }];
-        goal = 10000;
+        goalValue = 10000;
+        if (this.props.patient.goals.StepsGoal !== {}) {
+          goalValue = this.props.patient.goals.StepsGoal.value;
+        }
         xPos = 48;
         data = this.props.patient.datasets[0].measurements;
         upperLimit = 12000;
         lowerLimit = 1000;
-        goalValue = 10000;
         let aggregated = aggregateData(
           data,
           intervalName,
@@ -126,14 +135,17 @@ class GoalContent extends Component {
         unit = " skritt";
         break;
       case "Vekt":
-        COLORS = generalColors;
-        goal = 65;
+        dataSet = [{ value: 3 }, { value: 1 }, { value: 1 }];
+        COLORS = weightColors;
+        goalValue = 65;
+        if (this.props.patient.goals.WeightGoal !== {}) {
+          goalValue = this.props.patient.goals.WeightGoal.value;
+        }
         unit = " kg";
         xPos = 67;
         data = this.props.patient.datasets[1].measurements;
         upperLimit = 70;
         lowerLimit = 50;
-        goalValue = 65;
         trends = Trends(data, upperLimit, lowerLimit);
         mean = trends.mean;
         currentValue = mean;
@@ -141,28 +153,27 @@ class GoalContent extends Component {
       case "FysiskAktivitet":
         COLORS = physicalActiveColors;
         dataSet = [{ value: 1 }, { value: 2 }, { value: 2 }];
-        goal = 90;
+        goalValue = 65;
+        if (this.props.patient.goals.PhysicalActivityGoal !== {}) {
+          goalValue = this.props.patient.goals.PhysicalActivityGoal.value;
+        }
         unit = " min";
         xPos = 62;
         data = this.props.patient.datasets[2].measurements;
         upperLimit = 70;
         lowerLimit = 50;
-        goalValue = 65;
         trends = Trends(data, upperLimit, lowerLimit);
         mean = trends.mean;
         currentValue = mean;
         break;
       case "Karbohydrater":
         COLORS = generalColors;
-        goal = 280;
+        goalValue = 280;
+        if (this.props.patient.goals.CarbsGoal !== {}) {
+          goalValue = this.props.patient.goals.CarbsGoal.value;
+        }
         unit = " g";
         xPos = 70;
-        break;
-      case "Blodtrykk":
-        COLORS = generalColors;
-        goal = "number?";
-        unit = " mmHg";
-        xPos = 50;
         break;
       default:
         return;
@@ -212,7 +223,7 @@ class GoalContent extends Component {
         <div className="split">
           <div className="circleBound">
             <div className="goalText">Mål:</div>
-            <div className="goalPercentText">{goal}</div>
+            <div className="goalPercentText">{goalValue}</div>
             <div className="unitText">{this.displayUnit()}</div>
           </div>
         </div>
@@ -233,10 +244,6 @@ class GoalContent extends Component {
                   startAngle={220}
                   endAngle={-40}
                   fill="#8884d8"
-                  // label={({ cx, cy, index }) => {
-                  //   console.log("cx = ", cx);
-                  //   console.log("cy = ", cy); }
-                  // }
                 >
                   {dataSet.map((entry, index) => (
                     <Cell key="" fill={COLORS[index % COLORS.length]} />
