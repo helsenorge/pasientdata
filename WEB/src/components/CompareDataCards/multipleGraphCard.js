@@ -4,91 +4,24 @@ import CardComponent from "../Card/cardComponent";
 import { connect } from "react-redux";
 import { XAxis, BarChart, ResponsiveContainer } from "recharts";
 import PeriodStepper from "../PeriodStepper/periodStepper";
-import BloodSugarGraph from "./GraphContent/bloodSugarGraph";
-import InsulinGraph from "./GraphContent/insulinGraph";
-import StepsGraph from "./GraphContent/stepsGraph";
-import WeightGraph from "./GraphContent/weightGraph";
-import PhysicalActivityGraph from "./GraphContent/physicalActivityGraph";
-import CarbohydratesGraph from "./GraphContent/carbohydratesGraph";
 import periodFromView from "../../Utils/periodFromView";
-import formatInterval from "../../Utils/formatInterval";
 import aggregateData from "../../Utils/aggregateData";
 import getStartEndTimes from "../../Utils/getStartEndTimes";
+import getFormat from "../../Utils/getFormat";
+import {BLOODSUGAR, INSULIN, STEPS, WEIGHT, PHYSICAL_ACTIVITY, CARBOHYDRATES} from "../../dataTypes";
+import CompareDataGraph from "./compareDataGraph";
+import averageData from "../../Utils/averageData";
+import FakeGlucoseData from "../../Utils/fakeGlucose";
 
 class MultipleGraphCard extends Component {
-  makeBloodSugarGraph = bloodSugar => {
-    if (bloodSugar) {
-      return (
-        <div className="flex-children-multiple-graph">
-          <BloodSugarGraph />
-        </div>
-      );
-    } else {
-      return <div />;
-    }
-  };
-
-  makeInsulinGraph = insulin => {
-    if (insulin) {
-      return (
-        <div className="flex-children-multiple-graph">
-          <InsulinGraph />
-        </div>
-      );
-    } else {
-      return <div />;
-    }
-  };
-
-  makeStepsGraph = steps => {
-    if (steps) {
-      return (
-        <div className="flex-children-multiple-graph">
-          <StepsGraph />
-        </div>
-      );
-    } else {
-      return <div />;
-    }
-  };
-
-  makeWeightGraph = weight => {
-    if (weight) {
-      return (
-        <div className="flex-children-multiple-graph">
-          <WeightGraph
-            data={this.props.patient.datasets[1].measurements}
-            baseInfo={this.props.baseInfo}
-          />
-        </div>
-      );
-    } else {
-      return <div />;
-    }
-  };
-
-  makePhysicalActivityGraph = physicalActivity => {
-    if (physicalActivity) {
-      return (
-        <div className="flex-children-multiple-graph">
-          <PhysicalActivityGraph />
-        </div>
-      );
-    } else {
-      return <div />;
-    }
-  };
-
-  makeCarbohydratesGraph = carbohydrates => {
-    if (carbohydrates) {
-      return (
-        <div className="flex-children-multiple-graph">
-          <CarbohydratesGraph baseInfo={this.props.baseInfo} />
-        </div>
-      );
-    } else {
-      return <div />;
-    }
+  makeGraph = dataType => {
+    const aggregatedData = getAggregatedDataForDataType(this.props.baseInfo, this.props.patient.datasets, dataType);
+    return (
+      <CompareDataGraph
+        aggregatedData={aggregatedData}
+        dataType={dataType}
+      />
+    );
   };
 
   makePeriodStepper = data => {
@@ -133,7 +66,7 @@ class MultipleGraphCard extends Component {
       intervalName,
       start,
       end,
-      formatInterval(intervalName)
+      getFormat(periodName, intervalName)
     );
     const noDataTypesChecked =
       (bloodSugar ||
@@ -152,13 +85,13 @@ class MultipleGraphCard extends Component {
     } else {
       return (
         <div>
-          <div className="flex-container-multiple-graph">
-            {this.makeBloodSugarGraph(bloodSugar)}
-            {this.makeInsulinGraph(insulin)}
-            {this.makeStepsGraph(steps)}
-            {this.makeWeightGraph(weight)}
-            {this.makePhysicalActivityGraph(physicalActivity)}
-            {this.makeCarbohydratesGraph(carbohydrates)}
+          <div>
+            {bloodSugar && this.makeGraph(BLOODSUGAR)}
+            {insulin && this.makeGraph(INSULIN)}
+            {steps && this.makeGraph(STEPS)}
+            {weight && this.makeGraph(WEIGHT)}
+            {physicalActivity && this.makeGraph(PHYSICAL_ACTIVITY)}
+            {carbohydrates && this.makeGraph(CARBOHYDRATES)}
             <ResponsiveContainer width="100%" height={30}>
               <BarChart
                 width={350}
@@ -196,3 +129,78 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps)(MultipleGraphCard);
+
+const getAggregatedDataForDataType = (baseInfo, dataSets, dataType) => {
+  let { periodName, periodNumber, intervalName } = periodFromView(baseInfo.view);
+  let startEndTimes = getStartEndTimes(
+    baseInfo.view,
+    baseInfo.nrOfIntervalsBack
+  );
+  let start = startEndTimes.start;
+  let end = startEndTimes.end;
+  if (
+    baseInfo.view === "custom" &&
+    baseInfo.start !== "" &&
+    baseInfo.end !== ""
+  ) {
+    start = baseInfo.start;
+    end = baseInfo.end;
+  }
+  function getData() {
+    switch(dataType) { 
+      case STEPS:
+          return dataSets[0].measurements;
+      case WEIGHT: 
+          return dataSets[1].measurements;
+      case CARBOHYDRATES:
+      case PHYSICAL_ACTIVITY:
+      case BLOODSUGAR:
+      case INSULIN:
+          //if data is missing, generate empty datapoints to present in prototype
+          return [{value: 0, start: moment().subtract(periodNumber, periodName).format('YYYY-MM-DDTHH:mm:ss')}]
+    }
+  }
+  const data = getData();
+
+  function getAggregatedData () {
+    switch(dataType) {
+      case BLOODSUGAR:
+      case INSULIN:
+      case STEPS:
+      case CARBOHYDRATES:
+      case PHYSICAL_ACTIVITY:
+          return aggregateData(
+            data,
+            intervalName,
+            start,
+            end,
+            getFormat(periodName, intervalName)
+          );
+      case WEIGHT:
+          return averageData(
+            data,
+            intervalName,
+            start,
+            end,
+            getFormat(periodName, intervalName)
+          );
+    }
+  }
+  const fakeDataForDataType = {
+    [BLOODSUGAR]: FakeGlucoseData().map(data => data.value),
+    [INSULIN]: [25, 22, 30, 32, 28, 25, 33, 35, 28],
+    [WEIGHT]: [72, 72, 72, 69, 69, 68, 70, 72, 72, 72, 69, 69, 68, 70],
+    [PHYSICAL_ACTIVITY]: [40, 28, 0, 45, 0, 0, 55, 65, 36],
+    [CARBOHYDRATES]: [250, 260, 220, 270, 300, 230, 150, 180]
+  };
+
+  let aggregated = getAggregatedData();
+  const noRecentData = aggregated.filter(data => data.y > 0).length === 0;
+  //Fake data to present in prototype
+  if(noRecentData) {
+    const fakeData = fakeDataForDataType[dataType];
+    aggregated = aggregated.map((data, index) => ({x: data.x[0], y: fakeData[index % fakeData.length]}));
+  }
+  return aggregated;
+}
+
