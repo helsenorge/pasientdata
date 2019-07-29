@@ -1,20 +1,36 @@
 import React, { Component } from "react";
 import "./popupContent.css";
 import { DisplayButton } from "@helsenorge/toolkit/components/atoms/buttons/display-button";
+import { connect } from "react-redux";
+import { changeGoal } from "../../Redux/actions";
+import addGoal from "../../Utils/addGoal";
 
 class StepsPopupContent extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      value: ""
+      goal: ""
     };
   }
   handleSave = () => {
-    console.log(this.state.value);
+    if (this.state.goal !== "") {
+      let goal = { type: "lower", value: this.state.goal };
+      // console.log("goal: ", goal);
+      this.props.changeGoal("StepsGoal", goal);
+      addGoal(
+        "StepsGoal",
+        goal,
+        "Desired number of steps per day",
+        "steps/day",
+        "steps/day",
+        this.props.patient.googleId
+      ); // range goal
+    }
   };
+
   handleChange = event => {
-    this.setState({ value: event.target.value });
+    this.setState({ goal: event.target.value });
   };
 
   render = () => {
@@ -23,7 +39,7 @@ class StepsPopupContent extends Component {
         <h2> Skritt</h2>
         <div className="popup-content-center-text">
           <br />
-          Jeg ønsker å gå
+          Jeg ønsker å gå mer enn
           <input
             type="number"
             className="goal-input"
@@ -47,4 +63,15 @@ class StepsPopupContent extends Component {
   };
 }
 
-export default StepsPopupContent;
+const mapDispatchToProps = { changeGoal };
+
+function mapStateToProps(state) {
+  return {
+    patient: state.patient
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(StepsPopupContent);

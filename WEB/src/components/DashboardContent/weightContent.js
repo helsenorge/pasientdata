@@ -24,7 +24,7 @@ const weightContent = (data) => {
     /*const lastDataPoint = data[data.length - 1].value;
     aggregated = aggregated.map(data => ({x: data.x, y: lastDataPoint}));*/
     
-    aggregated = aggregated.map((data, index) => ({x: data.x[0], y: fakeWeightData[index]}));
+    aggregated = aggregated.map((data, index) => ({x: data.x[0], y: fakeWeightData[index % fakeWeightData.length]}));
   }
   const minWeight = aggregated.map(data => data.y).reduce((a, b) => Math.min(a, b));
   const maxWeight = aggregated.map(data => data.y).reduce((a, b) => Math.max(a, b));

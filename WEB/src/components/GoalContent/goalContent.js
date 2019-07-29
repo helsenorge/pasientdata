@@ -1,22 +1,15 @@
 import "./goalContent.css";
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
 import moment from "moment";
 import ChangeGoalButton from "../../components/ChangeGoalButton/changeGoalButton";
-import {
-  PieChart,
-  Pie,
-  Cell,
-  Label,
-  ResponsiveContainer,
-  Polygon
-} from "recharts";
+import { PieChart, Pie, Cell, Label, ResponsiveContainer } from "recharts";
 import CardComponent from "../../components/Card/cardComponent";
 import FakeGlucoseData from "../../Utils/fakeGlucose";
 import Trends from "../../Utils/trends";
 import periodFromView from "../../Utils/periodFromView";
 import aggregateData from "../../Utils/aggregateData";
+import aggregateActivity from "../../Utils/aggregateActivity";
 
 class GoalContent extends Component {
   CustomLabel(value1, value2, xPos) {
@@ -69,8 +62,7 @@ class GoalContent extends Component {
     let data = FakeGlucoseData();
     let upperLimit = 12;
     let lowerLimit = 5;
-    let trendValue = 2;
-    let goalValue = 75;
+    let goalValue = 80;
     let { mean, timeAbove, timeWithin, timeBelow } = Trends(
       data,
       upperLimit,
@@ -80,11 +72,6 @@ class GoalContent extends Component {
       (timeWithin * 100) / (timeAbove + timeWithin + timeBelow);
     let unit = "%";
     let trends;
-    let hasUpperLimit = true;
-    let percentGoal;
-    let upperGoal = 80;
-    let lowerGoal = 70;
-    let pieSideSize = 20;
     let { periodName, periodNumber, intervalName } = periodFromView(
       this.props.baseInfo.view
     );
@@ -95,37 +82,35 @@ class GoalContent extends Component {
         goal = "80%";
         xPos = 72;
         data = FakeGlucoseData();
-        upperLimit = 14;
+        upperLimit = 12;
         lowerLimit = 5;
-        percentGoal = 65;
-        trendValue = 2;
-        goalValue = 85;
-        trends = Trends(data, upperLimit, lowerLimit);
-        mean = trends.mean;
-        timeAbove = trends.timeAbove;
-        timeWithin = trends.timeWithin;
-        timeBelow = trends.timeBelow;
+        goalValue = 80;
         currentValue =
           (timeWithin * 100) / (timeAbove + timeWithin + timeBelow);
         unit = " %";
-        hasUpperLimit = false;
         break;
       case "BlodsukkerAvg":
         COLORS = generalColors;
         goal = 7;
         unit = " mmol/l";
         xPos = 48;
+        data = FakeGlucoseData();
+        upperLimit = 12;
+        lowerLimit = 6.2;
+        goalValue = 7;
+        trends = Trends(data, upperLimit, lowerLimit);
+        mean = trends.mean;
+        currentValue = mean;
         break;
       case "Skritt":
         COLORS = physicalActiveColors;
         dataSet = [{ value: 1 }, { value: 2 }, { value: 2 }];
-        goal = this.props.patient.goals[0].value;
+        goal = 10000;
         xPos = 48;
         data = this.props.patient.datasets[0].measurements;
-        upperLimit = 1000000;
-        lowerLimit = 10000;
-        trendValue = 200;
-        goalValue = 15000;
+        upperLimit = 12000;
+        lowerLimit = 1000;
+        goalValue = 10000;
         let aggregated = aggregateData(
           data,
           intervalName,
@@ -137,19 +122,21 @@ class GoalContent extends Component {
         );
         trends = Trends(aggregated, upperLimit, lowerLimit);
         mean = trends.mean;
-        timeAbove = trends.timeAbove;
-        timeWithin = trends.timeWithin;
-        timeBelow = trends.timeBelow;
         currentValue = mean;
-        unit = " \n skritt";
-        hasUpperLimit = false;
-        pieSideSize = 2000;
+        unit = " skritt";
         break;
       case "Vekt":
         COLORS = generalColors;
         goal = 65;
         unit = " kg";
         xPos = 67;
+        data = this.props.patient.datasets[1].measurements;
+        upperLimit = 70;
+        lowerLimit = 50;
+        goalValue = 65;
+        trends = Trends(data, upperLimit, lowerLimit);
+        mean = trends.mean;
+        currentValue = mean;
         break;
       case "FysiskAktivitet":
         COLORS = physicalActiveColors;
@@ -157,6 +144,22 @@ class GoalContent extends Component {
         goal = 90;
         unit = " min";
         xPos = 62;
+        data = this.props.patient.datasets[2].measurements;
+        upperLimit = 70;
+        lowerLimit = 50;
+        goalValue = 65;
+        let aggregatedActivity = aggregateActivity(
+          data,
+          intervalName,
+          moment()
+            .subtract(periodNumber, periodName)
+            .format("YYYY-MM-DDTHH:mm:ss"),
+          moment().format("YYYY-MM-DDTHH:mm:ss"),
+          "ddd"
+        );
+        trends = Trends(data, upperLimit, lowerLimit);
+        mean = trends.mean;
+        currentValue = mean;
         break;
       case "Karbohydrater":
         COLORS = generalColors;
@@ -174,104 +177,28 @@ class GoalContent extends Component {
         return;
     }
 
-    let angles = [];
-    let pieData;
-    let lowerTextValue;
-    let upperTextValue;
-    let lowerText;
-    let upperText;
-    let goalText;
-    if (hasUpperLimit) {
-      if (unit === "%") {
-        pieData = [
-          { value: Math.min(pieSideSize, 100 - upperGoal) },
-          { value: upperGoal - lowerGoal },
-          { value: Math.min(pieSideSize, lowerGoal) }
-        ];
-        lowerTextValue = Math.max(0, lowerGoal - pieSideSize);
-        upperTextValue = Math.min(100, upperGoal + pieSideSize);
-        goalText = lowerGoal + unit + " - " + upperGoal + unit;
-      } else {
-        pieData = [
-          { value: pieSideSize },
-          { value: upperGoal - lowerGoal },
-          {
-            value: Math.min(
-              currentValue - pieSideSize,
-              lowerGoal - pieSideSize
-            ),
-            name: "Time Below"
-          }
-        ];
-      }
-      angles = [
-        ((-30 +
-          (pieData[0].value /
-            (pieData[0].value + pieData[1].value + pieData[2].value)) *
-            240) *
-          Math.PI) /
-          180,
-        ((-30 +
-          ((pieData[0].value + pieData[1].value) /
-            (pieData[0].value + pieData[1].value + pieData[2].value)) *
-            240) *
-          Math.PI) /
-          180,
-        0
-      ];
-    } else {
-      // only lower limit
-      if (unit === "%") {
-        pieData = [
-          { value: Math.min(pieSideSize, 100 - goalValue) },
-          { value: Math.min(pieSideSize, goalValue) }
-        ];
-        lowerTextValue = Math.max(0, goalValue - pieSideSize);
-        upperTextValue = Math.min(100, goalValue + pieSideSize);
-        goalText = goalValue + unit;
-      } else {
-        pieData = [{ value: pieSideSize }, { value: pieSideSize }];
-        lowerTextValue = Math.max(0, goalValue - pieSideSize);
-        upperTextValue = goalValue + pieSideSize;
-      }
-      angles = [
-        0,
-        ((-30 +
-          (pieData[0].value / (pieData[0].value + pieData[1].value)) * 240) *
-          Math.PI) /
-          180,
-        0
-      ];
-
-      goalText = goalValue + " " + unit;
-    }
-    lowerText = lowerTextValue + unit;
-    upperText = upperTextValue + unit;
-
     let arrowAngle;
-    let arrowOutsideRangeSpacing = 5;
 
-    if (currentValue < lowerTextValue) {
-      arrowAngle = ((210 + arrowOutsideRangeSpacing) * Math.PI) / 180;
-    } else if (currentValue > upperTextValue) {
-      arrowAngle = ((-30 - arrowOutsideRangeSpacing) * Math.PI) / 180;
+    if (currentValue < lowerLimit) {
+      arrowAngle =
+        (-40 + ((currentValue - lowerLimit) / 5) * 220) * (Math.PI / 180);
+    } else if (currentValue > upperLimit) {
+      arrowAngle =
+        (-40 + ((currentValue - lowerLimit) / 5) * -40) * (Math.PI / 180);
     } else {
       arrowAngle =
-        ((-30 +
-          ((upperTextValue - currentValue) /
-            (upperTextValue - lowerTextValue)) *
-            240) *
-          Math.PI) /
-        180;
+        (-40 +
+          ((currentValue - lowerLimit) / (currentValue - upperLimit)) * 260) *
+        (Math.PI / 180);
     }
 
-    let triangleAngle = (70 * Math.PI) / 180; // går og litt på bredde
-    let r = 20; // lengde pil
-    let theta = 9; // ish bredde
-    let radius = 40; // hvor langt unna center
+    let triangleAngle = (70 * Math.PI) / 180;
+    let r = 20;
+    let theta = 9;
+    let radius = 45;
 
-    let centerX = 125 + radius * Math.cos(-arrowAngle);
-    let centerY = 110 + radius * Math.sin(-arrowAngle);
+    let centerX = 87.5 + radius * Math.cos(-arrowAngle);
+    let centerY = 80 + radius * Math.sin(-arrowAngle);
     let x1 = Math.floor(centerX + r * Math.cos(-arrowAngle));
     let y1 = Math.floor(centerY + r * Math.sin(-arrowAngle));
     let x2 = Math.floor(
@@ -315,6 +242,10 @@ class GoalContent extends Component {
                   startAngle={220}
                   endAngle={-40}
                   fill="#8884d8"
+                  // label={({ cx, cy, index }) => {
+                  //   console.log("cx = ", cx);
+                  //   console.log("cy = ", cy); }
+                  // }
                 >
                   {dataSet.map((entry, index) => (
                     <Cell key="" fill={COLORS[index % COLORS.length]} />
@@ -340,7 +271,6 @@ class GoalContent extends Component {
           </div>
           <div>
             <div className="button-style">
-              {/* <Link to={link} style={{ borderBottom: "none" }}> */}
               <ChangeGoalButton datatype={this.props.datatype} />
             </div>
           </div>

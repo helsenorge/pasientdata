@@ -18,7 +18,7 @@ class Dashboard extends Component {
     if (this.props.baseInfo.isLoggedin) {
       return (
         <div style={{ margin: "0 4px 8px" }}>
-          <h1 style={{ "marginLeft": "8px" }}>Innsikt</h1>
+          <h1 style={{ marginLeft: "8px" }}>Innsikt</h1>
           <CardComponent title={"Blodsukker"} content={blodsukkerContent()} />
           <div className="flex-container">
             <CardComponent
@@ -50,7 +50,7 @@ class Dashboard extends Component {
               className="dashboard-card"
               title={"Karbo"}
               content={stepsContent(
-                this.props.patient.datasets[3].measurements,
+                this.props.patient.datasets[0].measurements,
                 "/carbohydrates"
               )}
             />
@@ -68,16 +68,14 @@ class Dashboard extends Component {
               className="dashboard-card"
               title={"Fysisk aktivitet"}
               content={stepsContent(
-                this.props.patient.datasets[3].measurements,
+                this.props.patient.datasets[0].measurements,
                 "/physicalactivity"
               )}
             />
-            <div className="flex-children" style={{ "marginRight": "8px" }} />
+            <div className="flex-children" style={{ marginRight: "8px" }} />
           </div>
           <div className="single-flex-container">
-            <CardComponent
-              content={<AddDataContent />}
-            />
+            <CardComponent content={<AddDataContent />} />
           </div>
           <div className="single-flex-container">
             <CardComponent

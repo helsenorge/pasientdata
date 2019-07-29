@@ -3,11 +3,11 @@ import { DisplayButton } from "@helsenorge/toolkit/components/atoms/buttons/disp
 import EditOutlined from "@helsenorge/toolkit/components/icons/EditOutlined";
 import { LightBox } from "@helsenorge/toolkit/components/molecules/lightbox";
 import BloodSugarPopupContent from "../GoalPopupContents/bloodSugarPopupContent";
-import bloodSugarMeanPopupContent from "../GoalPopupContents/bloodSugarMeanPopupContent";
-import carbsPopupContent from "../GoalPopupContents/carbsPopupContent";
-import physicalActivityPopupContent from "../GoalPopupContents/physicalActivityPopupContent";
+import BloodSugarMeanPopupContent from "../GoalPopupContents/bloodSugarMeanPopupContent";
+import CarbsPopupContent from "../GoalPopupContents/carbsPopupContent";
+import PhysicalActivityPopupContent from "../GoalPopupContents/physicalActivityPopupContent";
 import StepsPopupContent from "../GoalPopupContents/stepsPopupContent";
-import weightPopupContent from "../GoalPopupContents/weightPopupContent";
+import WeightPopupContent from "../GoalPopupContents/weightPopupContent";
 import bloodPressurePopupContent from "../GoalPopupContents/bloodPressurePopupContent";
 import "./changeGoalButton.css";
 
@@ -38,22 +38,19 @@ class ChangeGoalButton extends Component {
         return <BloodSugarPopupContent />;
         break;
       case "BlodsukkerAvg":
-        return bloodSugarMeanPopupContent();
+        return <BloodSugarMeanPopupContent />;
         break;
       case "Skritt":
         return <StepsPopupContent />;
         break;
       case "Vekt":
-        return weightPopupContent();
+        return <WeightPopupContent />;
         break;
       case "FysiskAktivitet":
-        return physicalActivityPopupContent();
+        return <PhysicalActivityPopupContent />;
         break;
       case "Karbohydrater":
-        return carbsPopupContent();
-        break;
-      case "Blodtrykk":
-        return bloodPressurePopupContent();
+        return <CarbsPopupContent />;
         break;
       default:
         return;
@@ -79,7 +76,7 @@ class ChangeGoalButton extends Component {
         medium={false}
         large={false}
       >
-        <text>{"Rediger mål for:"}</text>
+        {"Rediger mål for:"}
         {this.popupContent()}
       </LightBox>
     );

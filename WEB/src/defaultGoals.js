@@ -1,3 +1,3 @@
-const defaultGoals = [];
+const defaultGoals = {};
 
 export default defaultGoals;

@@ -13,8 +13,9 @@ import {
 import "./trendGoalsCard.css";
 import { connect } from "react-redux";
 import aggregateData from "../../Utils/aggregateData";
-import moment from "moment";
 import periodFromView from "../../Utils/periodFromView";
+import getStartEndTimes from "../../Utils/getStartEndTimes";
+import findStartAndEndIndex from "../../Utils/findStartAndEndIndex";
 
 class TrendGoalsCard extends Component {
   displayUnit = () => {
@@ -34,6 +35,7 @@ class TrendGoalsCard extends Component {
 
   trendGoalsContent = () => {
     let data = FakeGlucoseData();
+    let aggregated;
     let upperLimit = 12;
     let lowerLimit = 5;
     let trendValue = 2;
@@ -48,19 +50,22 @@ class TrendGoalsCard extends Component {
     let unit = "%";
     let trends;
     let hasUpperLimit = true;
-    let percentGoal;
+    //let percentGoal;
     let upperGoal = 80;
     let lowerGoal = 70;
     let pieSideSize = 20;
-    let { periodName, periodNumber, intervalName } = periodFromView(
-      this.props.baseInfo.view
+    //let { intervalName } = periodFromView(this.props.baseInfo.view);
+    let { start, end } = getStartEndTimes(
+      this.props.baseInfo.view,
+      this.props.baseInfo.nrOfIntervalsBack
     );
+
     switch (this.props.datatype) {
       case "Blodsukker":
         data = FakeGlucoseData();
         upperLimit = 12;
         lowerLimit = 5;
-        percentGoal = 65;
+        //percentGoal = 65;
         trendValue = 2;
         goalValue = 85;
         trends = Trends(data, upperLimit, lowerLimit);
@@ -79,32 +84,36 @@ class TrendGoalsCard extends Component {
         lowerLimit = 5;
         trendValue = 2;
         goalValue = 75;
-        trends = Trends(data, upperLimit, lowerLimit);
+        //aggregated = aggregateData(data, intervalName, start, end, "ddd");
+        //console.log(aggregated);
+        const { startIndex, endIndex } = findStartAndEndIndex(data, start, end);
+
+        let slicedData = data.slice(startIndex, endIndex);
+        trends = Trends(slicedData, upperLimit, lowerLimit);
         mean = trends.mean;
         timeAbove = trends.timeAbove;
         timeWithin = trends.timeWithin;
         timeBelow = trends.timeBelow;
         currentValue =
-          (timeWithin * 100) / (timeAbove + timeWithin + timeBelow);
+          ((timeAbove + timeWithin - timeBelow) * 100) /
+          (timeAbove + timeWithin + timeBelow);
         unit = "%";
         upperGoal = 90;
         lowerGoal = 70;
         break;
       case "Skritt":
+        hasUpperLimit = false;
         data = this.props.patient.datasets[0].measurements;
-        upperLimit = 1000000;
-        lowerLimit = 10000;
+        upperLimit = 10000000;
+        if (this.props.patient.goals.StepsGoal) {
+          lowerLimit = this.props.patient.goals.StepsGoal.value;
+        } else {
+          console.log("No steps goal found in redux store.");
+          lowerLimit = 15000; // default case if no goal exist in redux store.
+        }
         trendValue = 200;
         goalValue = 15000;
-        let aggregated = aggregateData(
-          data,
-          intervalName,
-          moment()
-            .subtract(periodNumber, periodName)
-            .format("YYYY-MM-DDTHH:mm:ss"),
-          moment().format("YYYY-MM-DDTHH:mm:ss"),
-          "ddd"
-        );
+        aggregated = aggregateData(data, "day", start, end, "ddd");
         trends = Trends(aggregated, upperLimit, lowerLimit);
         mean = trends.mean;
         timeAbove = trends.timeAbove;
@@ -112,7 +121,6 @@ class TrendGoalsCard extends Component {
         timeBelow = trends.timeBelow;
         currentValue = mean;
         unit = "";
-        hasUpperLimit = false;
         pieSideSize = 2000;
         break;
       case "Vekt":
@@ -280,7 +288,6 @@ class TrendGoalsCard extends Component {
                 } else {
                   returnString = "";
                 }
-                console.log(upperText);
                 return (
                   <React.Fragment>
                     <text

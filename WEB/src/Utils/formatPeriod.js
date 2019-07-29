@@ -1,5 +1,3 @@
-import moment from "moment";
-
 export default function formatPeriod(period) {
   switch (period) {
     case "year":
