@@ -81,10 +81,9 @@ class GoalContent extends Component {
         COLORS = generalColors;
         goalValue = 80;
         if (
-          this.props.patient.goals.BloodSugarWithinRangePercentageGoal !== {}
+          "BloodSugarWithinRangePercentageGoal" in this.props.patient.goals
         ) {
-          goalValue = this.props.patient.goals
-            .BloodSugarWithinRangePercentageGoal.value;
+          goalValue = this.props.patient.goals.BloodSugarWithinRangePercentageGoal.value;
         }
         xPos = 72;
         data = FakeGlucoseData();
@@ -97,7 +96,7 @@ class GoalContent extends Component {
       case "BlodsukkerAvg":
         COLORS = generalColors;
         goalValue = 7;
-        if (this.props.patient.goals.MeanGlucoseGoal !== {}) {
+        if ("MeanGlucoseGoal" in this.props.patient.goals) {
           goalValue = this.props.patient.goals.MeanGlucoseGoal.value;
         }
         unit = " mmol/l";
@@ -113,7 +112,7 @@ class GoalContent extends Component {
         COLORS = physicalActiveColors;
         dataSet = [{ value: 1 }, { value: 2 }, { value: 2 }];
         goalValue = 10000;
-        if (this.props.patient.goals.StepsGoal !== {}) {
+        if ("StepsGoal" in this.props.patient.goals) {
           goalValue = this.props.patient.goals.StepsGoal.value;
         }
         xPos = 48;
@@ -138,7 +137,7 @@ class GoalContent extends Component {
         dataSet = [{ value: 3 }, { value: 1 }, { value: 1 }];
         COLORS = weightColors;
         goalValue = 65;
-        if (this.props.patient.goals.WeightGoal !== {}) {
+        if ("WeightGoal" in this.props.patient.goals) {
           goalValue = this.props.patient.goals.WeightGoal.value;
         }
         unit = " kg";
@@ -154,7 +153,7 @@ class GoalContent extends Component {
         COLORS = physicalActiveColors;
         dataSet = [{ value: 1 }, { value: 2 }, { value: 2 }];
         goalValue = 65;
-        if (this.props.patient.goals.PhysicalActivityGoal !== {}) {
+        if ("PhysicalActivityGoal" in this.props.patient.goals) {
           goalValue = this.props.patient.goals.PhysicalActivityGoal.value;
         }
         unit = " min";
@@ -169,7 +168,7 @@ class GoalContent extends Component {
       case "Karbohydrater":
         COLORS = generalColors;
         goalValue = 280;
-        if (this.props.patient.goals.CarbsGoal !== {}) {
+        if ("CarbsGoal" in this.props.patient.goals) {
           goalValue = this.props.patient.goals.CarbsGoal.value;
         }
         unit = " g";
