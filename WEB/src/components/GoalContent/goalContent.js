@@ -108,7 +108,7 @@ class GoalContent extends Component {
         goal = 10000;
         xPos = 48;
         data = this.props.patient.datasets[0].measurements;
-        upperLimit = 15000;
+        upperLimit = 12000;
         lowerLimit = 1000;
         goalValue = 10000;
         let aggregated = aggregateData(
@@ -145,7 +145,6 @@ class GoalContent extends Component {
         unit = " min";
         xPos = 62;
         data = this.props.patient.datasets[2].measurements;
-        console.log(data);
         upperLimit = 70;
         lowerLimit = 50;
         goalValue = 65;
