@@ -26,15 +26,7 @@ class MyGoals extends Component {
           <GoalContent datatype="Vekt" title="Vekt" />
           <GoalContent datatype="FysiskAktivitet" title="Fysisk aktivitet" />
           <GoalContent datatype="Karbohydrater" title="Karbohydrater" />
-          <GoalContent datatype="Blodtrykk" title="Blodtrykk" />
-
-          {/* <CardComponent title={"Blodsukker: Tid innenfor grenseverdi"} content={goalContent()} />
-        <CardComponent title={"Blodsukker: Gjennomsnittlig nivå"} content={goalContent()} />
-        <CardComponent title={"Skritt"} content={goalContent()} />
-        <CardComponent title={"Vekt"} content={goalContent()} />
-        <CardComponent title={"Fysisk aktivitet"} content={goalContent()} />
-        <CardComponent title={"Karbohydrater"} content={goalContent()} />
-        <CardComponent title={"Blodtrykk"} content={goalContent()} /> */}
+          {/* <GoalContent datatype="Blodtrykk" title="Blodtrykk" /> */}
         </div>
       );
     } else {
