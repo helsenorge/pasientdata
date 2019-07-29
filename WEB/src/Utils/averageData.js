@@ -13,9 +13,10 @@ export default function averageData(
     startString,
     endString
   );
-
+  //   console.log("input data: ", inData);
   let slicedData = inData.slice(startIndex, endIndex + 1);
-  //console.log(startIndex, endIndex);
+  //   console.log(startIndex, endIndex);
+  //   console.log("sliced data: ", slicedData);
   const inputFormat = "YYYY-MM-DDTHH:mm:ss";
   const startTime = moment(startString, inputFormat);
   const endTime = moment(endString, inputFormat);
@@ -29,6 +30,7 @@ export default function averageData(
 
   // no data points in the chosen time period
   let data = slicedData.map(item => ({ x: item.start, y: item.value }));
+  //   console.log("data from sliced data: ", data);
   if (data === undefined || data.length === 0) {
     data.push({ y: 0, x: startTime.format(inputFormat) });
   }
@@ -50,7 +52,7 @@ export default function averageData(
 
   let currentDataTime;
   //console.log(inData);
-  console.log(slicedData);
+  //   console.log(slicedData);
   let counter = 1;
   for (let i = 1; i < slicedLength; i++) {
     currentDataTime = moment(data[i].x, inputFormat);
@@ -67,8 +69,8 @@ export default function averageData(
       counter += 1;
       sum = sum * ((counter - 1) / counter) + data[i].y / counter;
       //sum += data[i].y;
-      console.log("counter: ", counter);
-      console.log("sum: ", sum);
+      //   console.log("counter: ", counter);
+      //   console.log("sum: ", sum);
     } else {
       //Add same value inbetween if needed
       let skipped = 0;
@@ -90,14 +92,14 @@ export default function averageData(
         });
         skipped++;
       }
-      console.log("sum etter else: ", sum);
+      //console.log("sum etter else: ", sum);
       sum = data[i].y;
       start = currentDataTime.startOf(interval);
       //console.log(start);
     }
   } // for sentence
 
-  console.log("verdien som pushes til aggregated: ", sum);
+  //console.log("verdien som pushes til aggregated: ", sum);
   //console.log()
   aggregated.push({ y: sum, x: start.format(outputFormat) });
 
@@ -113,6 +115,6 @@ export default function averageData(
       x: start.subtract(1, interval + "s").format(outputFormat)
     });
   }
-  console.log(aggregated);
+  //   console.log(aggregated);
   return aggregated;
 }
