@@ -35,22 +35,58 @@ class ChangeGoalButton extends Component {
   popupContent() {
     switch (this.props.datatype) {
       case "Blodsukker":
-        return <BloodSugarPopupContent />;
+        return (
+          <BloodSugarPopupContent
+            onSave={event => {
+              this.handleClick(event);
+            }}
+          />
+        );
         break;
       case "BlodsukkerAvg":
-        return <BloodSugarMeanPopupContent />;
+        return (
+          <BloodSugarMeanPopupContent
+            onSave={event => {
+              this.handleClick(event);
+            }}
+          />
+        );
         break;
       case "Skritt":
-        return <StepsPopupContent />;
+        return (
+          <StepsPopupContent
+            onSave={event => {
+              this.handleClick(event);
+            }}
+          />
+        );
         break;
       case "Vekt":
-        return <WeightPopupContent />;
+        return (
+          <WeightPopupContent
+            onSave={event => {
+              this.handleClick(event);
+            }}
+          />
+        );
         break;
       case "FysiskAktivitet":
-        return <PhysicalActivityPopupContent />;
+        return (
+          <PhysicalActivityPopupContent
+            onSave={event => {
+              this.handleClick(event);
+            }}
+          />
+        );
         break;
       case "Karbohydrater":
-        return <CarbsPopupContent />;
+        return (
+          <CarbsPopupContent
+            onSave={event => {
+              this.handleClick(event);
+            }}
+          />
+        );
         break;
       default:
         return;

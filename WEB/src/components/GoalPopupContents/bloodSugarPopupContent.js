@@ -101,7 +101,10 @@ class BloodSugarPopupContent extends Component {
           <br />
           <DisplayButton
             className="goal-save-button"
-            onClick={this.handleSave}
+            onClick={event => {
+              this.handleSave();
+              this.props.onSave(event);
+            }}
             secondary
           >
             Lagre
