@@ -10,6 +10,7 @@ import FakeGlucoseData from "../../Utils/fakeGlucose";
 import Trends from "../../Utils/trends";
 import periodFromView from "../../Utils/periodFromView";
 import aggregateData from "../../Utils/aggregateData";
+import aggregateActivity from "../../Utils/aggregateActivity";
 
 class GoalContent extends Component {
   CustomLabel(value1, value2, xPos) {
@@ -113,7 +114,7 @@ class GoalContent extends Component {
         xPos = 48;
         data = this.props.patient.datasets[0].measurements;
         upperLimit = goalValue; // 12000;
-        lowerLimit = goalValue / 6; // 1000;
+        lowerLimit = goalValue / 12; // 1000;
         let aggregated = aggregateData(
           data,
           intervalName,
@@ -146,19 +147,26 @@ class GoalContent extends Component {
         break;
       case "FysiskAktivitet":
         COLORS = overColors;
-        dataSet = [{ value: 1 }, { value: 2 }, { value: 2 }];
-        goalValue = 65;
+        dataSet = [{ value: 1 }, { value:  1}, { value: 3 }];
+        goalValue = 630;
         if ("PhysicalActivityGoal" in this.props.patient.goals) {
           goalValue = this.props.patient.goals.PhysicalActivityGoal.value;
         }
         unit = " min";
         xPos = 62;
         data = this.props.patient.datasets[2].measurements;
-        upperLimit = goalValue; // 70;
-        lowerLimit = goalValue / 5; // 50;
-        trends = Trends(data, upperLimit, lowerLimit);
-        mean = trends.mean;
-        currentValue = mean;
+        upperLimit = goalValue * 2; // 70;
+        lowerLimit = goalValue / 4; // 50;
+        let aggregatedActivity = aggregateActivity(
+          data,
+          intervalName,
+          moment()
+            .subtract(periodNumber, periodName)
+            .format("YYYY-MM-DDTHH:mm:ss"),
+          moment().format("YYYY-MM-DDTHH:mm:ss"),
+          "MM-DDTHH:mm"
+        );
+        currentValue = (aggregatedActivity.length / 7);
         break;
       case "Karbohydrater":
         COLORS = generalColors;
@@ -261,7 +269,6 @@ class GoalContent extends Component {
           </div>
           <div>
             <div className="button-style">
-              {/* <Link to={link} style={{ borderBottom: "none" }}> */}
               <ChangeGoalButton datatype={this.props.datatype} />
             </div>
           </div>
