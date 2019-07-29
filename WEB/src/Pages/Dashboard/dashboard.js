@@ -60,7 +60,8 @@ class Dashboard extends Component {
               title={"Vekt"}
               content={weightContent(
                 this.props.patient.datasets[1].measurements,
-                "/weight"
+                "/weight",
+                this.props.patient.goals.WeightGoal.value
               )}
             />
           </div>

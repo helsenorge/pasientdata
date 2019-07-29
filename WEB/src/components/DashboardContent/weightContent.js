@@ -6,42 +6,67 @@ import {
   YAxis,
   LineChart,
   Line,
-  ResponsiveContainer
+  ResponsiveContainer,
+  ReferenceLine
 } from "recharts";
 import aggregateData from "../../Utils/aggregateData";
 
-const weightContent = (data) => {
+const weightContent = (data, name, goal) => {
   let aggregated = aggregateData(
     data,
     "day",
-    moment().subtract(1, "week"),
+    moment()
+      .subtract(1, "week")
+      .endOf("day"),
     moment(),
     "ddd"
   );
   const noRecentData = aggregated.filter(data => data.y > 0).length === 0;
-  if(noRecentData && data.length > 0) {
+  if (noRecentData && data.length > 0) {
     //Without fake data
     /*const lastDataPoint = data[data.length - 1].value;
     aggregated = aggregated.map(data => ({x: data.x, y: lastDataPoint}));*/
-    
-    aggregated = aggregated.map((data, index) => ({x: data.x[0], y: fakeWeightData[index % fakeWeightData.length]}));
+
+    aggregated = aggregated.map((data, index) => ({
+      x: data.x[0],
+      y: fakeWeightData[index % fakeWeightData.length]
+    }));
   }
-  const minWeight = aggregated.map(data => data.y).reduce((a, b) => Math.min(a, b));
-  const maxWeight = aggregated.map(data => data.y).reduce((a, b) => Math.max(a, b));
+  const minWeight = aggregated
+    .map(data => data.y)
+    .reduce((a, b) => Math.min(a, b));
+  const maxWeight = aggregated
+    .map(data => data.y)
+    .reduce((a, b) => Math.max(a, b));
   return (
     <div>
       <ResponsiveContainer width="100%" height={96}>
-          <LineChart
-            width={400}
-            height={96}
-            data={aggregated}
-            margin={{ top: 0, right: 5, bottom: 0, left: 5 }}
-          >
-            <YAxis domain={[minWeight - 5, maxWeight + 5]} hide/>
-            <XAxis height={2} dataKey="x" tick={false} />
-            <Line dataKey="y" type="linear" stroke="#EF87CE" strokeWidth={2} dot={false} />
-          </LineChart>
-        </ResponsiveContainer>
+        <LineChart
+          width={400}
+          height={96}
+          data={aggregated}
+          margin={{ top: 0, right: 50, bottom: 0, left: 5 }}
+        >
+          <YAxis domain={[minWeight - 5, maxWeight + 5]} hide />
+          <XAxis height={2} dataKey="x" tick={false} />
+          <Line
+            dataKey="y"
+            type="linear"
+            stroke="#EF87CE"
+            strokeWidth={2}
+            dot={false}
+          />
+          <ReferenceLine
+            y={goal}
+            stroke="grey"
+            strokeDasharray="3 3"
+            label={{
+              value: goal,
+              position: "right"
+            }}
+          />
+        </LineChart>
+      </ResponsiveContainer>
       <InsightButton linkTo={"/weight"} />
     </div>
   );
