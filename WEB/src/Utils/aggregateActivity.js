@@ -8,6 +8,57 @@ export default function aggregateData(
   endString,
   outputFormat
 ) {
+  let sleepArray = [];
+  let walkArray = [];
+  let jogArray = [];
+  let inVehicleArray = [];
+  let standStillArray = [];
+  let activityArray = [];
+  let unknownArray = [];
+
+  for (let i = 0; i < inData.length; i++) {
+    switch (inData[i].value) {
+      case 0:
+        inVehicleArray.push(inData[i]);
+        return;
+
+      case 3:
+        standStillArray.push(inData[i]);
+        return;
+
+      case 4:
+        unknownArray.push(inData[i]);
+        return;
+
+      case 5:
+        unknownArray.push(inData[i]);
+        return;
+
+      case 7:
+        walkArray.push(inData[i]);
+        return;
+
+      case 56:
+        jogArray.push(inData[i]);
+        return;
+
+      case 72:
+        sleepArray.push(inData[i]);
+        return;
+
+      default:
+        activityArray.push(inData[i]);
+        console.log(inData[i].value);
+    }
+  }
+
+  console.log("vehicle: ", inVehicleArray.length);
+  console.log("sleep: ", sleepArray.length);
+  console.log("walking: ", walkArray.length);
+  console.log("jogging: ", jogArray.length);
+  console.log("standStillCount: ", standStillArray.length);
+  console.log("unknownCount: ", unknownArray.length);
+
   const { startIndex, endIndex } = findStartAndEndIndex(
     inData,
     startString,
