@@ -20,37 +20,37 @@ export function getUserWeight(response) {
   );
 }
 
-export function getUserHeight(response) {
-  return axios.get(
-    urlBase +
-      "height:com.google.android.gms:merge_height/datasets/631148400000000000-1735686000000000000",
-    { headers: { Authorization: "Bearer " + response.accessToken } }
-  );
-}
+// export function getUserHeight(response) {
+//   return axios.get(
+//     urlBase +
+//       "height:com.google.android.gms:merge_height/datasets/631148400000000000-1735686000000000000",
+//     { headers: { Authorization: "Bearer " + response.accessToken } }
+//   );
+// }
 
-export function getUserHeartBeat(response) {
-  return axios.get(
-    urlBase +
-      "heart_rate.bpm:com.google.android.gms:merge_heart_rate_bpm/datasets/631148400000000000-1735686000000000000",
-    { headers: { Authorization: "Bearer " + response.accessToken } }
-  );
-}
+// export function getUserHeartBeat(response) {
+//   return axios.get(
+//     urlBase +
+//       "heart_rate.bpm:com.google.android.gms:merge_heart_rate_bpm/datasets/631148400000000000-1735686000000000000",
+//     { headers: { Authorization: "Bearer " + response.accessToken } }
+//   );
+// }
 
-export function getUserBloodPressure(response) {
-  return axios.get(
-    urlBase +
-      "blood_pressure:com.google.android.gms:merged/datasets/631148400000000000-1735686000000000000",
-    { headers: { Authorization: "Bearer " + response.accessToken } }
-  );
-}
+// export function getUserBloodPressure(response) {
+//   return axios.get(
+//     urlBase +
+//       "blood_pressure:com.google.android.gms:merged/datasets/631148400000000000-1735686000000000000",
+//     { headers: { Authorization: "Bearer " + response.accessToken } }
+//   );
+// }
 
-export function getUserBloodGlucose(response) {
-  return axios.get(
-    urlBase +
-      "blood_glucose:com.google.android.gms:merged/datasets/631148400000000000-1735686000000000000",
-    { headers: { Authorization: "Bearer " + response.accessToken } }
-  );
-}
+// export function getUserBloodGlucose(response) {
+//   return axios.get(
+//     urlBase +
+//       "blood_glucose:com.google.android.gms:merged/datasets/631148400000000000-1735686000000000000",
+//     { headers: { Authorization: "Bearer " + response.accessToken } }
+//   );
+// }
 
 export function getUserActivities(response) {
   return axios.get(
@@ -146,60 +146,58 @@ export function responseGoogle(response) {
     .all([
       getUserSteps(response),
       getUserWeight(response),
-      getUserHeight(response),
-      getUserHeartBeat(response),
-      getUserBloodPressure(response),
-      getUserBloodGlucose(response),
+      // getUserHeight(response),
+      // getUserHeartBeat(response),
+      // getUserBloodPressure(response),
+      // getUserBloodGlucose(response),
       getUserActivities(response)
       // getUserBatchedActivity(response)
     ])
     .then(
-      axios.spread(
-        (
-          steps,
-          weight,
-          height,
-          heartBeat,
-          bloodPressure,
-          bloodGlucose,
-          activities,
-          batchedActivities
-        ) => {
-          let datasets = [];
-          const pic = response.profileObj.imageUrl + "?sz=200";
+      axios.spread((
+        steps,
+        weight,
+        // height,
+        // heartBeat,
+        // bloodPressure,
+        // bloodGlucose,
+        activities,
+        batchedActivities
+      ) => {
+        let datasets = [];
+        const pic = response.profileObj.imageUrl + "?sz=200";
 
-          let stepMeasurement = structureDatasets(steps);
-          let weightMeasurement = structureDatasets(weight);
-          let heightMeasurement = structureDatasets(height);
-          let heartBeatMeasurement = structureDatasets(heartBeat);
-          let bloodPressureMeasurement = structureDatasets(bloodPressure);
-          let bloodGlucoseMeasurement = structureDatasets(bloodGlucose);
-          let activitiesMeasurement = structureDatasets(activities);
-          // let batchedActivitiesMeasurement = structureDatasets(batchedActivities);
+        let stepMeasurement = structureDatasets(steps);
+        let weightMeasurement = structureDatasets(weight);
+        // let heightMeasurement = structureDatasets(height);
+        // let heartBeatMeasurement = structureDatasets(heartBeat);
+        // let bloodPressureMeasurement = structureDatasets(bloodPressure);
+        // let bloodGlucoseMeasurement = structureDatasets(bloodGlucose);
+        let activitiesMeasurement = structureDatasets(activities);
+        // let batchedActivitiesMeasurement = structureDatasets(batchedActivities);
 
-          datasets.push(
-            { name: "55423-8", measurements: stepMeasurement },
-            { name: "29463-7", measurements: weightMeasurement },
-            { name: "8302-2", measurements: heightMeasurement },
-            { name: "8867-4", measurements: heartBeatMeasurement },
-            { name: "85354-9", measurements: bloodPressureMeasurement },
-            { name: "2339-0", measurements: bloodGlucoseMeasurement },
-            { name: "77595-7", measurements: activitiesMeasurement }
-            // { name: "batchedActivities", measurements: batchedActivitiesMeasurement },
-          );
+        datasets.push(
+          { name: "55423-8", measurements: stepMeasurement },
+          { name: "29463-7", measurements: weightMeasurement },
+          // { name: "8302-2", measurements: heightMeasurement },
+          // { name: "8867-4", measurements: heartBeatMeasurement },
+          // { name: "85354-9", measurements: bloodPressureMeasurement },
+          // { name: "2339-0", measurements: bloodGlucoseMeasurement },
+          { name: "77595-7", measurements: activitiesMeasurement }
+          // { name: "batchedActivities", measurements: batchedActivitiesMeasurement },
+        );
 
-          this.props.addInfo(
-            response.profileObj.googleId,
-            response.profileObj.givenName,
-            response.profileObj.familyName,
-            response.profileObj.email,
-            pic,
-            datasets
-          );
+        this.props.addInfo(
+          response.profileObj.googleId,
+          response.profileObj.givenName,
+          response.profileObj.familyName,
+          response.profileObj.email,
+          pic,
+          datasets
+        );
 
-          this.props.onLoggedIn(true);
-        }
-      )
+        this.props.onLoggedIn(true);
+      })
     )
     .catch(error => {
       console.log(error);
