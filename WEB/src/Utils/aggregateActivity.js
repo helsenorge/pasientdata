@@ -14,6 +14,5 @@ export default function aggregateData(
     endString
   );
 
-  console.log(startIndex, endIndex)
 
 }
