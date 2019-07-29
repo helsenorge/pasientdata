@@ -3,6 +3,7 @@ import "./popupContent.css";
 import { DisplayButton } from "@helsenorge/toolkit/components/atoms/buttons/display-button";
 import { connect } from "react-redux";
 import { changeGoal } from "../../Redux/actions";
+import addGoal from "../../Utils/addGoal";
 
 class StepsPopupContent extends Component {
   constructor(props) {
@@ -13,12 +14,23 @@ class StepsPopupContent extends Component {
     };
   }
   handleSave = () => {
-    let goal = { type: "lower", value: this.state.percentGoal };
-    this.props.changeGoal("StepsGoal", goal);
+    if (this.state.goal !== "") {
+      let goal = { type: "lower", value: this.state.goal };
+      // console.log("goal: ", goal);
+      this.props.changeGoal("StepsGoal", goal);
+      addGoal(
+        "StepsGoal",
+        goal,
+        "Desired number of steps per day",
+        "steps/day",
+        "steps/day",
+        this.props.patient.googleId
+      ); // range goal
+    }
   };
 
   handleChange = event => {
-    this.setState({ percentGoal: event.target.value });
+    this.setState({ goal: event.target.value });
   };
 
   render = () => {
@@ -55,7 +67,7 @@ const mapDispatchToProps = { changeGoal };
 
 function mapStateToProps(state) {
   return {
-    pasientInfo: state.pasientInfo
+    patient: state.patient
   };
 }
 

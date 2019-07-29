@@ -12,7 +12,7 @@ export default function addGoal(
   googleId
 ) {
   let target;
-  //   console.log("goaltype: ", goal.type);
+  //   console.log("goal(addGoal): ", goal);
 
   if (goal.type == "range") {
     target = {
@@ -21,8 +21,8 @@ export default function addGoal(
         high: { value: goal.upper, unit: unit }
       }
     };
-    // console.log("target: ", target);
   } else {
+    // console.log("value: ", goal.value);
     target = {
       detailQuantity: {
         value: goal.value,
@@ -31,6 +31,7 @@ export default function addGoal(
         code: UCUMCode
       }
     };
+    // console.log("target: ", target);
   }
 
   let goalJSON = {
