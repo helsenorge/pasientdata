@@ -27,7 +27,7 @@ class Vekt extends Component {
         <GraphCard datatype="Vekt" />
         <PatternCard
           datatype="Vekt"
-          trianglePic={require("../../../Images/pinkUpTriangle.svg")}
+          triangle={"down"}
           fluctuation={bloodSugarFluctuations}
           greatestChange={bloodSugarGreatestChange}
           data={FakeGlucoseData()}

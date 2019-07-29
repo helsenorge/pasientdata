@@ -27,7 +27,7 @@ class FysiskAktivitet extends Component {
         <GraphCard datatype="FysiskAktivitet" />
         <PatternCard
           datatype="FysiskAktivitet"
-          trianglePic={require("../../../Images/pinkUpTriangle.svg")}
+          triangle={"up"}
           fluctuation={"none"}
           greatestChange={"none"}
           data={FakeGlucoseData()}

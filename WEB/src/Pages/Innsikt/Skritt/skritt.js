@@ -23,7 +23,7 @@ class Skritt extends Component {
         <GraphCard datatype="Skritt" />
         <PatternCard
           datatype="Skritt"
-          trianglePic={require("../../../Images/pinkUpTriangle.svg")}
+          triangle={"up"}
           fluctuation={"none"}
           greatestChange={stepsGreatestPeriod}
           data={this.props.patient.datasets[0].measurements}

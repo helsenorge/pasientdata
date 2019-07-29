@@ -125,7 +125,7 @@ export function stepsGreatestPeriod(view, data, goals) {
   let greatestValueObject = aggregated.reduce((prev, current) =>
     prev.y > current.y ? prev : current
   );
-  let time = moment(greatestValueObject.x).format("DD:MM");
+  let time = moment(greatestValueObject.x).format("DD.MM");
 
   return (
     "Du gikk flest skritt den " +

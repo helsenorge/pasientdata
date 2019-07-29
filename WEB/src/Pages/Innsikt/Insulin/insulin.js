@@ -27,7 +27,7 @@ class Insulin extends Component {
         <GraphCard datatype="Insulin" />
         <PatternCard
           datatype="Insulin"
-          trianglePic={require("../../../Images/pinkUpTriangle.svg")}
+          triangle={"down"}
           fluctuation={"none"}
           greatestChange={"none"}
           data={FakeGlucoseData()}
