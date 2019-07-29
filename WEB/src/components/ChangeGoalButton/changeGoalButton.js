@@ -7,7 +7,7 @@ import bloodSugarMeanPopupContent from "../GoalPopupContents/bloodSugarMeanPopup
 import carbsPopupContent from "../GoalPopupContents/carbsPopupContent";
 import physicalActivityPopupContent from "../GoalPopupContents/physicalActivityPopupContent";
 import StepsPopupContent from "../GoalPopupContents/stepsPopupContent";
-import weightPopupContent from "../GoalPopupContents/weightPopupContent";
+import WeightPopupContent from "../GoalPopupContents/weightPopupContent";
 import bloodPressurePopupContent from "../GoalPopupContents/bloodPressurePopupContent";
 import "./changeGoalButton.css";
 
@@ -44,7 +44,7 @@ class ChangeGoalButton extends Component {
         return <StepsPopupContent />;
         break;
       case "Vekt":
-        return weightPopupContent();
+        return <WeightPopupContent />;
         break;
       case "FysiskAktivitet":
         return physicalActivityPopupContent();
