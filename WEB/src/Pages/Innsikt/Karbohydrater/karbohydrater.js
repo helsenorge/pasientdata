@@ -27,7 +27,7 @@ class Karbohydrater extends Component {
         <GraphCard datatype="Karbohydrater" />
         <PatternCard
           datatype="Karbohydrater"
-          trianglePic={require("../../../Images/pinkUpTriangle.svg")}
+          triangle={"down"}
           fluctuation={"none"}
           greatestChange={"none"}
           data={FakeGlucoseData()}

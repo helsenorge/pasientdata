@@ -27,7 +27,7 @@ class Blodtrykk extends Component {
         <GraphCard datatype="Blodtrykk" />
         <PatternCard
           datatype="Blodtrykk"
-          trianglePic={require("../../../Images/pinkUpTriangle.svg")}
+          triangle={"down"}
           fluctuation={"none"}
           greatestChange={"none"}
           data={FakeGlucoseData()}

@@ -15,6 +15,8 @@ import { connect } from "react-redux";
 import aggregateData from "../../Utils/aggregateData";
 import moment from "moment";
 import periodFromView from "../../Utils/periodFromView";
+import getStartEndTimes from "../../Utils/getStartEndTimes";
+import findStartAndEndIndex from "../../Utils/findStartAndEndIndex";
 
 class TrendGoalsCard extends Component {
   displayUnit = () => {
@@ -34,6 +36,7 @@ class TrendGoalsCard extends Component {
 
   trendGoalsContent = () => {
     let data = FakeGlucoseData();
+    let aggregated;
     let upperLimit = 12;
     let lowerLimit = 5;
     let trendValue = 2;
@@ -55,6 +58,11 @@ class TrendGoalsCard extends Component {
     let { periodName, periodNumber, intervalName } = periodFromView(
       this.props.baseInfo.view
     );
+    let { start, end } = getStartEndTimes(
+      this.props.baseInfo.view,
+      this.props.baseInfo.nrOfIntervalsBack
+    );
+
     switch (this.props.datatype) {
       case "Blodsukker":
         data = FakeGlucoseData();
@@ -79,13 +87,21 @@ class TrendGoalsCard extends Component {
         lowerLimit = 5;
         trendValue = 2;
         goalValue = 75;
-        trends = Trends(data, upperLimit, lowerLimit);
+        //aggregated = aggregateData(data, intervalName, start, end, "ddd");
+        //console.log(aggregated);
+        const { startIndex, endIndex } = findStartAndEndIndex(data, start, end);
+
+        let slicedData = data.slice(startIndex, endIndex);
+        console.log(slicedData);
+        trends = Trends(slicedData, upperLimit, lowerLimit);
         mean = trends.mean;
         timeAbove = trends.timeAbove;
         timeWithin = trends.timeWithin;
         timeBelow = trends.timeBelow;
+        console.log("time above: ", timeBelow);
         currentValue =
-          (timeWithin * 100) / (timeAbove + timeWithin + timeBelow);
+          ((timeAbove + timeWithin - timeBelow) * 100) /
+          (timeAbove + timeWithin + timeBelow);
         unit = "%";
         upperGoal = 90;
         lowerGoal = 70;
@@ -96,15 +112,7 @@ class TrendGoalsCard extends Component {
         lowerLimit = 10000;
         trendValue = 200;
         goalValue = 15000;
-        let aggregated = aggregateData(
-          data,
-          intervalName,
-          moment()
-            .subtract(periodNumber, periodName)
-            .format("YYYY-MM-DDTHH:mm:ss"),
-          moment().format("YYYY-MM-DDTHH:mm:ss"),
-          "ddd"
-        );
+        aggregated = aggregateData(data, intervalName, start, end, "ddd");
         trends = Trends(aggregated, upperLimit, lowerLimit);
         mean = trends.mean;
         timeAbove = trends.timeAbove;
@@ -280,7 +288,6 @@ class TrendGoalsCard extends Component {
                 } else {
                   returnString = "";
                 }
-                console.log(upperText);
                 return (
                   <React.Fragment>
                     <text
