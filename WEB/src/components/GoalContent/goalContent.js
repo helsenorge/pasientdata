@@ -1,7 +1,6 @@
 import "./goalContent.css";
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
 import moment from "moment";
 import ChangeGoalButton from "../../components/ChangeGoalButton/changeGoalButton";
 import { PieChart, Pie, Cell, Label, ResponsiveContainer } from "recharts";
@@ -10,6 +9,7 @@ import FakeGlucoseData from "../../Utils/fakeGlucose";
 import Trends from "../../Utils/trends";
 import periodFromView from "../../Utils/periodFromView";
 import aggregateData from "../../Utils/aggregateData";
+import aggregateActivity from "../../Utils/aggregateActivity";
 
 class GoalContent extends Component {
   CustomLabel(value1, value2, xPos) {
@@ -148,6 +148,15 @@ class GoalContent extends Component {
         upperLimit = 70;
         lowerLimit = 50;
         goalValue = 65;
+        let aggregatedActivity = aggregateActivity(
+          data,
+          intervalName,
+          moment()
+            .subtract(periodNumber, periodName)
+            .format("YYYY-MM-DDTHH:mm:ss"),
+          moment().format("YYYY-MM-DDTHH:mm:ss"),
+          "ddd"
+        );
         trends = Trends(data, upperLimit, lowerLimit);
         mean = trends.mean;
         currentValue = mean;
@@ -262,7 +271,6 @@ class GoalContent extends Component {
           </div>
           <div>
             <div className="button-style">
-              {/* <Link to={link} style={{ borderBottom: "none" }}> */}
               <ChangeGoalButton datatype={this.props.datatype} />
             </div>
           </div>
