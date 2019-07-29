@@ -72,7 +72,7 @@ class BloodSugarPopupContent extends Component {
           <input
             type="number"
             className="goal-input"
-            id="percentGoal-input"
+            id="single-input"
             value={this.state.percentGoal}
             onChange={this.handlepercentGoalChange}
           />

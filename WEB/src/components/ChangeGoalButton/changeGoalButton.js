@@ -3,7 +3,7 @@ import { DisplayButton } from "@helsenorge/toolkit/components/atoms/buttons/disp
 import EditOutlined from "@helsenorge/toolkit/components/icons/EditOutlined";
 import { LightBox } from "@helsenorge/toolkit/components/molecules/lightbox";
 import BloodSugarPopupContent from "../GoalPopupContents/bloodSugarPopupContent";
-import bloodSugarMeanPopupContent from "../GoalPopupContents/bloodSugarMeanPopupContent";
+import BloodSugarMeanPopupContent from "../GoalPopupContents/bloodSugarMeanPopupContent";
 import carbsPopupContent from "../GoalPopupContents/carbsPopupContent";
 import physicalActivityPopupContent from "../GoalPopupContents/physicalActivityPopupContent";
 import StepsPopupContent from "../GoalPopupContents/stepsPopupContent";
@@ -38,7 +38,7 @@ class ChangeGoalButton extends Component {
         return <BloodSugarPopupContent />;
         break;
       case "BlodsukkerAvg":
-        return bloodSugarMeanPopupContent();
+        return <BloodSugarMeanPopupContent />;
         break;
       case "Skritt":
         return <StepsPopupContent />;
