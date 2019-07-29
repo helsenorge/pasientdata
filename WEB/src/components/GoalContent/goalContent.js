@@ -244,10 +244,6 @@ class GoalContent extends Component {
                   startAngle={220}
                   endAngle={-40}
                   fill="#8884d8"
-                  // label={({ cx, cy, index }) => {
-                  //   console.log("cx = ", cx);
-                  //   console.log("cy = ", cy); }
-                  // }
                 >
                   {dataSet.map((entry, index) => (
                     <Cell key="" fill={COLORS[index % COLORS.length]} />
