@@ -9,31 +9,40 @@ import GoalCard from "../../../components/InsightCards/goalCard";
 import { stepsGreatestPeriod } from "../../../Utils/PatternCalculations/stepsPatterns";
 import { connect } from "react-redux";
 import DateSelectorCard from "../../../components/DateSelectorCard/dateSelectorCard";
+import FHIRConnection from "../../../FHIRCommunication";
 
 class Skritt extends Component {
   state = {};
   render() {
-    return (
-      <div style={{ margin: "0 0 8px" }}>
-        <h1 style={{ marginLeft: "8px" }}>Innsikt</h1>
-        <NavigationBar />
-        <ViewCard />
-        <DateSelectorCard />
-        <TrendGoalsCard datatype="Skritt" />
-        <GraphCard datatype="Skritt" />
-        <PatternCard
-          datatype="Skritt"
-          triangle={"up"}
-          fluctuation={"none"}
-          greatestChange={stepsGreatestPeriod}
-          data={this.props.patient.datasets[0].measurements}
-          view={this.props.baseInfo.view}
-          goals={this.props.patient.goals}
-        />
-        <GoalCard />
-        <CompareDataCard />
-      </div>
-    );
+    if (this.props.baseInfo.isLoggedin) {
+      return (
+        <div style={{ margin: "0 0 8px" }}>
+          <h1 style={{ marginLeft: "8px" }}>Innsikt</h1>
+          <NavigationBar />
+          <ViewCard />
+          <DateSelectorCard />
+          <TrendGoalsCard datatype="Skritt" />
+          <GraphCard datatype="Skritt" />
+          <PatternCard
+            datatype="Skritt"
+            triangle={"up"}
+            fluctuation={"none"}
+            greatestChange={stepsGreatestPeriod}
+            data={this.props.patient.datasets[0].measurements}
+            view={this.props.baseInfo.view}
+            goals={this.props.patient.goals}
+          />
+          <GoalCard />
+          <CompareDataCard />
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <FHIRConnection />
+        </div>
+      );
+    }
   }
 }
 

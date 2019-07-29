@@ -1,5 +1,5 @@
 import findStartAndEndIndex from "../findStartAndEndIndex";
-import Trends from "../trends";
+//import Trends from "../trends";
 import aggregateData from "../aggregateData";
 import moment from "moment";
 import periodFromView from "../periodFromView";
@@ -65,16 +65,16 @@ export function stepsGreatestPeriod(view, data, goals) {
   let slicedData = data.slice(startIndex, endIndex);
   //   console.log(slicedData);
 
-  let upperLimit = 12;
-  let lowerLimit = 5;
-  //   let numIntervals = getIntervalsInPeriod(period, interval);
+  // let upperLimit = 12;
+  // let lowerLimit = 5;
+  // //   let numIntervals = getIntervalsInPeriod(period, interval);
 
-  let dataArray;
+  // let dataArray;
 
-  let trends;
-  let timeAbove;
-  let timeWithin;
-  let timeBelow;
+  // let trends;
+  // let timeAbove;
+  // let timeWithin;
+  // let timeBelow;
 
   let aggregated = aggregateData(
     slicedData,
@@ -114,13 +114,13 @@ export function stepsGreatestPeriod(view, data, goals) {
   //   upperEnd = moment(aggregated[upperIndex * 60].x)
   //     .add(59, "minutes")
   //     .format("HH:mm");
-  let lowerStart;
-  let lowerEnd;
-  let upperStart;
-  let upperEnd;
-  let withinLimits;
-  let upperIndex;
-  let lowerIndex;
+  // let lowerStart;
+  // let lowerEnd;
+  // let upperStart;
+  // let upperEnd;
+  // let withinLimits;
+  // let upperIndex;
+  // let lowerIndex;
 
   let greatestValueObject = aggregated.reduce((prev, current) =>
     prev.y > current.y ? prev : current

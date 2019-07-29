@@ -13,14 +13,14 @@ class PatternCard extends Component {
     let goals = this.props.goals;
 
     let fluctuationText;
-    if (this.props.fluctuation != "none") {
+    if (this.props.fluctuation !== "none") {
       fluctuationText = this.props.fluctuation(view, data, goals);
     } else {
       fluctuationText = "ingen funskjon";
     }
 
     let greatestChangeText;
-    if (this.props.greatestChange != "none") {
+    if (this.props.greatestChange !== "none") {
       greatestChangeText = this.props.greatestChange(view, data, goals);
     } else {
       greatestChangeText = "ingen funksjon";

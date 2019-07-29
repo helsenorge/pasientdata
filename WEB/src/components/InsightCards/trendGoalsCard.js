@@ -13,7 +13,6 @@ import {
 import "./trendGoalsCard.css";
 import { connect } from "react-redux";
 import aggregateData from "../../Utils/aggregateData";
-import moment from "moment";
 import periodFromView from "../../Utils/periodFromView";
 import getStartEndTimes from "../../Utils/getStartEndTimes";
 import findStartAndEndIndex from "../../Utils/findStartAndEndIndex";
@@ -51,13 +50,11 @@ class TrendGoalsCard extends Component {
     let unit = "%";
     let trends;
     let hasUpperLimit = true;
-    let percentGoal;
+    //let percentGoal;
     let upperGoal = 80;
     let lowerGoal = 70;
     let pieSideSize = 20;
-    let { periodName, periodNumber, intervalName } = periodFromView(
-      this.props.baseInfo.view
-    );
+    //let { intervalName } = periodFromView(this.props.baseInfo.view);
     let { start, end } = getStartEndTimes(
       this.props.baseInfo.view,
       this.props.baseInfo.nrOfIntervalsBack
@@ -68,7 +65,7 @@ class TrendGoalsCard extends Component {
         data = FakeGlucoseData();
         upperLimit = 12;
         lowerLimit = 5;
-        percentGoal = 65;
+        //percentGoal = 65;
         trendValue = 2;
         goalValue = 85;
         trends = Trends(data, upperLimit, lowerLimit);
@@ -92,13 +89,11 @@ class TrendGoalsCard extends Component {
         const { startIndex, endIndex } = findStartAndEndIndex(data, start, end);
 
         let slicedData = data.slice(startIndex, endIndex);
-        console.log(slicedData);
         trends = Trends(slicedData, upperLimit, lowerLimit);
         mean = trends.mean;
         timeAbove = trends.timeAbove;
         timeWithin = trends.timeWithin;
         timeBelow = trends.timeBelow;
-        console.log("time above: ", timeBelow);
         currentValue =
           ((timeAbove + timeWithin - timeBelow) * 100) /
           (timeAbove + timeWithin + timeBelow);
@@ -112,7 +107,7 @@ class TrendGoalsCard extends Component {
         lowerLimit = 10000;
         trendValue = 200;
         goalValue = 15000;
-        aggregated = aggregateData(data, intervalName, start, end, "ddd");
+        aggregated = aggregateData(data, "day", start, end, "ddd");
         trends = Trends(aggregated, upperLimit, lowerLimit);
         mean = trends.mean;
         timeAbove = trends.timeAbove;

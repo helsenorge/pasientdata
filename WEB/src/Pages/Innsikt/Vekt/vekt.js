@@ -13,31 +13,39 @@ import {
 import FakeGlucoseData from "../../../Utils/fakeGlucose";
 import { connect } from "react-redux";
 import DateSelectorCard from "../../../components/DateSelectorCard/dateSelectorCard";
+import FHIRConnection from "../../../FHIRCommunication";
 
 class Vekt extends Component {
-  state = {};
   render() {
-    return (
-      <div style={{ margin: "0 0 8px" }}>
-        <h1 style={{ marginLeft: "8px" }}>Innsikt</h1>
-        <NavigationBar />
-        <ViewCard />
-        <DateSelectorCard />
-        <TrendGoalsCard datatype="Vekt" />
-        <GraphCard datatype="Vekt" />
-        <PatternCard
-          datatype="Vekt"
-          triangle={"down"}
-          fluctuation={bloodSugarFluctuations}
-          greatestChange={bloodSugarGreatestChange}
-          data={FakeGlucoseData()}
-          view={this.props.baseInfo.view}
-          goals={this.props.patient.goals}
-        />
-        <GoalCard />
-        <CompareDataCard />
-      </div>
-    );
+    if (this.props.baseInfo.isLoggedin) {
+      return (
+        <div style={{ margin: "0 0 8px" }}>
+          <h1 style={{ marginLeft: "8px" }}>Innsikt</h1>
+          <NavigationBar />
+          <ViewCard />
+          <DateSelectorCard />
+          <TrendGoalsCard datatype="Vekt" />
+          <GraphCard datatype="Vekt" />
+          <PatternCard
+            datatype="Vekt"
+            triangle={"down"}
+            fluctuation={bloodSugarFluctuations}
+            greatestChange={bloodSugarGreatestChange}
+            data={FakeGlucoseData()}
+            view={this.props.baseInfo.view}
+            goals={this.props.patient.goals}
+          />
+          <GoalCard />
+          <CompareDataCard />
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <FHIRConnection />
+        </div>
+      );
+    }
   }
 }
 
