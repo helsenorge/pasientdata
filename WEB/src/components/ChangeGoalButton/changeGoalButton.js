@@ -4,8 +4,8 @@ import EditOutlined from "@helsenorge/toolkit/components/icons/EditOutlined";
 import { LightBox } from "@helsenorge/toolkit/components/molecules/lightbox";
 import BloodSugarPopupContent from "../GoalPopupContents/bloodSugarPopupContent";
 import BloodSugarMeanPopupContent from "../GoalPopupContents/bloodSugarMeanPopupContent";
-import carbsPopupContent from "../GoalPopupContents/carbsPopupContent";
-import physicalActivityPopupContent from "../GoalPopupContents/physicalActivityPopupContent";
+import CarbsPopupContent from "../GoalPopupContents/carbsPopupContent";
+import PhysicalActivityPopupContent from "../GoalPopupContents/physicalActivityPopupContent";
 import StepsPopupContent from "../GoalPopupContents/stepsPopupContent";
 import WeightPopupContent from "../GoalPopupContents/weightPopupContent";
 import bloodPressurePopupContent from "../GoalPopupContents/bloodPressurePopupContent";
@@ -47,13 +47,10 @@ class ChangeGoalButton extends Component {
         return <WeightPopupContent />;
         break;
       case "FysiskAktivitet":
-        return physicalActivityPopupContent();
+        return <PhysicalActivityPopupContent />;
         break;
       case "Karbohydrater":
-        return carbsPopupContent();
-        break;
-      case "Blodtrykk":
-        return bloodPressurePopupContent();
+        return <CarbsPopupContent />;
         break;
       default:
         return;

@@ -39,7 +39,7 @@ class WeightPopupContent extends Component {
         <h2> Vekt</h2>
         <div className="popup-content-center-text">
           <br />
-          Jeg ønsker å veie
+          Jeg ønsker å veie mindre enn
           <input
             type="number"
             className="goal-input"

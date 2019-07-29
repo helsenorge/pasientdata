@@ -39,7 +39,7 @@ class BloodSugarMeanPopupContent extends Component {
         <h2> Blodsukker</h2> Gjennomsnittlig nivå
         <div className="popup-content-center-text">
           <br />
-          Jeg ønsker å ha
+          Jeg ønsker å ha mindre enn
           <input
             type="number"
             className="goal-input"

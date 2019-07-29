@@ -68,7 +68,7 @@ class BloodSugarPopupContent extends Component {
         <div>Tid innenfor grenseverdier</div>
         <div className="popup-content-center-text">
           <br />
-          Jeg ønsker å være
+          Jeg ønsker å være mer enn
           <input
             type="number"
             className="goal-input"

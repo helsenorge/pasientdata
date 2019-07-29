@@ -39,7 +39,7 @@ class StepsPopupContent extends Component {
         <h2> Skritt</h2>
         <div className="popup-content-center-text">
           <br />
-          Jeg ønsker å gå
+          Jeg ønsker å gå mer enn
           <input
             type="number"
             className="goal-input"
