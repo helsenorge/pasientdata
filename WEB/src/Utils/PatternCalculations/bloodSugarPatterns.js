@@ -1,6 +1,6 @@
 import findStartAndEndIndex from "../findStartAndEndIndex";
-import Trends from "../trends";
-import aggregateData from "../aggregateData";
+// import Trends from "../trends";
+// import aggregateData from "../aggregateData";
 import moment from "moment";
 
 export function bloodSugarFluctuations(view, data, goals) {

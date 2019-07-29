@@ -21,7 +21,6 @@ class GraphCard extends Component {
       this.props.baseInfo.view,
       this.props.baseInfo.nrOfIntervalsBack
     );
-    // console.log(start, end);
     if (
       this.props.baseInfo.view === "custom" &&
       this.props.baseInfo.start !== "" &&

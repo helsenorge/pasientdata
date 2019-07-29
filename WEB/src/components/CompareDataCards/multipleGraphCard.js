@@ -1,12 +1,8 @@
 import React, { Component } from "react";
-import moment from 'moment';
+import moment from "moment";
 import CardComponent from "../Card/cardComponent";
 import { connect } from "react-redux";
-import {
-  XAxis,
-  BarChart,
-  ResponsiveContainer
-} from "recharts";
+import { XAxis, BarChart, ResponsiveContainer } from "recharts";
 import PeriodStepper from "../PeriodStepper/periodStepper";
 import BloodSugarGraph from "./GraphContent/bloodSugarGraph";
 import InsulinGraph from "./GraphContent/insulinGraph";
@@ -14,8 +10,8 @@ import StepsGraph from "./GraphContent/stepsGraph";
 import WeightGraph from "./GraphContent/weightGraph";
 import PhysicalActivityGraph from "./GraphContent/physicalActivityGraph";
 import CarbohydratesGraph from "./GraphContent/carbohydratesGraph";
-import periodFromView from '../../Utils/periodFromView';
-import formatInterval from '../../Utils/formatInterval';
+import periodFromView from "../../Utils/periodFromView";
+import formatInterval from "../../Utils/formatInterval";
 import aggregateData from "../../Utils/aggregateData";
 import getStartEndTimes from "../../Utils/getStartEndTimes";
 
@@ -60,7 +56,10 @@ class MultipleGraphCard extends Component {
     if (weight) {
       return (
         <div className="flex-children-multiple-graph">
-          <WeightGraph data={this.props.patient.datasets[1].measurements} baseInfo={this.props.baseInfo} />
+          <WeightGraph
+            data={this.props.patient.datasets[1].measurements}
+            baseInfo={this.props.baseInfo}
+          />
         </div>
       );
     } else {
@@ -113,28 +112,45 @@ class MultipleGraphCard extends Component {
     let physicalActivity = dataTypes.physicalActivityChecked;
     let carbohydrates = dataTypes.carbohydratesChecked;
 
-    let {periodName, periodNumber, intervalName} = periodFromView(this.props.baseInfo.view);
+    let { periodName, periodNumber, intervalName } = periodFromView(
+      this.props.baseInfo.view
+    );
     let startEndTimes = getStartEndTimes(
-        this.props.baseInfo.view,
-        this.props.baseInfo.nrOfIntervalsBack
+      this.props.baseInfo.view,
+      this.props.baseInfo.nrOfIntervalsBack
     );
     let start = startEndTimes.start;
     let end = startEndTimes.end;
     let xAxisTicks = aggregateData(
-        [{value: 0, start: moment().subtract(periodNumber, periodName).format('YYYY-MM-DDTHH:mm:ss')}],
-        intervalName,
-        start,
-        end,
-        formatInterval(intervalName)
+      [
+        {
+          value: 0,
+          start: moment()
+            .subtract(periodNumber, periodName)
+            .format("YYYY-MM-DDTHH:mm:ss")
+        }
+      ],
+      intervalName,
+      start,
+      end,
+      formatInterval(intervalName)
     );
-    const noDataTypesChecked = (bloodSugar || insulin || steps || weight || physicalActivity || carbohydrates) == false;
+    const noDataTypesChecked =
+      (bloodSugar ||
+        insulin ||
+        steps ||
+        weight ||
+        physicalActivity ||
+        carbohydrates) === false;
 
-    if(noDataTypesChecked) {
+    if (noDataTypesChecked) {
       return (
-        <span>Valg de datatyper som du vill se sammelign mellan i listan nedan.</span>
+        <span>
+          Valg de datatyper som du vill se sammelign mellan i listan nedan.
+        </span>
       );
     } else {
-        return (
+      return (
         <div>
           <div className="flex-container-multiple-graph">
             {this.makeBloodSugarGraph(bloodSugar)}
@@ -144,9 +160,13 @@ class MultipleGraphCard extends Component {
             {this.makePhysicalActivityGraph(physicalActivity)}
             {this.makeCarbohydratesGraph(carbohydrates)}
             <ResponsiveContainer width="100%" height={30}>
-              <BarChart width={350} height={30} data={xAxisTicks}
-                  margin={{top:0, right: 30, left: 40, bottom: 0}}>
-                  <XAxis dataKey="x" tick={{fontSize: '12px'}}/>
+              <BarChart
+                width={350}
+                height={30}
+                data={xAxisTicks}
+                margin={{ top: 0, right: 30, left: 40, bottom: 0 }}
+              >
+                <XAxis dataKey="x" tick={{ fontSize: "12px" }} />
               </BarChart>
             </ResponsiveContainer>
           </div>
@@ -160,7 +180,7 @@ class MultipleGraphCard extends Component {
           )}
         </div>
       );
-    } 
+    }
   };
 
   render() {
