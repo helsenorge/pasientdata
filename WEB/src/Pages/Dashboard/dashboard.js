@@ -34,7 +34,8 @@ class Dashboard extends Component {
               title={"Skritt"}
               content={stepsContent(
                 this.props.patient.datasets[0].measurements,
-                "/steps"
+                "/steps",
+                this.props.patient.goals.StepsGoal
               )}
             />
           </div>
@@ -59,7 +60,8 @@ class Dashboard extends Component {
               title={"Vekt"}
               content={weightContent(
                 this.props.patient.datasets[1].measurements,
-                "/weight"
+                "/weight",
+                this.props.patient.goals.WeightGoal.value
               )}
             />
           </div>

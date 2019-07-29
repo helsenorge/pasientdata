@@ -1,4 +1,3 @@
-import * as React from "react";
 import * as FHIR from "fhirclient";
 import moment from "moment";
 import getStringsFromLOINC from "./getStringsFromLOINC";
