@@ -3,6 +3,7 @@ import "./popupContent.css";
 import { DisplayButton } from "@helsenorge/toolkit/components/atoms/buttons/display-button";
 import { connect } from "react-redux";
 import { changeGoal } from "../../Redux/actions";
+import addGoal from "../../Utils/addGoal";
 
 class BloodSugarPopupContent extends Component {
   constructor(props) {
@@ -29,9 +30,25 @@ class BloodSugarPopupContent extends Component {
 
       let percentGoal = { type: "lower", value: this.state.percentGoal };
       this.props.changeGoal("BloodSugarWithinRangePercentageGoal", percentGoal);
+
+      addGoal(
+        "BloodSugarWithinRangePercentageGoal",
+        percentGoal,
+        "Percentage of time within desired blood sugar range",
+        "%",
+        "%",
+        this.props.patient.googleId
+      ); // percentage goal
+      addGoal(
+        "BloodSugarRangeGoal",
+        goalRange,
+        "Desired blood sugar range",
+        "mg/dL",
+        "mg/dL",
+        this.props.patient.googleId
+      ); // range goal
     }
   };
-
   handlepercentGoalChange = event => {
     this.setState({ percentGoal: event.target.value });
   };
@@ -99,7 +116,7 @@ const mapDispatchToProps = { changeGoal };
 
 function mapStateToProps(state) {
   return {
-    pasientInfo: state.pasientInfo
+    patient: state.patient
   };
 }
 

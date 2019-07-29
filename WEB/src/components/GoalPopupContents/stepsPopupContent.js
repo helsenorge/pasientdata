@@ -18,7 +18,7 @@ class StepsPopupContent extends Component {
   };
 
   handleChange = event => {
-    this.setState({ value: event.target.value });
+    this.setState({ percentGoal: event.target.value });
   };
 
   render = () => {
