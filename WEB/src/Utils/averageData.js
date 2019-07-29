@@ -1,7 +1,7 @@
 import moment from "moment";
 import findStartAndEndIndex from "./findStartAndEndIndex";
 
-export default function averageData(
+export default function averageDataFunctions(
   inData,
   interval,
   startString,
