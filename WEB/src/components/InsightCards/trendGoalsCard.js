@@ -68,6 +68,7 @@ class TrendGoalsCard extends Component {
         //percentGoal = 65;
         trendValue = 2;
         goalValue = 85;
+        let averageData = averageData(data, "hour", start, end, "ddd");
         trends = Trends(data, upperLimit, lowerLimit);
         mean = trends.mean;
         timeAbove = trends.timeAbove;
