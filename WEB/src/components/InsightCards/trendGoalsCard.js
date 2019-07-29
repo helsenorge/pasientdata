@@ -16,6 +16,7 @@ import aggregateData from "../../Utils/aggregateData";
 import periodFromView from "../../Utils/periodFromView";
 import getStartEndTimes from "../../Utils/getStartEndTimes";
 import findStartAndEndIndex from "../../Utils/findStartAndEndIndex";
+import averageDataFunction from "../../Utils/averageData";
 
 class TrendGoalsCard extends Component {
   displayUnit = () => {
@@ -68,7 +69,7 @@ class TrendGoalsCard extends Component {
         //percentGoal = 65;
         trendValue = 2;
         goalValue = 85;
-        let averageData = averageData(data, "hour", start, end, "ddd");
+        let averageData = averageDataFunction(data, "hour", start, end, "ddd");
         trends = Trends(data, upperLimit, lowerLimit);
         mean = trends.mean;
         timeAbove = trends.timeAbove;
