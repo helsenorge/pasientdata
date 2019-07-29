@@ -22,7 +22,10 @@ class LoginPage extends Component {
     if (sessionStorage.getItem("googleResponse")) {
       console.log("Reading google client from localStorage");
       let response = JSON.parse(sessionStorage.getItem("googleResponse"));
-      if (response.Zi && moment().diff(moment.unix(response.Zi.expires_at / 1000), "m") < 0) {
+      if (
+        response.Zi &&
+        moment().diff(moment.unix(response.Zi.expires_at / 1000), "m") < 0
+      ) {
         responseGoogle.bind(this)(response);
         return <div />;
       } // Else move on to login screen because need new login data.
@@ -30,13 +33,13 @@ class LoginPage extends Component {
     return (
       <div className="container-fluid">
         <div className="row">
-          <div className="col-sm-12 index-Image-head">
+          <div className="col-sm-12 col-md-12 index-Image-head">
             <img src={pic} alt={"logo"} className="index-Image" />
           </div>
-          <div className="col-sm-12 text-generic">
+          <div className="col-sm-12 col-md-12 text-generic">
             <p>Logg inn for å registrere din data</p>
           </div>
-          <div className="col-sm-12 login-button">
+          <div className="col-sm-12 col-md-12 login-button">
             {
               <GoogleLogin
                 autoLoad={false}

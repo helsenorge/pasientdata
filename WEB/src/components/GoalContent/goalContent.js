@@ -227,7 +227,7 @@ class GoalContent extends Component {
             <div className="unitText">{this.displayUnit()}</div>
           </div>
         </div>
-        <div className="row split">
+        <div className="row split rowStyle">
           <div className="pieChartStyle">
             <ResponsiveContainer
               className="flex-children-trend-goals"
