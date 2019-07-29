@@ -146,45 +146,45 @@ export function responseGoogle(response) {
     .all([
       getUserSteps(response),
       getUserWeight(response),
+      getUserActivities(response)
       // getUserHeight(response),
       // getUserHeartBeat(response),
       // getUserBloodPressure(response),
       // getUserBloodGlucose(response),
-      getUserActivities(response)
       // getUserBatchedActivity(response)
     ])
     .then(
       axios.spread((
         steps,
         weight,
+        activities,
         // height,
         // heartBeat,
         // bloodPressure,
         // bloodGlucose,
-        activities,
-        batchedActivities
+        // batchedActivities
       ) => {
         let datasets = [];
         const pic = response.profileObj.imageUrl + "?sz=200";
 
         let stepMeasurement = structureDatasets(steps);
         let weightMeasurement = structureDatasets(weight);
+        let activitiesMeasurement = structureDatasets(activities);
         // let heightMeasurement = structureDatasets(height);
         // let heartBeatMeasurement = structureDatasets(heartBeat);
         // let bloodPressureMeasurement = structureDatasets(bloodPressure);
         // let bloodGlucoseMeasurement = structureDatasets(bloodGlucose);
-        let activitiesMeasurement = structureDatasets(activities);
         // let batchedActivitiesMeasurement = structureDatasets(batchedActivities);
 
         datasets.push(
           { name: "55423-8", measurements: stepMeasurement },
           { name: "29463-7", measurements: weightMeasurement },
+          { name: "77595-7", measurements: activitiesMeasurement },
           // { name: "8302-2", measurements: heightMeasurement },
           // { name: "8867-4", measurements: heartBeatMeasurement },
           // { name: "85354-9", measurements: bloodPressureMeasurement },
           // { name: "2339-0", measurements: bloodGlucoseMeasurement },
-          { name: "77595-7", measurements: activitiesMeasurement }
-          // { name: "batchedActivities", measurements: batchedActivitiesMeasurement },
+          // { name: "batchedActivities", measurements: batchedActivitiesMeasurement }
         );
 
         this.props.addInfo(
