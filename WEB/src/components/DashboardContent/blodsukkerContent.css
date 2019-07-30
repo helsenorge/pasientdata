@@ -83,16 +83,25 @@
 .lower-left-glucose-div {
   display: flex;
   flex-direction: row;
-  justify-content: flex-end;
+  justify-content: flex-start;
+  flex: 1;
 }
 
 .upper-left-glucose-div {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
+  flex: 1;
 }
 
 .glucose-trend-children {
   flex: 1;
-  text-align: left;
+  max-height: 20px;
+  font-size: 12px;
+}
+
+.lower-glucose-bar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
 }

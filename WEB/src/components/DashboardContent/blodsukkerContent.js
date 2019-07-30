@@ -34,7 +34,8 @@ class BlodsukkerContent extends Component {
     let prevValue =
       prevTrends.timeWithin /
       (prevTrends.timeAbove + prevTrends.timeWithin + prevTrends.timeBelow);
-    let trendValue = currentValue - prevValue;
+    let percentageChange = currentValue - prevValue;
+    let meanChange = trends.mean - prevTrends.mean;
     const upTrianglePic = require("../../Images/greenUpTriangle.svg");
     const downTrianglePic = require("../../Images/yellowDownTriangle.svg");
     return (
@@ -54,34 +55,11 @@ class BlodsukkerContent extends Component {
               >
                 {Math.floor(trends.mean)} mmol/l
               </div>
-              {/* <div className="glucose-plot">
-              <BarPlotter
-                start={start}
-                end={end}
-                interval={"day"}
-                outputFormat={"ddd"}
-                data={data}
-                legend="off"
-                page="Dashboard"
-                color={"rgba(89, 195, 255, 0.8)"}
-              />
-            </div> */}
-            </div>
-            <div className="lower-left-glucose-div">
-              <img
-                src={trendValue > 0 ? upTrianglePic : downTrianglePic}
-                alt={"logo"}
-                className="glucose-trend-children"
-              />
-              <div className="glucose-trend-children">
-                {Math.floor(trendValue)} mmol/l
-              </div>
             </div>
           </div>
           <div className="flex-children caption">
             <div>Tid innenfor grenseverdien:</div>
             <div>
-              {/* <br /> */}
               <div className="large-numerical-value glucose-time-within">
                 {Math.floor(currentValue)} %
               </div>{" "}
@@ -91,12 +69,31 @@ class BlodsukkerContent extends Component {
                 percent={currentValue}
                 trailWidth="4"
               />
-              {/* <br /> */}
             </div>
           </div>
         </div>
 
-        <div>
+        <div className="lower-glucose-bar">
+          <div className="lower-left-glucose-div">
+            <img
+              src={meanChange > 0 ? upTrianglePic : downTrianglePic}
+              alt={"logo"}
+              className="glucose-trend-children"
+            />
+            <div className="glucose-trend-children">
+              {Math.floor(meanChange)} mmol/l
+            </div>
+          </div>
+          <div className="lower-left-glucose-div">
+            <img
+              src={percentageChange > 0 ? upTrianglePic : downTrianglePic}
+              alt={"logo"}
+              className="glucose-trend-children"
+            />
+            <div className="glucose-trend-children">
+              {Math.floor(percentageChange)} %
+            </div>
+          </div>
           <div className="button-style">
             <Link to={"/bloodsugar"} style={{ borderBottom: "none" }}>
               <DisplayButton secondary>
