@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import "./dashboard.css";
 import FHIRConnection from "../../FHIRCommunication";
 import CardComponent from "../../components/Card/cardComponent";
-import blodsukkerContent from "../../components/DashboardContent/blodsukkerContent";
+import BlodsukkerContent from "../../components/DashboardContent/blodsukkerContent";
 import AddDataContent from "../../components/DashboardContent/addDataContent";
 import changeGoalsContent from "../../components/DashboardContent/changeGoalsContent";
 import compareDataContent from "../../components/DashboardContent/compareDataContent";
@@ -23,7 +23,7 @@ class Dashboard extends Component {
       return (
         <div style={{ margin: "0 4px 8px" }}>
           <h1 style={{ marginLeft: "8px" }}>Innsikt</h1>
-          <CardComponent title={"Blodsukker"} content={blodsukkerContent()} />
+          <CardComponent title={"Blodsukker"} content={<BlodsukkerContent />} />
           <div className="flex-container">
             <DashboardGraphCard dataType={INSULIN} />
             <DashboardGraphCard dataType={STEPS} />

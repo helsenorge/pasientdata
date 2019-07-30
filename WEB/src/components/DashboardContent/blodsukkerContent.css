@@ -30,3 +30,78 @@
 .svgicon chevron {
   font-size: 1rem;
 }
+
+.glucose-main-div {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.glucose-main-children {
+  flex: 1;
+}
+
+.average-glucose-child {
+  flex: 1;
+}
+
+.average-glucose-child,
+#left-glucose-text {
+  text-align: left;
+}
+.average-glucose-child,
+#right-glucose-text {
+  text-align: right;
+}
+
+.average-glucose-parent {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.average-glucose-parent-right {
+  display: flex;
+}
+
+.left-glucose-div {
+  padding-right: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.glucose-main {
+  min-height: 120px;
+}
+
+.glucose-time-within {
+  color: #007544;
+  padding: 10px;
+}
+
+.lower-left-glucose-div {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  flex: 1;
+}
+
+.upper-left-glucose-div {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  flex: 1;
+}
+
+.glucose-trend-children {
+  flex: 1;
+  max-height: 20px;
+  font-size: 12px;
+}
+
+.lower-glucose-bar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
