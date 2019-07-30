@@ -14,6 +14,7 @@ import FakeGlucoseData from "../../../Utils/fakeGlucose";
 import { connect } from "react-redux";
 import DateSelectorCard from "../../../components/DateSelectorCard/dateSelectorCard";
 import FHIRConnection from "../../../FHIRCommunication";
+import {WEIGHT} from "../../../dataTypes";
 
 class WeightInsight extends Component {
   render() {
@@ -24,8 +25,8 @@ class WeightInsight extends Component {
           <NavigationBar />
           <ViewCard />
           <DateSelectorCard />
+          <GraphCard datatype={WEIGHT} />
           <TrendGoalsCard datatype="Vekt" />
-          <GraphCard datatype="Vekt" />
           <PatternCard
             datatype="Vekt"
             triangle={"down"}

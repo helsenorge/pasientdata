@@ -1,12 +1,12 @@
 import React from "react";
-import {YAxis, Bar, BarChart, LineChart, Line, ResponsiveContainer } from "recharts";
-import {WEIGHT, chartDataByDataType, getDomain} from "../../dataTypes";
+import { XAxis, YAxis, Bar, BarChart, LineChart, Line, ResponsiveContainer } from "recharts";
+import {chartDataByDataType, getDomain} from "../../dataTypes";
 
-const CompareDataGraph = ({ aggregatedData, dataType }) => {
+const InsightGraph = ({ aggregatedData, dataType }) => {
   const chartData = chartDataByDataType[dataType];
-  const chartWidth = 350;
-  const chartHeight = 150;
-  const chartMargin = { top: 20, right: 30, left: 0, bottom: 0 };
+  const chartWidth = 400;
+  const chartHeight = 180;
+  const chartMargin = { top: 20, right: 5, bottom: 10, left: 0 };
 
   const yAxis = (
     <YAxis
@@ -33,7 +33,8 @@ const CompareDataGraph = ({ aggregatedData, dataType }) => {
               margin={chartMargin}
             >
               {yAxis}
-              <Bar dataKey='y' fill={chartData.color} />
+              <XAxis dataKey="x" tick={{ fontSize: "12px" }} />
+              <Bar dataKey='y' fill="#59C3FF"/>
             </BarChart>
           </ResponsiveContainer>
         </div>
@@ -49,11 +50,12 @@ const CompareDataGraph = ({ aggregatedData, dataType }) => {
               margin={chartMargin}
             >
               {yAxis}
+              <XAxis dataKey="x" tick={{ fontSize: "12px" }} />
               <Line
                 type="linear"
                 dataKey="y"
-                stroke={chartData.color}
-                fill={chartData.color}
+                stroke="#59C3FF"
+                fill="#59C3FF"
                 dot={{ strokeWidth: 2, r: 1 }}
               />
             </LineChart>
@@ -63,4 +65,4 @@ const CompareDataGraph = ({ aggregatedData, dataType }) => {
   }
 };
 
-export default CompareDataGraph;
+export default InsightGraph;

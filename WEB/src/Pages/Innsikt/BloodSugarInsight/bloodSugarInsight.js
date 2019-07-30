@@ -14,6 +14,7 @@ import {
 } from "../../../Utils/PatternCalculations/bloodSugarPatterns";
 import { connect } from "react-redux";
 import FakeGlucoseData from "../../../Utils/fakeGlucose";
+import {BLOODSUGAR} from "../../../dataTypes";
 
 class BloodSugarInsight extends Component {
   render() {
@@ -23,8 +24,8 @@ class BloodSugarInsight extends Component {
         <NavigationBar />
         <ViewCard />
         <DateSelectorCard />
+        <GraphCard datatype={BLOODSUGAR} />
         <TrendGoalsCard datatype="Blodsukker" />
-        <GraphCard datatype="Blodsukker" />
         <PatternCard
           datatype="Blodsukker"
           triangle={"up"}
