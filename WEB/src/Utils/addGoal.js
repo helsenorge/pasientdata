@@ -1,6 +1,5 @@
 import * as FHIR from "fhirclient";
 import moment from "moment";
-import getStringsFromLOINC from "./getStringsFromLOINC";
 
 export default function addGoal(
   goalId,
@@ -13,7 +12,7 @@ export default function addGoal(
   let target;
   //   console.log("goal(addGoal): ", goal);
 
-  if (goal.type == "range") {
+  if (goal.type === "range") {
     target = {
       detailRange: {
         low: { value: goal.lower, unit: unit },

@@ -8,7 +8,6 @@ import CarbsPopupContent from "../GoalPopupContents/carbsPopupContent";
 import PhysicalActivityPopupContent from "../GoalPopupContents/physicalActivityPopupContent";
 import StepsPopupContent from "../GoalPopupContents/stepsPopupContent";
 import WeightPopupContent from "../GoalPopupContents/weightPopupContent";
-import bloodPressurePopupContent from "../GoalPopupContents/bloodPressurePopupContent";
 import "./changeGoalButton.css";
 
 class ChangeGoalButton extends Component {
@@ -42,7 +41,6 @@ class ChangeGoalButton extends Component {
             }}
           />
         );
-        break;
       case "BlodsukkerAvg":
         return (
           <BloodSugarMeanPopupContent
@@ -51,7 +49,6 @@ class ChangeGoalButton extends Component {
             }}
           />
         );
-        break;
       case "Skritt":
         return (
           <StepsPopupContent
@@ -60,7 +57,6 @@ class ChangeGoalButton extends Component {
             }}
           />
         );
-        break;
       case "Vekt":
         return (
           <WeightPopupContent
@@ -69,7 +65,6 @@ class ChangeGoalButton extends Component {
             }}
           />
         );
-        break;
       case "FysiskAktivitet":
         return (
           <PhysicalActivityPopupContent
@@ -78,7 +73,6 @@ class ChangeGoalButton extends Component {
             }}
           />
         );
-        break;
       case "Karbohydrater":
         return (
           <CarbsPopupContent
@@ -87,7 +81,6 @@ class ChangeGoalButton extends Component {
             }}
           />
         );
-        break;
       default:
         return;
     }

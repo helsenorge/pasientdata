@@ -1,7 +1,6 @@
 import "./goalContent.css";
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
 import moment from "moment";
 import ChangeGoalButton from "../../components/ChangeGoalButton/changeGoalButton";
 import { PieChart, Pie, Cell, Label, ResponsiveContainer } from "recharts";
@@ -90,7 +89,7 @@ class GoalContent extends Component {
         COLORS = generalColors;
         goalValue = this.props.patient.goals.MeanGlucoseGoal.value; // 7
         unit = this.props.patient.goals.MeanGlucoseGoal.unit;
-        xPos = 48;
+        xPos = 51;
         data = FakeGlucoseData();
         upperLimit = goalValue; // 12;
         lowerLimit = goalValue / 5; // 6.2;
@@ -234,7 +233,7 @@ class GoalContent extends Component {
                     position="center"
                     content={this.CustomLabel(
                       "Status: ",
-                      Math.floor(currentValue) + unit,
+                      Math.floor(currentValue) + " " + unit,
                       xPos
                     )}
                   />
