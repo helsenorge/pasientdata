@@ -11,7 +11,7 @@ class GoalCard extends Component {
         <div>Har du behov for å justere dine målsetninger?</div>
         <br />
         <div className="goal-card">
-          <Link to={"/mygoals"} style={{ "border-bottom": "none" }}>
+          <Link to={"/mygoals"} className="link-without-border-bottom">
             <DisplayButton secondary>
               <div className={"button-sizing"}>Mine mål </div>
             </DisplayButton>

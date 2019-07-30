@@ -3,12 +3,14 @@ import InsightButton from "../InsightButton/insightButton";
 import moment from "moment";
 import BarPlotter from "../Barplotter/barPlotter";
 
-const stepsContent = (data, link) => {
+const stepsContent = (data, link, lower, upper) => {
   return (
     <div>
       <div style={{ marginBottom: "12px" }}>
         <BarPlotter
-          start={moment().subtract(1, "week")}
+          start={moment()
+            .subtract(1, "week")
+            .endOf("day")}
           end={moment()}
           interval={"day"}
           outputFormat={"ddd"}

@@ -16,6 +16,7 @@ import aggregateData from "../../Utils/aggregateData";
 import periodFromView from "../../Utils/periodFromView";
 import getStartEndTimes from "../../Utils/getStartEndTimes";
 import findStartAndEndIndex from "../../Utils/findStartAndEndIndex";
+import averageDataFunction from "../../Utils/averageData";
 
 class TrendGoalsCard extends Component {
   displayUnit = () => {
@@ -59,6 +60,7 @@ class TrendGoalsCard extends Component {
       this.props.baseInfo.view,
       this.props.baseInfo.nrOfIntervalsBack
     );
+    let weight = false;
 
     switch (this.props.datatype) {
       case "Blodsukker":
@@ -68,7 +70,15 @@ class TrendGoalsCard extends Component {
         //percentGoal = 65;
         trendValue = 2;
         goalValue = 85;
-        let averageData = averageData(data, "hour", start, end, "ddd");
+        if ("BloodSugarWithinRangePercentageGoal" in this.props.patient.goals) {
+          goalValue = this.props.patient.goals
+            .BloodSugarWithinRangePercentageGoal.value;
+        }
+        if ("BloodSugarRangeGoal" in this.props.patient.goals) {
+          lowerLimit = this.props.patient.goals.BloodSugarRangeGoal.lower;
+          upperLimit = this.props.patient.goals.BloodSugarRangeGoal.upper;
+        }
+        let averageData = averageDataFunction(data, "hour", start, end, "ddd");
         trends = Trends(data, upperLimit, lowerLimit);
         mean = trends.mean;
         timeAbove = trends.timeAbove;
@@ -106,14 +116,12 @@ class TrendGoalsCard extends Component {
         hasUpperLimit = false;
         data = this.props.patient.datasets[0].measurements;
         upperLimit = 10000000;
-        if (this.props.patient.goals.StepsGoal) {
-          lowerLimit = this.props.patient.goals.StepsGoal.value;
-        } else {
-          console.log("No steps goal found in redux store.");
-          lowerLimit = 15000; // default case if no goal exist in redux store.
+        lowerLimit = 15000;
+        goalValue = 15000; // default case if no goal exist in redux store.
+        if ("StepsGoal" in this.props.patient.goals) {
+          goalValue = this.props.patient.goals.StepsGoal.value;
         }
         trendValue = 200;
-        goalValue = 15000;
         aggregated = aggregateData(data, "day", start, end, "ddd");
         trends = Trends(aggregated, upperLimit, lowerLimit);
         mean = trends.mean;
@@ -125,10 +133,21 @@ class TrendGoalsCard extends Component {
         pieSideSize = 2000;
         break;
       case "Vekt":
-        break;
-      case "Blodtrykk":
+        goalValue = 65;
+        unit = " kg";
+        pieSideSize = 20;
+        if ("WeightGoal" in this.props.patient.goals) {
+          goalValue = this.props.patient.goals.WeightGoal.value;
+        }
+        hasUpperLimit = false;
+        weight = true;
         break;
       case "Karbohydrater":
+        goalValue = 280;
+        if ("CarbsGoal" in this.props.patient.goals) {
+          goalValue = this.props.patient.goals.CarbsGoal.value;
+        }
+        unit = " g";
         break;
       default:
     }
@@ -136,6 +155,9 @@ class TrendGoalsCard extends Component {
     let COLORS = ["#A61E7B", "#569B7E", "#E38B21"];
     if (!hasUpperLimit) {
       COLORS = ["#569B7E", "#E38B21"];
+    }
+    if (weight) {
+      COLORS = ["#E38B21", "#569B7E"];
     }
 
     const goalArrowPic = require("../../Images/goalArrow.svg");
@@ -198,7 +220,7 @@ class TrendGoalsCard extends Component {
       } else {
         pieData = [{ value: pieSideSize }, { value: pieSideSize }];
         lowerTextValue = Math.max(0, goalValue - pieSideSize);
-        upperTextValue = goalValue + pieSideSize;
+        upperTextValue = parseInt(goalValue) + parseInt(pieSideSize);
       }
       angles = [
         0,

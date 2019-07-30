@@ -12,10 +12,14 @@ import weightContent from "../../components/DashboardContent/weightContent";
 import AddDataContent from "../../components/DashboardContent/addDataContent";
 import changeGoalsContent from "../../components/DashboardContent/changeGoalsContent";
 import compareDataContent from "../../components/DashboardContent/compareDataContent";
+import periodFromView from "../../Utils/periodFromView";
 
 class Dashboard extends Component {
   render() {
     if (this.props.baseInfo.isLoggedin) {
+      let { periodName, intervalName } = periodFromView(
+        this.props.baseInfo.view
+      );
       return (
         <div style={{ margin: "0 4px 8px" }}>
           <h1 style={{ marginLeft: "8px" }}>Innsikt</h1>
@@ -34,7 +38,8 @@ class Dashboard extends Component {
               title={"Skritt"}
               content={stepsContent(
                 this.props.patient.datasets[0].measurements,
-                "/steps"
+                "/steps",
+                this.props.patient.goals.StepsGoal
               )}
             />
           </div>
@@ -59,7 +64,9 @@ class Dashboard extends Component {
               title={"Vekt"}
               content={weightContent(
                 this.props.patient.datasets[1].measurements,
-                "/weight"
+                intervalName,
+                periodName,
+                this.props.patient.goals.WeightGoal.value
               )}
             />
           </div>

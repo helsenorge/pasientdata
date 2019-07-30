@@ -59,7 +59,7 @@ class DataTypeCard extends Component {
     let changed;
     let newCheckboxes = this.state.checkboxes.map(e => {
       if (e.id === id) {
-        if (this.state.numberChecked < 3 || e.checked === true) {
+        if (this.state.numberChecked < 6 || e.checked === true) {
           if (e.checked === true) {
             counter = counter - 1;
           } else {

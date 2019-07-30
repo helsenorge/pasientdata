@@ -11,7 +11,7 @@ class CompareDataCard extends Component {
         <div>Forstå dine resultater bedre ved å sammenligne data.</div>
         <br />
         <div className="compare-data-card">
-          <Link to={"/comparedata"} style={{ "border-bottom": "none" }}>
+          <Link to={"/comparedata"} className="link-without-border-bottom">
             <DisplayButton secondary>
               <div className={"button-sizing"}>Sammenlign data </div>
             </DisplayButton>

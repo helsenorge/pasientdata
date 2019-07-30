@@ -10,6 +10,7 @@ import FakeGlucoseData from "../../Utils/fakeGlucose";
 import Trends from "../../Utils/trends";
 import periodFromView from "../../Utils/periodFromView";
 import aggregateData from "../../Utils/aggregateData";
+import aggregateActivity from "../../Utils/aggregateActivity";
 
 class GoalContent extends Component {
   CustomLabel(value1, value2, xPos) {
@@ -48,16 +49,11 @@ class GoalContent extends Component {
 
   goalContent = () => {
     let generalColors = ["#E38B21", "#EEE05D", "#569B7E", "#EEE05D", "#E38B21"];
-    let physicalActiveColors = ["#E38B21", "#EEE05D", "#569B7E"];
-    let weightColors = ["#569B7E", "#EEE05D", "#E38B21"];
+    let overColors = ["#E38B21", "#EEE05D", "#569B7E"];
+    let underColors = ["#569B7E", "#EEE05D", "#E38B21"];
     let COLORS = [];
-    let dataSet = [
-      { value: 1 },
-      { value: 1 },
-      { value: 1 },
-      { value: 1 },
-      { value: 1 }
-    ];
+    let dataSet = [{ value: 1 }, { value: 1 }, { value: 3 }];
+
     let xPos;
     let data = FakeGlucoseData();
     let upperLimit = 12;
@@ -78,18 +74,17 @@ class GoalContent extends Component {
 
     switch (this.props.datatype) {
       case "Blodsukker":
-        COLORS = generalColors;
+        COLORS = overColors;
+        dataSet = [{ value: 1 }, { value: 1 }, { value: 3 }];
         goalValue = 80;
-        if (
-          this.props.patient.goals.BloodSugarWithinRangePercentageGoal !== {}
-        ) {
+        if ("BloodSugarWithinRangePercentageGoal" in this.props.patient.goals) {
           goalValue = this.props.patient.goals
             .BloodSugarWithinRangePercentageGoal.value;
         }
         xPos = 72;
         data = FakeGlucoseData();
-        upperLimit = 12;
-        lowerLimit = 5;
+        upperLimit = goalValue; // 12;
+        lowerLimit = goalValue / 5; // 5;
         currentValue =
           (timeWithin * 100) / (timeAbove + timeWithin + timeBelow);
         unit = " %";
@@ -97,29 +92,29 @@ class GoalContent extends Component {
       case "BlodsukkerAvg":
         COLORS = generalColors;
         goalValue = 7;
-        if (this.props.patient.goals.MeanGlucoseGoal !== {}) {
+        if ("MeanGlucoseGoal" in this.props.patient.goals) {
           goalValue = this.props.patient.goals.MeanGlucoseGoal.value;
         }
         unit = " mmol/l";
         xPos = 48;
         data = FakeGlucoseData();
-        upperLimit = 12;
-        lowerLimit = 6.2;
+        upperLimit = goalValue; // 12;
+        lowerLimit = goalValue * 4; // 6.2;
         trends = Trends(data, upperLimit, lowerLimit);
         mean = trends.mean;
         currentValue = mean;
         break;
       case "Skritt":
-        COLORS = physicalActiveColors;
-        dataSet = [{ value: 1 }, { value: 2 }, { value: 2 }];
+        COLORS = overColors;
+        dataSet = [{ value: 1 }, { value: 1 }, { value: 3 }];
         goalValue = 10000;
-        if (this.props.patient.goals.StepsGoal !== {}) {
+        if ("StepsGoal" in this.props.patient.goals) {
           goalValue = this.props.patient.goals.StepsGoal.value;
         }
         xPos = 48;
         data = this.props.patient.datasets[0].measurements;
-        upperLimit = 12000;
-        lowerLimit = 1000;
+        upperLimit = goalValue; // 12000;
+        lowerLimit = goalValue / 12; // 1000;
         let aggregated = aggregateData(
           data,
           intervalName,
@@ -136,40 +131,47 @@ class GoalContent extends Component {
         break;
       case "Vekt":
         dataSet = [{ value: 3 }, { value: 1 }, { value: 1 }];
-        COLORS = weightColors;
+        COLORS = underColors;
         goalValue = 65;
-        if (this.props.patient.goals.WeightGoal !== {}) {
+        if ("WeightGoal" in this.props.patient.goals) {
           goalValue = this.props.patient.goals.WeightGoal.value;
         }
         unit = " kg";
         xPos = 67;
         data = this.props.patient.datasets[1].measurements;
-        upperLimit = 70;
-        lowerLimit = 50;
+        upperLimit = goalValue; // 70;
+        lowerLimit = goalValue / 5; // 50;
         trends = Trends(data, upperLimit, lowerLimit);
         mean = trends.mean;
         currentValue = mean;
         break;
       case "FysiskAktivitet":
-        COLORS = physicalActiveColors;
-        dataSet = [{ value: 1 }, { value: 2 }, { value: 2 }];
-        goalValue = 65;
-        if (this.props.patient.goals.PhysicalActivityGoal !== {}) {
+        COLORS = overColors;
+        dataSet = [{ value: 1 }, { value:  1}, { value: 3 }];
+        goalValue = 630;
+        if ("PhysicalActivityGoal" in this.props.patient.goals) {
           goalValue = this.props.patient.goals.PhysicalActivityGoal.value;
         }
         unit = " min";
         xPos = 62;
         data = this.props.patient.datasets[2].measurements;
-        upperLimit = 70;
-        lowerLimit = 50;
-        trends = Trends(data, upperLimit, lowerLimit);
-        mean = trends.mean;
-        currentValue = mean;
+        upperLimit = goalValue * 2; // 70;
+        lowerLimit = goalValue / 4; // 50;
+        let aggregatedActivity = aggregateActivity(
+          data,
+          intervalName,
+          moment()
+            .subtract(periodNumber, periodName)
+            .format("YYYY-MM-DDTHH:mm:ss"),
+          moment().format("YYYY-MM-DDTHH:mm:ss"),
+          "MM-DDTHH:mm"
+        );
+        currentValue = (aggregatedActivity.length / 7);
         break;
       case "Karbohydrater":
         COLORS = generalColors;
         goalValue = 280;
-        if (this.props.patient.goals.CarbsGoal !== {}) {
+        if ("CarbsGoal" in this.props.patient.goals) {
           goalValue = this.props.patient.goals.CarbsGoal.value;
         }
         unit = " g";
@@ -182,11 +184,9 @@ class GoalContent extends Component {
     let arrowAngle;
 
     if (currentValue < lowerLimit) {
-      arrowAngle =
-        (-40 + ((currentValue - lowerLimit) / 5) * 220) * (Math.PI / 180);
+      arrowAngle = (-40 + (currentValue - lowerLimit) * 220) * (Math.PI / 180);
     } else if (currentValue > upperLimit) {
-      arrowAngle =
-        (-40 + ((currentValue - lowerLimit) / 5) * -40) * (Math.PI / 180);
+      arrowAngle = (-40 + (currentValue - upperLimit) * -40) * (Math.PI / 180);
     } else {
       arrowAngle =
         (-40 +
@@ -227,7 +227,7 @@ class GoalContent extends Component {
             <div className="unitText">{this.displayUnit()}</div>
           </div>
         </div>
-        <div className="row split">
+        <div className="row split rowStyle">
           <div className="pieChartStyle">
             <ResponsiveContainer
               className="flex-children-trend-goals"
@@ -269,7 +269,6 @@ class GoalContent extends Component {
           </div>
           <div>
             <div className="button-style">
-              {/* <Link to={link} style={{ borderBottom: "none" }}> */}
               <ChangeGoalButton datatype={this.props.datatype} />
             </div>
           </div>

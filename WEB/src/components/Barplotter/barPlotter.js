@@ -6,9 +6,11 @@ import {
   Tooltip,
   BarChart,
   Bar,
-  ResponsiveContainer
+  ResponsiveContainer,
+  ReferenceLine
 } from "recharts";
 import aggregateData from "../../Utils/aggregateData";
+import { connect } from "react-redux";
 
 /*
  * The BarPlotter component.
@@ -40,10 +42,25 @@ class BarPlotter extends Component {
             width={400}
             height={96}
             data={aggregated}
-            margin={{ top: 10, right: 5, bottom: 0, left: 0 }}
+            margin={{ top: 10, right: 50, bottom: 0, left: 0 }}
           >
             <XAxis height={2} dataKey="x" tick={false} />
             <Bar dataKey="y" name="Steps/hour" fill={this.props.color} />
+            {/* <ReferenceLine
+              y={this.props.upper}
+              label="Upper goal"
+              stroke="red"
+              strokeDasharray="3 3"
+            /> */}
+            <ReferenceLine
+              y={this.props.patient.goals.StepsGoal.value}
+              stroke="grey"
+              strokeDasharray="3 3"
+              label={{
+                value: this.props.patient.goals.StepsGoal.value,
+                position: "right"
+              }}
+            />
           </BarChart>
         </ResponsiveContainer>
       );
@@ -87,4 +104,11 @@ class BarPlotter extends Component {
   }
 }
 
-export default BarPlotter;
+function mapStateToProps(state) {
+  return {
+    patient: state.patient,
+    baseInfo: state.baseInfo
+  };
+}
+
+export default connect(mapStateToProps)(BarPlotter);

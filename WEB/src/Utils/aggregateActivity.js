@@ -8,89 +8,89 @@ export default function aggregateData(
   endString,
   outputFormat
 ) {
+  let sleepArray = [];
+  let activityArray = [];
+  let notActiveArray = [];
+  let activityType =
+    1 || // Biking
+    2 || // On foot
+    7 || // Walking
+    8 || // Running
+    11 || // Baseball
+    12 || // Basketball
+    16 || // Road biking
+    17 || // Spinning
+    18 || // Stationary biking
+    19 || // Utility biking
+    39 || // Jumping rope
+    54 || // Rowing machine
+    57 || // Running on sand
+    58 || // Running (treadmill)
+    77 || // Stair climbing
+    78 || // Stair-climbing machine
+    80 || // Strength training
+    85 || // Table tennis
+    86 || // Team Sports
+    87 || // Tennis
+    88 || // Treadmill (walking or running)
+    89 || // Volleyball
+    93 || // Walking (fitness)
+    94 || // Nording walking
+    95 || // Walking (treadmill)
+    97 || // Weightlifting
+    98 || // Wheelchair
+    114 || // HIIT
+    116; // Walking (stroller)
+
+  for (let i = 0; i < inData.length; i++) {
+    let googleType = inData[i].value;
+    if (
+      googleType === 0 || // In vehicle
+      googleType === 3 || // Still (not moving)
+      googleType === 4 || // Unknown (unable to detect activity)
+      googleType === 5 // Tilting (sudden device gravity change)
+    ) {
+      notActiveArray.push(inData[i]);
+    } else if (
+      googleType === 72 || // Sleeping
+      googleType === 109 || // Light sleep	
+      googleType === 110 || // Deep sleep
+      googleType === 111 || // REM sleep
+      googleType === 112 // Awake (during sleep cycle)
+    ) {
+      sleepArray.push(inData[i]);
+    } else {
+      activityArray.push(inData[i]);
+    }
+  }
   const { startIndex, endIndex } = findStartAndEndIndex(
-    inData,
+    activityArray,
     startString,
     endString
   );
 
-  let slicedData = inData.slice(startIndex, endIndex);
-  const inputFormat = "YYYY-MM-DDTHH:mm:ss";
-  const startTime = moment(startString, inputFormat);
-  const endTime = moment(endString, inputFormat);
+  let slicedData = activityArray.slice(startIndex, endIndex);
+  const inputFormat = "YYYY-MM-DDTHH:mm";
   const slicedLength = slicedData.length;
 
-  /*
-   * Loop through the desired dataset and aggregate
-   */
-
   let aggregated = [];
+  let count = 0;
 
-  let data = slicedData.map(item => ({ x: item.start, y: item.value }));
-  if (data === undefined || data.length === 0) {
-    data.push({ y: 0, x: startTime.format(inputFormat) });
-  }
-  let sum = data[0].y;
-  let start = moment(data[0].x, inputFormat).startOf(interval);
+  let data = slicedData.map(item => ({ x: item.start, y: 0 }));
 
-  // Add empty bars at start if needed
-  let added = 1;
-  while (moment(start).diff(startTime, interval + "s") - added > -1) {
-    aggregated.push({
-      y: 0,
-      x: moment(startTime)
-        .add(added, interval + "s")
-        .format(outputFormat)
-    });
-    added++;
-  }
+  let start = moment(data[0].x, inputFormat).startOf("minutes");
 
   let currentDataTime;
   for (let i = 1; i < slicedLength; i++) {
     currentDataTime = moment(data[i].x, inputFormat);
-    if (
-      moment(start).diff(currentDataTime.startOf(interval), interval + "s") ===
-      0
-    ) {
-      sum += data[i].y;
-    } else {
-      // Add empty bars inbetween if needed
-      let skipped = 0;
+    if (data[i].x !== data[i - 1].x) {
       aggregated.push({
-        y: sum,
-        x: start.format(outputFormat)
+        y: 0,
+        x: currentDataTime.format(outputFormat)
       });
-      while (
-        moment(start).diff(currentDataTime, interval + "s") + skipped <
-        -1
-      ) {
-        aggregated.push({
-          y: 0,
-          x: moment(start)
-            .add(1 + skipped, interval + "s")
-            .startOf(interval)
-            .format(outputFormat)
-        });
-        skipped++;
-      }
-
-      sum = data[i].y;
-      start = currentDataTime.startOf(interval);
     }
   }
-  aggregated.push({ y: sum, x: start.format(outputFormat) });
+  aggregated.push({ y: 0, x: start.format(outputFormat) });
 
-  // Add empty bars at end if needed
-  while (
-    moment(endTime).diff(start.add(1, interval + "s"), interval + "s") > 0
-  ) {
-    aggregated.push({ y: 0, x: start.format(outputFormat) });
-  }
-  if (moment(endTime).diff(start.add(1, interval + "s"), interval + "s") > -1) {
-    aggregated.push({
-      y: 0,
-      x: start.subtract(1, interval + "s").format(outputFormat)
-    });
-  }
   return aggregated;
 }
