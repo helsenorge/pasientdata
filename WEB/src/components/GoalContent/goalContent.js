@@ -51,7 +51,7 @@ class GoalContent extends Component {
     let overColors = ["#E38B21", "#EEE05D", "#569B7E"];
     let underColors = ["#569B7E", "#EEE05D", "#E38B21"];
     let COLORS = [];
-    let dataSet = [{ value: 1 }, { value: 1 }, { value: 3 }];
+    let dataSet = [{ value: 1 }, { value: 1 }, { value: 1 }, { value: 1 }, { value: 1 }];
 
     let xPos;
     let data = FakeGlucoseData();
@@ -104,7 +104,7 @@ class GoalContent extends Component {
         xPos = 48;
         data = this.props.patient.datasets[0].measurements;
         upperLimit = goalValue; // 12000;
-        lowerLimit = goalValue / 12; // 1000;
+        lowerLimit = goalValue / 5; // 1000;
         let aggregated = aggregateData(
           data,
           intervalName,
@@ -137,7 +137,7 @@ class GoalContent extends Component {
         dataSet = [{ value: 1 }, { value: 1 }, { value: 3 }];
         goalValue = this.props.patient.goals.PhysicalActivityGoal.value; //630
         unit = this.props.patient.goals.PhysicalActivityGoal.unit;
-        xPos = 62;
+        xPos = 58;
         data = this.props.patient.datasets[2].measurements;
         upperLimit = goalValue; // 70;
         lowerLimit = goalValue / 5; // 50;
