@@ -59,3 +59,9 @@ html {
   text-align: center;
   line-height: 33px;
 }
+
+.really-large-numerical-value {
+  font-size: 36px;
+  line-height: 42px;
+  text-align: center;
+}
