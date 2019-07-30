@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import NavigationBar from "../../../components/NavigationBar/navigationBar.js";
-import OversiktKort from "../../../components/InsightCards/trendGoalsCard";
+import TrendGoalsCard from "../../../components/InsightCards/trendGoalsCard";
 import GraphCard from "../../../components/InsightCards/graphCard";
 import PatternCard from "../../../components/InsightCards/patternCard";
 import ViewCard from "../../../components/InsightCards/viewCard";
@@ -11,7 +11,7 @@ import { connect } from "react-redux";
 import DateSelectorCard from "../../../components/DateSelectorCard/dateSelectorCard";
 import FHIRConnection from "../../../FHIRCommunication";
 
-class Blodtrykk extends Component {
+class InsulinInsight extends Component {
   render() {
     if (this.props.baseInfo.isLoggedin) {
       return (
@@ -20,10 +20,10 @@ class Blodtrykk extends Component {
           <NavigationBar />
           <ViewCard />
           <DateSelectorCard />
-          <OversiktKort datatype="Blodtrykk" />
-          <GraphCard datatype="Blodtrykk" />
+          <TrendGoalsCard datatype="Insulin" />
+          <GraphCard datatype="Insulin" />
           <PatternCard
-            datatype="Blodtrykk"
+            datatype="Insulin"
             triangle={"down"}
             fluctuation={"none"}
             greatestChange={"none"}
@@ -52,4 +52,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(Blodtrykk);
+export default connect(mapStateToProps)(InsulinInsight);

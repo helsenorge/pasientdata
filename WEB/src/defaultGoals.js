@@ -2,7 +2,7 @@ const defaultGoals = {
   StepsGoal: {
     type: "lower",
     value: 10000,
-    unit: "steps/day"
+    unit: "skritt"
   },
   WeightGoal: {
     type: "upper",

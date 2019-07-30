@@ -22,8 +22,8 @@ class StepsPopupContent extends Component {
         "StepsGoal",
         goal,
         "Desired number of steps per day",
-        "steps/day",
-        "steps/day",
+        "skritt",
+        "skritt",
         this.props.patient.googleId
       ); // range goal
     }

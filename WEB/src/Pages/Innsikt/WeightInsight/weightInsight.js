@@ -10,12 +10,11 @@ import {
   bloodSugarGreatestChange,
   bloodSugarFluctuations
 } from "../../../Utils/PatternCalculations/bloodSugarPatterns";
-import FakeGlucoseData from "../../../Utils/fakeGlucose";
 import { connect } from "react-redux";
 import DateSelectorCard from "../../../components/DateSelectorCard/dateSelectorCard";
 import FHIRConnection from "../../../FHIRCommunication";
 
-class Vekt extends Component {
+class WeightInsight extends Component {
   render() {
     if (this.props.baseInfo.isLoggedin) {
       return (
@@ -31,7 +30,7 @@ class Vekt extends Component {
             triangle={"down"}
             fluctuation={bloodSugarFluctuations}
             greatestChange={bloodSugarGreatestChange}
-            data={FakeGlucoseData()}
+            data={this.props.patient.datasets[1].measurements}
             view={this.props.baseInfo.view}
             goals={this.props.patient.goals}
           />
@@ -56,4 +55,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(Vekt);
+export default connect(mapStateToProps)(WeightInsight);

@@ -23,7 +23,7 @@ class NavigationBar extends Component {
               className="tab-anchor"
               activeClassName="tab_selected"
             >
-              Blodsukker
+              BLODSUKKER
             </NavLink>
           </li>
           <li className="li-wrapper">
@@ -32,7 +32,7 @@ class NavigationBar extends Component {
               className="tab-anchor"
               activeClassName="tab_selected"
             >
-              Insulin
+              INSULIN
             </NavLink>
           </li>
           <li className="li-wrapper">
@@ -41,7 +41,7 @@ class NavigationBar extends Component {
               className="tab-anchor"
               activeClassName="tab_selected"
             >
-              Skritt
+              SKRITT
             </NavLink>
           </li>
           <li className="li-wrapper">
@@ -50,16 +50,16 @@ class NavigationBar extends Component {
               className="tab-anchor"
               activeClassName="tab_selected"
             >
-              Vekt
+              VEKT
             </NavLink>
           </li>
           <li className="li-wrapper">
             <NavLink
-              to="/bloodpressure"
+              to="/physicalactivity"
               className="tab-anchor"
               activeClassName="tab_selected"
             >
-              Blodtrykk
+              FYSISK AKTIVITET
             </NavLink>
           </li>
           <li className="li-wrapper">
@@ -68,7 +68,7 @@ class NavigationBar extends Component {
               className="tab-anchor"
               activeClassName="tab_selected"
             >
-              Karbohydrater
+              KARBOHYDRATER
             </NavLink>
           </li>
         </ul>

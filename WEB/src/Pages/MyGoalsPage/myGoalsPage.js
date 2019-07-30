@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import "./myGoalsPage.css";
-import CardComponent from "../../components/Card/cardComponent";
 import GoalContent from "../../components/GoalContent/goalContent";
 import FHIRConnection from "../../FHIRCommunication";
 

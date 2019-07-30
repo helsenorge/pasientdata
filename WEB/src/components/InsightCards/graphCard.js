@@ -13,6 +13,10 @@ class GraphCard extends Component {
     let data;
     if (this.props.datatype === "Blodsukker") {
       data = FakeGlucoseData();
+    } else if (this.props.datatype === "Vekt") {
+      data = this.props.patient.datasets[1].measurements;
+    } else if (this.props.datatype === "FysiskAktivitet") {
+      data = this.props.patient.datasets[2].measurements;
     } else {
       data = this.props.patient.datasets[0].measurements;
     }

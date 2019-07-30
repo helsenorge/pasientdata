@@ -22,8 +22,8 @@ class CarbsPopupContent extends Component {
         "CarbsGoal",
         goal,
         "Max grams of carbohydrates per day",
-        "carbs/day",
-        "carbs/day",
+        "g",
+        "g",
         this.props.patient.googleId
       ); // range goal
     }

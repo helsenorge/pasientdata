@@ -9,7 +9,7 @@ class ViewCard extends Component {
   makeContent = () => {
     return (
       <div className="view-parent">
-        <div className="view-div">Viser siste</div>
+        <div className="view-div subheader">Viser siste</div>
         <div className="view-child">
           <DateDropdown name={this.state.view} />
         </div>

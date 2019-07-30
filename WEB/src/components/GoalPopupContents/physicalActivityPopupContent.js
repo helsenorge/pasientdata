@@ -22,8 +22,8 @@ class PhysicalActivityPopupContent extends Component {
         "PhysicalActivityGoal",
         goal,
         "Desired number of minutes of physical activity each week",
-        "minutes/week",
-        "minutes/week",
+        "min",
+        "min",
         this.props.patient.googleId
       ); // range goal
     }

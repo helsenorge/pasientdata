@@ -119,14 +119,14 @@ class MenuBar extends Component {
             </li>
             <li className="liBar2 libar2-items">
               <NavLink
-                to="/bloodpressure"
+                to="/physicalactivity"
                 className="menu-link2 click-menuBar-open2"
                 onClick={() => {
                   this.toggle2();
                   this.toggle();
                 }}
               >
-                Blodtrykk
+                Fysisk aktivitet
               </NavLink>
             </li>
             <li className="liBar2 libar2-items">
