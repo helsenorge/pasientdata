@@ -365,7 +365,12 @@ class TrendGoalsCard extends Component {
                       dominantBaseline="end"
                       className="caption" // "distance-to-goal-text"
                     >
-                      {goalText - Math.floor(currentValue)} skritt fra målet
+                      {/* {goalText - Math.floor(currentValue)} skritt fra målet */}
+                      {goalText - Math.floor(currentValue) > 0
+                        ? Math.abs(goalText - Math.floor(currentValue)) +
+                          " skritt fra målet"
+                        : Math.abs(goalText - Math.floor(currentValue)) +
+                          " skritt over målet"}
                     </text>
                     <text
                       x={cx}
