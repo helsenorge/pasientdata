@@ -6,13 +6,12 @@ import PatternCard from "../../../components/InsightCards/patternCard";
 import ViewCard from "../../../components/InsightCards/viewCard";
 import CompareDataCard from "../../../components/InsightCards/compareDataCard";
 import GoalCard from "../../../components/InsightCards/goalCard";
-import "../innsikt.css";
 import FakeGlucoseData from "../../../Utils/fakeGlucose";
 import { connect } from "react-redux";
 import DateSelectorCard from "../../../components/DateSelectorCard/dateSelectorCard";
 import FHIRConnection from "../../../FHIRCommunication";
 
-class Karbohydrater extends Component {
+class PhysicalActivityInsight extends Component {
   render() {
     if (this.props.baseInfo.isLoggedin) {
       return (
@@ -21,14 +20,14 @@ class Karbohydrater extends Component {
           <NavigationBar />
           <ViewCard />
           <DateSelectorCard />
-          <TrendGoalsCard datatype="Karbohydrater" />
-          <GraphCard datatype="Karbohydrater" />
+          <TrendGoalsCard datatype="FysiskAktivitet" />
+          <GraphCard datatype="FysiskAktivitet" />
           <PatternCard
-            datatype="Karbohydrater"
-            triangle={"down"}
+            datatype="FysiskAktivitet"
+            triangle={"up"}
             fluctuation={"none"}
             greatestChange={"none"}
-            data={FakeGlucoseData()}
+            data={this.props.patient.datasets[2].measurements}
             view={this.props.baseInfo.view}
             goals={this.props.patient.goals}
           />
@@ -53,4 +52,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(Karbohydrater);
+export default connect(mapStateToProps)(PhysicalActivityInsight);

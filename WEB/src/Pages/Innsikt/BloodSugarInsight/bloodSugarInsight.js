@@ -15,7 +15,7 @@ import {
 import { connect } from "react-redux";
 import FakeGlucoseData from "../../../Utils/fakeGlucose";
 
-class Blodsukker extends Component {
+class BloodSugarInsight extends Component {
   render() {
     return (
       <div style={{ margin: "0 0 8px" }}>
@@ -48,4 +48,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(Blodsukker);
+export default connect(mapStateToProps)(BloodSugarInsight);

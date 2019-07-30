@@ -6,12 +6,13 @@ import PatternCard from "../../../components/InsightCards/patternCard";
 import ViewCard from "../../../components/InsightCards/viewCard";
 import CompareDataCard from "../../../components/InsightCards/compareDataCard";
 import GoalCard from "../../../components/InsightCards/goalCard";
-import FakeGlucoseData from "../../../Utils/fakeGlucose";
+import { stepsGreatestPeriod } from "../../../Utils/PatternCalculations/stepsPatterns";
 import { connect } from "react-redux";
 import DateSelectorCard from "../../../components/DateSelectorCard/dateSelectorCard";
 import FHIRConnection from "../../../FHIRCommunication";
 
-class FysiskAktivitet extends Component {
+class StepInsight extends Component {
+  state = {};
   render() {
     if (this.props.baseInfo.isLoggedin) {
       return (
@@ -20,14 +21,14 @@ class FysiskAktivitet extends Component {
           <NavigationBar />
           <ViewCard />
           <DateSelectorCard />
-          <TrendGoalsCard datatype="FysiskAktivitet" />
-          <GraphCard datatype="FysiskAktivitet" />
+          <TrendGoalsCard datatype="Skritt" />
+          <GraphCard datatype="Skritt" />
           <PatternCard
-            datatype="FysiskAktivitet"
+            datatype="Skritt"
             triangle={"up"}
             fluctuation={"none"}
-            greatestChange={"none"}
-            data={FakeGlucoseData()}
+            greatestChange={stepsGreatestPeriod}
+            data={this.props.patient.datasets[0].measurements}
             view={this.props.baseInfo.view}
             goals={this.props.patient.goals}
           />
@@ -52,4 +53,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(FysiskAktivitet);
+export default connect(mapStateToProps)(StepInsight);
