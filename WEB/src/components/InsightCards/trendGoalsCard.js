@@ -333,6 +333,7 @@ class TrendGoalsCard extends Component {
                       fill="#8884d8"
                       textAnchor="middle"
                       dominantBaseline="end"
+                      className="caption"
                     >
                       {returnString}
                     </text>
@@ -342,15 +343,17 @@ class TrendGoalsCard extends Component {
                       fill="#8884d8"
                       textAnchor="middle"
                       dominantBaseline="end"
+                      className="caption"
                     >
                       {lowerText}
                     </text>
                     <text
-                      x={cx + 105 * Math.cos((30 * Math.PI) / 180)}
-                      y={cy + 105 * Math.sin((30 * Math.PI) / 180)}
+                      x={cx + 100 * Math.cos((30 * Math.PI) / 180)}
+                      y={cy + 100 * Math.sin((30 * Math.PI) / 180)}
                       fill="#8884d8"
                       textAnchor="middle"
                       dominantBaseline="end"
+                      className="caption"
                     >
                       {upperText}
                     </text>
@@ -377,27 +380,51 @@ class TrendGoalsCard extends Component {
             </svg>
           </PieChart>
         </ResponsiveContainer>
-        <div className="flex-children-trend-goals flex-side-container-trend-goals">
+        {/* <div className="flex-children-trend-goals flex-side-container-trend-goals">
           <div className="flex-children-trend-goals flex-container-trend-goals upper-trend-goals-div">
             <img
               src={goalArrowPic}
               alt={"logo"}
-              className="index-Image flex-children-trend-goals trend-pic"
-            />
-            <div className="flex-children-trend-goals flex-side-container-trend-goals">
-              <div className="flex-children-trend-goals">Mål:</div>
-              <div className="flex-children-trend-goals">{goalText}</div>
-            </div>
-          </div>
-          <div className="flex-children-trend-goals flex-container-trend-goals lower-trend-goals-div">
-            <img
-              src={trendValue > 0 ? upTrianglePic : downTrianglePic}
-              alt={"logo"}
               className="index-Image flex-children trend-pic"
             />
             <div className="flex-children-trend-goals flex-side-container-trend-goals">
-              <div className="flex-children-trend-goals">Trend:</div>
-              <div className="flex-children-trend-goals">
+              <div className="flex-children-trend-goals">Mål:</div>
+              <div className="flex-children-trend-goals large-numerical-value">
+                {goalText}
+              </div>
+            </div>
+          </div> */}
+        <div className="flex-children-trend-goals flex-side-container-trend-goals">
+          <div className="flex-parent-upper-right upper-trend-goals-div">
+            <div className="flex-children-trend-goals flex-container-trend-goals ">
+              <img
+                src={goalArrowPic}
+                alt={"logo"}
+                className="index-Image flex-children trend-pic"
+              />
+              <div className="flex-children-trend-goals subheader">Mål:</div>
+            </div>
+            <br />
+            <div className="flex-children-trend-goals flex-side-container-trend-goals">
+              <div className="flex-children-trend-goals large-numerical-value">
+                {goalText}
+              </div>
+              <br />
+            </div>
+          </div>
+          <div className="flex-parent-upper-right">
+            <br />
+            <div className="flex-children-trend-goals flex-container-trend-goals lower-trend-goals-div">
+              <img
+                src={trendValue > 0 ? upTrianglePic : downTrianglePic}
+                alt={"logo"}
+                className="index-Image flex-children trend-pic"
+              />
+              <div className="flex-children-trend-goals subheader">Trend:</div>
+            </div>
+            <br />
+            <div className="flex-children-trend-goals flex-side-container-trend-goals">
+              <div className="flex-children-trend-goals large-numerical-value">
                 {Math.floor(trendValue)} {unit}
               </div>
             </div>

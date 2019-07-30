@@ -5,10 +5,13 @@
 .flex-side-container-trend-goals {
   display: flex;
   flex-direction: column;
+  justify-content: space-evenly;
 }
 
 .flex-children-trend-goals {
   flex: 1;
+  display: flex;
+  align-items: center;
 }
 
 .trend-pic {
@@ -25,7 +28,7 @@
 }
 
 .lower-trend-goals-div {
-  margin-top: 18px;
+  margin-top: 0px;
 }
 
 /* .trend-polygon {
