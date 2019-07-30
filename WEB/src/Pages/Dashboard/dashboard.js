@@ -20,7 +20,6 @@ import insulinContent from "../../components/DashboardContent/insulinContent";
 
 class Dashboard extends Component {
   render() {
-    console.log(this.props.patient.datasets[2].measurements);
     if (this.props.baseInfo.isLoggedin) {
       let { periodName, intervalName } = periodFromView(
         this.props.baseInfo.view

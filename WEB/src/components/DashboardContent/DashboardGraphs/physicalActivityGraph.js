@@ -9,10 +9,10 @@ import {
   ResponsiveContainer,
   ReferenceLine
 } from "recharts";
-import fakeCarbData from "../../../Utils/fakeCarbData";
 import aggregateData from "../../../Utils/aggregateData";
 import { connect } from "react-redux";
 import moment from "moment";
+import aggregateActivity from "../../../Utils/aggregateActivity";
 
 class PhysicalActivityGraph extends Component {
   render() {
@@ -25,7 +25,6 @@ class PhysicalActivityGraph extends Component {
       moment(),
       "ddd"
     );
-    console.log(aggregated);
     if (this.props.page === "Dashboard") {
       return (
         <ResponsiveContainer width="100%" height={96}>
