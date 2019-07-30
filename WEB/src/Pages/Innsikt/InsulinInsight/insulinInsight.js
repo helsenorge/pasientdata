@@ -10,6 +10,7 @@ import FakeGlucoseData from "../../../Utils/fakeGlucose";
 import { connect } from "react-redux";
 import DateSelectorCard from "../../../components/DateSelectorCard/dateSelectorCard";
 import FHIRConnection from "../../../FHIRCommunication";
+import {INSULIN} from "../../../dataTypes";
 
 class InsulinInsight extends Component {
   render() {
@@ -20,8 +21,8 @@ class InsulinInsight extends Component {
           <NavigationBar />
           <ViewCard />
           <DateSelectorCard />
+          <GraphCard datatype={INSULIN} />
           <TrendGoalsCard datatype="Insulin" />
-          <GraphCard datatype="Insulin" />
           <PatternCard
             datatype="Insulin"
             triangle={"down"}
