@@ -76,30 +76,24 @@ class GoalContent extends Component {
       case "Blodsukker":
         COLORS = overColors;
         dataSet = [{ value: 1 }, { value: 1 }, { value: 3 }];
-        goalValue = 80;
-        if ("BloodSugarWithinRangePercentageGoal" in this.props.patient.goals) {
-          goalValue = this.props.patient.goals
-            .BloodSugarWithinRangePercentageGoal.value;
-        }
+        goalValue = this.props.patient.goals.BloodSugarWithinRangePercentageGoal.value; // 80
         xPos = 72;
         data = FakeGlucoseData();
         upperLimit = goalValue; // 12;
         lowerLimit = goalValue / 5; // 5;
         currentValue =
           (timeWithin * 100) / (timeAbove + timeWithin + timeBelow);
-        unit = " %";
+        unit = this.props.patient.goals.BloodSugarWithinRangePercentageGoal
+          .unit;
         break;
       case "BlodsukkerAvg":
         COLORS = generalColors;
-        goalValue = 7;
-        if ("MeanGlucoseGoal" in this.props.patient.goals) {
-          goalValue = this.props.patient.goals.MeanGlucoseGoal.value;
-        }
-        unit = " mmol/l";
+        goalValue = this.props.patient.goals.MeanGlucoseGoal.value; // 7
+        unit = this.props.patient.goals.MeanGlucoseGoal.unit;
         xPos = 48;
         data = FakeGlucoseData();
         upperLimit = goalValue; // 12;
-        lowerLimit = goalValue * 4; // 6.2;
+        lowerLimit = goalValue / 5; // 6.2;
         trends = Trends(data, upperLimit, lowerLimit);
         mean = trends.mean;
         currentValue = mean;
@@ -107,10 +101,7 @@ class GoalContent extends Component {
       case "Skritt":
         COLORS = overColors;
         dataSet = [{ value: 1 }, { value: 1 }, { value: 3 }];
-        goalValue = 10000;
-        if ("StepsGoal" in this.props.patient.goals) {
-          goalValue = this.props.patient.goals.StepsGoal.value;
-        }
+        goalValue = this.props.patient.goals.StepsGoal.value; // 10000
         xPos = 48;
         data = this.props.patient.datasets[0].measurements;
         upperLimit = goalValue; // 12000;
@@ -127,16 +118,13 @@ class GoalContent extends Component {
         trends = Trends(aggregated, upperLimit, lowerLimit);
         mean = trends.mean;
         currentValue = mean;
-        unit = " skritt";
+        unit = this.props.patient.goals.StepsGoal.unit;
         break;
       case "Vekt":
         dataSet = [{ value: 3 }, { value: 1 }, { value: 1 }];
         COLORS = underColors;
-        goalValue = 65;
-        if ("WeightGoal" in this.props.patient.goals) {
-          goalValue = this.props.patient.goals.WeightGoal.value;
-        }
-        unit = " kg";
+        goalValue = this.props.patient.goals.WeightGoal.value; // 70
+        unit = this.props.patient.goals.WeightGoal.unit;
         xPos = 67;
         data = this.props.patient.datasets[1].measurements;
         upperLimit = goalValue; // 70;
@@ -147,16 +135,13 @@ class GoalContent extends Component {
         break;
       case "FysiskAktivitet":
         COLORS = overColors;
-        dataSet = [{ value: 1 }, { value:  1}, { value: 3 }];
-        goalValue = 630;
-        if ("PhysicalActivityGoal" in this.props.patient.goals) {
-          goalValue = this.props.patient.goals.PhysicalActivityGoal.value;
-        }
-        unit = " min";
+        dataSet = [{ value: 1 }, { value: 1 }, { value: 3 }];
+        goalValue = this.props.patient.goals.PhysicalActivityGoal.value; //630
+        unit = this.props.patient.goals.PhysicalActivityGoal.unit;
         xPos = 62;
         data = this.props.patient.datasets[2].measurements;
-        upperLimit = goalValue * 2; // 70;
-        lowerLimit = goalValue / 4; // 50;
+        upperLimit = goalValue; // 70;
+        lowerLimit = goalValue / 5; // 50;
         let aggregatedActivity = aggregateActivity(
           data,
           intervalName,
@@ -166,15 +151,12 @@ class GoalContent extends Component {
           moment().format("YYYY-MM-DDTHH:mm:ss"),
           "MM-DDTHH:mm"
         );
-        currentValue = (aggregatedActivity.length / 7);
+        currentValue = aggregatedActivity.length / 7;
         break;
       case "Karbohydrater":
         COLORS = generalColors;
-        goalValue = 280;
-        if ("CarbsGoal" in this.props.patient.goals) {
-          goalValue = this.props.patient.goals.CarbsGoal.value;
-        }
-        unit = " g";
+        goalValue = this.props.patient.goals.CarbsGoal.value; //280;
+        unit = this.props.patient.goals.CarbsGoal.unit;
         xPos = 70;
         break;
       default:

@@ -268,7 +268,7 @@ class FHIRCommunication extends React.Component {
       })
       .then(goalsMsg => {
         // console.log(goalsMsg);
-        let stateGoals = {};
+        let stateGoals = this.props.patient.goals;
         // for (let i = 0; i < goals.length; i++) {}
         goalsMsg.map((item, index) => {
           // console.log("item: ", item);
