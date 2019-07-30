@@ -23,17 +23,17 @@ const WeightGraph = ({ data, baseInfo }) => {
     end,
     formatInterval(intervalName)
   );
-  const noRecentData = aggregated.filter(data => data.y > 0).length === 0;
-  if (noRecentData && data.length > 0) {
-    //Without fake data
-    /*const lastDataPoint = data[data.length - 1].value;
-    aggregated = aggregated.map(data => ({x: data.x, y: lastDataPoint}));*/
+  //   const noRecentData = aggregated.filter(data => data.y > 0).length === 0;
+  //   if (noRecentData && data.length > 0) {
+  //     //Without fake data
+  //     /*const lastDataPoint = data[data.length - 1].value;
+  //     aggregated = aggregated.map(data => ({x: data.x, y: lastDataPoint}));*/
 
-    aggregated = aggregated.map((data, index) => ({
-      x: data.x[0],
-      y: fakeWeightData[index % fakeWeightData.length]
-    }));
-  }
+  //     aggregated = aggregated.map((data, index) => ({
+  //       x: data.x[0],
+  //       y: fakeWeightData[index % fakeWeightData.length]
+  //     }));
+  //   }
   const minWeight = aggregated
     .map(data => data.y)
     .reduce((a, b) => Math.min(a, b));
