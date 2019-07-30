@@ -56,9 +56,15 @@ class TrendGoalsCard extends Component {
     let lowerGoal = 70;
     let pieSideSize = 20;
     //let { intervalName } = periodFromView(this.props.baseInfo.view);
+
     let { start, end } = getStartEndTimes(
       this.props.baseInfo.view,
       this.props.baseInfo.nrOfIntervalsBack
+    );
+
+    let { start: startPrev, end: endPrev } = getStartEndTimes(
+      this.props.baseInfo.view,
+      parseInt(this.props.baseInfo.nrOfIntervalsBack, 10) + 1
     );
     let weight = false;
 
@@ -95,8 +101,6 @@ class TrendGoalsCard extends Component {
         lowerLimit = 5;
         trendValue = 2;
         goalValue = 75;
-        //aggregated = aggregateData(data, intervalName, start, end, "ddd");
-        //console.log(aggregated);
         const { startIndex, endIndex } = findStartAndEndIndex(data, start, end);
 
         let slicedData = data.slice(startIndex, endIndex);
@@ -124,11 +128,20 @@ class TrendGoalsCard extends Component {
         trendValue = 200;
         aggregated = aggregateData(data, "day", start, end, "ddd");
         trends = Trends(aggregated, upperLimit, lowerLimit);
+        let prevAggregated = aggregateData(
+          data,
+          "day",
+          startPrev,
+          endPrev,
+          "ddd"
+        );
+        let prevTrends = Trends(prevAggregated, upperLimit, lowerLimit);
         mean = trends.mean;
         timeAbove = trends.timeAbove;
         timeWithin = trends.timeWithin;
         timeBelow = trends.timeBelow;
         currentValue = mean;
+        trendValue = mean - prevTrends.mean;
         unit = "";
         pieSideSize = 2000;
         break;
@@ -161,7 +174,8 @@ class TrendGoalsCard extends Component {
     }
 
     const goalArrowPic = require("../../Images/goalArrow.svg");
-    const downTrianglePic = require("../../Images/greenDownTriangle.svg");
+    const upTrianglePic = require("../../Images/greenUpTriangle.svg");
+    const downTrianglePic = require("../../Images/yellowDownTriangle.svg");
     let angles = [];
     let pieData;
     let lowerTextValue;
@@ -377,14 +391,14 @@ class TrendGoalsCard extends Component {
           </div>
           <div className="flex-children-trend-goals flex-container-trend-goals lower-trend-goals-div">
             <img
-              src={downTrianglePic}
+              src={trendValue > 0 ? upTrianglePic : downTrianglePic}
               alt={"logo"}
               className="index-Image flex-children trend-pic"
             />
             <div className="flex-children-trend-goals flex-side-container-trend-goals">
               <div className="flex-children-trend-goals">Trend:</div>
               <div className="flex-children-trend-goals">
-                {trendValue} {unit}
+                {Math.floor(trendValue)} {unit}
               </div>
             </div>
           </div>
