@@ -10,6 +10,7 @@ import { stepsGreatestPeriod } from "../../../Utils/PatternCalculations/stepsPat
 import { connect } from "react-redux";
 import DateSelectorCard from "../../../components/DateSelectorCard/dateSelectorCard";
 import FHIRConnection from "../../../FHIRCommunication";
+import {STEPS} from "../../../dataTypes";
 
 class StepInsight extends Component {
   state = {};
@@ -21,8 +22,8 @@ class StepInsight extends Component {
           <NavigationBar />
           <ViewCard />
           <DateSelectorCard />
+          <GraphCard datatype={STEPS} />
           <TrendGoalsCard datatype="Skritt" />
-          <GraphCard datatype="Skritt" />
           <PatternCard
             datatype="Skritt"
             triangle={"up"}

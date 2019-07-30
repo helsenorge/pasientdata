@@ -11,6 +11,7 @@ import FakeGlucoseData from "../../../Utils/fakeGlucose";
 import { connect } from "react-redux";
 import DateSelectorCard from "../../../components/DateSelectorCard/dateSelectorCard";
 import FHIRConnection from "../../../FHIRCommunication";
+import {CARBOHYDRATES} from "../../../dataTypes";
 
 class CarbohydrateInsight extends Component {
   render() {
@@ -21,8 +22,8 @@ class CarbohydrateInsight extends Component {
           <NavigationBar />
           <ViewCard />
           <DateSelectorCard />
+          <GraphCard datatype={CARBOHYDRATES} />
           <TrendGoalsCard datatype="Karbohydrater" />
-          <GraphCard datatype="Karbohydrater" />
           <PatternCard
             datatype="Karbohydrater"
             triangle={"down"}

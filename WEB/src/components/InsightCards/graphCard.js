@@ -1,26 +1,14 @@
 import React, { Component } from "react";
 import CardComponent from "../Card/cardComponent";
-import BarPlotter from "../Barplotter/barPlotter";
-import FakeGlucoseData from "../../Utils/fakeGlucose";
-import getFormat from "../../Utils/getFormat";
 import getStartEndTimes from "../../Utils/getStartEndTimes";
 import periodFromView from "../../Utils/periodFromView";
 import { connect } from "react-redux";
 import PeriodStepper from "../PeriodStepper/periodStepper";
+import InsightGraph from "./insightGraph";
+import { getAggregatedDataForDataType } from "../../Utils/aggregatedDataForDataType";
 
 class GraphCard extends Component {
-  graphContent = () => {
-    let data;
-    if (this.props.datatype === "Blodsukker") {
-      data = FakeGlucoseData();
-    } else if (this.props.datatype === "Vekt") {
-      data = this.props.patient.datasets[1].measurements;
-    } else if (this.props.datatype === "FysiskAktivitet") {
-      data = this.props.patient.datasets[2].measurements;
-    } else {
-      data = this.props.patient.datasets[0].measurements;
-    }
-    let { periodName, intervalName } = periodFromView(this.props.baseInfo.view);
+  graphContent = () => {let { periodName, intervalName } = periodFromView(this.props.baseInfo.view);
     let { start, end } = getStartEndTimes(
       this.props.baseInfo.view,
       this.props.baseInfo.nrOfIntervalsBack
@@ -33,17 +21,11 @@ class GraphCard extends Component {
       start = this.props.baseInfo.start;
       end = this.props.baseInfo.end;
     }
+    const aggregatedData = getAggregatedDataForDataType(this.props.baseInfo, this.props.patient.datasets, this.props.datatype)
 
     return (
       <div>
-        <BarPlotter
-          start={start}
-          end={end}
-          interval={intervalName}
-          outputFormat={getFormat(periodName, intervalName)}
-          data={data}
-          color={"#3C7E72"}
-        />
+        <InsightGraph aggregatedData={aggregatedData} dataType={this.props.datatype} />
         <PeriodStepper start={start} end={end} periodName={periodName} />
       </div>
     );

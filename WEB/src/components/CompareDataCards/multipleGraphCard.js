@@ -10,8 +10,7 @@ import getStartEndTimes from "../../Utils/getStartEndTimes";
 import getFormat from "../../Utils/getFormat";
 import {BLOODSUGAR, INSULIN, STEPS, WEIGHT, PHYSICAL_ACTIVITY, CARBOHYDRATES} from "../../dataTypes";
 import CompareDataGraph from "./compareDataGraph";
-import averageData from "../../Utils/averageData";
-import FakeGlucoseData from "../../Utils/fakeGlucose";
+import { getAggregatedDataForDataType } from "../../Utils/aggregatedDataForDataType";
 
 class MultipleGraphCard extends Component {
   makeGraph = dataType => {
@@ -129,78 +128,3 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps)(MultipleGraphCard);
-
-const getAggregatedDataForDataType = (baseInfo, dataSets, dataType) => {
-  let { periodName, periodNumber, intervalName } = periodFromView(baseInfo.view);
-  let startEndTimes = getStartEndTimes(
-    baseInfo.view,
-    baseInfo.nrOfIntervalsBack
-  );
-  let start = startEndTimes.start;
-  let end = startEndTimes.end;
-  if (
-    baseInfo.view === "custom" &&
-    baseInfo.start !== "" &&
-    baseInfo.end !== ""
-  ) {
-    start = baseInfo.start;
-    end = baseInfo.end;
-  }
-  function getData() {
-    switch(dataType) { 
-      case STEPS:
-          return dataSets[0].measurements;
-      case WEIGHT: 
-          return dataSets[1].measurements;
-      case CARBOHYDRATES:
-      case PHYSICAL_ACTIVITY:
-      case BLOODSUGAR:
-      case INSULIN:
-          //if data is missing, generate empty datapoints to present in prototype
-          return [{value: 0, start: moment().subtract(periodNumber, periodName).format('YYYY-MM-DDTHH:mm:ss')}]
-    }
-  }
-  const data = getData();
-
-  function getAggregatedData () {
-    switch(dataType) {
-      case BLOODSUGAR:
-      case INSULIN:
-      case STEPS:
-      case CARBOHYDRATES:
-      case PHYSICAL_ACTIVITY:
-          return aggregateData(
-            data,
-            intervalName,
-            start,
-            end,
-            getFormat(periodName, intervalName)
-          );
-      case WEIGHT:
-          return averageData(
-            data,
-            intervalName,
-            start,
-            end,
-            getFormat(periodName, intervalName)
-          );
-    }
-  }
-  const fakeDataForDataType = {
-    [BLOODSUGAR]: FakeGlucoseData().map(data => data.value),
-    [INSULIN]: [25, 22, 30, 32, 28, 25, 33, 35, 28],
-    [WEIGHT]: [72, 72, 72, 69, 69, 68, 70, 72, 72, 72, 69, 69, 68, 70],
-    [PHYSICAL_ACTIVITY]: [40, 28, 0, 45, 0, 0, 55, 65, 36],
-    [CARBOHYDRATES]: [250, 260, 220, 270, 300, 230, 150, 180]
-  };
-
-  let aggregated = getAggregatedData();
-  const noRecentData = aggregated.filter(data => data.y > 0).length === 0;
-  //Fake data to present in prototype
-  if(noRecentData) {
-    const fakeData = fakeDataForDataType[dataType];
-    aggregated = aggregated.map((data, index) => ({x: data.x[0], y: fakeData[index % fakeData.length]}));
-  }
-  return aggregated;
-}
-

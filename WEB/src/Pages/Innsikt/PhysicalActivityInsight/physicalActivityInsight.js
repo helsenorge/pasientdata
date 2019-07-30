@@ -9,6 +9,7 @@ import GoalCard from "../../../components/InsightCards/goalCard";
 import { connect } from "react-redux";
 import DateSelectorCard from "../../../components/DateSelectorCard/dateSelectorCard";
 import FHIRConnection from "../../../FHIRCommunication";
+import {PHYSICAL_ACTIVITY} from "../../../dataTypes";
 
 class PhysicalActivityInsight extends Component {
   render() {
@@ -19,8 +20,8 @@ class PhysicalActivityInsight extends Component {
           <NavigationBar />
           <ViewCard />
           <DateSelectorCard />
+          <GraphCard datatype={PHYSICAL_ACTIVITY} />
           <TrendGoalsCard datatype="FysiskAktivitet" />
-          <GraphCard datatype="FysiskAktivitet" />
           <PatternCard
             datatype="FysiskAktivitet"
             triangle={"up"}
