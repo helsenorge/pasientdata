@@ -1,13 +1,6 @@
 import React, { Component } from "react";
-import moment from "moment";
 import CardComponent from "../Card/cardComponent";
 import { connect } from "react-redux";
-import { XAxis, BarChart, ResponsiveContainer } from "recharts";
-import PeriodStepper from "../PeriodStepper/periodStepper";
-import periodFromView from "../../Utils/periodFromView";
-import aggregateData from "../../Utils/aggregateData";
-import getStartEndTimes from "../../Utils/getStartEndTimes";
-import getFormat from "../../Utils/getFormat";
 import {
   BLOODSUGAR,
   INSULIN,
@@ -28,7 +21,6 @@ class DashboardGraphCard extends Component {
       dataType,
       "dashboard"
     );
-    console.log(aggregatedData);
     return (
       <DashboardGraph
         aggregatedData={aggregatedData}

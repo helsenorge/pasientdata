@@ -26,42 +26,31 @@ class PeriodStepper extends Component {
     let text;
     if (periodName === "custom") {
       text =
-        moment(this.props.start, "YYYY-MM-DDTHH:mm:ss").format("dd.MM.YYYY") +
+        moment(this.props.start, "YYYY-MM-DDTHH:mm:ss").format("DD.MM") +
         " - " +
-        moment(this.props.end, "YYYY-MM-DDTHH:mm:ss").format("dd.MM.YYYY");
+        moment(this.props.end, "YYYY-MM-DDTHH:mm:ss").format("DD.MM");
     } else {
-      if (this.props.baseInfo.nrOfIntervalsBack === 0) {
-        if (periodNumber === 1) {
-          text = "siste " + intervalToString(periodName);
+      if (this.props.baseInfo.nrOfIntervalsBack === "0") {
+        if (periodName === "day") {
+          text = moment(this.props.start, "YYYY-MM-DDTHH:mm:ss").format(
+            "DD.MM"
+          );
         } else {
-          text = "siste " + periodNumber + " " + intervalToString(periodName);
+          text =
+            moment(this.props.start, "YYYY-MM-DDTHH:mm:ss").format("DD.MM") +
+            " - " +
+            moment(this.props.end, "YYYY-MM-DDTHH:mm:ss").format("DD.MM");
         }
       } else {
-        if (periodNumber === 1) {
-          text =
-            intervalToString(periodName) +
-            " " +
-            moment()
-              .subtract(this.props.baseInfo.nrOfIntervalsBack, periodName)
-              .format(formatPeriod(periodName));
+        if (periodName === "day") {
+          text = moment(this.props.start, "YYYY-MM-DDTHH:mm:ss").format(
+            "DD.MM"
+          );
         } else {
           text =
-            intervalToString(periodName) +
-            " " +
-            moment()
-              .subtract(
-                parseInt(this.props.baseInfo.nrOfIntervalsBack) +
-                  periodNumber -
-                  1,
-                periodName
-              )
-              .format(formatPeriod(periodName)) +
+            moment(this.props.start, "YYYY-MM-DDTHH:mm:ss").format("DD.MM") +
             " - " +
-            intervalToString(periodName) +
-            " " +
-            moment()
-              .subtract(this.props.baseInfo.nrOfIntervalsBack, periodName)
-              .format(formatPeriod(periodName));
+            moment(this.props.end, "YYYY-MM-DDTHH:mm:ss").format("DD.MM");
         }
       }
     }
