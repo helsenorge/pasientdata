@@ -82,8 +82,7 @@ class GoalContent extends Component {
         lowerLimit = goalValue / 5; // 5;
         currentValue =
           (timeWithin * 100) / (timeAbove + timeWithin + timeBelow);
-        unit = this.props.patient.goals.BloodSugarWithinRangePercentageGoal
-          .unit;
+        unit = this.props.patient.goals.BloodSugarWithinRangePercentageGoal.unit;
         break;
       case "BlodsukkerAvg":
         COLORS = generalColors;
@@ -143,14 +142,13 @@ class GoalContent extends Component {
         lowerLimit = goalValue / 5; // 50;
         let aggregatedActivity = aggregateActivity(
           data,
-          intervalName,
           moment()
             .subtract(periodNumber, periodName)
             .format("YYYY-MM-DDTHH:mm:ss"),
           moment().format("YYYY-MM-DDTHH:mm:ss"),
           "MM-DDTHH:mm"
         );
-        currentValue = aggregatedActivity.length / 7;
+        currentValue = (aggregatedActivity.length / 7);
         break;
       case "Karbohydrater":
         COLORS = generalColors;

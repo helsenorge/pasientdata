@@ -1,9 +1,8 @@
 import moment from "moment";
 import findStartAndEndIndex from "./findStartAndEndIndex";
 
-export default function aggregateData(
+export default function aggregateActivity(
   inData,
-  interval,
   startString,
   endString,
   outputFormat
@@ -41,7 +40,7 @@ export default function aggregateData(
   //   97 || // Weightlifting
   //   98 || // Wheelchair
   //   114 || // HIIT
-  //   116; // Walking (stroller)
+  //   116 // Walking (stroller)
 
   for (let i = 0; i < inData.length; i++) {
     let googleType = inData[i].value;
@@ -78,24 +77,38 @@ export default function aggregateData(
   let slicedData = activityArray.slice(startIndex, endIndex);
   const inputFormat = "YYYY-MM-DDTHH:mm";
   const slicedLength = slicedData.length;
+  console.log(startIndex, endIndex, activityArray.length)
 
   let aggregated = [];
 
-  let data = slicedData.map(item => ({ x: item.start, y: 0 }));
+  let data = slicedData.map(item => ({ x: item.start, y: 1 }));
 
   let start = moment(data[0].x, inputFormat).startOf("minutes");
 
   let currentDataTime;
   for (let i = 1; i < slicedLength; i++) {
     currentDataTime = moment(data[i].x, inputFormat);
-    if (data[i].x !== data[i - 1].x) {
-      aggregated.push({
-        y: 0,
-        x: currentDataTime.format(outputFormat)
-      });
-    }
+    aggregated.push({
+      y: 1,
+      x: currentDataTime.format(outputFormat)
+    });
   }
-  aggregated.push({ y: 0, x: start.format(outputFormat) });
+  aggregated.push({ y: 1, x: start.format(outputFormat) });
+
+  console.log(aggregated.length);
+  // switch (interval) {
+  //   case "day":
+  //     return aggregated.length / 14;
+  //   case "week":
+  //     console.log(aggregated.length/7)
+  //     return aggregated.length / 7;
+  //   case "2weeks":
+  //     return aggregated.length;
+  //   case "month":
+  //     return aggregated.length;
+  //   default:
+  //     return aggregated;
+  // }
 
   return aggregated;
 }
