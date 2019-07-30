@@ -13,8 +13,16 @@ import {
   PHYSICAL_ACTIVITY,
   CARBOHYDRATES
 } from "../dataTypes";
+import fakeCarbData from "./fakeCarbData";
+import fakeInsulinData from "./fakeInsulinData";
+import sortActivity from './sortActivity';
 
-export const getAggregatedDataForDataType = (baseInfo, dataSets, dataType) => {
+export const getAggregatedDataForDataType = (
+  baseInfo,
+  dataSets,
+  dataType,
+  pageType
+) => {
   let { periodName, periodNumber, intervalName } = periodFromView(
     baseInfo.view
   );
@@ -24,6 +32,14 @@ export const getAggregatedDataForDataType = (baseInfo, dataSets, dataType) => {
   );
   let start = startEndTimes.start;
   let end = startEndTimes.end;
+
+  if (pageType === "dashboard") {
+    start = moment()
+      .startOf("day")
+      .subtract(1, "week")
+      .add(1, "day");
+    end = moment();
+  }
   if (
     baseInfo.view === "custom" &&
     baseInfo.start !== "" &&
@@ -39,10 +55,19 @@ export const getAggregatedDataForDataType = (baseInfo, dataSets, dataType) => {
       case WEIGHT:
         return dataSets[1].measurements;
       case PHYSICAL_ACTIVITY:
-        return dataSets[2].measurements;
+        let sortedActivity = sortActivity(
+          dataSets[2].measurements,
+          moment()
+            .subtract(periodNumber, periodName)
+            .format("YYYY-MM-DDTHH:mm:ss"),
+          moment().format("YYYY-MM-DDTHH:mm:ss")
+        );
+        return sortedActivity;
       case CARBOHYDRATES:
-      case BLOODSUGAR:
+        return fakeCarbData(start, end);
       case INSULIN:
+        return fakeInsulinData(start, end);
+      case BLOODSUGAR:
         //if data is missing, generate empty datapoints to present in prototype
         return [
           {
@@ -55,7 +80,6 @@ export const getAggregatedDataForDataType = (baseInfo, dataSets, dataType) => {
     }
   }
   const data = getData();
-
   function getAggregatedData() {
     switch (dataType) {
       case BLOODSUGAR:
@@ -89,6 +113,7 @@ export const getAggregatedDataForDataType = (baseInfo, dataSets, dataType) => {
   };
 
   let aggregated = getAggregatedData();
+
   // console.log(aggregated)
   const noRecentData = aggregated.filter(data => data.y > 0).length === 0;
   //Fake data to present in prototype
