@@ -32,6 +32,7 @@ h5 {
   font-size: 18px !important;
   line-height: 21px;
   letter-spacing: 0.5625px;
+  text-transform: none !important;
 }
 
 html {
@@ -42,4 +43,13 @@ html {
   body {
     padding-top: 56px;
   }
+}
+
+.caption {
+  font-size: 12px;
+}
+
+.subheader {
+  font-size: 18px;
+  color: #212529;
 }

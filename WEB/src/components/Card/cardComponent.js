@@ -19,7 +19,7 @@ class CardComponent extends Component {
     return (
       <Card className={cardClassName}>
         <CardBody>
-          <CardTitle>{this.props.title}</CardTitle>
+          {this.props.title && <CardTitle>{this.props.title}</CardTitle>}
           {this.props.content}
         </CardBody>
       </Card>

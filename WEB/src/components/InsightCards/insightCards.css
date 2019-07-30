@@ -25,8 +25,7 @@
 
 .view-parent {
   display: flex;
-  align-items: space-around;
-  align-items: "center";
+  align-items: center;
 }
 
 .link-without-border-bottom {
