@@ -1,7 +1,6 @@
 import "./goalContent.css";
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
 import moment from "moment";
 import ChangeGoalButton from "../../components/ChangeGoalButton/changeGoalButton";
 import { PieChart, Pie, Cell, Label, ResponsiveContainer } from "recharts";
@@ -52,7 +51,7 @@ class GoalContent extends Component {
     let overColors = ["#E38B21", "#EEE05D", "#569B7E"];
     let underColors = ["#569B7E", "#EEE05D", "#E38B21"];
     let COLORS = [];
-    let dataSet = [{ value: 1 }, { value: 1 }, { value: 3 }];
+    let dataSet = [{ value: 1 }, { value: 1 }, { value: 1 }, { value: 1 }, { value: 1 }];
 
     let xPos;
     let data = FakeGlucoseData();
@@ -83,17 +82,16 @@ class GoalContent extends Component {
         lowerLimit = goalValue / 5; // 5;
         currentValue =
           (timeWithin * 100) / (timeAbove + timeWithin + timeBelow);
-        unit = this.props.patient.goals.BloodSugarWithinRangePercentageGoal
-          .unit;
+        unit = this.props.patient.goals.BloodSugarWithinRangePercentageGoal.unit;
         break;
       case "BlodsukkerAvg":
         COLORS = generalColors;
         goalValue = this.props.patient.goals.MeanGlucoseGoal.value; // 7
         unit = this.props.patient.goals.MeanGlucoseGoal.unit;
-        xPos = 48;
+        xPos = 51;
         data = FakeGlucoseData();
-        upperLimit = goalValue; // 12;
-        lowerLimit = goalValue / 5; // 6.2;
+        upperLimit = goalValue * 2; // 12;
+        lowerLimit = goalValue / 2; // 6.2;
         trends = Trends(data, upperLimit, lowerLimit);
         mean = trends.mean;
         currentValue = mean;
@@ -105,7 +103,7 @@ class GoalContent extends Component {
         xPos = 48;
         data = this.props.patient.datasets[0].measurements;
         upperLimit = goalValue; // 12000;
-        lowerLimit = goalValue / 12; // 1000;
+        lowerLimit = goalValue / 5; // 1000;
         let aggregated = aggregateData(
           data,
           intervalName,
@@ -121,7 +119,7 @@ class GoalContent extends Component {
         unit = this.props.patient.goals.StepsGoal.unit;
         break;
       case "Vekt":
-        dataSet = [{ value: 3 }, { value: 1 }, { value: 1 }];
+        dataSet = [{ value: 2 }, { value: 2 }, { value: 1 }];
         COLORS = underColors;
         goalValue = this.props.patient.goals.WeightGoal.value; // 70
         unit = this.props.patient.goals.WeightGoal.unit;
@@ -138,20 +136,19 @@ class GoalContent extends Component {
         dataSet = [{ value: 1 }, { value: 1 }, { value: 3 }];
         goalValue = this.props.patient.goals.PhysicalActivityGoal.value; //630
         unit = this.props.patient.goals.PhysicalActivityGoal.unit;
-        xPos = 62;
+        xPos = 58;
         data = this.props.patient.datasets[2].measurements;
         upperLimit = goalValue; // 70;
         lowerLimit = goalValue / 5; // 50;
         let aggregatedActivity = aggregateActivity(
           data,
-          intervalName,
           moment()
             .subtract(periodNumber, periodName)
             .format("YYYY-MM-DDTHH:mm:ss"),
           moment().format("YYYY-MM-DDTHH:mm:ss"),
           "MM-DDTHH:mm"
         );
-        currentValue = aggregatedActivity.length / 7;
+        currentValue = (aggregatedActivity.length / 7);
         break;
       case "Karbohydrater":
         COLORS = generalColors;
@@ -234,7 +231,7 @@ class GoalContent extends Component {
                     position="center"
                     content={this.CustomLabel(
                       "Status: ",
-                      Math.floor(currentValue) + unit,
+                      Math.floor(currentValue) + " " + unit,
                       xPos
                     )}
                   />

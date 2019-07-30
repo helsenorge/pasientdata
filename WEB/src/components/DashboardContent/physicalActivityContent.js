@@ -2,7 +2,6 @@ import React from "react";
 import InsightButton from "../InsightButton/insightButton";
 import moment from "moment";
 import BarPlotter from "../Barplotter/barPlotter";
-import {ReferenceLine} from "recharts";
 
 const PhysicalActivityContent = (data, link, goal) => {
   return (

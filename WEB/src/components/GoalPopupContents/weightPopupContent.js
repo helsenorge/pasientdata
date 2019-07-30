@@ -22,8 +22,8 @@ class WeightPopupContent extends Component {
         "WeightGoal",
         goal,
         "Desired weight to get under",
-        "kilogram",
-        "kilogram",
+        "kg",
+        "kg",
         this.props.patient.googleId
       ); // range goal
     }

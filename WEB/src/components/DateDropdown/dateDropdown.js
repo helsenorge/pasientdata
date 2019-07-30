@@ -34,10 +34,10 @@ class DateDropdown extends Component {
           Dag
         </option>
         <option className="custom-control" value="week">
-          Uke
+          7 dager
         </option>
         <option className="custom-control" value="2weeks">
-          To uker
+          14 dager
         </option>
         <option className="custom-control" value="month">
           Måned
