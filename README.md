@@ -18,16 +18,16 @@ npm start
 
 ## Setup
 ### Google setup:
-To access google data you will need to log into: concole.developers.google.com. <br/>
+To access google data you will need to log into: [concole.developers.google.com](https://console.developers.google.com/) <br/>
 <br/>
 How to set up credentials:
 * Select a project -> new project
     * set project name (let location be default: No organization) -> create
-* Select your new project
+* Select your [new project](https://console.developers.google.com/projectcreate?previousPage=%2Fapis%2Fdashboard%3Fproject%3Dehelse-247812&folder=&organizationId=0)
     * Click "APIs & Services" on the left
         * Click "+ ENABLE APIS AND SERVICES"
         * Search and select "Fitness API", then enable it
-        * Go back by entering "https://console.developers.google.com/apis/dashboard" in the url
+        * Go back by entering "[https://console.developers.google.com/apis/dashboard](https://console.developers.google.com/apis/dashboard)" in the url
     * Click on "Credentials" on the left
         * Click on "OAuth consent screen" from the tabs
             * Fill in application name
