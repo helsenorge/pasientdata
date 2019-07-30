@@ -11,8 +11,6 @@ import "./blodsukkerContent.css";
 import { Line } from "rc-progress";
 import aggregateData from "../../Utils/aggregateData";
 
-import BarPlotter from "../Barplotter/barPlotter";
-
 class BlodsukkerContent extends Component {
   render() {
     let data = FakeGlucoseData();
