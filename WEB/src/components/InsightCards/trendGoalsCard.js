@@ -49,6 +49,7 @@ class TrendGoalsCard extends Component {
     let currentValue =
       (timeWithin * 100) / (timeAbove + timeWithin + timeBelow);
     let unit = "%";
+    let unitMiddle = "%";
     let trends;
     let hasUpperLimit = true;
     //let percentGoal;
@@ -143,6 +144,7 @@ class TrendGoalsCard extends Component {
         currentValue = mean;
         trendValue = mean - prevTrends.mean;
         unit = "";
+        unitMiddle = "skritt";
         pieSideSize = 2000;
         break;
       case "Vekt":
@@ -366,11 +368,15 @@ class TrendGoalsCard extends Component {
                       className="caption" // "distance-to-goal-text"
                     >
                       {/* {goalText - Math.floor(currentValue)} skritt fra målet */}
-                      {goalText - Math.floor(currentValue) > 0
-                        ? Math.abs(goalText - Math.floor(currentValue)) +
-                          " skritt fra målet"
-                        : Math.abs(goalText - Math.floor(currentValue)) +
-                          " skritt over målet"}
+                      {goalValue - Math.floor(currentValue) > 0
+                        ? Math.abs(goalValue - Math.floor(currentValue)) +
+                          " " +
+                          unitMiddle +
+                          " fra målet"
+                        : Math.abs(goalValue - Math.floor(currentValue)) +
+                          " " +
+                          unitMiddle +
+                          " over målet"}
                     </text>
                     <text
                       x={cx}
