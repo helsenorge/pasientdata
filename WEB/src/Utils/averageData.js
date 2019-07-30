@@ -76,7 +76,7 @@ export default function averageDataFunctions(
 
   let counter = 1;
   for (let i = 1; i < slicedLength; i++) {
-    console.log("sliced length: ", slicedLength);
+    // console.log("sliced length: ", slicedLength);
     currentDataTime = moment(data[i].x, inputFormat);
     if (
       moment(start).diff(currentDataTime.startOf(interval), interval + "s") ===

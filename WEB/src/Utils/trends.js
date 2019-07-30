@@ -3,30 +3,33 @@ function Trends(data, upperLimit, lowerLimit) {
   let timeAbove = 0;
   let timeBelow = 0;
   let timeWithin = 0;
-  if (data[0].value) {
-    for (let i = 0; i < data.length; i++) {
-      if (data[i].value > upperLimit) {
-        timeAbove++;
-      } else if (data[i].value < lowerLimit) {
-        timeBelow++;
-      } else {
-        timeWithin++;
+  let mean = 0;
+  if (data.length > 0) {
+    if (data[0].value) {
+      for (let i = 0; i < data.length; i++) {
+        if (data[i].value > upperLimit) {
+          timeAbove++;
+        } else if (data[i].value < lowerLimit) {
+          timeBelow++;
+        } else {
+          timeWithin++;
+        }
+        sum += data[i].value;
       }
-      sum += data[i].value;
-    }
-  } else {
-    for (let i = 0; i < data.length; i++) {
-      if (data[i].y > upperLimit) {
-        timeAbove++;
-      } else if (data[i].y < lowerLimit) {
-        timeBelow++;
-      } else {
-        timeWithin++;
+    } else {
+      for (let i = 0; i < data.length; i++) {
+        if (data[i].y > upperLimit) {
+          timeAbove++;
+        } else if (data[i].y < lowerLimit) {
+          timeBelow++;
+        } else {
+          timeWithin++;
+        }
+        sum += data[i].y;
       }
-      sum += data[i].y;
     }
+    mean = sum / data.length;
   }
-  const mean = sum / data.length;
   return { timeAbove, timeBelow, timeWithin, mean, sum };
 }
 
