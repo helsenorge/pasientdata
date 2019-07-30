@@ -13,10 +13,10 @@ import {
 import "./trendGoalsCard.css";
 import { connect } from "react-redux";
 import aggregateData from "../../Utils/aggregateData";
-import periodFromView from "../../Utils/periodFromView";
 import getStartEndTimes from "../../Utils/getStartEndTimes";
 import findStartAndEndIndex from "../../Utils/findStartAndEndIndex";
 import averageDataFunction from "../../Utils/averageData";
+import sortActivity from "../../Utils/sortActivity";
 
 class TrendGoalsCard extends Component {
   displayUnit = () => {
@@ -145,6 +145,7 @@ class TrendGoalsCard extends Component {
         unit = " kg";
         unitMiddle = "kg";
         pieSideSize = 20;
+        data = this.props.patient.datasets[1].measurements;
         goalValue = this.props.patient.goals.WeightGoal.value;
         hasUpperLimit = false;
         lowerIsBetter = true;
@@ -160,8 +161,16 @@ class TrendGoalsCard extends Component {
       case "FysiskAktivitet":
         unitMiddle = "min";
         unit = " min";
+        data = this.props.patient.datasets[2].measurements;
         goalValue = this.props.patient.goals.PhysicalActivityGoal.value;
         hasUpperLimit = false;
+        let sortedActivity = sortActivity(
+          this.props.patient.datasets[2].measurements,
+          start,
+          end,
+          true
+        );
+        currentValue = sortedActivity.length;
         break;
       default:
     }
