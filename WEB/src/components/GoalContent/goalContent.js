@@ -7,7 +7,6 @@ import { PieChart, Pie, Cell, Label, ResponsiveContainer } from "recharts";
 import CardComponent from "../../components/Card/cardComponent";
 import FakeGlucoseData from "../../Utils/fakeGlucose";
 import Trends from "../../Utils/trends";
-import periodFromView from "../../Utils/periodFromView";
 import aggregateData from "../../Utils/aggregateData";
 import sortActivity from "../../Utils/sortActivity";
 
@@ -73,9 +72,6 @@ class GoalContent extends Component {
       (timeWithin * 100) / (timeAbove + timeWithin + timeBelow);
     let unit = "%";
     let trends;
-    let { periodName, periodNumber, intervalName } = periodFromView(
-      this.props.baseInfo.view
-    );
 
     switch (this.props.datatype) {
       case "Blodsukker":
@@ -114,9 +110,9 @@ class GoalContent extends Component {
         lowerLimit = goalValue / 6.5;
         let aggregated = aggregateData(
           data,
-          intervalName,
+          "day",
           moment()
-            .subtract(periodNumber, periodName)
+            .subtract(2, "week")
             .format("YYYY-MM-DDTHH:mm:ss"),
           moment().format("YYYY-MM-DDTHH:mm:ss"),
           "ddd"
@@ -151,7 +147,7 @@ class GoalContent extends Component {
         let sortedActivity = sortActivity(
           data,
           moment()
-            .subtract(periodNumber, periodName)
+            .subtract(2, "week")
             .format("YYYY-MM-DDTHH:mm:ss"),
           moment().format("YYYY-MM-DDTHH:mm:ss"),
           true
