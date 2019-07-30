@@ -391,11 +391,6 @@ class TrendGoalsCard extends Component {
                 <Cell key="" fill={COLORS[index % COLORS.length]} />
               ))}{" "}
               />{" "}
-              {/* <Label
-                value={Math.floor(currentValue) + unit}
-                position="center"
-                className="large-numerical-value"
-              /> */}
             </Pie>
             <svg>
               <polygon
@@ -406,20 +401,6 @@ class TrendGoalsCard extends Component {
             </svg>
           </PieChart>
         </ResponsiveContainer>
-        {/* <div className="flex-children-trend-goals flex-side-container-trend-goals">
-          <div className="flex-children-trend-goals flex-container-trend-goals upper-trend-goals-div">
-            <img
-              src={goalArrowPic}
-              alt={"logo"}
-              className="index-Image flex-children trend-pic"
-            />
-            <div className="flex-children-trend-goals flex-side-container-trend-goals">
-              <div className="flex-children-trend-goals">Mål:</div>
-              <div className="flex-children-trend-goals large-numerical-value">
-                {goalText}
-              </div>
-            </div>
-          </div> */}
         <div className="flex-children-trend-goals flex-side-container-trend-goals">
           <div className="flex-parent-upper-right upper-trend-goals-div">
             <div className="flex-children-trend-goals flex-container-trend-goals ">
