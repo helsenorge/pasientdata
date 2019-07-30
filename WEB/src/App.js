@@ -4,13 +4,12 @@ import "./min-helse.css";
 import "./styles.css";
 import { Switch, Route, BrowserRouter } from "react-router-dom";
 import Dashboard from "./Pages/Dashboard/dashboard";
-import Blodsukker from "./Pages/Innsikt/Blodsukker/blodsukker";
-import Skritt from "./Pages/Innsikt/Skritt/skritt";
-import Insulin from "./Pages/Innsikt/Insulin/insulin";
-import Vekt from "./Pages/Innsikt/Vekt/vekt";
-import Blodtrykk from "./Pages/Innsikt/Blodtrykk/blodtrykk";
-import Karbohydrater from "./Pages/Innsikt/Karbohydrater/karbohydrater";
-import FysiskAktivitet from "./Pages/Innsikt/FysiskAktivitet/fysiskAktivitet";
+import BloodSugarInsight from "./Pages/Innsikt/BloodSugarInsight/bloodSugarInsight";
+import StepInsight from "./Pages/Innsikt/StepInsight/stepInsight";
+import InsulinInsight from "./Pages/Innsikt/InsulinInsight/insulinInsight";
+import WeightInsight from "./Pages/Innsikt/WeightInsight/weightInsight";
+import CarbohydrateInsight from "./Pages/Innsikt/CarbohydrateInsight/carbohydrateInsight";
+import PhysicalActivityInsight from "./Pages/Innsikt/PhysicalActivityInsight/physicalActivityInsight";
 import MyGoals from "./Pages/MyGoalsPage/myGoalsPage";
 import CompareData from "./Pages/CompareDataPage/compareDataPage";
 
@@ -30,13 +29,12 @@ class App extends Component {
             <Route exact path="/" component={FHIRCommunication} />
             <Route path="/login" component={FHIRCommunication} />
             <Route path="/dashboard" component={Dashboard} />
-            <Route path="/bloodsugar" component={Blodsukker} />
-            <Route path="/insulin" component={Insulin} />
-            <Route path="/steps" component={Skritt} />
-            <Route path="/weight" component={Vekt} />
-            <Route path="/bloodpressure" component={Blodtrykk} />
-            <Route path="/carbohydrates" component={Karbohydrater} />
-            <Route path="/physicalactivity" component={FysiskAktivitet} />
+            <Route path="/bloodsugar" component={BloodSugarInsight} />
+            <Route path="/insulin" component={InsulinInsight} />
+            <Route path="/steps" component={StepInsight} />
+            <Route path="/weight" component={WeightInsight} />
+            <Route path="/carbohydrates" component={CarbohydrateInsight} />
+            <Route path="/physicalactivity" component={PhysicalActivityInsight} />
             <Route path="/comparedata" component={CompareData} />
             <Route path="/mygoals" component={MyGoals} />
             <Route

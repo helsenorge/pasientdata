@@ -6,13 +6,13 @@ import PatternCard from "../../../components/InsightCards/patternCard";
 import ViewCard from "../../../components/InsightCards/viewCard";
 import CompareDataCard from "../../../components/InsightCards/compareDataCard";
 import GoalCard from "../../../components/InsightCards/goalCard";
+import "../innsikt.css";
 import FakeGlucoseData from "../../../Utils/fakeGlucose";
 import { connect } from "react-redux";
 import DateSelectorCard from "../../../components/DateSelectorCard/dateSelectorCard";
 import FHIRConnection from "../../../FHIRCommunication";
 
-class Insulin extends Component {
-  state = {};
+class CarbohydrateInsight extends Component {
   render() {
     if (this.props.baseInfo.isLoggedin) {
       return (
@@ -21,10 +21,10 @@ class Insulin extends Component {
           <NavigationBar />
           <ViewCard />
           <DateSelectorCard />
-          <TrendGoalsCard datatype="Insulin" />
-          <GraphCard datatype="Insulin" />
+          <TrendGoalsCard datatype="Karbohydrater" />
+          <GraphCard datatype="Karbohydrater" />
           <PatternCard
-            datatype="Insulin"
+            datatype="Karbohydrater"
             triangle={"down"}
             fluctuation={"none"}
             greatestChange={"none"}
@@ -53,4 +53,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(Insulin);
+export default connect(mapStateToProps)(CarbohydrateInsight);
