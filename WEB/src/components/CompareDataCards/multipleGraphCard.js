@@ -8,18 +8,27 @@ import periodFromView from "../../Utils/periodFromView";
 import aggregateData from "../../Utils/aggregateData";
 import getStartEndTimes from "../../Utils/getStartEndTimes";
 import getFormat from "../../Utils/getFormat";
-import {BLOODSUGAR, INSULIN, STEPS, WEIGHT, PHYSICAL_ACTIVITY, CARBOHYDRATES} from "../../dataTypes";
+import {
+  BLOODSUGAR,
+  INSULIN,
+  STEPS,
+  WEIGHT,
+  PHYSICAL_ACTIVITY,
+  CARBOHYDRATES
+} from "../../dataTypes";
 import CompareDataGraph from "./compareDataGraph";
 import { getAggregatedDataForDataType } from "../../Utils/aggregatedDataForDataType";
 
 class MultipleGraphCard extends Component {
   makeGraph = dataType => {
-    const aggregatedData = getAggregatedDataForDataType(this.props.baseInfo, this.props.patient.datasets, dataType);
+    const aggregatedData = getAggregatedDataForDataType(
+      this.props.baseInfo,
+      this.props.patient.datasets,
+      dataType,
+      "compareData"
+    );
     return (
-      <CompareDataGraph
-        aggregatedData={aggregatedData}
-        dataType={dataType}
-      />
+      <CompareDataGraph aggregatedData={aggregatedData} dataType={dataType} />
     );
   };
 

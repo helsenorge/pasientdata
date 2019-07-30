@@ -16,7 +16,7 @@ import moment from "moment";
 
 class CarbsGraph extends Component {
   render() {
-    let data = fakeCarbData(this.props.start, this.props.end, 55, 10);
+    let data = fakeCarbData(this.props.start, this.props.end);
     let aggregated = aggregateData(
       data,
       this.props.interval,

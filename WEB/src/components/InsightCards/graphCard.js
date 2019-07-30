@@ -8,7 +8,8 @@ import InsightGraph from "./insightGraph";
 import { getAggregatedDataForDataType } from "../../Utils/aggregatedDataForDataType";
 
 class GraphCard extends Component {
-  graphContent = () => {let { periodName, intervalName } = periodFromView(this.props.baseInfo.view);
+  graphContent = () => {
+    let { periodName, intervalName } = periodFromView(this.props.baseInfo.view);
     let { start, end } = getStartEndTimes(
       this.props.baseInfo.view,
       this.props.baseInfo.nrOfIntervalsBack
@@ -21,11 +22,19 @@ class GraphCard extends Component {
       start = this.props.baseInfo.start;
       end = this.props.baseInfo.end;
     }
-    const aggregatedData = getAggregatedDataForDataType(this.props.baseInfo, this.props.patient.datasets, this.props.datatype)
+    const aggregatedData = getAggregatedDataForDataType(
+      this.props.baseInfo,
+      this.props.patient.datasets,
+      this.props.datatype,
+      "insight"
+    );
 
     return (
       <div>
-        <InsightGraph aggregatedData={aggregatedData} dataType={this.props.datatype} />
+        <InsightGraph
+          aggregatedData={aggregatedData}
+          dataType={this.props.datatype}
+        />
         <PeriodStepper start={start} end={end} periodName={periodName} />
       </div>
     );

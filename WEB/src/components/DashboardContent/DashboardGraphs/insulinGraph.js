@@ -17,7 +17,7 @@ import moment from "moment";
 
 class InsulinGraph extends Component {
   render() {
-    let data = fakeInsulinData(this.props.start, this.props.end, 6, 3);
+    let data = fakeInsulinData(this.props.start, this.props.end);
     let aggregated = aggregateData(
       data,
       this.props.interval,

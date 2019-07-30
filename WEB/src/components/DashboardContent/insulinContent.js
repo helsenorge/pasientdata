@@ -3,6 +3,16 @@ import "./dashboardContent.css";
 import InsightButton from "../InsightButton/insightButton";
 import moment from "moment";
 import InsulinGraph from "./DashboardGraphs/insulinGraph";
+import DashboardGraph from "./dashboardGraph";
+import { getAggregatedDataForDataType } from "../../Utils/aggregatedDataForDataType";
+import {
+  BLOODSUGAR,
+  INSULIN,
+  STEPS,
+  WEIGHT,
+  PHYSICAL_ACTIVITY,
+  CARBOHYDRATES
+} from "../../dataTypes";
 
 const insulinContent = () => {
   let startString = moment()
@@ -10,19 +20,16 @@ const insulinContent = () => {
     .subtract(1, "week")
     .add(1, "day");
   let endString = moment();
-
+  const aggregatedData = getAggregatedDataForDataType(
+    this.props.baseInfo,
+    this.props.patient.datasets,
+    INSULIN,
+    "dashboard"
+  );
   return (
     <div>
       <div style={{ marginBottom: "12px" }}>
-        <InsulinGraph
-          start={startString}
-          end={endString}
-          interval={"day"}
-          outputFormat={"ddd"}
-          legend="off"
-          page="Dashboard"
-          color={"rgba(89, 195, 255, 0.8)"}
-        />
+        {this.DashboardGraph(aggregatedData, INSULIN)}
       </div>
       <InsightButton linkTo={"/insulin"} />
     </div>

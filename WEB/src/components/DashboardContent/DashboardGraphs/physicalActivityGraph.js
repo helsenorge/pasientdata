@@ -12,7 +12,7 @@ import {
 import aggregateData from "../../../Utils/aggregateData";
 import { connect } from "react-redux";
 import moment from "moment";
-import aggregateActivity from "../../../Utils/aggregateActivity";
+//import aggregateActivity from "../../../Utils/aggregateActivity";
 
 class PhysicalActivityGraph extends Component {
   render() {

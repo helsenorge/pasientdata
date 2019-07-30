@@ -16,7 +16,12 @@ import {
 import fakeCarbData from "./fakeCarbData";
 import fakeInsulinData from "./fakeInsulinData";
 
-export const getAggregatedDataForDataType = (baseInfo, dataSets, dataType) => {
+export const getAggregatedDataForDataType = (
+  baseInfo,
+  dataSets,
+  dataType,
+  pageType
+) => {
   let { periodName, periodNumber, intervalName } = periodFromView(
     baseInfo.view
   );
@@ -26,6 +31,14 @@ export const getAggregatedDataForDataType = (baseInfo, dataSets, dataType) => {
   );
   let start = startEndTimes.start;
   let end = startEndTimes.end;
+
+  if (pageType === "dashboard") {
+    start = moment()
+      .startOf("day")
+      .subtract(1, "week")
+      .add(1, "day");
+    end = moment();
+  }
   if (
     baseInfo.view === "custom" &&
     baseInfo.start !== "" &&
@@ -59,7 +72,6 @@ export const getAggregatedDataForDataType = (baseInfo, dataSets, dataType) => {
     }
   }
   const data = getData();
-
   function getAggregatedData() {
     switch (dataType) {
       case BLOODSUGAR:

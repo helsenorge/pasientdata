@@ -9,15 +9,12 @@ class InsightButton extends Component {
       <div
         style={{
           display: "flex",
-          "justifyContent": "flex-end",
-          "alignItems": "flex-end",
-          "alignSelf": "flex-end",
-          position: "absolute",
-          bottom: "8px",
-          right: "8px"
+          justifyContent: "flex-end",
+          alignItems: "flex-end",
+          alignSelf: "flex-end"
         }}
       >
-        <Link to={this.props.linkTo} style={{ "borderBottom": "none" }}>
+        <Link to={this.props.linkTo} style={{ borderBottom: "none" }}>
           <button className="shape">
             <ChevronRightRounded className="chevronStyle" />
           </button>
