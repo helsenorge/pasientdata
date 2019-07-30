@@ -13,6 +13,8 @@ import {
   PHYSICAL_ACTIVITY,
   CARBOHYDRATES
 } from "../dataTypes";
+import fakeCarbData from "./fakeCarbData";
+import fakeInsulinData from "./fakeInsulinData";
 
 export const getAggregatedDataForDataType = (baseInfo, dataSets, dataType) => {
   let { periodName, periodNumber, intervalName } = periodFromView(
@@ -41,8 +43,10 @@ export const getAggregatedDataForDataType = (baseInfo, dataSets, dataType) => {
       case PHYSICAL_ACTIVITY:
         return dataSets[2].measurements;
       case CARBOHYDRATES:
-      case BLOODSUGAR:
+        return fakeCarbData(start, end);
       case INSULIN:
+        return fakeInsulinData(start, end);
+      case BLOODSUGAR:
         //if data is missing, generate empty datapoints to present in prototype
         return [
           {
@@ -89,6 +93,7 @@ export const getAggregatedDataForDataType = (baseInfo, dataSets, dataType) => {
   };
 
   let aggregated = getAggregatedData();
+
   // console.log(aggregated)
   const noRecentData = aggregated.filter(data => data.y > 0).length === 0;
   //Fake data to present in prototype

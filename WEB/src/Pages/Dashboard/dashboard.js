@@ -14,12 +14,19 @@ import AddDataContent from "../../components/DashboardContent/addDataContent";
 import changeGoalsContent from "../../components/DashboardContent/changeGoalsContent";
 import compareDataContent from "../../components/DashboardContent/compareDataContent";
 import periodFromView from "../../Utils/periodFromView";
+import getStartEndTimes from "../../Utils/getStartEndTimes";
+import carbohydratesContent from "../../components/DashboardContent/carbohydratesContent";
+import insulinContent from "../../components/DashboardContent/insulinContent";
 
 class Dashboard extends Component {
   render() {
     if (this.props.baseInfo.isLoggedin) {
       let { periodName, intervalName } = periodFromView(
         this.props.baseInfo.view
+      );
+      let { start, end } = getStartEndTimes(
+        this.props.baseInfo.view,
+        this.props.baseInfo.nrOfIntervalsBack
       );
       return (
         <div style={{ margin: "0 4px 8px" }}>
@@ -29,10 +36,7 @@ class Dashboard extends Component {
             <CardComponent
               className="dashboard-card"
               title={"Insulin"}
-              content={stepsContent(
-                this.props.patient.datasets[0].measurements,
-                "/insulin"
-              )}
+              content={insulinContent()}
             />
             <CardComponent
               className="dashboard-card"
@@ -55,10 +59,11 @@ class Dashboard extends Component {
             <CardComponent
               className="dashboard-card"
               title={"Karbo"}
-              content={stepsContent(
-                this.props.patient.datasets[0].measurements,
-                "/carbohydrates"
-              )}
+              // content={stepsContent(
+              //   this.props.patient.datasets[0].measurements,
+              //   "/carbohydrates"
+              // )}
+              content={carbohydratesContent()}
             />
             <CardComponent
               className="dashboard-card"
@@ -77,8 +82,9 @@ class Dashboard extends Component {
               title={"Fysisk aktivitet"}
               content={physicalActivityContent(
                 this.props.patient.datasets[2].measurements,
-                "/physicalactivity", 
-                this.props.patient.goals.PhysicalActivityGoal.value
+                "/physicalactivity",
+                start,
+                end
               )}
             />
             <div className="flex-children" style={{ marginRight: "8px" }} />

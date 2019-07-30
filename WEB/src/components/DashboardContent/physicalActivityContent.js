@@ -1,17 +1,20 @@
 import React from "react";
 import InsightButton from "../InsightButton/insightButton";
 import moment from "moment";
-import BarPlotter from "../Barplotter/barPlotter";
+import PhysicalActivityGraph from "./DashboardGraphs/physicalActivityGraph";
 
-const PhysicalActivityContent = (data, link, goal) => {
+const PhysicalActivityContent = (data, link, start, end) => {
+  let startString = moment()
+    .startOf("day")
+    .subtract(1, "week")
+    .add(1, "day");
+  let endString = moment();
   return (
     <div>
-      <div>
-        <BarPlotter
-          start={moment()
-            .subtract(1, "week")
-            .endOf("day")}
-          end={moment()}
+      <div style={{ marginBottom: "12px" }}>
+        <PhysicalActivityGraph
+          start={startString}
+          end={endString}
           interval={"day"}
           outputFormat={"ddd"}
           data={data}
