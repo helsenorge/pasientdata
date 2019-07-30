@@ -150,6 +150,7 @@ class TrendGoalsCard extends Component {
       case "Vekt":
         goalValue = 65;
         unit = " kg";
+        unitMiddle = "kg";
         pieSideSize = 20;
         if ("WeightGoal" in this.props.patient.goals) {
           goalValue = this.props.patient.goals.WeightGoal.value;
@@ -159,6 +160,7 @@ class TrendGoalsCard extends Component {
         break;
       case "Karbohydrater":
         goalValue = 280;
+        unitMiddle = "g";
         if ("CarbsGoal" in this.props.patient.goals) {
           goalValue = this.props.patient.goals.CarbsGoal.value;
         }
