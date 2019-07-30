@@ -359,7 +359,7 @@ class TrendGoalsCard extends Component {
                     </text>
                     <text
                       x={cx}
-                      y={cy + 10}
+                      y={cy + 15}
                       fill="#000000"
                       textAnchor="middle"
                       dominantBaseline="end"
