@@ -1,12 +1,14 @@
 import moment from "moment";
 
-export default function fakeInsulinData(startString, endString, mean, range) {
+export default function fakeInsulinData(startString, endString) {
   let start;
   let end;
   let value;
   let data = [];
-  let percentage = 0.25;
+  const percentage = 0.25;
   let prefix = 0;
+  const mean = 6;
+  const range = 2;
   let dataLength =
     moment(endString, "YYYY-MM-DDTHH:mm:ss").diff(
       moment(startString, "YYYY-MM-DDTHH:mm:ss"),

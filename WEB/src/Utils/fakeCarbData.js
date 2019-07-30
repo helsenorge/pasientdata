@@ -1,12 +1,14 @@
 import moment from "moment";
 
-export default function fakeCarbData(startString, endString, mean, range) {
+export default function fakeCarbData(startString, endString) {
   let start;
   let end;
   let value;
   let data = [];
-  let percentage = 0.15;
+  const percentage = 0.15;
   let prefix = 0;
+  const mean = 55;
+  const range = 10;
   let dataLength =
     moment(endString, "YYYY-MM-DDTHH:mm:ss").diff(
       moment(startString, "YYYY-MM-DDTHH:mm:ss"),
