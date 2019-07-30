@@ -15,7 +15,7 @@ import {
 } from "../dataTypes";
 import fakeCarbData from "./fakeCarbData";
 import fakeInsulinData from "./fakeInsulinData";
-import sortActivity from './sortActivity';
+import sortActivity from "./sortActivity";
 
 export const getAggregatedDataForDataType = (
   baseInfo,
@@ -57,10 +57,9 @@ export const getAggregatedDataForDataType = (
       case PHYSICAL_ACTIVITY:
         let sortedActivity = sortActivity(
           dataSets[2].measurements,
-          moment()
-            .subtract(periodNumber, periodName)
-            .format("YYYY-MM-DDTHH:mm:ss"),
-          moment().format("YYYY-MM-DDTHH:mm:ss")
+          start,
+          end,
+          true
         );
         return sortedActivity;
       case CARBOHYDRATES:
