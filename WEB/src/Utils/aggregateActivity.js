@@ -11,6 +11,7 @@ export default function aggregateData(
   let sleepArray = [];
   let activityArray = [];
   let notActiveArray = [];
+  let walkingArray = [];
   let activityType =
     1 || // Biking
     2 || // On foot
@@ -53,12 +54,17 @@ export default function aggregateData(
       notActiveArray.push(inData[i]);
     } else if (
       googleType === 72 || // Sleeping
-      googleType === 109 || // Light sleep	
+      googleType === 109 || // Light sleep
       googleType === 110 || // Deep sleep
       googleType === 111 || // REM sleep
       googleType === 112 // Awake (during sleep cycle)
     ) {
       sleepArray.push(inData[i]);
+    } else if (
+      googleType === 2 || // On foot
+      googleType === 7 // Walking
+    ) {
+      walkingArray.push(inData[i]);
     } else {
       activityArray.push(inData[i]);
     }

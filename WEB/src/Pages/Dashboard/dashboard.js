@@ -9,6 +9,7 @@ import blodsukkerContent from "../../components/DashboardContent/blodsukkerConte
 // import carbohydratesContent from "../../components/DashboardContent/carbohydratesContent";
 import stepsContent from "../../components/DashboardContent/stepsContent";
 import weightContent from "../../components/DashboardContent/weightContent";
+import physicalActivityContent from "../../components/DashboardContent/physicalActivityContent";
 import AddDataContent from "../../components/DashboardContent/addDataContent";
 import changeGoalsContent from "../../components/DashboardContent/changeGoalsContent";
 import compareDataContent from "../../components/DashboardContent/compareDataContent";
@@ -69,9 +70,10 @@ class Dashboard extends Component {
             <CardComponent
               className="dashboard-card"
               title={"Fysisk aktivitet"}
-              content={stepsContent(
-                this.props.patient.datasets[0].measurements,
-                "/physicalactivity"
+              content={physicalActivityContent(
+                this.props.patient.datasets[2].measurements,
+                "/physicalactivity", 
+                this.props.patient.goals.PhysicalActivityGoal.value
               )}
             />
             <div className="flex-children" style={{ marginRight: "8px" }} />
