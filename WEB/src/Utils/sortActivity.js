@@ -1,11 +1,12 @@
 import moment from "moment";
 import findStartAndEndIndex from "./findStartAndEndIndex";
 
-export default function aggregateActivity(
+export default function sortActivity(
   inData,
   startString,
   endString,
-  outputFormat
+  outputFormat,
+  spliced
 ) {
   let sleepArray = [];
   let activityArray = [];
@@ -75,40 +76,33 @@ export default function aggregateActivity(
   );
 
   let slicedData = activityArray.slice(startIndex, endIndex);
-  const inputFormat = "YYYY-MM-DDTHH:mm";
-  const slicedLength = slicedData.length;
-  console.log(startIndex, endIndex, activityArray.length)
 
-  let aggregated = [];
 
-  let data = slicedData.map(item => ({ x: item.start, y: 1 }));
+  // const inputFormat = "YYYY-MM-DDTHH:mm";
+  // const slicedLength = slicedData.length;
+  // console.log(startIndex, endIndex, activityArray.length)
 
-  let start = moment(data[0].x, inputFormat).startOf("minutes");
+  // let aggregated = [];
 
-  let currentDataTime;
-  for (let i = 1; i < slicedLength; i++) {
-    currentDataTime = moment(data[i].x, inputFormat);
-    aggregated.push({
-      y: 1,
-      x: currentDataTime.format(outputFormat)
-    });
-  }
-  aggregated.push({ y: 1, x: start.format(outputFormat) });
+  // let data = slicedData.map(item => ({ x: item.start, y: 1 }));
 
-  console.log(aggregated.length);
-  // switch (interval) {
-  //   case "day":
-  //     return aggregated.length / 14;
-  //   case "week":
-  //     console.log(aggregated.length/7)
-  //     return aggregated.length / 7;
-  //   case "2weeks":
-  //     return aggregated.length;
-  //   case "month":
-  //     return aggregated.length;
-  //   default:
-  //     return aggregated;
+  // let start = moment(data[0].x, inputFormat).startOf("minutes");
+
+  // let currentDataTime;
+  // for (let i = 1; i < slicedLength; i++) {
+  //   currentDataTime = moment(data[i].x, inputFormat);
+  //   aggregated.push({
+  //     y: 1,
+  //     x: currentDataTime.format(outputFormat)
+  //   });
   // }
+  // aggregated.push({ y: 1, x: start.format(outputFormat) });
 
-  return aggregated;
+  // console.log(aggregated.length);
+  switch (spliced) {
+    case true:
+      return slicedData;
+    default:
+      return activityArray;
+  }
 }

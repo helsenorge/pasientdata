@@ -9,7 +9,7 @@ import FakeGlucoseData from "../../Utils/fakeGlucose";
 import Trends from "../../Utils/trends";
 import periodFromView from "../../Utils/periodFromView";
 import aggregateData from "../../Utils/aggregateData";
-import aggregateActivity from "../../Utils/aggregateActivity";
+import sortActivity from "../../Utils/sortActivity";
 
 class GoalContent extends Component {
   CustomLabel(value1, value2, xPos) {
@@ -51,7 +51,13 @@ class GoalContent extends Component {
     let overColors = ["#E38B21", "#EEE05D", "#569B7E"];
     let underColors = ["#569B7E", "#EEE05D", "#E38B21"];
     let COLORS = [];
-    let dataSet = [{ value: 1 }, { value: 1 }, { value: 1 }, { value: 1 }, { value: 1 }];
+    let dataSet = [
+      { value: 1 },
+      { value: 1 },
+      { value: 1 },
+      { value: 1 },
+      { value: 1 }
+    ];
 
     let xPos;
     let data = FakeGlucoseData();
@@ -75,14 +81,16 @@ class GoalContent extends Component {
       case "Blodsukker":
         COLORS = overColors;
         dataSet = [{ value: 1 }, { value: 1 }, { value: 3 }];
-        goalValue = this.props.patient.goals.BloodSugarWithinRangePercentageGoal.value; // 80
+        goalValue = this.props.patient.goals.BloodSugarWithinRangePercentageGoal
+          .value; // 80
         xPos = 72;
         data = FakeGlucoseData();
         upperLimit = goalValue; // 12;
         lowerLimit = goalValue / 5; // 5;
         currentValue =
           (timeWithin * 100) / (timeAbove + timeWithin + timeBelow);
-        unit = this.props.patient.goals.BloodSugarWithinRangePercentageGoal.unit;
+        unit = this.props.patient.goals.BloodSugarWithinRangePercentageGoal
+          .unit;
         break;
       case "BlodsukkerAvg":
         COLORS = generalColors;
@@ -140,15 +148,16 @@ class GoalContent extends Component {
         data = this.props.patient.datasets[2].measurements;
         upperLimit = goalValue; // 70;
         lowerLimit = goalValue / 5; // 50;
-        let aggregatedActivity = aggregateActivity(
+        let sortedActivity = sortActivity(
           data,
           moment()
             .subtract(periodNumber, periodName)
             .format("YYYY-MM-DDTHH:mm:ss"),
           moment().format("YYYY-MM-DDTHH:mm:ss"),
-          "MM-DDTHH:mm"
+          "MM-DDTHH:mm",
+          true
         );
-        currentValue = (aggregatedActivity.length / 7);
+        currentValue = sortedActivity.length / 7;
         break;
       case "Karbohydrater":
         COLORS = generalColors;

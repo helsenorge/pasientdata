@@ -93,7 +93,8 @@ export const getAggregatedDataForDataType = (baseInfo, dataSets, dataType) => {
   };
 
   let aggregated = getAggregatedData();
-  console.log(aggregated);
+
+  // console.log(aggregated)
   const noRecentData = aggregated.filter(data => data.y > 0).length === 0;
   //Fake data to present in prototype
   if (noRecentData) {

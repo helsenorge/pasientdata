@@ -22,13 +22,17 @@ class TrendGoalsCard extends Component {
   displayUnit = () => {
     switch (this.props.datatype) {
       case "Blodsukker":
-        return "%";
+        return "";
       case "Insulin":
-        return "%";
+        return "";
       case "Skritt":
         return "skritt/dag";
       case "Blodsukker":
-        return "%";
+        return "";
+      case "FysiskAktivitet":
+        return "";
+      case "Karbohydrater":
+        return "";
       default:
         return "Default";
     }
@@ -67,24 +71,16 @@ class TrendGoalsCard extends Component {
       this.props.baseInfo.view,
       parseInt(this.props.baseInfo.nrOfIntervalsBack, 10) + 1
     );
-    let weight = false;
-
+    let lowerIsBetter = false;
     switch (this.props.datatype) {
       case "Blodsukker":
         data = FakeGlucoseData();
-        upperLimit = 12;
-        lowerLimit = 5;
         //percentGoal = 65;
         trendValue = 2;
-        goalValue = 85;
-        if ("BloodSugarWithinRangePercentageGoal" in this.props.patient.goals) {
-          goalValue = this.props.patient.goals
-            .BloodSugarWithinRangePercentageGoal.value;
-        }
-        if ("BloodSugarRangeGoal" in this.props.patient.goals) {
-          lowerLimit = this.props.patient.goals.BloodSugarRangeGoal.lower;
-          upperLimit = this.props.patient.goals.BloodSugarRangeGoal.upper;
-        }
+        goalValue = this.props.patient.goals.BloodSugarWithinRangePercentageGoal
+          .value;
+        lowerLimit = this.props.patient.goals.BloodSugarRangeGoal.lower;
+        upperLimit = this.props.patient.goals.BloodSugarRangeGoal.upper;
         let averageData = averageDataFunction(data, "hour", start, end, "ddd");
         trends = Trends(data, upperLimit, lowerLimit);
         mean = trends.mean;
@@ -122,10 +118,7 @@ class TrendGoalsCard extends Component {
         data = this.props.patient.datasets[0].measurements;
         upperLimit = 10000000;
         lowerLimit = 15000;
-        goalValue = 15000; // default case if no goal exist in redux store.
-        if ("StepsGoal" in this.props.patient.goals) {
-          goalValue = this.props.patient.goals.StepsGoal.value;
-        }
+        goalValue = this.props.patient.goals.StepsGoal.value;
         trendValue = 200;
         aggregated = aggregateData(data, "day", start, end, "ddd");
         trends = Trends(aggregated, upperLimit, lowerLimit);
@@ -152,19 +145,23 @@ class TrendGoalsCard extends Component {
         unit = " kg";
         unitMiddle = "kg";
         pieSideSize = 20;
-        if ("WeightGoal" in this.props.patient.goals) {
-          goalValue = this.props.patient.goals.WeightGoal.value;
-        }
+        goalValue = this.props.patient.goals.WeightGoal.value;
         hasUpperLimit = false;
-        weight = true;
+        lowerIsBetter = true;
         break;
       case "Karbohydrater":
         goalValue = 280;
         unitMiddle = "g";
-        if ("CarbsGoal" in this.props.patient.goals) {
-          goalValue = this.props.patient.goals.CarbsGoal.value;
-        }
+        goalValue = this.props.patient.goals.CarbsGoal.value;
         unit = " g";
+        hasUpperLimit = false;
+        lowerIsBetter = true;
+        break;
+      case "FysiskAktivitet":
+        unitMiddle = "min";
+        unit = " min";
+        goalValue = this.props.patient.goals.PhysicalActivityGoal.value;
+        hasUpperLimit = false;
         break;
       default:
     }
@@ -173,7 +170,7 @@ class TrendGoalsCard extends Component {
     if (!hasUpperLimit) {
       COLORS = ["#569B7E", "#E38B21"];
     }
-    if (weight) {
+    if (lowerIsBetter) {
       COLORS = ["#E38B21", "#569B7E"];
     }
 
@@ -374,7 +371,7 @@ class TrendGoalsCard extends Component {
                         ? Math.abs(goalValue - Math.floor(currentValue)) +
                           " " +
                           unitMiddle +
-                          " fra målet"
+                          " under målet"
                         : Math.abs(goalValue - Math.floor(currentValue)) +
                           " " +
                           unitMiddle +
