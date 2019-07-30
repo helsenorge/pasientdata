@@ -91,8 +91,8 @@ class GoalContent extends Component {
         unit = this.props.patient.goals.MeanGlucoseGoal.unit;
         xPos = 51;
         data = FakeGlucoseData();
-        upperLimit = goalValue; // 12;
-        lowerLimit = goalValue / 5; // 6.2;
+        upperLimit = goalValue * 2; // 12;
+        lowerLimit = goalValue / 2; // 6.2;
         trends = Trends(data, upperLimit, lowerLimit);
         mean = trends.mean;
         currentValue = mean;
@@ -120,7 +120,7 @@ class GoalContent extends Component {
         unit = this.props.patient.goals.StepsGoal.unit;
         break;
       case "Vekt":
-        dataSet = [{ value: 3 }, { value: 1 }, { value: 1 }];
+        dataSet = [{ value: 2 }, { value: 2 }, { value: 1 }];
         COLORS = underColors;
         goalValue = this.props.patient.goals.WeightGoal.value; // 70
         unit = this.props.patient.goals.WeightGoal.unit;
