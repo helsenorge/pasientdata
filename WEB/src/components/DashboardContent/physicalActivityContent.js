@@ -5,10 +5,9 @@ import BarPlotter from "../Barplotter/barPlotter";
 import {ReferenceLine} from "recharts";
 
 const PhysicalActivityContent = (data, link, goal) => {
-  console.log(data);
   return (
     <div>
-      <div style={{ "margin-right": "40px" }}>
+      <div>
         <BarPlotter
           start={moment()
             .subtract(1, "week")
