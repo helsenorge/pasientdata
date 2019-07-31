@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import "./popupContent.css";
 import { DisplayButton } from "@helsenorge/toolkit/components/atoms/buttons/display-button";
 import { connect } from "react-redux";
-import { changeGoal } from "../../Redux/actions";
-import addGoal from "../../Utils/addGoal";
+import { changeGoal } from "../../../Redux/actions";
+import addGoal from "../../../Utils/addGoal";
 
-class WeightPopupContent extends Component {
+class StepsPopupContent extends Component {
   constructor(props) {
     super(props);
 
@@ -15,15 +15,15 @@ class WeightPopupContent extends Component {
   }
   handleSave = () => {
     if (this.state.goal !== "") {
-      let goal = { type: "upper", value: this.state.goal };
+      let goal = { type: "lower", value: this.state.goal };
       // console.log("goal: ", goal);
-      this.props.changeGoal("WeightGoal", goal);
+      this.props.changeGoal("StepsGoal", goal);
       addGoal(
-        "WeightGoal",
+        "StepsGoal",
         goal,
-        "Desired weight to get under",
-        "kg",
-        "kg",
+        "Desired number of steps per day",
+        "skritt",
+        "skritt",
         this.props.patient.googleId
       ); // range goal
     }
@@ -36,10 +36,10 @@ class WeightPopupContent extends Component {
   render = () => {
     return (
       <React.Fragment>
-        <h2> Vekt</h2>
+        <h2> Skritt</h2>
         <div className="popup-content-center-text">
           <br />
-          Jeg ønsker å veie mindre enn
+          Jeg ønsker å gå mer enn
           <input
             type="number"
             className="goal-input"
@@ -47,7 +47,7 @@ class WeightPopupContent extends Component {
             value={this.state.value}
             onChange={this.handleChange}
           />
-          kilogram
+          skritt per dag
           <br />
           <br />
           <DisplayButton
@@ -77,4 +77,4 @@ function mapStateToProps(state) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(WeightPopupContent);
+)(StepsPopupContent);

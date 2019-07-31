@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import "./popupContent.css";
 import { DisplayButton } from "@helsenorge/toolkit/components/atoms/buttons/display-button";
 import { connect } from "react-redux";
-import { changeGoal } from "../../Redux/actions";
-import addGoal from "../../Utils/addGoal";
+import { changeGoal } from "../../../Redux/actions";
+import addGoal from "../../../Utils/addGoal";
 
-class CarbsPopupContent extends Component {
+class BloodSugarMeanPopupContent extends Component {
   constructor(props) {
     super(props);
 
@@ -17,13 +17,13 @@ class CarbsPopupContent extends Component {
     if (this.state.goal !== "") {
       let goal = { type: "upper", value: this.state.goal };
       // console.log("goal: ", goal);
-      this.props.changeGoal("CarbsGoal", goal);
+      this.props.changeGoal("MeanGlucoseGoal", goal);
       addGoal(
-        "CarbsGoal",
+        "MeanGlucoseGoal",
         goal,
-        "Max grams of carbohydrates per day",
-        "g",
-        "g",
+        "Desired upper limit of the mean blood glucose",
+        "mmol/l",
+        "mmol/l",
         this.props.patient.googleId
       ); // range goal
     }
@@ -36,10 +36,10 @@ class CarbsPopupContent extends Component {
   render = () => {
     return (
       <React.Fragment>
-        <h2> Fysisk aktivitet</h2>
+        <h2> Blodsukker</h2> Gjennomsnittlig nivå
         <div className="popup-content-center-text">
           <br />
-          Jeg ønsker å spise mindre enn
+          Jeg ønsker å ha mindre enn
           <input
             type="number"
             className="goal-input"
@@ -47,7 +47,7 @@ class CarbsPopupContent extends Component {
             value={this.state.value}
             onChange={this.handleChange}
           />
-          gram karbohydrater per dag
+          mml/l i gjennomsnittlig glukoseverdi
           <br />
           <br />
           <DisplayButton
@@ -77,4 +77,4 @@ function mapStateToProps(state) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(CarbsPopupContent);
+)(BloodSugarMeanPopupContent);

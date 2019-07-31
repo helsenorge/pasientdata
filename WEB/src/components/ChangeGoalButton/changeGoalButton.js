@@ -2,12 +2,12 @@ import React, { Component } from "react";
 import { DisplayButton } from "@helsenorge/toolkit/components/atoms/buttons/display-button";
 import EditOutlined from "@helsenorge/toolkit/components/icons/EditOutlined";
 import { LightBox } from "@helsenorge/toolkit/components/molecules/lightbox";
-import BloodSugarPopupContent from "../GoalPopupContents/bloodSugarPopupContent";
-import BloodSugarMeanPopupContent from "../GoalPopupContents/bloodSugarMeanPopupContent";
-import CarbsPopupContent from "../GoalPopupContents/carbsPopupContent";
-import PhysicalActivityPopupContent from "../GoalPopupContents/physicalActivityPopupContent";
-import StepsPopupContent from "../GoalPopupContents/stepsPopupContent";
-import WeightPopupContent from "../GoalPopupContents/weightPopupContent";
+import BloodSugarPopupContent from "../../Pages/MyGoalsPage/GoalPopupContents/bloodSugarPopupContent";
+import BloodSugarMeanPopupContent from "../../Pages/MyGoalsPage/GoalPopupContents/bloodSugarMeanPopupContent";
+import CarbsPopupContent from "../../Pages/MyGoalsPage/GoalPopupContents/carbsPopupContent";
+import PhysicalActivityPopupContent from "../../Pages/MyGoalsPage/GoalPopupContents/physicalActivityPopupContent";
+import StepsPopupContent from "../../Pages/MyGoalsPage/GoalPopupContents/stepsPopupContent";
+import WeightPopupContent from "../../Pages/MyGoalsPage/GoalPopupContents/weightPopupContent";
 import "./changeGoalButton.css";
 
 class ChangeGoalButton extends Component {

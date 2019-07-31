@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import "./popupContent.css";
 import { DisplayButton } from "@helsenorge/toolkit/components/atoms/buttons/display-button";
 import { connect } from "react-redux";
-import { changeGoal } from "../../Redux/actions";
-import addGoal from "../../Utils/addGoal";
+import { changeGoal } from "../../../Redux/actions";
+import addGoal from "../../../Utils/addGoal";
 
-class BloodSugarMeanPopupContent extends Component {
+class WeightPopupContent extends Component {
   constructor(props) {
     super(props);
 
@@ -17,13 +17,13 @@ class BloodSugarMeanPopupContent extends Component {
     if (this.state.goal !== "") {
       let goal = { type: "upper", value: this.state.goal };
       // console.log("goal: ", goal);
-      this.props.changeGoal("MeanGlucoseGoal", goal);
+      this.props.changeGoal("WeightGoal", goal);
       addGoal(
-        "MeanGlucoseGoal",
+        "WeightGoal",
         goal,
-        "Desired upper limit of the mean blood glucose",
-        "mmol/l",
-        "mmol/l",
+        "Desired weight to get under",
+        "kg",
+        "kg",
         this.props.patient.googleId
       ); // range goal
     }
@@ -36,10 +36,10 @@ class BloodSugarMeanPopupContent extends Component {
   render = () => {
     return (
       <React.Fragment>
-        <h2> Blodsukker</h2> Gjennomsnittlig nivå
+        <h2> Vekt</h2>
         <div className="popup-content-center-text">
           <br />
-          Jeg ønsker å ha mindre enn
+          Jeg ønsker å veie mindre enn
           <input
             type="number"
             className="goal-input"
@@ -47,7 +47,7 @@ class BloodSugarMeanPopupContent extends Component {
             value={this.state.value}
             onChange={this.handleChange}
           />
-          mml/l i gjennomsnittlig glukoseverdi
+          kilogram
           <br />
           <br />
           <DisplayButton
@@ -77,4 +77,4 @@ function mapStateToProps(state) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(BloodSugarMeanPopupContent);
+)(WeightPopupContent);
