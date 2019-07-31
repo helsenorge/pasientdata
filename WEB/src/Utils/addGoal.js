@@ -61,12 +61,12 @@ export default function addGoal(
     body: JSON.stringify(goalJSON)
   };
 
-  // const client = FHIR.client({
-  //   serverUrl: mainURL
-  // });
+  const client = FHIR.client({
+    serverUrl: mainURL
+  });
 
   console.log("Adding goal to FHIR database");
-  this.state.client
+  client
     .request(goalOptions, (error, response, body) => {})
     .then(goal => {
       console.log("Goal: ", goal);
