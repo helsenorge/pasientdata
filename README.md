@@ -6,7 +6,7 @@ This is a project done by 5 summer interns, who will find and create a solution 
 
 #### How to run ####
 
-**_Before running the program, take a look at [setup](https://github.com/helsenorgelab/pasientdata#setup)_**
+**_Before running the program, take a look at [setup](https://github.com/helsenorgelab/pasientdata#setup)**
 
 Run using npm:
 
@@ -36,7 +36,7 @@ The backend is now running on a server, but we also have a local version. If you
 ![picture alt](https://github.com/helsenorgelab/pasientdata/blob/master/Documentation%20images/runAfter.PNG "This is how it should look after you have changed to Spark.NetCore")
 
 * When you have chosen "Spark.NetCore" as your run module you can run and see a webpage with "localhost:5001" showing up.
-* Now the backend is setup and you can move to the [next section](https://github.com/helsenorgelab/pasientdata#frontend*setup).
+* Now the backend is setup and you can move to the [next section](https://github.com/helsenorgelab/pasientdata#frontend-setup).
 
 *If you are running the project locally, you need to change the useLocalServer variable to "true" in the file called [fhirUrl.js](https://github.com/helsenorgelab/pasientdata/blob/dev/WEB/src/fhirUrl.js). 
 
