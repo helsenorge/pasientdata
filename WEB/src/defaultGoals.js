@@ -1,3 +1,7 @@
+/*
+ * Default goals used if the user has no goals in the fhir database.
+ */
+
 const defaultGoals = {
   StepsGoal: {
     type: "lower",
