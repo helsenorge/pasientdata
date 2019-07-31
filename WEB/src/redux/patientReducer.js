@@ -1,7 +1,7 @@
 import { SET_PATIENT, SET_GOALS, CHANGE_GOAL } from "./actionType";
 import defaultGoals from "../defaultGoals.js";
 
-const initialState = {
+export const initialState = {
   googleId: "",
   firstname: "",
   lastname: "",
