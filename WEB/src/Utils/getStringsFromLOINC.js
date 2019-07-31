@@ -56,17 +56,14 @@ export default function getStringsFromLOINC(LOINC) {
         unit: "unitless",
         UCUMCode: "unitless"
       };
-      return;
-
+      break;
     default:
       strings = {
         unitDisplayString: "Activity",
         observationDisplayName: "Activity",
-        unit: "unitless",
-        UCUMCode: "unitless"
+        unit: "",
+        UCUMCode: ""
       };
-    // console.error("Non-valid LOINC-code: ", LOINC);
-    // return null;
   }
   return strings;
 }

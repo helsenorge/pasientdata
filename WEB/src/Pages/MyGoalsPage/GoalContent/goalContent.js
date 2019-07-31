@@ -2,13 +2,13 @@ import "./goalContent.css";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import moment from "moment";
-import ChangeGoalButton from "../../components/ChangeGoalButton/changeGoalButton";
+import ChangeGoalButton from "../../../components/ChangeGoalButton/changeGoalButton";
 import { PieChart, Pie, Cell, Label, ResponsiveContainer } from "recharts";
-import CardComponent from "../../components/Card/cardComponent";
-import FakeGlucoseData from "../../Utils/fakeGlucose";
-import Trends from "../../Utils/trends";
-import aggregateData from "../../Utils/aggregateData";
-import sortActivity from "../../Utils/sortActivity";
+import CardComponent from "../../../components/Card/cardComponent";
+import FakeGlucoseData from "../../../Utils/fakeGlucose";
+import Trends from "../../../Utils/trends";
+import aggregateData from "../../../Utils/aggregateData";
+import sortActivity from "../../../Utils/sortActivity";
 
 class GoalContent extends Component {
   CustomLabel(value1, value2, xPos) {

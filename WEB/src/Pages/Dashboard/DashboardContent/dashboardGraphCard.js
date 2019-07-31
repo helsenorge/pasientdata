@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import CardComponent from "../Card/cardComponent";
+import CardComponent from "../../../components/Card/cardComponent";
 import { connect } from "react-redux";
 import {
   BLOODSUGAR,
@@ -8,10 +8,10 @@ import {
   WEIGHT,
   PHYSICAL_ACTIVITY,
   CARBOHYDRATES
-} from "../../dataTypes";
-import { getAggregatedDataForDataType } from "../../Utils/aggregatedDataForDataType";
+} from "../../../dataTypes";
+import { getAggregatedDataForDataType } from "../../../Utils/aggregatedDataForDataType";
 import DashboardGraph from "./dashboardGraph";
-import InsightButton from "../InsightButton/insightButton";
+import InsightButton from "../../../components/InsightButton/insightButton";
 
 class DashboardGraphCard extends Component {
   makeGraph = dataType => {

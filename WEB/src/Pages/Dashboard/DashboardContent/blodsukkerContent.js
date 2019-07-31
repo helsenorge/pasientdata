@@ -45,8 +45,8 @@ class BlodsukkerContent extends Component {
     // let percentageChange = currentValue - prevValue;
     // let meanChange = trends.mean - prevTrends.mean;
     // // Get arrow imgs for use with trend values.
-    const upTrianglePic = require("../../Images/greenUpTriangle.svg");
-    const downTrianglePic = require("../../Images/greenDownTriangle.svg");
+    const upTrianglePic = require("../../../Images/greenUpTriangle.svg");
+    const downTrianglePic = require("../../../Images/greenDownTriangle.svg");
     return (
       <React.Fragment>
         <div className="flex-container glucose-main">
