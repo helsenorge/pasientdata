@@ -5,13 +5,12 @@ import { Link } from "react-router-dom";
 const changeGoalsContent = () => {
   return (
     <div>
-      <div>
-        Opplever du at du överträffar målene dine eller trenger å justere dem?
-        Prøv å endre målene.
+      <div style={{ color: "black" }}>
+        Om du har behov for å justere målene dine kan du endre på dem.
       </div>
       <br />
       <div className="dashboard-button">
-        <Link to={"/mygoals"} style={{ "borderBottom": "none" }}>
+        <Link to={"/mygoals"} style={{ borderBottom: "none" }}>
           <DisplayButton secondary>
             <div className={"dashboard-button-sizing"}>Gå til Mine mål </div>
           </DisplayButton>

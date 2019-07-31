@@ -8,7 +8,9 @@ class CompareDataCard extends Component {
   makeContent = () => {
     return (
       <div>
-        <div>Forstå dine resultater bedre ved å sammenligne data.</div>
+        <div style={{ color: "black" }}>
+          Forstå dine resultater bedre ved å sammenligne data.
+        </div>
         <br />
         <div className="compare-data-card">
           <Link to={"/comparedata"} className="link-without-border-bottom">

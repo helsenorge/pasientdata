@@ -59,7 +59,10 @@ class PatternCard extends Component {
             <div className="flex-children-pattern-image">
               <img src={pic} alt={"logo"} className="arrow-icon" />
             </div>
-            <div className="flex-children-pattern-text">
+            <div
+              className="flex-children-pattern-text"
+              style={{ color: "black" }}
+            >
               {greatestChangeText}
             </div>
           </div>
@@ -73,7 +76,7 @@ class PatternCard extends Component {
               />
             </div>
             <div className="flex-children-pattern-text">
-              <div>{fluctuationText}</div>
+              <div style={{ color: "black" }}>{fluctuationText}</div>
             </div>
           </div>
           <div />
@@ -86,7 +89,10 @@ class PatternCard extends Component {
             <div className="flex-children-pattern-image">
               <img src={pic} alt={"logo"} className="arrow-icon" />
             </div>
-            <div className="flex-children-pattern-text">
+            <div
+              className="flex-children-pattern-text"
+              style={{ color: "black" }}
+            >
               {greatestChangeText}
             </div>
           </div>
@@ -103,7 +109,12 @@ class PatternCard extends Component {
                 className="squiggly-icon"
               />
             </div>
-            <div className="flex-children-pattern-text">{fluctuationText}</div>
+            <div
+              className="flex-children-pattern-text"
+              style={{ color: "black" }}
+            >
+              {fluctuationText}
+            </div>
           </div>
         </div>
       );

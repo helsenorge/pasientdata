@@ -12,6 +12,7 @@ import {
 import { getAggregatedDataForDataType } from "../../../Utils/aggregatedDataForDataType";
 import DashboardGraph from "./dashboardGraph";
 import InsightButton from "../../../components/InsightButton/insightButton";
+import getStaticTrend from "../../../Utils/getStaticTrend";
 
 class DashboardGraphCard extends Component {
   makeGraph = dataType => {
@@ -31,12 +32,16 @@ class DashboardGraphCard extends Component {
   };
 
   makeContent = link => {
+    const trend = getStaticTrend(this.props.dataType);
     return (
       <div>
         <div style={{ marginBottom: "12px" }}>
           {this.makeGraph(this.props.dataType)}
         </div>
-        <InsightButton linkTo={link} />
+        <div className="dashboard-card-container">
+          <div className="static-trend">{trend}</div>
+          <InsightButton linkTo={link} />
+        </div>
       </div>
     );
   };

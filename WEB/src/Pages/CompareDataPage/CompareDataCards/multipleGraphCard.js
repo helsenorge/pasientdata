@@ -114,8 +114,8 @@ class MultipleGraphCard extends Component {
 
     if (noDataTypesChecked) {
       return (
-        <span>
-          Valg de datatyper som du vill se sammelign mellan i listan nedan.
+        <span style={{ color: "black" }}>
+          Velg de datatypene du vil sammenligne fra listen nedenfor.
         </span>
       );
     } else {

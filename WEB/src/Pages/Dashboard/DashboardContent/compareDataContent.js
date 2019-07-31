@@ -6,13 +6,12 @@ import "./dashboardContent.css";
 const compareDataContent = () => {
   return (
     <div>
-      <div>
-        For å forstå din data bedre og hvordan ulike faktorer henger sammen kan
-        du teste sammenlign data.
+      <div style={{ color: "black" }}>
+        Forstå dine resultater bedre ved å sammenligne data.
       </div>
       <br />
       <div className="dashboard-button">
-        <Link to={"/comparedata"} style={{ "borderBottom": "none" }}>
+        <Link to={"/comparedata"} style={{ borderBottom: "none" }}>
           <DisplayButton secondary>
             <div className={"dashboard-button-sizing"}>
               Gå til Sammenlign data{" "}
