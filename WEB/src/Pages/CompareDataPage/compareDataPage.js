@@ -7,6 +7,12 @@ import DateSelectorCard from "../../components/DateSelectorCard/dateSelectorCard
 import FHIRConnection from "../../FHIRCommunication";
 import { connect } from "react-redux";
 
+/*
+ * Page that gives the user the possibility of selecting data sources, that are then
+ * rendered above each other. Also contains the view card that lets the user select
+ * time period to be shown either by dropdown or by selecting to and from dates.
+ */
+
 class CompareData extends Component {
   render() {
     if (this.props.baseInfo.isLoggedin) {
