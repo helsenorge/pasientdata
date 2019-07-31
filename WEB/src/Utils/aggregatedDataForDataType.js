@@ -17,6 +17,7 @@ import fakeCarbData from "./fakeCarbData";
 import fakeInsulinData from "./fakeInsulinData";
 import sortActivity from "./sortActivity";
 import findStartAndEndIndex from "./findStartAndEndIndex";
+import filterActivityByDate from "./filterActivityByDate";
 
 export const getAggregatedDataForDataType = (
   baseInfo,
@@ -57,14 +58,12 @@ export const getAggregatedDataForDataType = (
       case WEIGHT:
         return dataSets[1].measurements;
       case PHYSICAL_ACTIVITY:
-        console.log(start, end);
         let sortedActivity = sortActivity(
           dataSets[2].measurements,
           start,
           end,
           true
         );
-        console.log(sortedActivity);
         return sortedActivity;
       case CARBOHYDRATES:
         return fakeCarbData(start, end);
@@ -85,11 +84,14 @@ export const getAggregatedDataForDataType = (
   const data = getData();
   function getAggregatedData() {
     switch (dataType) {
+      case PHYSICAL_ACTIVITY:
+        let filteredActivityByDate = filterActivityByDate(data);
+        console.log(filteredActivityByDate)
+        return filteredActivityByDate;
       case BLOODSUGAR:
       case INSULIN:
       case STEPS:
       case CARBOHYDRATES:
-      case PHYSICAL_ACTIVITY:
         return aggregateData(
           data,
           intervalName,
