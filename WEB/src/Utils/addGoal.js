@@ -1,5 +1,6 @@
 import * as FHIR from "fhirclient";
 import moment from "moment";
+import fhirUrl from "../fhirUrl";
 
 export default function addGoal(
   goalId,
@@ -10,7 +11,6 @@ export default function addGoal(
   googleId
 ) {
   let target;
-  let mainURL = "https://pasientdata-fhir-api.azurewebsites.net/fhir"; // "https://localhost:5001/fhir"; //
   if (goal.type === "range") {
     target = {
       detailRange: {
@@ -37,7 +37,7 @@ export default function addGoal(
       lastUpdated: moment().format("YYYY-MM-DDThh:mm:ss")
     },
     subject: {
-      reference: mainURL + "/Patient/" + googleId
+      reference: fhirUrl + "/Patient/" + googleId
     },
     target: target,
     note: { text: goal.type },
@@ -47,7 +47,7 @@ export default function addGoal(
 
   let goalOptions = {
     method: "PUT",
-    url: mainURL + "/Goal/" + goalId,
+    url: fhirUrl + "/Goal/" + goalId,
     headers: {
       "cache-control": "no-cache",
       Connection: "keep-alive",
@@ -62,7 +62,7 @@ export default function addGoal(
   };
 
   const client = FHIR.client({
-    serverUrl: mainURL
+    serverUrl: fhirUrl
   });
 
   console.log("Adding goal to FHIR database");
