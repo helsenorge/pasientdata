@@ -46,7 +46,7 @@ export const getDomain = (dataType, aggregatedData) => {
     const maxWeight = aggregatedData
       .map(data => data.y)
       .reduce((a, b) => Math.max(a, b));
-    return [Math.floor(minWeight) - 5, Math.ceil(maxWeight) + 5];
+    return [Math.floor(minWeight) - 5, Math.ceil(maxWeight) + 3];
   }
   if (dataType === CARBOHYDRATES) {
     return [0, 320];
@@ -61,16 +61,16 @@ export const getDomain = (dataType, aggregatedData) => {
     return [0, 14000];
   }
   if (dataType === BLOODSUGAR) {
-    return [5, 12];
+    return [5, 10];
   }
 };
 
 export const getGoal = (patient, dataType) => {
   if (dataType === WEIGHT) {
-    return patient.goals.WeightGoal;
+    return { value: patient.goals.WeightGoal.value, unit: "kg" };
   }
   if (dataType === CARBOHYDRATES) {
-    return patient.goals.CarbsGoal;
+    return { value: patient.goals.CarbsGoal.value, unit: "g" };
   }
   if (dataType === INSULIN) {
     return { value: 35, unit: "U" };
@@ -78,13 +78,13 @@ export const getGoal = (patient, dataType) => {
   if (dataType === PHYSICAL_ACTIVITY) {
     return {
       value: patient.goals.PhysicalActivityGoal.value / 7,
-      unit: patient.goals.PhysicalActivityGoal.unit
+      unit: "min"
     };
   }
   if (dataType === STEPS) {
-    return patient.goals.StepsGoal;
+    return { value: patient.goals.StepsGoal.value };
   }
   if (dataType === BLOODSUGAR) {
-    return patient.goals.MeanGlucoseGoal;
+    return { value: patient.goals.MeanGlucoseGoal.value, unit: "" };
   }
 };

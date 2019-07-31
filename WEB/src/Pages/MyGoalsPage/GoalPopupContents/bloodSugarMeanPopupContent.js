@@ -15,7 +15,7 @@ class BloodSugarMeanPopupContent extends Component {
   }
   handleSave = () => {
     if (this.state.goal !== "") {
-      let goal = { type: "upper", value: this.state.goal };
+      let goal = { type: "upper", value: this.state.goal, unit: "" };
       // console.log("goal: ", goal);
       this.props.changeGoal("MeanGlucoseGoal", goal);
       addGoal(
