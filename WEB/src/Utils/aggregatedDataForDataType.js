@@ -91,7 +91,6 @@ export const getAggregatedDataForDataType = (
     switch (dataType) {
       case PHYSICAL_ACTIVITY:
         let filteredActivityByDate = filterActivityByDate(data);
-        console.log(filteredActivityByDate)
         return filteredActivityByDate;
       case BLOODSUGAR:
       case INSULIN:
