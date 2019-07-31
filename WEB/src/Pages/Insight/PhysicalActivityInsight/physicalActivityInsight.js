@@ -30,7 +30,7 @@ class PhysicalActivityInsight extends Component {
               triangle={"up"}
               fluctuation={"none"}
               greatestChange={"none"}
-              data={this.props.patient.datasets[2].measurements}
+              dataType={PHYSICAL_ACTIVITY}
               view={this.props.baseInfo.view}
               goals={this.props.patient.goals}
             />

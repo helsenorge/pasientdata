@@ -1,6 +1,12 @@
 import React, { Component } from "react";
 import CardComponent from "../../../components/Card/cardComponent";
 import "./patternCard.css";
+import {
+  getRawDataForDataType,
+  getAggregatedDataForDataType
+} from "../../../Utils/aggregatedDataForDataType";
+import { connect } from "react-redux";
+import { getGoal } from "../../../dataTypes";
 
 class PatternCard extends Component {
   patternCardContent = () => {
@@ -12,22 +18,36 @@ class PatternCard extends Component {
     let view = this.props.view;
     let goals = this.props.goals;
 
+    const aggregatedData = getRawDataForDataType(
+      this.props.baseInfo,
+      this.props.patient.datasets,
+      this.props.dataType,
+      "insight"
+    );
     let fluctuationText;
+    let fluctuationValue;
     if (this.props.fluctuation !== "none") {
-      fluctuationText = this.props.fluctuation(view, data, goals);
+      fluctuationText = this.props.fluctuation(view, aggregatedData, goals);
     } else {
       fluctuationText = "ingen funksjon";
     }
-
     let greatestChangeText;
+    let changeValue;
     if (this.props.greatestChange !== "none") {
-      greatestChangeText = this.props.greatestChange(view, data, goals);
+      [greatestChangeText, changeValue] = this.props.greatestChange(
+        view,
+        aggregatedData,
+        goals
+      );
     } else {
       greatestChangeText = "ingen funksjon";
     }
 
+    let goal = getGoal(this.props.patient, this.props.dataType).value;
     let pic = triangleDownPic;
-    if (this.props.triangle === "up") {
+    if (this.props.triangle === "squiggly") {
+      pic = squigglyLinePic;
+    } else if (changeValue.y >= goal) {
       pic = triangleUpPic;
     }
 
@@ -74,15 +94,21 @@ class PatternCard extends Component {
           </div>
         </div>
       );
-      // } else if (this.props.fluctuation !== "none") {
-      //   <div>
-      //     <div className="flex-container-pattern">
-      //       <div className="flex-children-pattern-image">
-      //         <img src={squigglyLinePic} alt={"logo"} className="squiggly-icon" />
-      //       </div>
-      //       <div className="flex-children-pattern-text">{fluctuationText}</div>
-      //     </div>
-      // </div>;
+    } else if (this.props.fluctuation !== "none") {
+      return (
+        <div>
+          <div className="flex-container-pattern">
+            <div className="flex-children-pattern-image">
+              <img
+                src={squigglyLinePic}
+                alt={"logo"}
+                className="squiggly-icon"
+              />
+            </div>
+            <div className="flex-children-pattern-text">{fluctuationText}</div>
+          </div>
+        </div>
+      );
     } else {
       return <div />;
     }
@@ -95,4 +121,11 @@ class PatternCard extends Component {
   }
 }
 
-export default PatternCard;
+function mapStateToProps(state) {
+  return {
+    patient: state.patient,
+    baseInfo: state.baseInfo
+  };
+}
+
+export default connect(mapStateToProps)(PatternCard);

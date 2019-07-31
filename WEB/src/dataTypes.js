@@ -82,6 +82,7 @@ export const getGoal = (patient, dataType) => {
     };
   }
   if (dataType === STEPS) {
+    console.log(patient);
     return patient.goals.StepsGoal;
   }
   if (dataType === BLOODSUGAR) {

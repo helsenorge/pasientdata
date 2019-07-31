@@ -31,7 +31,7 @@ class InsulinInsight extends Component {
               triangle={"down"}
               fluctuation={fluctuationText}
               greatestChange={greatestChangeText}
-              data={FakeGlucoseData()}
+              dataType={INSULIN}
               view={this.props.baseInfo.view}
               goals={this.props.patient.goals}
             />
