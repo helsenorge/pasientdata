@@ -6,6 +6,11 @@ import { setView } from "../../Redux/actions";
 
 import "./dateDropdown.css";
 
+/*
+ * Dropdown menu for selecting the period being shown in the graphs and the trends.
+ * Sets the view variable in the redux store.
+ */
+
 class DateDropdown extends Component {
   constructor(props) {
     super(props);
