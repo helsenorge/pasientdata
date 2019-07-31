@@ -31,11 +31,11 @@
   font-size: 1rem;
 }
 
-.glucose-main-div {
+/* .glucose-main-div {
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
-}
+} */
 
 .glucose-main-children {
   flex: 1;
@@ -83,7 +83,6 @@
 .lower-left-glucose-div {
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
   flex: 1;
 }
 
