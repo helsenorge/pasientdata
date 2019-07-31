@@ -1,16 +1,16 @@
 import React, { Component } from "react";
 import NavigationBar from "../../../components/NavigationBar/navigationBar.js";
-import TrendGoalsCard from "../../../components/InsightCards/trendGoalsCard";
-import GraphCard from "../../../components/InsightCards/graphCard";
-import PatternCard from "../../../components/InsightCards/patternCard";
-import ViewCard from "../../../components/InsightCards/viewCard";
-import CompareDataCard from "../../../components/InsightCards/compareDataCard";
-import GoalCard from "../../../components/InsightCards/goalCard";
+import TrendGoalsCard from "../InsightCards/trendGoalsCard";
+import GraphCard from "../InsightCards/graphCard";
+import PatternCard from "../InsightCards/patternCard";
+import ViewCard from "../InsightCards/viewCard";
+import CompareDataCard from "../InsightCards/compareDataCard";
+import GoalCard from "../InsightCards/goalCard";
 import { stepsGreatestPeriod } from "../../../Utils/PatternCalculations/stepsPatterns";
 import { connect } from "react-redux";
 import DateSelectorCard from "../../../components/DateSelectorCard/dateSelectorCard";
 import FHIRConnection from "../../../FHIRCommunication";
-import {STEPS} from "../../../dataTypes";
+import { STEPS } from "../../../dataTypes";
 
 class StepInsight extends Component {
   state = {};

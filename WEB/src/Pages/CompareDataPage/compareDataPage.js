@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import ViewCard from "../../components/InsightCards/viewCard";
+import ViewCard from "../Insight/InsightCards/viewCard";
 import MultipleGraphCard from "./CompareDataCards/multipleGraphCard";
 import DataTypeCard from "./CompareDataCards/dataTypeCard";
 import GoToInsightCard from "./CompareDataCards/goToInsightCard";
