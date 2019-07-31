@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import formatPeriod from "../../Utils/formatPeriod";
-import intervalToString from "../../Utils/intervalToString";
 import periodFromView from "../../Utils/periodFromView";
 import { connect } from "react-redux";
 import { setNrOfIntervalsBack } from "../../Redux/actions";
@@ -28,7 +26,7 @@ class PeriodStepper extends Component {
     }
   };
   render() {
-    let { periodName, periodNumber } = periodFromView(this.props.baseInfo.view);
+    let { periodName } = periodFromView(this.props.baseInfo.view);
     let text;
     if (periodName === "custom") {
       text =

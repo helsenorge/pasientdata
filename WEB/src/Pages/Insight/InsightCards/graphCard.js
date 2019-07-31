@@ -9,7 +9,7 @@ import { getAggregatedDataForDataType } from "../../../Utils/aggregatedDataForDa
 
 class GraphCard extends Component {
   graphContent = () => {
-    let { periodName, intervalName } = periodFromView(this.props.baseInfo.view);
+    let { periodName } = periodFromView(this.props.baseInfo.view);
     let { start, end } = getStartEndTimes(
       this.props.baseInfo.view,
       this.props.baseInfo.nrOfIntervalsBack
