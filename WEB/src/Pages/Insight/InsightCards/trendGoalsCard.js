@@ -2,14 +2,7 @@ import React, { Component } from "react";
 import CardComponent from "../../../components/Card/cardComponent";
 import FakeGlucoseData from "../../../Utils/fakeGlucose";
 import Trends from "../../../Utils/trends";
-import {
-  PieChart,
-  Pie,
-  Cell,
-  Label,
-  ResponsiveContainer,
-  Polygon
-} from "recharts";
+import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
 import "./trendGoalsCard.css";
 import { connect } from "react-redux";
 import aggregateData from "../../../Utils/aggregateData";

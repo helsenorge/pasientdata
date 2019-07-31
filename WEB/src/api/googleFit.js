@@ -1,6 +1,10 @@
 import axios from "axios";
 import moment from "moment";
 
+/*
+ * Handles all communication with googleFit, once the user has logged in.
+ */
+
 var urlBase =
   "https://www.googleapis.com/fitness/v1/users/me/dataSources/derived:com.google.";
 
@@ -157,7 +161,7 @@ export function responseGoogle(response) {
       axios.spread((
         steps,
         weight,
-        activities,
+        activities
         // height,
         // heartBeat,
         // bloodPressure,
@@ -179,7 +183,7 @@ export function responseGoogle(response) {
         datasets.push(
           { name: "55423-8", measurements: stepMeasurement },
           { name: "29463-7", measurements: weightMeasurement },
-          { name: "77595-7", measurements: activitiesMeasurement },
+          { name: "77595-7", measurements: activitiesMeasurement }
           // { name: "8302-2", measurements: heightMeasurement },
           // { name: "8867-4", measurements: heartBeatMeasurement },
           // { name: "85354-9", measurements: bloodPressureMeasurement },
