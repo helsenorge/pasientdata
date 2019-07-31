@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import "./myGoalsPage.css";
-import GoalContent from "../../components/GoalContent/goalContent";
+import GoalContent from "./GoalContent/goalContent";
 import FHIRConnection from "../../FHIRCommunication";
 
 class MyGoals extends Component {
