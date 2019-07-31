@@ -53,8 +53,8 @@ export default function getStringsFromLOINC(LOINC) {
       strings = {
         unitDisplayString: "Activity",
         observationDisplayName: "Activity",
-        unit: "unitless",
-        UCUMCode: "unitless"
+        unit: "",
+        UCUMCode: ""
       };
       break;
     default:

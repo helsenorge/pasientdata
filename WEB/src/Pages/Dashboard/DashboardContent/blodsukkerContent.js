@@ -58,11 +58,72 @@ class BlodsukkerContent extends Component {
     const downTrianglePic = require("../../../Images/greenDownTriangle.svg");
     return (
       <React.Fragment>
-        <DashboardGraph
-          aggregatedData={aggregatedData}
-          dataType={BLOODSUGAR}
-          patient={this.props.patient}
-        />
+        <div className="main">
+          <div className="left">
+            <div className="average-div">
+              <div className="average-left caption">Gj.snittlig:</div>
+              <div className="average-right caption">
+                {10} mmol/l
+                {/* {Math.floor(trends.mean)} mmol/l */}
+              </div>
+            </div>
+            <DashboardGraph
+              aggregatedData={aggregatedData}
+              dataType={BLOODSUGAR}
+              patient={this.props.patient}
+            />
+          </div>
+          <div className="right">
+            <div className="caption">
+              <div>Tid innenfor grenseverdien:</div>
+              <div>
+                <div className="large-numerical-value time-within">
+                  {74} %{/* {Math.floor(currentValue)} % */}
+                </div>{" "}
+                <Line
+                  strokeWidth="5"
+                  strokeColor="#85c99e"
+                  // percent={currentValue}
+                  percent={74}
+                  trailWidth="5"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="trend-div">
+          <div className="left-trend">
+            <img
+              // src={meanChange > 0 ? upTrianglePic : downTrianglePic}
+              src={downTrianglePic}
+              alt={"logo"}
+              className="trend-triangle"
+            />
+            <div>
+              {/* {Math.floor(meanChange)} mmol/l */}
+              -1 mmol/l
+            </div>
+          </div>
+          <div className="right-trend">
+            <img
+              // src={percentageChange > 0 ? upTrianglePic : downTrianglePic}
+              src={upTrianglePic}
+              alt={"logo"}
+              className="trend-triangle"
+            />
+            <div>2 %{/* {Math.floor(percentageChange)} % */}</div>
+          </div>
+          <div className="button-style">
+            <Link to={"/bloodsugar"} style={{ borderBottom: "none" }}>
+              <DisplayButton secondary>
+                <div className="flex-container-button">
+                  <div className="flex-children-button">Utforsk</div>
+                  <ChevronRightRounded className="flex-children-button-icon chevronStyle" />
+                </div>
+              </DisplayButton>
+            </Link>
+          </div>
+        </div>
       </React.Fragment>
     );
   }
