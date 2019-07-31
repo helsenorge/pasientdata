@@ -10,9 +10,18 @@ import { connect } from "react-redux";
 import "./blodsukkerContent.css";
 import { Line } from "rc-progress";
 // import aggregateData from "../../Utils/aggregateData";
+import { BLOODSUGAR } from "../../../dataTypes";
+import { getAggregatedDataForDataType } from "../../../Utils/aggregatedDataForDataType";
+import DashboardGraph from "./dashboardGraph";
 
 class BlodsukkerContent extends Component {
   render() {
+    const aggregatedData = getAggregatedDataForDataType(
+      this.props.baseInfo,
+      this.props.patient.datasets,
+      BLOODSUGAR,
+      "dashboard"
+    );
     /*
      * All of the following ended up not working right before the deadline
      * but it almost works, so didn't want to throw out.
@@ -49,77 +58,11 @@ class BlodsukkerContent extends Component {
     const downTrianglePic = require("../../../Images/greenDownTriangle.svg");
     return (
       <React.Fragment>
-        <div className="flex-container glucose-main">
-          <div className="flex-children average-glucose-parent left-glucose-div">
-            <div className="upper-left-glucose-div">
-              <div
-                className="average-glucose-child caption"
-                id="left-glucose-text"
-              >
-                Gj.snittlig:
-              </div>
-              <div
-                className="average-glucose-child caption"
-                id="right-glucose-text"
-              >
-                {10} mmol/l
-                {/* {Math.floor(trends.mean)} mmol/l */}
-              </div>
-            </div>
-          </div>
-          <div className="flex-children caption">
-            <div>Tid innenfor grenseverdien:</div>
-            <div>
-              <div className="large-numerical-value glucose-time-within">
-                {74} %{/* {Math.floor(currentValue)} % */}
-              </div>{" "}
-              <Line
-                strokeWidth="4"
-                strokeColor="#85c99e"
-                // percent={currentValue}
-                percent={74}
-                trailWidth="4"
-              />
-            </div>
-          </div>
-        </div>
-
-        <div className="lower-glucose-bar">
-          <div className="lower-left-glucose-div">
-            <img
-              // src={meanChange > 0 ? upTrianglePic : downTrianglePic}
-              src={downTrianglePic}
-              alt={"logo"}
-              className="glucose-trend-children"
-            />
-            <div className="glucose-trend-children">
-              {/* {Math.floor(meanChange)} mmol/l */}
-              -1 mmol/l
-            </div>
-          </div>
-          <div className="lower-left-glucose-div">
-            <img
-              // src={percentageChange > 0 ? upTrianglePic : downTrianglePic}
-              src={upTrianglePic}
-              alt={"logo"}
-              className="glucose-trend-children"
-            />
-            <div className="glucose-trend-children">
-              2 %{/* {Math.floor(percentageChange)} % */}
-            </div>
-          </div>
-
-          <div className="button-style">
-            <Link to={"/bloodsugar"} style={{ borderBottom: "none" }}>
-              <DisplayButton secondary>
-                <div className="flex-container-button">
-                  <div className="flex-children-button">Utforsk</div>
-                  <ChevronRightRounded className="flex-children-button-icon chevronStyle" />
-                </div>
-              </DisplayButton>
-            </Link>
-          </div>
-        </div>
+        <DashboardGraph
+          aggregatedData={aggregatedData}
+          dataType={BLOODSUGAR}
+          patient={this.props.patient}
+        />
       </React.Fragment>
     );
   }

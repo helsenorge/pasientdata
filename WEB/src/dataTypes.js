@@ -60,6 +60,9 @@ export const getDomain = (dataType, aggregatedData) => {
   if (dataType === STEPS) {
     return [0, 14000];
   }
+  if (dataType === BLOODSUGAR) {
+    return [5, 12];
+  }
 };
 
 export const getGoal = (patient, dataType) => {
@@ -80,5 +83,8 @@ export const getGoal = (patient, dataType) => {
   }
   if (dataType === STEPS) {
     return patient.goals.StepsGoal;
+  }
+  if (dataType === BLOODSUGAR) {
+    return patient.goals.MeanGlucoseGoal;
   }
 };
