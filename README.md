@@ -25,6 +25,7 @@ Both programs can be downloaded here:
 When you have completed you can clone [our repo](https://github.com/helsenorgelab/pasientdata.git) and follow the setup for [backend](https://github.com/helsenorgelab/pasientdata#backend*setup) and then [frontend](https://github.com/helsenorgelab/pasientdata#frontend*setup)
 
 ### Backend setup: ###
+The backend is now running on a server, but we also have a local version. If you want to run it locally, follow the steps below.
 
 - Download and install the .NET core sdk 2.2 from their website: https://dotnet.microsoft.com/download
 - Then open the [spark.sln](https://github.com/helsenorgelab/pasientdata/blob/master/src/Spark/Spark.sln) file in Visual Studio, which is located in the Spark folder within the first src file in the repo.
@@ -37,11 +38,12 @@ When you have completed you can clone [our repo](https://github.com/helsenorgela
 - When you have chosen "Spark.NetCore" as your run module you can run and see a webpage with "localhost:5001" showing up.
 - Now the backend is setup and you can move to the [next section](https://github.com/helsenorgelab/pasientdata#frontend*setup).
 
+*If you are running the project locally, you need to change the fhirURL in the file called [fhirUrl.js](https://github.com/helsenorgelab/pasientdata/blob/dev/WEB/src/fhirUrl.js). If you are going to run the backend locally, set the url to: https://localhost:5001/fhir 
+
 ### Frontend setup: ###
+To install the packages and run the application you need to install nodeJS, which can be downloaded from: https://nodejs.org/en/ (Install NodeJS before continuing).
 
-To install the packages and run the application you need to install nodeJS, which can be downloaded from: https://nodejs.org/en/ (Install NodeJS before continuing)
-
-- Before installing the packages, you need to get your key from e\*helse so that you can get the styling components from them, which will be installed when you use npm install.
+- Before installing the packages, you need to get your key from e-helse so that you can get the styling components from them, which will be installed when you use npm install.
   - This key should be placed in a file called ".npmrc" and the file should be placed right under your "user" folder.
   ```
       C:\Users\"username"
@@ -55,7 +57,10 @@ How to install packages:
 npm install
 ```
 
-(if missing packages, install from error messages)
+*if missing packages, install the package manually with: 
+```
+npm install --save "name_of_package"
+```
 
 **Now you can run the program as [shown above](https://github.com/helsenorgelab/pasientdata#how-to-run)**
 
