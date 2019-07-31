@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import moment from "moment";
-import CardComponent from "../Card/cardComponent";
+import CardComponent from "../../../components//Card/cardComponent";
 import { connect } from "react-redux";
 import { XAxis, BarChart, ResponsiveContainer } from "recharts";
-import PeriodStepper from "../PeriodStepper/periodStepper";
-import periodFromView from "../../Utils/periodFromView";
-import aggregateData from "../../Utils/aggregateData";
-import getStartEndTimes from "../../Utils/getStartEndTimes";
-import getFormat from "../../Utils/getFormat";
+import PeriodStepper from "../../../components/PeriodStepper/periodStepper";
+import periodFromView from "../../../Utils/periodFromView";
+import aggregateData from "../../../Utils/aggregateData";
+import getStartEndTimes from "../../../Utils/getStartEndTimes";
+import getFormat from "../../../Utils/getFormat";
 import {
   BLOODSUGAR,
   INSULIN,
@@ -15,9 +15,9 @@ import {
   WEIGHT,
   PHYSICAL_ACTIVITY,
   CARBOHYDRATES
-} from "../../dataTypes";
+} from "../../../dataTypes";
 import CompareDataGraph from "./compareDataGraph";
-import { getAggregatedDataForDataType } from "../../Utils/aggregatedDataForDataType";
+import { getAggregatedDataForDataType } from "../../../Utils/aggregatedDataForDataType";
 
 class MultipleGraphCard extends Component {
   makeGraph = dataType => {

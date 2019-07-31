@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import CardComponent from "../Card/cardComponent";
+import CardComponent from "../../../components/Card/cardComponent";
 // import { FormCheckbox } from "shards-react";
 import CheckBoxGroup, {
   Option
@@ -14,7 +14,7 @@ import {
   setPhysicalActivityChecked,
   setCarbohydratesChecked,
   setNumberChecked
-} from "../../Redux/actions";
+} from "../../../Redux/actions";
 
 class DataTypeCard extends Component {
   constructor(props) {
