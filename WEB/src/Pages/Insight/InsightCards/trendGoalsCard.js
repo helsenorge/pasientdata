@@ -37,6 +37,8 @@ class TrendGoalsCard extends Component {
   };
 
   trendGoalsContent = () => {
+    // Getting the data, goals and such needed for each use case. Also calculates trends.
+
     let data = FakeGlucoseData();
     let aggregated;
     let upperLimit = 12;
@@ -173,6 +175,8 @@ class TrendGoalsCard extends Component {
       default:
     }
 
+    // Deciding which colors to use.
+
     let COLORS = ["#A61E7B", "#569B7E", "#E38B21"];
     if (!hasUpperLimit) {
       COLORS = ["#569B7E", "#E38B21"];
@@ -191,6 +195,8 @@ class TrendGoalsCard extends Component {
     let lowerText;
     let upperText;
     let goalText;
+
+    // Calculating limits, and where to put arrows and labels.
     if (hasUpperLimit) {
       if (unit === "%") {
         pieData = [
@@ -274,6 +280,8 @@ class TrendGoalsCard extends Component {
           Math.PI) /
         180;
     }
+
+    // Calculating positions of the vertices of the polygon making up the triangle.
 
     let triangleAngle = (70 * Math.PI) / 180;
     let r = 20;
