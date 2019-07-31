@@ -29,6 +29,7 @@ The backend is now running on a server, but we also have a local version. If you
 
 - Download and install the .NET core sdk 2.2 from their website: https://dotnet.microsoft.com/download
 - Then open the [spark.sln](https://github.com/helsenorgelab/pasientdata/blob/master/src/Spark/Spark.sln) file in Visual Studio, which is located in the Spark folder within the first src file in the repo.
+- 
 - This should trigger some error, in which you click on the error and try to restore the packages (you might need to restart Visual Studio if you installed the sdk while having Visual Studio open)
 - When the packages are restored and the sdk is install, you can click on the arrow down button right next to the run button and change it to "Spark.NetCore" (see image below)
 
@@ -38,7 +39,7 @@ The backend is now running on a server, but we also have a local version. If you
 - When you have chosen "Spark.NetCore" as your run module you can run and see a webpage with "localhost:5001" showing up.
 - Now the backend is setup and you can move to the [next section](https://github.com/helsenorgelab/pasientdata#frontend-setup).
 
-*If you are running the project locally, you need to change the fhirURL in the file called [fhirUrl.js](https://github.com/helsenorgelab/pasientdata/blob/dev/WEB/src/fhirUrl.js). If you are going to run the backend locally, set the url to: https://localhost:5001/fhir 
+*If you are running the project locally, you need to change the useLocalServer variable to "true" in the file called [fhirUrl.js](https://github.com/helsenorgelab/pasientdata/blob/dev/WEB/src/fhirUrl.js). 
 
 ## Frontend setup: ##
 To install the packages and run the application you need to install nodeJS, which can be downloaded from: https://nodejs.org/en/ (Install NodeJS before continuing).
