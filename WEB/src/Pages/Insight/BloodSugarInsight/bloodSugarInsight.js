@@ -18,27 +18,44 @@ import { BLOODSUGAR } from "../../../dataTypes";
 
 class BloodSugarInsight extends Component {
   render() {
-    return (
-      <div style={{ margin: "0 0 8px" }}>
-        <h1 style={{ marginLeft: "8px" }}>Innsikt</h1>
-        <NavigationBar />
-        <ViewCard />
-        <DateSelectorCard />
-        <GraphCard datatype={BLOODSUGAR} />
-        <TrendGoalsCard datatype="Blodsukker" />
-        <PatternCard
-          datatype="Blodsukker"
-          triangle={"up"}
-          fluctuation={bloodSugarFluctuations}
-          greatestChange={bloodSugarGreatestChange}
-          data={FakeGlucoseData()}
-          view={"day"}
-          goals={this.props.patient.goals}
-        />
-        <GoalCard />
-        <CompareDataCard />
-      </div>
-    );
+    let fluctuationText = bloodSugarFluctuations;
+    let greatestChangeText = bloodSugarGreatestChange;
+    if (fluctuationText !== "none" || greatestChangeText !== "none") {
+      return (
+        <div style={{ margin: "0 0 8px" }}>
+          <h1 style={{ marginLeft: "8px" }}>Innsikt</h1>
+          <NavigationBar />
+          <ViewCard />
+          <DateSelectorCard />
+          <GraphCard datatype={BLOODSUGAR} />
+          <TrendGoalsCard datatype="Blodsukker" />
+          <PatternCard
+            datatype="Blodsukker"
+            triangle={"up"}
+            fluctuation={fluctuationText}
+            greatestChange={greatestChangeText}
+            data={FakeGlucoseData()}
+            view={"day"}
+            goals={this.props.patient.goals}
+          />
+          <GoalCard />
+          <CompareDataCard />
+        </div>
+      );
+    } else {
+      return (
+        <div style={{ margin: "0 0 8px" }}>
+          <h1 style={{ marginLeft: "8px" }}>Innsikt</h1>
+          <NavigationBar />
+          <ViewCard />
+          <DateSelectorCard />
+          <GraphCard datatype={BLOODSUGAR} />
+          <TrendGoalsCard datatype="Blodsukker" />
+          <GoalCard />
+          <CompareDataCard />
+        </div>
+      );
+    }
   }
 }
 

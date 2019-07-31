@@ -18,27 +18,44 @@ import { WEIGHT } from "../../../dataTypes";
 class WeightInsight extends Component {
   render() {
     if (this.props.baseInfo.isLoggedin) {
-      return (
-        <div style={{ margin: "0 0 8px" }}>
-          <h1 style={{ marginLeft: "8px" }}>Innsikt</h1>
-          <NavigationBar />
-          <ViewCard />
-          <DateSelectorCard />
-          <GraphCard datatype={WEIGHT} />
-          <TrendGoalsCard datatype="Vekt" />
-          <PatternCard
-            datatype="Vekt"
-            triangle={"down"}
-            fluctuation={bloodSugarFluctuations}
-            greatestChange={bloodSugarGreatestChange}
-            data={this.props.patient.datasets[1].measurements}
-            view={this.props.baseInfo.view}
-            goals={this.props.patient.goals}
-          />
-          <GoalCard />
-          <CompareDataCard />
-        </div>
-      );
+      let fluctuationText = "none";
+      let greatestChangeText = "none";
+      if (fluctuationText !== "none" || greatestChangeText !== "none") {
+        return (
+          <div style={{ margin: "0 0 8px" }}>
+            <h1 style={{ marginLeft: "8px" }}>Innsikt</h1>
+            <NavigationBar />
+            <ViewCard />
+            <DateSelectorCard />
+            <GraphCard datatype={WEIGHT} />
+            <TrendGoalsCard datatype="Vekt" />
+            <PatternCard
+              datatype="Vekt"
+              triangle={"down"}
+              fluctuation={fluctuationText}
+              greatestChange={greatestChangeText}
+              data={this.props.patient.datasets[1].measurements}
+              view={this.props.baseInfo.view}
+              goals={this.props.patient.goals}
+            />
+            <GoalCard />
+            <CompareDataCard />
+          </div>
+        );
+      } else {
+        return (
+          <div style={{ margin: "0 0 8px" }}>
+            <h1 style={{ marginLeft: "8px" }}>Innsikt</h1>
+            <NavigationBar />
+            <ViewCard />
+            <DateSelectorCard />
+            <GraphCard datatype={WEIGHT} />
+            <TrendGoalsCard datatype="Vekt" />
+            <GoalCard />
+            <CompareDataCard />
+          </div>
+        );
+      }
     } else {
       return (
         <div>
