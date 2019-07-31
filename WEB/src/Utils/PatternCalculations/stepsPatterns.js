@@ -48,97 +48,81 @@ import periodFromView from "../periodFromView";
 //   }
 
 export function stepsGreatestPeriod(view, data, goals) {
-  let {
-    periodName,
-    periodNumber,
-    intervalName,
-    intervalNumber
-  } = periodFromView(view);
-  let { startIndex, endIndex } = findStartAndEndIndex(
-    data,
-    moment()
-      .subtract(periodNumber, periodName)
-      .format("YYYY-MM-DDTHH:mm:ss"),
-    moment().format("YYYY-MM-DDTHH:mm:ss")
-  );
+  let { periodName, periodNumber, intervalName } = periodFromView(view);
 
-  let slicedData = data.slice(startIndex, endIndex);
-  //   console.log(slicedData);
-
-  // let upperLimit = 12;
-  // let lowerLimit = 5;
-  // //   let numIntervals = getIntervalsInPeriod(period, interval);
-
-  // let dataArray;
-
-  // let trends;
-  // let timeAbove;
-  // let timeWithin;
-  // let timeBelow;
-
+  console.log("periodName: ", periodName, " intervalName: ", intervalName);
   let aggregated = aggregateData(
-    slicedData,
+    data,
     intervalName,
     moment()
       .subtract(periodNumber, periodName)
       .format("YYYY-MM-DDTHH:mm:ss"),
     moment().format("YYYY-MM-DDTHH:mm:ss", "ddd")
   );
-  // console.log(aggregated);
-
-  //   for (let i = 0; i < intervalNumber; i++) {
-  // dataArray = aggregated.slice(i, i + 1);
-  // console.log(dataArray);
-  //   trends = Trends(dataArray, upperLimit, lowerLimit);
-  //   timeAbove = trends.timeAbove;
-  //   timeWithin = trends.timeWithin;
-  //   timeBelow = trends.timeBelow;
-  //   withinLimits = (timeWithin * 100) / (timeWithin + timeAbove + timeBelow);
-  //   sum.push(withinLimits);
-  //   }
-  //   let diff;
-  //   for (let index = 1; index < sum.length; index++) {
-  //     diff = sum[index] - sum[index - 1];
-  //     if (diff > greatestChange) {
-  //       greatestChange = Math.round(diff);
-  //       upperIndex = index;
-  //       lowerIndex = index - 1;
-  //     }
-  //   }
-
-  //   lowerStart = moment(aggregated[lowerIndex * 60].x).format("HH:mm");
-  //   upperStart = moment(aggregated[upperIndex * 60].x).format("HH:mm");
-  //   lowerEnd = moment(aggregated[upperIndex * 60].x)
-  //     .subtract(1, "minutes")
-  //     .format("HH:mm");
-  //   upperEnd = moment(aggregated[upperIndex * 60].x)
-  //     .add(59, "minutes")
-  //     .format("HH:mm");
-  // let lowerStart;
-  // let lowerEnd;
-  // let upperStart;
-  // let upperEnd;
-  // let withinLimits;
-  // let upperIndex;
-  // let lowerIndex;
 
   let greatestValueObject = aggregated.reduce((prev, current) =>
     prev.y > current.y ? prev : current
   );
-  let time = moment(greatestValueObject.x).format("DD.MM");
 
-  return (
-    "Du gikk flest skritt den " +
-    time +
-    " (" +
-    greatestValueObject.y +
-    ") i denne perioden"
-    // "Fra " +
-    // lowerStart +
-    // " to " +
-    // upperStart +
-    // " skjedde den største økningen i tid innom grenseverdiene, med en økning på " +
-    // greatestChange +
-    // "%"
+  let text = getPatternTextGreatestValue(
+    periodName,
+    intervalName,
+    greatestValueObject,
+    periodNumber
   );
+
+  return text;
 }
+
+const getPatternTextGreatestValue = (
+  period,
+  interval,
+  valueObj,
+  periodNumber
+) => {
+  let time = valueObj.x;
+  let value = valueObj.y;
+  let startTime;
+  let endTime;
+  let periodText;
+  console.log(time);
+  if (interval === "day") {
+    startTime = moment(time).format("DD.MM");
+    if (period === "week" && periodNumber === 1) {
+      periodText = "I løpet av den siste uken gikk du flest skritt på ";
+    } else if (period === "week" && periodNumber === 2) {
+      periodText = "I løpet av de siste to ukene gikk du flest skritt på ";
+    } else {
+      periodText = "I løpet av den siste måneden gikk du flest skritt på ";
+    }
+    return periodText + startTime + " (" + value + ")";
+  } else if (interval === "hour") {
+    startTime = moment(time).format("HH:mm");
+    endTime = moment(time)
+      .add(1, "hours")
+      .format("HH:mm");
+    return (
+      "I dag gikk du flest skritt mellom " +
+      startTime +
+      " og " +
+      endTime +
+      " (" +
+      value +
+      ")"
+    );
+  } else if (interval === "week") {
+    startTime = moment(time).format("DD.MM");
+    endTime = moment(time)
+      .add(1, interval)
+      .format("DD.MM");
+    return (
+      "I løpet av de siste tre månedene gikk du flest skritt mellom " +
+      startTime +
+      " og " +
+      endTime +
+      " (" +
+      value +
+      ")"
+    );
+  }
+};

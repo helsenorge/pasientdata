@@ -28,6 +28,12 @@ const defaultGoals = {
     type: "upper",
     value: 280,
     unit: "g"
+  },
+  BloodSugarRangeGoal: {
+    type: "range",
+    lower: 3,
+    upper: 12,
+    unit: "mmol/l"
   }
 };
 

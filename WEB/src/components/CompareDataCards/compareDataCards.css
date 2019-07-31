@@ -27,7 +27,7 @@ input[type="checkbox"] + label {
 
 .mol_validation {
   margin: 16px 0;
-  height: 22px
+  height: 22px;
 }
 
 .mol_validation:first-child {
@@ -87,4 +87,3 @@ input[type="checkbox"] + label {
 .datatypes-error-message {
   margin-top: 15px;
 }
-
