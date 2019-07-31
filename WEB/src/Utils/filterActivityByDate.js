@@ -6,23 +6,14 @@ export default function filterActivityByDate(inData) {
     y: item.value
   }));
 
-  let filteredArray = [];
-  let prev;
-  data.sort();
-  let count = 0;
-
-  for (let i = 0; i < data.length; i++) {
-    // if (data[i] === 0) {
-    //   prev;
-    // }
-    if (data[i].x !== prev) {
-      filteredArray.push({ y: count, x: data[i].x });
-      count = 0;
-    } else {
-      count++;
-    }
-    prev = data[i].x;
-  }
+  // fillters based on date which is the x value and increments for each instance which is the y value.
+  let filteredArray = Object.values(
+    data.reduce((c, { x }) => {
+      c[x] = c[x] || { x: x, y: 0 };
+      c[x].y++;
+      return c;
+    }, {})
+  );
 
   return filteredArray;
 }
