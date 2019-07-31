@@ -4,6 +4,10 @@ import CardComponent from "../Card/cardComponent";
 import "./dateSelectorCard.css";
 import { connect } from "react-redux";
 
+/*
+ * Card containing the DateSelector, used to get custom start and end dates for graphing and trend calculations.
+ */
+
 class DateSelectorCard extends Component {
   makeContent = () => {
     return (
