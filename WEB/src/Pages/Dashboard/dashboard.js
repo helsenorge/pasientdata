@@ -17,6 +17,13 @@ import {
   CARBOHYDRATES
 } from "../../dataTypes";
 
+/*
+ * The main page of the project, giving a summary of each data source, with links to each data source's
+ * insight page. Also contains links to the goal page and the compare data page, as well as a currently
+ * not working link to add more data sources. As with all the pages it has the menu bar at the top for
+ * easy navigation.
+ */
+
 class Dashboard extends Component {
   render() {
     if (this.props.baseInfo.isLoggedin) {
