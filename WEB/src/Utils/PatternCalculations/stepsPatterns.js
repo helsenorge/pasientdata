@@ -3,7 +3,8 @@ import findStartAndEndIndex from "../findStartAndEndIndex";
 import aggregateData from "../aggregateData";
 import moment from "moment";
 import periodFromView from "../periodFromView";
-
+import "moment/locale/de";
+//import {moment, min, moment-with-locales} from "moment";
 // export function stepsFluctuations(view, data, goals) {
 //     let [period, periodNumber, interval] = periodFromView(view);
 //     //let numIntervals = 24;
@@ -121,6 +122,24 @@ const getPatternTextGreatestValue = (
       " (" +
       value +
       ")."
+    );
+  } else if (period === "year") {
+    startTime = moment(time).format("MMMM");
+    return (
+      "I løpet av de siste tre månedene gikk du flest skritt i " +
+      startTime +
+      " (" +
+      value +
+      ")."
+    );
+  } else if (period === "custom") {
+    startTime = moment(time).format("DD.MM");
+    return (
+      "Du gikk flest skritt på " +
+      startTime +
+      " (" +
+      value +
+      ") i den valgte perioden."
     );
   }
 };

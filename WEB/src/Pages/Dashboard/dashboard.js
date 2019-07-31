@@ -22,7 +22,13 @@ class Dashboard extends Component {
     if (this.props.baseInfo.isLoggedin) {
       return (
         <div style={{ margin: "0 4px 8px" }}>
-          <h1 style={{ marginLeft: "8px" }}>Innsikt</h1>
+          <div className="insight-header">
+            <h1 className="header-container">Innsikt</h1>
+            <div className="status-container">
+              Viser status fra siste 7 dager
+            </div>
+          </div>
+
           <CardComponent title={"Blodsukker"} content={<BlodsukkerContent />} />
           <div className="flex-container">
             <DashboardGraphCard dataType={INSULIN} />

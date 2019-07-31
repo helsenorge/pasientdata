@@ -22,7 +22,6 @@ class PeriodStepper extends Component {
     }
   };
   render() {
-    console.log(this.props.start);
     let { periodName, periodNumber } = periodFromView(this.props.baseInfo.view);
     let text;
     if (periodName === "custom") {

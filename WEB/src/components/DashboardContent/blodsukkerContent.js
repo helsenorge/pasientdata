@@ -56,7 +56,7 @@ class BlodsukkerContent extends Component {
                 className="average-glucose-child caption"
                 id="left-glucose-text"
               >
-                Gj.snittligt:
+                Gj.snittlig:
               </div>
               <div
                 className="average-glucose-child caption"
