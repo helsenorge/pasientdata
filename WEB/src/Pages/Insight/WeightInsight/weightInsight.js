@@ -6,10 +6,10 @@ import PatternCard from "../InsightCards/patternCard";
 import ViewCard from "../InsightCards/viewCard";
 import CompareDataCard from "../InsightCards/compareDataCard";
 import GoalCard from "../InsightCards/goalCard";
-import {
-  bloodSugarGreatestChange,
-  bloodSugarFluctuations
-} from "../../../Utils/PatternCalculations/bloodSugarPatterns";
+// import {
+//   bloodSugarGreatestChange,
+//   bloodSugarFluctuations
+// } from "../../../Utils/PatternCalculations/bloodSugarPatterns";
 import { connect } from "react-redux";
 import DateSelectorCard from "../../../components/DateSelectorCard/dateSelectorCard";
 import FHIRConnection from "../../../FHIRCommunication";
@@ -34,7 +34,7 @@ class WeightInsight extends Component {
               triangle={"down"}
               fluctuation={fluctuationText}
               greatestChange={greatestChangeText}
-              data={this.props.patient.datasets[1].measurements}
+              datatype={WEIGHT}
               view={this.props.baseInfo.view}
               goals={this.props.patient.goals}
             />

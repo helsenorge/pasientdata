@@ -31,7 +31,7 @@ class StepInsight extends Component {
               triangle={"up"}
               fluctuation={fluctuationText}
               greatestChange={greatestChangeText}
-              data={this.props.patient.datasets[0].measurements}
+              dataType={STEPS}
               view={this.props.baseInfo.view}
               goals={this.props.patient.goals}
             />

@@ -6,16 +6,16 @@ import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { setGoals } from "./Redux/actions";
 import getStringsFromLOINC from "./Utils/getStringsFromLOINC";
+import fhirUrl from "./fhirUrl";
 
 class FHIRCommunication extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       client: FHIR.client({
-        serverUrl: "https://localhost:5001/fhir" // "https://pasientdata-fhir-api.azurewebsites.net/fhir"
+        serverUrl: fhirUrl()
       }),
-      userLoggedOut: false,
-      mainURL: "https://localhost:5001/fhir" // "https://pasientdata-fhir-api.azurewebsites.net/fhir"
+      userLoggedOut: false
     };
   }
 
@@ -93,8 +93,7 @@ class FHIRCommunication extends React.Component {
       link: [
         {
           other: {
-            reference:
-              this.state.mainURL + "/Patient/" + this.props.patient.googleId
+            reference: fhirUrl() + "/Patient/" + this.props.patient.googleId
           },
           type: "seealso"
         }
@@ -102,7 +101,7 @@ class FHIRCommunication extends React.Component {
     };
     let optionsPatient = {
       method: "PUT",
-      url: this.state.mainURL + "/Patient/" + this.props.patient.googleId,
+      url: fhirUrl() + "/Patient/" + this.props.patient.googleId,
       headers: {
         "cache-control": "no-cache",
         Connection: "keep-alive",
@@ -122,7 +121,7 @@ class FHIRCommunication extends React.Component {
     this.state.client
       .request(optionsPatient, (error, response, body) => {})
       .then(patient => {
-        console.log(patient);
+        // console.log("Newly added patient: ", patient);
       });
   };
 
@@ -206,15 +205,14 @@ class FHIRCommunication extends React.Component {
           text: observationDisplayName
         },
         subject: {
-          reference:
-            this.state.mainURL + "/Patient/" + this.props.patient.googleId
+          reference: fhirUrl() + "/Patient/" + this.props.patient.googleId
         },
         component: components
       };
 
       let optionsObservation = {
         method: "PUT",
-        url: this.state.mainURL + "/Observation/" + observationId,
+        url: fhirUrl() + "/Observation/" + observationId,
         headers: {
           "cache-control": "no-cache",
           Connection: "keep-alive",
@@ -260,7 +258,10 @@ class FHIRCommunication extends React.Component {
     console.log("Reading all goals the patient has in the FHIR database");
     const q1 = new URLSearchParams();
     q1.set("subject", this.props.patient.googleId);
-    this.state.client
+    let client = FHIR.client({
+      serverUrl: fhirUrl()
+    });
+    client
       .request(`Goal?${q1}`, {
         pageLimit: 0,
         flat: true
@@ -288,6 +289,7 @@ class FHIRCommunication extends React.Component {
             }
           }
         });
+        console.log("Goals from fhir", goalsMsg);
         this.props.setGoals(stateGoals);
       });
   };

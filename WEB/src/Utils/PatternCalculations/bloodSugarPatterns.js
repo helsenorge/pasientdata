@@ -116,7 +116,7 @@ export function bloodSugarGreatestChange(view, data, goals) {
   // upperEnd = moment(aggregated[upperIndex * 60].x)
   //   .add(59, "minutes")
   //   .format("HH:mm");
-
+  let valueObj = { y: 0, x: "28.06" };
   return (
     // "Fra " +
     // lowerStart +
@@ -125,6 +125,6 @@ export function bloodSugarGreatestChange(view, data, goals) {
     // " skjedde den største økningen i tid innom grenseverdiene, med en økning på " +
     // greatestChange +
     // "%"
-    "work in progress, fix in aggregateData gives errors here"
+    ["work in progress, fix in aggregateData gives errors here", valueObj]
   );
 }

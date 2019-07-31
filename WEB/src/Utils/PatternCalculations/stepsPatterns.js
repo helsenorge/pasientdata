@@ -3,8 +3,7 @@ import findStartAndEndIndex from "../findStartAndEndIndex";
 import aggregateData from "../aggregateData";
 import moment from "moment";
 import periodFromView from "../periodFromView";
-import "moment/locale/de";
-//import {moment, min, moment-with-locales} from "moment";
+
 // export function stepsFluctuations(view, data, goals) {
 //     let [period, periodNumber, interval] = periodFromView(view);
 //     //let numIntervals = 24;
@@ -50,28 +49,16 @@ import "moment/locale/de";
 
 export function stepsGreatestPeriod(view, data, goals) {
   let { periodName, periodNumber, intervalName } = periodFromView(view);
-
-  let aggregated = aggregateData(
-    data,
-    intervalName,
-    moment()
-      .subtract(periodNumber, periodName)
-      .format("YYYY-MM-DDTHH:mm:ss"),
-    moment().format("YYYY-MM-DDTHH:mm:ss", "ddd")
-  );
-
-  let greatestValueObject = aggregated.reduce((prev, current) =>
+  let greatestValueObject = data.reduce((prev, current) =>
     prev.y > current.y ? prev : current
   );
-
   let text = getPatternTextGreatestValue(
     periodName,
     intervalName,
     greatestValueObject,
     periodNumber
   );
-
-  return text;
+  return [text, greatestValueObject];
 }
 
 const getPatternTextGreatestValue = (
@@ -88,11 +75,11 @@ const getPatternTextGreatestValue = (
   if (interval === "day") {
     startTime = moment(time).format("DD.MM");
     if (period === "week" && periodNumber === 1) {
-      periodText = "I løpet av den siste uken gikk du flest skritt på ";
+      periodText = "I løpet av den siste uken gikk du flest skritt den ";
     } else if (period === "week" && periodNumber === 2) {
-      periodText = "I løpet av de siste to ukene gikk du flest skritt på ";
+      periodText = "I løpet av de siste to ukene gikk du flest skritt den ";
     } else {
-      periodText = "I løpet av den siste måneden gikk du flest skritt på ";
+      periodText = "I løpet av den siste måneden gikk du flest skritt den ";
     }
     return periodText + startTime + " (" + value + ").";
   } else if (interval === "hour") {
@@ -135,7 +122,7 @@ const getPatternTextGreatestValue = (
   } else if (period === "custom") {
     startTime = moment(time).format("DD.MM");
     return (
-      "Du gikk flest skritt på " +
+      "Du gikk flest skritt den " +
       startTime +
       " (" +
       value +
