@@ -8,7 +8,7 @@ import {
   getGoal,
   INSULIN,
   STEPS
-} from "../../dataTypes";
+} from "../../../dataTypes";
 import React from "react";
 import {
   YAxis,

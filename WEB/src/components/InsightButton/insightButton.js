@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import ChevronRightRounded from "@helsenorge/toolkit/components/icons/ChevronRightRounded";
-import "../DashboardContent/dashboardContent.css";
+import "../../Pages/Dashboard/DashboardContent/dashboardContent.css";
 import { Link } from "react-router-dom";
 
 class InsightButton extends Component {

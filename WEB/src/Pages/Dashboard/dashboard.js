@@ -3,11 +3,11 @@ import { connect } from "react-redux";
 import "./dashboard.css";
 import FHIRConnection from "../../FHIRCommunication";
 import CardComponent from "../../components/Card/cardComponent";
-import BlodsukkerContent from "../../components/DashboardContent/blodsukkerContent";
-import AddDataContent from "../../components/DashboardContent/addDataContent";
-import changeGoalsContent from "../../components/DashboardContent/changeGoalsContent";
-import compareDataContent from "../../components/DashboardContent/compareDataContent";
-import DashboardGraphCard from "../../components/DashboardContent/dashboardGraphCard";
+import BlodsukkerContent from "./DashboardContent/blodsukkerContent";
+import AddDataContent from "./DashboardContent/addDataContent";
+import changeGoalsContent from "./DashboardContent/changeGoalsContent";
+import compareDataContent from "./DashboardContent/compareDataContent";
+import DashboardGraphCard from "./DashboardContent/dashboardGraphCard";
 import {
   BLOODSUGAR,
   INSULIN,
