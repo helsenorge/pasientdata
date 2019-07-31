@@ -13,7 +13,7 @@ class FHIRCommunication extends React.Component {
     super(props);
     this.state = {
       client: FHIR.client({
-        serverUrl: fhirUrl
+        serverUrl: fhirUrl()
       }),
       userLoggedOut: false
     };
@@ -93,7 +93,7 @@ class FHIRCommunication extends React.Component {
       link: [
         {
           other: {
-            reference: fhirUrl + "/Patient/" + this.props.patient.googleId
+            reference: fhirUrl() + "/Patient/" + this.props.patient.googleId
           },
           type: "seealso"
         }
@@ -101,7 +101,7 @@ class FHIRCommunication extends React.Component {
     };
     let optionsPatient = {
       method: "PUT",
-      url: fhirUrl + "/Patient/" + this.props.patient.googleId,
+      url: fhirUrl() + "/Patient/" + this.props.patient.googleId,
       headers: {
         "cache-control": "no-cache",
         Connection: "keep-alive",
@@ -205,14 +205,14 @@ class FHIRCommunication extends React.Component {
           text: observationDisplayName
         },
         subject: {
-          reference: fhirUrl + "/Patient/" + this.props.patient.googleId
+          reference: fhirUrl() + "/Patient/" + this.props.patient.googleId
         },
         component: components
       };
 
       let optionsObservation = {
         method: "PUT",
-        url: fhirUrl + "/Observation/" + observationId,
+        url: fhirUrl() + "/Observation/" + observationId,
         headers: {
           "cache-control": "no-cache",
           Connection: "keep-alive",
@@ -259,7 +259,7 @@ class FHIRCommunication extends React.Component {
     const q1 = new URLSearchParams();
     q1.set("subject", this.props.patient.googleId);
     let client = FHIR.client({
-      serverUrl: fhirUrl
+      serverUrl: fhirUrl()
     });
     client
       .request(`Goal?${q1}`, {

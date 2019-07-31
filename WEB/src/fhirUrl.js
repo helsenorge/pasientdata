@@ -1,3 +1,8 @@
 export default function fhirUrl() {
-  return "https://localhost:5001/fhir";
-} // "https://pasientdata-fhir-api.azurewebsites.net/fhir";
+  let useLocalServer = false;
+  if (useLocalServer) {
+    return "https://localhost:5001/fhir";
+  } else {
+    return "https://pasientdata-fhir-api.azurewebsites.net/fhir";
+  }
+}

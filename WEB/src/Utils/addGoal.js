@@ -47,7 +47,7 @@ export default function addGoal(
 
   let goalOptions = {
     method: "PUT",
-    url: fhirUrl + "/Goal/" + goalId,
+    url: fhirUrl() + "/Goal/" + goalId,
     headers: {
       "cache-control": "no-cache",
       Connection: "keep-alive",
@@ -62,7 +62,7 @@ export default function addGoal(
   };
 
   const client = FHIR.client({
-    serverUrl: fhirUrl
+    serverUrl: fhirUrl()
   });
 
   console.log("Adding goal to FHIR database");
