@@ -22,6 +22,7 @@ class PeriodStepper extends Component {
     }
   };
   render() {
+    console.log(this.props.start);
     let { periodName, periodNumber } = periodFromView(this.props.baseInfo.view);
     let text;
     if (periodName === "custom") {
@@ -35,6 +36,11 @@ class PeriodStepper extends Component {
           text = moment(this.props.start, "YYYY-MM-DDTHH:mm:ss").format(
             "DD.MM"
           );
+        } else if (periodName === "year") {
+          text =
+            moment(this.props.start, "YYYY-MM-DDTHH:mm:ss").format("DD.MM.YY") +
+            " - " +
+            moment(this.props.end, "YYYY-MM-DDTHH:mm:ss").format("DD.MM.YY");
         } else {
           text =
             moment(this.props.start, "YYYY-MM-DDTHH:mm:ss").format("DD.MM") +

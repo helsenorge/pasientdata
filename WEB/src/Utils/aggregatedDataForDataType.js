@@ -39,6 +39,7 @@ export const getAggregatedDataForDataType = (
       .subtract(1, "week")
       .add(1, "day");
     end = moment();
+    intervalName = "day";
   }
   if (
     baseInfo.view === "custom" &&

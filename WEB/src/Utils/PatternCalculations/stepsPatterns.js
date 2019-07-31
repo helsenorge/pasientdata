@@ -50,7 +50,6 @@ import periodFromView from "../periodFromView";
 export function stepsGreatestPeriod(view, data, goals) {
   let { periodName, periodNumber, intervalName } = periodFromView(view);
 
-  console.log("periodName: ", periodName, " intervalName: ", intervalName);
   let aggregated = aggregateData(
     data,
     intervalName,
@@ -85,7 +84,6 @@ const getPatternTextGreatestValue = (
   let startTime;
   let endTime;
   let periodText;
-  console.log(time);
   if (interval === "day") {
     startTime = moment(time).format("DD.MM");
     if (period === "week" && periodNumber === 1) {
@@ -95,7 +93,7 @@ const getPatternTextGreatestValue = (
     } else {
       periodText = "I løpet av den siste måneden gikk du flest skritt på ";
     }
-    return periodText + startTime + " (" + value + ")";
+    return periodText + startTime + " (" + value + ").";
   } else if (interval === "hour") {
     startTime = moment(time).format("HH:mm");
     endTime = moment(time)
@@ -108,7 +106,7 @@ const getPatternTextGreatestValue = (
       endTime +
       " (" +
       value +
-      ")"
+      ")."
     );
   } else if (interval === "week") {
     startTime = moment(time).format("DD.MM");
@@ -122,7 +120,7 @@ const getPatternTextGreatestValue = (
       endTime +
       " (" +
       value +
-      ")"
+      ")."
     );
   }
 };
