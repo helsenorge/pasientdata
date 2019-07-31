@@ -58,14 +58,12 @@ export const getAggregatedDataForDataType = (
       case WEIGHT:
         return dataSets[1].measurements;
       case PHYSICAL_ACTIVITY:
-        console.log(start, end);
         let sortedActivity = sortActivity(
           dataSets[2].measurements,
           start,
           end,
           true
         );
-        console.log(sortedActivity);
         return sortedActivity;
       case CARBOHYDRATES:
         return fakeCarbData(start, end);
