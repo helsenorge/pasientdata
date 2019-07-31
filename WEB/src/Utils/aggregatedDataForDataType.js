@@ -16,7 +16,6 @@ import {
 import fakeCarbData from "./fakeCarbData";
 import fakeInsulinData from "./fakeInsulinData";
 import sortActivity from "./sortActivity";
-import findStartAndEndIndex from "./findStartAndEndIndex";
 import filterActivityByDate from "./filterActivityByDate";
 
 export const getAggregatedDataForDataType = (

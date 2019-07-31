@@ -7,7 +7,6 @@ import ViewCard from "../InsightCards/viewCard";
 import CompareDataCard from "../InsightCards/compareDataCard";
 import GoalCard from "../InsightCards/goalCard";
 import "../innsikt.css";
-import FakeGlucoseData from "../../../Utils/fakeGlucose";
 import { connect } from "react-redux";
 import DateSelectorCard from "../../../components/DateSelectorCard/dateSelectorCard";
 import FHIRConnection from "../../../FHIRCommunication";

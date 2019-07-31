@@ -7,7 +7,7 @@ import {
   Line,
   ResponsiveContainer
 } from "recharts";
-import { WEIGHT, chartDataByDataType, getDomain } from "../../../dataTypes";
+import { chartDataByDataType, getDomain } from "../../../dataTypes";
 
 const CompareDataGraph = ({ aggregatedData, dataType }) => {
   const chartData = chartDataByDataType[dataType];
