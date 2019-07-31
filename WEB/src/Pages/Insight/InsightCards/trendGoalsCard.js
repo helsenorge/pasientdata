@@ -2,14 +2,7 @@ import React, { Component } from "react";
 import CardComponent from "../../../components/Card/cardComponent";
 import FakeGlucoseData from "../../../Utils/fakeGlucose";
 import Trends from "../../../Utils/trends";
-import {
-  PieChart,
-  Pie,
-  Cell,
-  Label,
-  ResponsiveContainer,
-  Polygon
-} from "recharts";
+import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
 import "./trendGoalsCard.css";
 import { connect } from "react-redux";
 import aggregateData from "../../../Utils/aggregateData";
@@ -17,6 +10,11 @@ import getStartEndTimes from "../../../Utils/getStartEndTimes";
 import findStartAndEndIndex from "../../../Utils/findStartAndEndIndex";
 import averageDataFunction from "../../../Utils/averageData";
 import sortActivity from "../../../Utils/sortActivity";
+
+/*
+ * Calculates trends and renders the trend card. Most of the calculations is figuring out the
+ * look of the goal speedometer.
+ */
 
 class TrendGoalsCard extends Component {
   displayUnit = () => {

@@ -3,7 +3,7 @@ import CardComponent from "../../../components/Card/cardComponent";
 import "./patternCard.css";
 import { getAggregatedDataForDataType } from "../../../Utils/aggregatedDataForDataType";
 import { connect } from "react-redux";
-import { getGoal } from "../../../dataTypes";
+import { getGoal, BLOODSUGAR } from "../../../dataTypes";
 
 class PatternCard extends Component {
   patternCardContent = () => {
@@ -11,7 +11,6 @@ class PatternCard extends Component {
     const triangleUpPic = require("../../../Images/pinkUpTriangle.svg");
     const triangleDownPic = require("../../../Images/pinkDownTriangle.svg");
 
-    let data = this.props.data;
     let view = this.props.view;
     let goals = this.props.goals;
 
@@ -22,6 +21,7 @@ class PatternCard extends Component {
       "insight",
       "YYYY-MM-DDTHH:mm:ss"
     );
+
     let fluctuationText;
     let fluctuationValue;
     if (this.props.fluctuation !== "none") {
@@ -29,14 +29,22 @@ class PatternCard extends Component {
     } else {
       fluctuationText = "ingen funksjon";
     }
+
     let greatestChangeText;
     let changeValue;
-    if (this.props.greatestChange !== "none") {
+    if (
+      this.props.greatestChange !== "none" &&
+      this.props.dataType !== BLOODSUGAR
+    ) {
       [greatestChangeText, changeValue] = this.props.greatestChange(
         view,
         aggregatedData,
         goals
       );
+    } else if (this.props.dataType === BLOODSUGAR) {
+      fluctuationText =
+        "Den største reduksjonen i gjennomsnittlig blodsukker skjedde fra onsdag til torsdag.";
+      greatestChangeText = "Du hadde mest svingninger i blodsukker på mandag.";
     } else {
       greatestChangeText = "ingen funksjon";
     }
@@ -45,13 +53,16 @@ class PatternCard extends Component {
     let pic = triangleDownPic;
     if (this.props.triangle === "squiggly") {
       pic = squigglyLinePic;
-    } else if (changeValue.y >= goal) {
-      pic = triangleUpPic;
+    } else if (changeValue !== undefined) {
+      if (changeValue.y >= goal) {
+        pic = triangleUpPic;
+      }
     }
 
     if (
-      this.props.greatestChange !== "none" &&
-      this.props.fluctuation !== "none"
+      (this.props.greatestChange !== "none" &&
+        this.props.fluctuation !== "none") ||
+      this.props.dataType !== BLOODSUGAR
     ) {
       return (
         <div>

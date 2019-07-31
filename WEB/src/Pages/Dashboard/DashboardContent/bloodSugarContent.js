@@ -7,14 +7,14 @@ import { Link } from "react-router-dom";
 // import Trends from "../../Utils/trends";
 // import getStartEndTimes from "../../Utils/getStartEndTimes";
 import { connect } from "react-redux";
-import "./blodsukkerContent.css";
+import "./bloodSugarContent.css";
 import { Line } from "rc-progress";
 // import aggregateData from "../../Utils/aggregateData";
 import { BLOODSUGAR } from "../../../dataTypes";
 import { getAggregatedDataForDataType } from "../../../Utils/aggregatedDataForDataType";
 import DashboardGraph from "./dashboardGraph";
 
-class BlodsukkerContent extends Component {
+class BloodSugarContent extends Component {
   render() {
     const aggregatedData = getAggregatedDataForDataType(
       this.props.baseInfo,
@@ -136,4 +136,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(BlodsukkerContent);
+export default connect(mapStateToProps)(BloodSugarContent);
