@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import ViewCard from "../../components/InsightCards/viewCard";
-import MultipleGraphCard from "../../components/CompareDataCards/multipleGraphCard";
-import DataTypeCard from "../../components/CompareDataCards/dataTypeCard";
-import GoToInsightCard from "../../components/CompareDataCards/goToInsightCard";
+import MultipleGraphCard from "./CompareDataCards/multipleGraphCard";
+import DataTypeCard from "./CompareDataCards/dataTypeCard";
+import GoToInsightCard from "./CompareDataCards/goToInsightCard";
 import DateSelectorCard from "../../components/DateSelectorCard/dateSelectorCard";
 import FHIRConnection from "../../FHIRCommunication";
 import { connect } from "react-redux";
