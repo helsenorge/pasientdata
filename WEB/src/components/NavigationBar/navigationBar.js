@@ -2,6 +2,12 @@ import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 import "./navigationBar.css";
 
+/*
+ * Navigation bar used for navigating between the different insight pages.
+ * Can be scrolled through with arrow buttons or with drag and drop.
+ * Known bugs: does not remember position when an element is pressed.
+ */
+
 class NavigationBar extends Component {
   scrollRight() {
     var x = document.getElementById("tab_list");
