@@ -14,7 +14,7 @@ import {
 
 const initialState = {
   isLoggedin: false,
-  view: "2weeks",
+  view: "week",
   nrOfIntervalsBack: "0",
   bloodSugarChecked: false,
   insulinChecked: false,
