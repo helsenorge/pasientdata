@@ -67,7 +67,7 @@ export default function averageDataFunctions(
         .add(added, interval + "s")
         .format(outputFormat);
       aggregated.push({
-        y: inData[startIndex - 1].value,
+        y: inData[startIndex].value,
         x: time
       });
       added++;
