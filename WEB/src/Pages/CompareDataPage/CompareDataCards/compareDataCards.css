@@ -69,6 +69,7 @@ input[type="checkbox"] + label {
 
 .color-category-child-category {
   flex: 1;
+  color: black;
 }
 
 .flex-children-color-category {
@@ -86,4 +87,5 @@ input[type="checkbox"] + label {
 
 .datatypes-error-message {
   margin-top: 15px;
+  color: black;
 }

@@ -75,7 +75,7 @@ class BlodsukkerContent extends Component {
           </div>
           <div className="right">
             <div className="caption">
-              <div>Tid innenfor grenseverdien:</div>
+              <div style={{ color: "black" }}>Tid innenfor grenseverdien:</div>
               <div>
                 <div className="large-numerical-value time-within">
                   {74} %{/* {Math.floor(currentValue)} % */}

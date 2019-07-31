@@ -8,9 +8,9 @@ class GoToInsightCard extends Component {
   makeContent = () => {
     return (
       <div>
-        <div>
-          Få mer dyptgående innsikt ved å se på hver og en av datapunktene for
-          seg selv.
+        <div style={{ color: "black" }}>
+          Få mer dyptgående innsikt ved å se på hver og en av datatypene for seg
+          selv.
         </div>
         <br />
         <div className="go-to-insight-card">

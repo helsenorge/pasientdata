@@ -8,7 +8,9 @@ class GoalCard extends Component {
   makeContent = () => {
     return (
       <div>
-        <div>Har du behov for å justere dine målsetninger?</div>
+        <div style={{ color: "black" }}>
+          Har du behov for å justere dine målsetninger?
+        </div>
         <br />
         <div className="goal-card">
           <Link to={"/mygoals"} className="link-without-border-bottom">

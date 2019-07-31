@@ -43,3 +43,26 @@
   /* position: absolute;
   margin: 0; */
 }
+
+.dashboard-card-container {
+  display: flex;
+}
+
+.static-trend {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: end;
+}
+
+.dash-trend-image {
+  flex-basis: auto;
+}
+
+.dash-trend-text {
+  flex-basis: auto;
+  color: black;
+  font-size: 14px;
+  /* letter-spacing: 0.3px; */
+}
