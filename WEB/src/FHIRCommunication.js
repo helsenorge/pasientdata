@@ -8,6 +8,11 @@ import { setGoals } from "./Redux/actions";
 import getStringsFromLOINC from "./Utils/getStringsFromLOINC";
 import fhirUrl from "./fhirUrl";
 
+/*
+ * File for handling initial communication with the fhir server.
+ * Uses the server url set in fhirUrl.
+ */
+
 class FHIRCommunication extends React.Component {
   constructor(props) {
     super(props);
@@ -302,7 +307,6 @@ class FHIRCommunication extends React.Component {
           {this.addPatientIfNeeded()}
           {this.addObservations()}
           {/* {this.readAllObservations()} */}
-          {/* {this.addGoal()} */}
           {this.readAllGoals()}
           <Redirect to="/dashboard" />
         </div>

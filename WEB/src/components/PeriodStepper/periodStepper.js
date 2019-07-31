@@ -9,6 +9,12 @@ import ChevronRightRounded from "@helsenorge/toolkit/components/icons/ChevronRig
 import moment from "moment";
 import "./periodStepper.css";
 
+/*
+ * Component giving arrows for stepping back and forth in time periods. It also shows current
+ * dates being shown. Uses the view selected in the DateDropdown, and sets the nrOfIntervalsBack
+ * variable in the redux store.
+ */
+
 class PeriodStepper extends Component {
   leftClicked = () => {
     let value = parseInt(this.props.baseInfo.nrOfIntervalsBack) + 1;

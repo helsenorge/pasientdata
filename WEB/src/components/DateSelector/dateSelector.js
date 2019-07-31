@@ -9,6 +9,11 @@ import "./dateSelector.css";
 import { connect } from "react-redux";
 import { setStartEnd } from "../../Redux/actions";
 
+/*
+ * Simple to and from date selector.
+ * Sets the start and end variables in the redux store when both have been selected.
+ */
+
 class DateSelector extends React.Component {
   constructor(props) {
     super(props);

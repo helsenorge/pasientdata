@@ -10,6 +10,13 @@ import StepsPopupContent from "../../Pages/MyGoalsPage/GoalPopupContents/stepsPo
 import WeightPopupContent from "../../Pages/MyGoalsPage/GoalPopupContents/weightPopupContent";
 import "./changeGoalButton.css";
 
+/*
+ * When ChangeGoalButton is clicked a lightbox pops up that gives the option of changing the relevant goal.
+ * Which goal is relevant is chosen based on this.props.datatype that needs to be sent in to the component.
+ * The different goal contents are all in the folder /Pages/MyGoalsPage/GoalPopupContents. When a new goal
+ * is selected and the save button is pressed, the goal is added to redux store and sent to the fhir server.
+ */
+
 class ChangeGoalButton extends Component {
   constructor(props) {
     super(props);

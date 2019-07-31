@@ -7,6 +7,10 @@ import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { onLoggedIn } from "../../Redux/actions";
 
+/*
+ * The menu bar at the top of the page.
+ */
+
 class MenuBar extends Component {
   constructor(props) {
     super(props);
@@ -149,16 +153,23 @@ class MenuBar extends Component {
     }
 
     if (this.state.isToggleOn) {
-      const menuBar2OpenStyle = {height: 'auto', padding: '12px 16px 4px 44px'};
+      const menuBar2OpenStyle = {
+        height: "auto",
+        padding: "12px 16px 4px 44px"
+      };
       menu = (
         <div className="menuBar menuBar-open pageLink">
           <ul className="ulBar">
             <li className="liBar">
               <div className="minHelse">
-                <Tiles color="black" /> <span className="smallMarginLeft">Min helse</span>
+                <Tiles color="black" />{" "}
+                <span className="smallMarginLeft">Min helse</span>
               </div>
             </li>
-            <li className="liBar libar-items" style={this.state.isToggleOn2 ? menuBar2OpenStyle: {}}>
+            <li
+              className="liBar libar-items"
+              style={this.state.isToggleOn2 ? menuBar2OpenStyle : {}}
+            >
               <NavLink
                 to="/dashboard"
                 className="menu-link click-menuBar-open"
@@ -167,7 +178,15 @@ class MenuBar extends Component {
                 Innsikt
               </NavLink>
               <button className="button2" onClick={this.toggle2}>
-                <ChevronDownRounded className="menuButton2" color="blue" style={this.state.isToggleOn2 ? {transform: 'rotate(180deg)'}: {}} />
+                <ChevronDownRounded
+                  className="menuButton2"
+                  color="blue"
+                  style={
+                    this.state.isToggleOn2
+                      ? { transform: "rotate(180deg)" }
+                      : {}
+                  }
+                />
               </button>
               {menu2}
             </li>
