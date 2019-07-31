@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import NavigationBar from "../../../components/NavigationBar/navigationBar.js";
-import TrendGoalsCard from "../../../components/InsightCards/trendGoalsCard";
-import GraphCard from "../../../components/InsightCards/graphCard";
-import PatternCard from "../../../components/InsightCards/patternCard";
-import ViewCard from "../../../components/InsightCards/viewCard";
-import CompareDataCard from "../../../components/InsightCards/compareDataCard";
-import GoalCard from "../../../components/InsightCards/goalCard";
+import TrendGoalsCard from "../InsightCards/trendGoalsCard";
+import GraphCard from "../InsightCards/graphCard";
+import PatternCard from "../InsightCards/patternCard";
+import ViewCard from "../InsightCards/viewCard";
+import CompareDataCard from "../InsightCards/compareDataCard";
+import GoalCard from "../InsightCards/goalCard";
 import DateSelectorCard from "../../../components/DateSelectorCard/dateSelectorCard";
 
 import {
@@ -14,7 +14,7 @@ import {
 } from "../../../Utils/PatternCalculations/bloodSugarPatterns";
 import { connect } from "react-redux";
 import FakeGlucoseData from "../../../Utils/fakeGlucose";
-import {BLOODSUGAR} from "../../../dataTypes";
+import { BLOODSUGAR } from "../../../dataTypes";
 
 class BloodSugarInsight extends Component {
   render() {

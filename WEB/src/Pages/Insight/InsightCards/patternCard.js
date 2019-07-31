@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import CardComponent from "../Card/cardComponent";
+import CardComponent from "../../../components/Card/cardComponent";
 import "./patternCard.css";
 
 class PatternCard extends Component {
   patternCardContent = () => {
-    const squigglyLinePic = require("../../Images/squigglyPatternIcon.svg");
-    const triangleUpPic = require("../../Images/pinkUpTriangle.svg");
-    const triangleDownPic = require("../../Images/pinkDownTriangle.svg");
+    const squigglyLinePic = require("../../../Images/squigglyPatternIcon.svg");
+    const triangleUpPic = require("../../../Images/pinkUpTriangle.svg");
+    const triangleDownPic = require("../../../Images/pinkDownTriangle.svg");
 
     let data = this.props.data;
     let view = this.props.view;

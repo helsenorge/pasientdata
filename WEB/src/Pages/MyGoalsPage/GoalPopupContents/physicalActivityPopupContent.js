@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import "./popupContent.css";
 import { DisplayButton } from "@helsenorge/toolkit/components/atoms/buttons/display-button";
 import { connect } from "react-redux";
-import { changeGoal } from "../../Redux/actions";
-import addGoal from "../../Utils/addGoal";
+import { changeGoal } from "../../../Redux/actions";
+import addGoal from "../../../Utils/addGoal";
 
 class PhysicalActivityPopupContent extends Component {
   constructor(props) {

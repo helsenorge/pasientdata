@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import "./popupContent.css";
 import { DisplayButton } from "@helsenorge/toolkit/components/atoms/buttons/display-button";
 import { connect } from "react-redux";
-import { changeGoal } from "../../Redux/actions";
-import addGoal from "../../Utils/addGoal";
+import { changeGoal } from "../../../Redux/actions";
+import addGoal from "../../../Utils/addGoal";
 
-class StepsPopupContent extends Component {
+class CarbsPopupContent extends Component {
   constructor(props) {
     super(props);
 
@@ -15,15 +15,15 @@ class StepsPopupContent extends Component {
   }
   handleSave = () => {
     if (this.state.goal !== "") {
-      let goal = { type: "lower", value: this.state.goal };
+      let goal = { type: "upper", value: this.state.goal };
       // console.log("goal: ", goal);
-      this.props.changeGoal("StepsGoal", goal);
+      this.props.changeGoal("CarbsGoal", goal);
       addGoal(
-        "StepsGoal",
+        "CarbsGoal",
         goal,
-        "Desired number of steps per day",
-        "skritt",
-        "skritt",
+        "Max grams of carbohydrates per day",
+        "g",
+        "g",
         this.props.patient.googleId
       ); // range goal
     }
@@ -36,10 +36,10 @@ class StepsPopupContent extends Component {
   render = () => {
     return (
       <React.Fragment>
-        <h2> Skritt</h2>
+        <h2> Fysisk aktivitet</h2>
         <div className="popup-content-center-text">
           <br />
-          Jeg ønsker å gå mer enn
+          Jeg ønsker å spise mindre enn
           <input
             type="number"
             className="goal-input"
@@ -47,7 +47,7 @@ class StepsPopupContent extends Component {
             value={this.state.value}
             onChange={this.handleChange}
           />
-          skritt per dag
+          gram karbohydrater per dag
           <br />
           <br />
           <DisplayButton
@@ -77,4 +77,4 @@ function mapStateToProps(state) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(StepsPopupContent);
+)(CarbsPopupContent);

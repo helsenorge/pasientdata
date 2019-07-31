@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import CardComponent from "../Card/cardComponent";
-import getStartEndTimes from "../../Utils/getStartEndTimes";
-import periodFromView from "../../Utils/periodFromView";
+import CardComponent from "../../../components/Card/cardComponent";
+import getStartEndTimes from "../../../Utils/getStartEndTimes";
+import periodFromView from "../../../Utils/periodFromView";
 import { connect } from "react-redux";
-import PeriodStepper from "../PeriodStepper/periodStepper";
+import PeriodStepper from "../../../components/PeriodStepper/periodStepper";
 import InsightGraph from "./insightGraph";
-import { getAggregatedDataForDataType } from "../../Utils/aggregatedDataForDataType";
+import { getAggregatedDataForDataType } from "../../../Utils/aggregatedDataForDataType";
 
 class GraphCard extends Component {
   graphContent = () => {

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import CardComponent from "../Card/cardComponent";
-import FakeGlucoseData from "../../Utils/fakeGlucose";
-import Trends from "../../Utils/trends";
+import CardComponent from "../../../components/Card/cardComponent";
+import FakeGlucoseData from "../../../Utils/fakeGlucose";
+import Trends from "../../../Utils/trends";
 import {
   PieChart,
   Pie,
@@ -12,11 +12,11 @@ import {
 } from "recharts";
 import "./trendGoalsCard.css";
 import { connect } from "react-redux";
-import aggregateData from "../../Utils/aggregateData";
-import getStartEndTimes from "../../Utils/getStartEndTimes";
-import findStartAndEndIndex from "../../Utils/findStartAndEndIndex";
-import averageDataFunction from "../../Utils/averageData";
-import sortActivity from "../../Utils/sortActivity";
+import aggregateData from "../../../Utils/aggregateData";
+import getStartEndTimes from "../../../Utils/getStartEndTimes";
+import findStartAndEndIndex from "../../../Utils/findStartAndEndIndex";
+import averageDataFunction from "../../../Utils/averageData";
+import sortActivity from "../../../Utils/sortActivity";
 
 class TrendGoalsCard extends Component {
   displayUnit = () => {
@@ -183,9 +183,9 @@ class TrendGoalsCard extends Component {
       COLORS = ["#E38B21", "#569B7E"];
     }
 
-    const goalArrowPic = require("../../Images/goalArrow.svg");
-    const upTrianglePic = require("../../Images/greenUpTriangle.svg");
-    const downTrianglePic = require("../../Images/yellowDownTriangle.svg");
+    const goalArrowPic = require("../../../Images/goalArrow.svg");
+    const upTrianglePic = require("../../../Images/greenUpTriangle.svg");
+    const downTrianglePic = require("../../../Images/yellowDownTriangle.svg");
     let angles = [];
     let pieData;
     let lowerTextValue;

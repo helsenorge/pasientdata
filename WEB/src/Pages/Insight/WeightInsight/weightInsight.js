@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import NavigationBar from "../../../components/NavigationBar/navigationBar.js";
-import TrendGoalsCard from "../../../components/InsightCards/trendGoalsCard";
-import GraphCard from "../../../components/InsightCards/graphCard";
-import PatternCard from "../../../components/InsightCards/patternCard";
-import ViewCard from "../../../components/InsightCards/viewCard";
-import CompareDataCard from "../../../components/InsightCards/compareDataCard";
-import GoalCard from "../../../components/InsightCards/goalCard";
+import TrendGoalsCard from "../InsightCards/trendGoalsCard";
+import GraphCard from "../InsightCards/graphCard";
+import PatternCard from "../InsightCards/patternCard";
+import ViewCard from "../InsightCards/viewCard";
+import CompareDataCard from "../InsightCards/compareDataCard";
+import GoalCard from "../InsightCards/goalCard";
 import {
   bloodSugarGreatestChange,
   bloodSugarFluctuations
@@ -13,7 +13,7 @@ import {
 import { connect } from "react-redux";
 import DateSelectorCard from "../../../components/DateSelectorCard/dateSelectorCard";
 import FHIRConnection from "../../../FHIRCommunication";
-import {WEIGHT} from "../../../dataTypes";
+import { WEIGHT } from "../../../dataTypes";
 
 class WeightInsight extends Component {
   render() {
