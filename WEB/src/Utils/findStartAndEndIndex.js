@@ -35,7 +35,7 @@ export default function findStartAndEndIndex(data, start, end) {
     if (!endIndexFound) {
       endIndex--;
     }
-    if (startIndex !== data.length - 1) {
+    if (startIndex !== data.length - 1 && startIndex > 0) {
       startIndex++;
     }
   } else {

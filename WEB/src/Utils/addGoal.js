@@ -1,6 +1,5 @@
 import * as FHIR from "fhirclient";
 import moment from "moment";
-import getStringsFromLOINC from "./getStringsFromLOINC";
 
 export default function addGoal(
   goalId,
@@ -11,9 +10,8 @@ export default function addGoal(
   googleId
 ) {
   let target;
-  //   console.log("goal(addGoal): ", goal);
-
-  if (goal.type == "range") {
+  let mainURL = "https://localhost:5001/fhir"; // "https://pasientdata-fhir-api.azurewebsites.net/fhir"
+  if (goal.type === "range") {
     target = {
       detailRange: {
         low: { value: goal.lower, unit: unit },
@@ -21,7 +19,6 @@ export default function addGoal(
       }
     };
   } else {
-    // console.log("value: ", goal.value);
     target = {
       detailQuantity: {
         value: goal.value,
@@ -30,7 +27,6 @@ export default function addGoal(
         code: UCUMCode
       }
     };
-    // console.log("target: ", target);
   }
 
   let goalJSON = {
@@ -41,7 +37,7 @@ export default function addGoal(
       lastUpdated: moment().format("YYYY-MM-DDThh:mm:ss")
     },
     subject: {
-      reference: "https://localhost:5001/fhir/Patient/" + googleId
+      reference: mainURL + "/Patient/" + googleId
     },
     target: target,
     note: { text: goal.type },
@@ -51,7 +47,7 @@ export default function addGoal(
 
   let goalOptions = {
     method: "PUT",
-    url: "http://localhost:5000/fhir/Goal/" + goalId,
+    url: mainURL + "/Goal/" + goalId,
     headers: {
       "cache-control": "no-cache",
       Connection: "keep-alive",
@@ -66,14 +62,14 @@ export default function addGoal(
   };
 
   const client = FHIR.client({
-    serverUrl: "http://localhost:5000/fhir"
+    serverUrl: mainURL
   });
 
   console.log("Adding goal to FHIR database");
   client
     .request(goalOptions, (error, response, body) => {})
     .then(goal => {
-      // console.log("Goal: ", goal);
+      console.log("Goal: ", goal);
       // this.setState({ observation });
     });
 }

@@ -17,3 +17,29 @@
 .dashboard-card {
   height: 192px;
 }
+
+.insight-header {
+  display: flex;
+}
+
+.element-style,
+.header-container {
+  margin-left: 10px;
+}
+.header-container {
+  flex: 1;
+  margin-bottom: 0;
+  padding: 0;
+}
+
+.status-container {
+  flex-basis: auto;
+  /* flex-direction: column; */
+  justify-content: end;
+  align-items: end;
+  margin-top: 19px;
+  margin-right: 6px;
+  color: black;
+  /* position: absolute;
+  margin: 0; */
+}

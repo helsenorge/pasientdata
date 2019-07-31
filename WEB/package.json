@@ -11,6 +11,7 @@
     "moment": "^2.24.0",
     "npm": "^6.9.2",
     "numeral": "^2.0.6",
+    "rc-progress": "^2.5.1",
     "react": "^16.8.6",
     "react-burger-menu": "^2.6.10",
     "react-collapse": "^4.0.3",

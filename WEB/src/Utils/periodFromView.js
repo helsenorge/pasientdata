@@ -48,7 +48,7 @@ export default function(view) {
     case "custom":
       // @todo Make this smarter.
       return {
-        periodName: "week",
+        periodName: "custom",
         periodNumber: 1,
         intervalName: "day",
         intervalNumber: "7"

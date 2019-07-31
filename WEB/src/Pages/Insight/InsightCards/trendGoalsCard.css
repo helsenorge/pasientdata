@@ -1,0 +1,43 @@
+.flex-container-trend-goals {
+  display: flex;
+}
+
+.flex-side-container-trend-goals {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.flex-children-trend-goals {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.trend-pic {
+  max-height: 40px;
+  margin-right: 5px;
+}
+
+.outer-div-trend-goals {
+  width: 100%;
+}
+
+.upper-trend-goals-div {
+  border-bottom: 1px solid black;
+}
+
+.lower-trend-goals-div {
+  margin-top: 0px;
+}
+
+/* .trend-polygon {
+  color: #4f4f4f;
+  position: absolute;
+  top: 0;
+  right: 0;
+} */
+
+.distance-to-goal-text {
+  font-size: 10px;
+}

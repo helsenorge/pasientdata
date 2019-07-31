@@ -3,41 +3,36 @@ import { connect } from "react-redux";
 import "./dashboard.css";
 import FHIRConnection from "../../FHIRCommunication";
 import CardComponent from "../../components/Card/cardComponent";
-import blodsukkerContent from "../../components/DashboardContent/blodsukkerContent";
-// import PhysicalActivityContent from "../../components/DashboardContent/physicalActivityContent";
-// import insulinContent from "../../components/DashboardContent/insulinContent";
-// import carbohydratesContent from "../../components/DashboardContent/carbohydratesContent";
-import stepsContent from "../../components/DashboardContent/stepsContent";
-import weightContent from "../../components/DashboardContent/weightContent";
-import AddDataContent from "../../components/DashboardContent/addDataContent";
-import changeGoalsContent from "../../components/DashboardContent/changeGoalsContent";
-import compareDataContent from "../../components/DashboardContent/compareDataContent";
+import BlodsukkerContent from "./DashboardContent/blodsukkerContent";
+import AddDataContent from "./DashboardContent/addDataContent";
+import changeGoalsContent from "./DashboardContent/changeGoalsContent";
+import compareDataContent from "./DashboardContent/compareDataContent";
+import DashboardGraphCard from "./DashboardContent/dashboardGraphCard";
+import {
+  BLOODSUGAR,
+  INSULIN,
+  STEPS,
+  WEIGHT,
+  PHYSICAL_ACTIVITY,
+  CARBOHYDRATES
+} from "../../dataTypes";
 
 class Dashboard extends Component {
   render() {
     if (this.props.baseInfo.isLoggedin) {
       return (
         <div style={{ margin: "0 4px 8px" }}>
-          <h1 style={{ marginLeft: "8px" }}>Innsikt</h1>
-          <CardComponent title={"Blodsukker"} content={blodsukkerContent()} />
+          <div className="insight-header">
+            <h1 className="header-container">Innsikt</h1>
+            <div className="status-container">
+              Viser status fra siste 7 dager
+            </div>
+          </div>
+
+          <CardComponent title={"Blodsukker"} content={<BlodsukkerContent />} />
           <div className="flex-container">
-            <CardComponent
-              className="dashboard-card"
-              title={"Insulin"}
-              content={stepsContent(
-                this.props.patient.datasets[0].measurements,
-                "/insulin"
-              )}
-            />
-            <CardComponent
-              className="dashboard-card"
-              title={"Skritt"}
-              content={stepsContent(
-                this.props.patient.datasets[0].measurements,
-                "/steps",
-                this.props.patient.goals.StepsGoal
-              )}
-            />
+            <DashboardGraphCard dataType={INSULIN} />
+            <DashboardGraphCard dataType={STEPS} />
           </div>
           <div
             className="flex-container"
@@ -47,33 +42,11 @@ class Dashboard extends Component {
               "margin-right": "8px"
             }}
           >
-            <CardComponent
-              className="dashboard-card"
-              title={"Karbo"}
-              content={stepsContent(
-                this.props.patient.datasets[0].measurements,
-                "/carbohydrates"
-              )}
-            />
-            <CardComponent
-              className="dashboard-card"
-              title={"Vekt"}
-              content={weightContent(
-                this.props.patient.datasets[1].measurements,
-                "/weight",
-                this.props.patient.goals.WeightGoal.value
-              )}
-            />
+            <DashboardGraphCard dataType={CARBOHYDRATES} />
+            <DashboardGraphCard dataType={WEIGHT} />
           </div>
           <div className="flex-container">
-            <CardComponent
-              className="dashboard-card"
-              title={"Fysisk aktivitet"}
-              content={stepsContent(
-                this.props.patient.datasets[0].measurements,
-                "/physicalactivity"
-              )}
-            />
+            <DashboardGraphCard dataType={PHYSICAL_ACTIVITY} />
             <div className="flex-children" style={{ marginRight: "8px" }} />
           </div>
           <div className="single-flex-container">
