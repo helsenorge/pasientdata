@@ -1,5 +1,4 @@
 .max-width-wrapper {
-  max-width: 700px;
   margin: 0 auto !important;
   position: relative;
 }
@@ -49,18 +48,6 @@ a:hover {
 }
 
 @media only screen and (max-width: 750px) {
-  .max-width-wrapper {
-    max-width: 600px;
-    margin: 0 auto !important;
-    position: relative;
-  }
-
-  .li-wrapper {
-    font-weight: 400;
-    font-size: 18px;
-    display: inline-block;
-  }
-
   .tab_list {
     display: block;
     flex-direction: row;
@@ -72,12 +59,6 @@ a:hover {
     overflow-y: hidden;
     white-space: nowrap;
     width: 600px;
-  }
-
-  .tab_selected {
-    position: relative;
-    color: black !important;
-    font-weight: 500;
   }
 
   .a:link,
@@ -92,28 +73,24 @@ a:hover {
     border: 2px solid transparent;
   }
 
-  a:hover {
-    text-decoration: none !important;
-    color: #a61e7b !important;
-  }
-
   /* Next & previous buttons */
   .prev,
   .next {
     cursor: pointer;
     position: absolute;
-    top: 12px;
+    top: 8px;
     padding: 5px;
     font-weight: bold;
     font-size: 18px;
     transition: 0.6s ease;
     border-radius: 0 3px 3px 0;
+    display: flex;
     user-select: none;
   }
 
   /* Position the "next button" to the right */
   .next {
-    right: 10px;
+    right: 15px;
     border-radius: 3px 0 0 3px;
   }
 
@@ -130,18 +107,6 @@ a:hover {
 }
 
 @media only screen and (max-width: 450px) {
-  .max-width-wrapper {
-    max-width: 600px;
-    margin: 0 auto !important;
-    position: relative;
-  }
-
-  .li-wrapper {
-    font-weight: 400;
-    font-size: 18px;
-    display: inline-block;
-  }
-
   .tab_list {
     display: block;
     flex-direction: row;
@@ -178,17 +143,12 @@ a:hover {
     border: 2px solid transparent;
   }
 
-  a:hover {
-    text-decoration: none !important;
-    color: #a61e7b !important;
-  }
-
   /* Next & previous buttons */
   .prev,
   .next {
     cursor: pointer;
     position: absolute;
-    top: 8px;
+    top: 6px;
     padding: 5px;
     font-weight: bold;
     font-size: 18px;
@@ -198,20 +158,13 @@ a:hover {
     display: flex;
   }
 
-  /* Position the "next button" to the right */
   .next {
     right: 10px;
     border-radius: 3px 0 0 3px;
   }
 
   .prev {
-    left: 5px;
+    left: 10px;
     border-radius: 3px 0 0 3px;
-  }
-
-  /* On hover, add a black background color with a little bit see-through */
-  .prev:hover,
-  .next:hover {
-    background-color: rgba(0, 0, 0, 0.8);
   }
 }
