@@ -4,6 +4,11 @@ import "./myGoalsPage.css";
 import GoalContent from "./GoalContent/goalContent";
 import FHIRConnection from "../../FHIRCommunication";
 
+/*
+ * Page showing the different goals and current status towards those goals, as well
+ * as a button that lets you change them.
+ */
+
 class MyGoals extends Component {
   render() {
     if (this.props.baseInfo.isLoggedin) {
