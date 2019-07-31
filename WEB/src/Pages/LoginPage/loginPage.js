@@ -6,6 +6,11 @@ import { responseGoogle } from "../../api/googleFit";
 import { addInfo, onLoggedIn } from "../../Redux/actions";
 import "./loginPage.css";
 
+/*
+ * Simple login page for login into google that then handles communication with the fhir server
+ * and redirects to the dashboard.
+ */
+
 class LoginPage extends Component {
   constructor(props) {
     super(props);
