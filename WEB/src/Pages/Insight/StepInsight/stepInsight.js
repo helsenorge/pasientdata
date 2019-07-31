@@ -13,30 +13,46 @@ import FHIRConnection from "../../../FHIRCommunication";
 import { STEPS } from "../../../dataTypes";
 
 class StepInsight extends Component {
-  state = {};
   render() {
     if (this.props.baseInfo.isLoggedin) {
-      return (
-        <div style={{ margin: "0 0 8px" }}>
-          <h1 style={{ marginLeft: "8px" }}>Innsikt</h1>
-          <NavigationBar />
-          <ViewCard />
-          <DateSelectorCard />
-          <GraphCard datatype={STEPS} />
-          <TrendGoalsCard datatype="Skritt" />
-          <PatternCard
-            datatype="Skritt"
-            triangle={"up"}
-            fluctuation={"none"}
-            greatestChange={stepsGreatestPeriod}
-            data={this.props.patient.datasets[0].measurements}
-            view={this.props.baseInfo.view}
-            goals={this.props.patient.goals}
-          />
-          <GoalCard />
-          <CompareDataCard />
-        </div>
-      );
+      let fluctuationText = "none";
+      let greatestChangeText = stepsGreatestPeriod;
+      if (fluctuationText !== "none" || greatestChangeText !== "none") {
+        return (
+          <div style={{ margin: "0 0 8px" }}>
+            <h1 style={{ marginLeft: "8px" }}>Innsikt</h1>
+            <NavigationBar />
+            <ViewCard />
+            <DateSelectorCard />
+            <GraphCard datatype={STEPS} />
+            <TrendGoalsCard datatype="Skritt" />
+            <PatternCard
+              datatype="Skritt"
+              triangle={"up"}
+              fluctuation={fluctuationText}
+              greatestChange={greatestChangeText}
+              data={this.props.patient.datasets[0].measurements}
+              view={this.props.baseInfo.view}
+              goals={this.props.patient.goals}
+            />
+            <GoalCard />
+            <CompareDataCard />
+          </div>
+        );
+      } else {
+        return (
+          <div style={{ margin: "0 0 8px" }}>
+            <h1 style={{ marginLeft: "8px" }}>Innsikt</h1>
+            <NavigationBar />
+            <ViewCard />
+            <DateSelectorCard />
+            <GraphCard datatype={STEPS} />
+            <TrendGoalsCard datatype="Skritt" />
+            <GoalCard />
+            <CompareDataCard />
+          </div>
+        );
+      }
     } else {
       return (
         <div>

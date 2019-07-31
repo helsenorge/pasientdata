@@ -15,27 +15,44 @@ import { INSULIN } from "../../../dataTypes";
 class InsulinInsight extends Component {
   render() {
     if (this.props.baseInfo.isLoggedin) {
-      return (
-        <div style={{ margin: "0 0 8px" }}>
-          <h1 style={{ marginLeft: "8px" }}>Innsikt</h1>
-          <NavigationBar />
-          <ViewCard />
-          <DateSelectorCard />
-          <GraphCard datatype={INSULIN} />
-          <TrendGoalsCard datatype="Insulin" />
-          <PatternCard
-            datatype="Insulin"
-            triangle={"down"}
-            fluctuation={"none"}
-            greatestChange={"none"}
-            data={FakeGlucoseData()}
-            view={this.props.baseInfo.view}
-            goals={this.props.patient.goals}
-          />
-          <GoalCard />
-          <CompareDataCard />
-        </div>
-      );
+      let fluctuationText = "none";
+      let greatestChangeText = "none";
+      if (fluctuationText !== "none" || greatestChangeText !== "none") {
+        return (
+          <div style={{ margin: "0 0 8px" }}>
+            <h1 style={{ marginLeft: "8px" }}>Innsikt</h1>
+            <NavigationBar />
+            <ViewCard />
+            <DateSelectorCard />
+            <GraphCard datatype={INSULIN} />
+            <TrendGoalsCard datatype="Insulin" />
+            <PatternCard
+              datatype="Insulin"
+              triangle={"down"}
+              fluctuation={fluctuationText}
+              greatestChange={greatestChangeText}
+              data={FakeGlucoseData()}
+              view={this.props.baseInfo.view}
+              goals={this.props.patient.goals}
+            />
+            <GoalCard />
+            <CompareDataCard />
+          </div>
+        );
+      } else {
+        return (
+          <div style={{ margin: "0 0 8px" }}>
+            <h1 style={{ marginLeft: "8px" }}>Innsikt</h1>
+            <NavigationBar />
+            <ViewCard />
+            <DateSelectorCard />
+            <GraphCard datatype={INSULIN} />
+            <TrendGoalsCard datatype="Insulin" />
+            <GoalCard />
+            <CompareDataCard />
+          </div>
+        );
+      }
     } else {
       return (
         <div>

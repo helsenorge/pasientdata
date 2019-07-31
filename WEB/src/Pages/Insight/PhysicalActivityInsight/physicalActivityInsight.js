@@ -14,27 +14,44 @@ import { PHYSICAL_ACTIVITY } from "../../../dataTypes";
 class PhysicalActivityInsight extends Component {
   render() {
     if (this.props.baseInfo.isLoggedin) {
-      return (
-        <div style={{ margin: "0 0 8px" }}>
-          <h1 style={{ marginLeft: "8px" }}>Innsikt</h1>
-          <NavigationBar />
-          <ViewCard />
-          <DateSelectorCard />
-          <GraphCard datatype={PHYSICAL_ACTIVITY} />
-          <TrendGoalsCard datatype="FysiskAktivitet" />
-          <PatternCard
-            datatype="FysiskAktivitet"
-            triangle={"up"}
-            fluctuation={"none"}
-            greatestChange={"none"}
-            data={this.props.patient.datasets[2].measurements}
-            view={this.props.baseInfo.view}
-            goals={this.props.patient.goals}
-          />
-          <GoalCard />
-          <CompareDataCard />
-        </div>
-      );
+      let fluctuationText = "none";
+      let greatestChangeText = "none";
+      if (fluctuationText !== "none" || greatestChangeText !== "none") {
+        return (
+          <div style={{ margin: "0 0 8px" }}>
+            <h1 style={{ marginLeft: "8px" }}>Innsikt</h1>
+            <NavigationBar />
+            <ViewCard />
+            <DateSelectorCard />
+            <GraphCard datatype={PHYSICAL_ACTIVITY} />
+            <TrendGoalsCard datatype="FysiskAktivitet" />
+            <PatternCard
+              datatype="FysiskAktivitet"
+              triangle={"up"}
+              fluctuation={"none"}
+              greatestChange={"none"}
+              data={this.props.patient.datasets[2].measurements}
+              view={this.props.baseInfo.view}
+              goals={this.props.patient.goals}
+            />
+            <GoalCard />
+            <CompareDataCard />
+          </div>
+        );
+      } else {
+        return (
+          <div style={{ margin: "0 0 8px" }}>
+            <h1 style={{ marginLeft: "8px" }}>Innsikt</h1>
+            <NavigationBar />
+            <ViewCard />
+            <DateSelectorCard />
+            <GraphCard datatype={PHYSICAL_ACTIVITY} />
+            <TrendGoalsCard datatype="FysiskAktivitet" />
+            <GoalCard />
+            <CompareDataCard />
+          </div>
+        );
+      }
     } else {
       return (
         <div>
