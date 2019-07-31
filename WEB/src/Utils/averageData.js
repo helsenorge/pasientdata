@@ -66,8 +66,10 @@ export default function averageDataFunctions(
       time = moment(startTime)
         .add(added, interval + "s")
         .format(outputFormat);
+      console.log("inData: ", inData);
+      console.log("startIndex: ", startIndex);
       aggregated.push({
-        y: inData[startIndex - 1].value,
+        y: inData[startIndex].value,
         x: time
       });
       added++;

@@ -1,10 +1,7 @@
 import React, { Component } from "react";
 import CardComponent from "../../../components/Card/cardComponent";
 import "./patternCard.css";
-import {
-  getRawDataForDataType,
-  getAggregatedDataForDataType
-} from "../../../Utils/aggregatedDataForDataType";
+import { getAggregatedDataForDataType } from "../../../Utils/aggregatedDataForDataType";
 import { connect } from "react-redux";
 import { getGoal } from "../../../dataTypes";
 
@@ -18,11 +15,12 @@ class PatternCard extends Component {
     let view = this.props.view;
     let goals = this.props.goals;
 
-    const aggregatedData = getRawDataForDataType(
+    const aggregatedData = getAggregatedDataForDataType(
       this.props.baseInfo,
       this.props.patient.datasets,
       this.props.dataType,
-      "insight"
+      "insight",
+      "YYYY-MM-DDTHH:mm:ss"
     );
     let fluctuationText;
     let fluctuationValue;
