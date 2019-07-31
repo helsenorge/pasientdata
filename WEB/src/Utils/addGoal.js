@@ -10,7 +10,7 @@ export default function addGoal(
   googleId
 ) {
   let target;
-  let mainURL = "https://localhost:5001/fhir"; // "https://pasientdata-fhir-api.azurewebsites.net/fhir"
+  let mainURL = "https://pasientdata-fhir-api.azurewebsites.net/fhir"; // "https://localhost:5001/fhir"; //
   if (goal.type === "range") {
     target = {
       detailRange: {
@@ -61,12 +61,12 @@ export default function addGoal(
     body: JSON.stringify(goalJSON)
   };
 
-  const client = FHIR.client({
-    serverUrl: mainURL
-  });
+  // const client = FHIR.client({
+  //   serverUrl: mainURL
+  // });
 
   console.log("Adding goal to FHIR database");
-  client
+  this.state.client
     .request(goalOptions, (error, response, body) => {})
     .then(goal => {
       console.log("Goal: ", goal);

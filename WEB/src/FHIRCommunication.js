@@ -122,7 +122,7 @@ class FHIRCommunication extends React.Component {
     this.state.client
       .request(optionsPatient, (error, response, body) => {})
       .then(patient => {
-        console.log(patient);
+        // console.log("Newly added patient: ", patient);
       });
   };
 
@@ -260,7 +260,10 @@ class FHIRCommunication extends React.Component {
     console.log("Reading all goals the patient has in the FHIR database");
     const q1 = new URLSearchParams();
     q1.set("subject", this.props.patient.googleId);
-    this.state.client
+    let client = FHIR.client({
+      serverUrl: this.state.mainURL
+    });
+    client
       .request(`Goal?${q1}`, {
         pageLimit: 0,
         flat: true
@@ -288,6 +291,7 @@ class FHIRCommunication extends React.Component {
             }
           }
         });
+        console.log("Goals from fhir", goalsMsg);
         this.props.setGoals(stateGoals);
       });
   };

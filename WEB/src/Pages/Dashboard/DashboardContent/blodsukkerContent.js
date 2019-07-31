@@ -81,11 +81,11 @@ class BlodsukkerContent extends Component {
                   {74} %{/* {Math.floor(currentValue)} % */}
                 </div>{" "}
                 <Line
-                  strokeWidth="4"
+                  strokeWidth="5"
                   strokeColor="#85c99e"
                   // percent={currentValue}
                   percent={74}
-                  trailWidth="4"
+                  trailWidth="5"
                 />
               </div>
             </div>
