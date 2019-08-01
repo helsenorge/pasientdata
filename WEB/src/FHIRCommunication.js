@@ -108,16 +108,9 @@ class FHIRCommunication extends React.Component {
       method: "PUT",
       url: fhirUrl() + "/Patient/" + this.props.patient.googleId,
       headers: {
-        "cache-control": "no-cache",
         Connection: "keep-alive",
         "accept-encoding": "gzip, deflate",
-        Host: "localhost:5000",
-        "Cache-Control": "no-cache",
-        Accept: "*/*",
-        "Content-Type": "application/json",
-        "User-Agent": "PostmanRuntime/7.15.0",
-        pageLimit: 0,
-        flat: true
+        "Content-Type": "application/json"
       },
       body: JSON.stringify(patientJSON)
     };
@@ -219,14 +212,9 @@ class FHIRCommunication extends React.Component {
         method: "PUT",
         url: fhirUrl() + "/Observation/" + observationId,
         headers: {
-          "cache-control": "no-cache",
           Connection: "keep-alive",
           "accept-encoding": "gzip, deflate",
-          Host: "localhost:5000",
-          "Cache-Control": "no-cache",
-          Accept: "*/*",
-          "Content-Type": "application/json",
-          "User-Agent": "PostmanRuntime/7.15.0"
+          "Content-Type": "application/json"
         },
         body: JSON.stringify(observationJSON)
       };

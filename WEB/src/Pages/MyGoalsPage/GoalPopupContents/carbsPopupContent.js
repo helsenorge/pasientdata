@@ -36,7 +36,7 @@ class CarbsPopupContent extends Component {
   render = () => {
     return (
       <React.Fragment>
-        <h2> Fysisk aktivitet</h2>
+        <h2> Karbohydrater </h2>
         <div className="popup-content-center-text">
           <br />
           Jeg ønsker å spise mindre enn
