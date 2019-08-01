@@ -302,7 +302,7 @@ class FHIRCommunication extends React.Component {
         <div>
           {/* moved them here, seems to have solved some issues, gets called after login has saved info to redux */}
           {this.addPatientIfNeeded()}
-          {this.addObservations()}
+          {/* {this.addObservations()} */}
           {/* {this.readAllObservations()} */}
           {this.readAllGoals()}
           <Redirect to="/dashboard" />

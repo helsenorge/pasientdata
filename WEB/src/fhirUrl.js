@@ -3,7 +3,7 @@
  */
 
 export default function fhirUrl() {
-  let useLocalServer = true;
+  let useLocalServer = false;
   if (useLocalServer) {
     return "https://localhost:5001/fhir";
   } else {
