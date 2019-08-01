@@ -1,49 +1,5 @@
-//import Trends from "../trends";
 import moment from "moment";
 import periodFromView from "../periodFromView";
-
-// export function stepsFluctuations(view, data, goals) {
-//     let [period, periodNumber, interval] = periodFromView(view);
-//     //let numIntervals = 24;
-//     let { startIndex, endIndex } = findStartAndEndIndex(
-//       data,
-//
-//       moment()
-//         .subtract(periodNumber, period)
-//         .format("YYYY-MM-DDTHH:mm:ss"),
-//       moment().format("YYYY-MM-DDTHH:mm:ss")
-//     );
-
-//     let slicedData = data.slice(startIndex, endIndex);
-//     let dataArray;
-//     let sum = [];
-//     let start;
-//     let end;
-//     let greatestChange = 0;
-
-//     for (let i = 0; i < numIntervals * 60; i = i + 60) {
-//       dataArray = slicedData.slice(i, i + 60);
-//       let delta = 0;
-//       for (let j = 1; j < dataArray.length; j++) {
-//         delta = delta + Math.abs(dataArray[j - 1].value - dataArray[j].value);
-//       }
-//       sum.push(delta);
-//       if (delta >= greatestChange) {
-//         start = moment(dataArray[0].start).format("HH:mm");
-//         end = moment(dataArray[0].start)
-//           .add(1, period + "s")
-//           .format("HH:mm");
-//         greatestChange = delta;
-//       }
-//     }
-//     return (
-//       "Mest svingninger i blodsukkeret mellom " +
-//       start +
-//       " og " +
-//       end +
-//       " denne dagen."
-//     );
-//   }
 
 export function stepsGreatestPeriod(view, data, goals) {
   let { periodName, periodNumber, intervalName } = periodFromView(view);
