@@ -6,7 +6,6 @@ import PatternCard from "../InsightCards/patternCard";
 import ViewCard from "../InsightCards/viewCard";
 import CompareDataCard from "../InsightCards/compareDataCard";
 import GoalCard from "../InsightCards/goalCard";
-import FakeGlucoseData from "../../../Utils/fakeGlucose";
 import { connect } from "react-redux";
 import DateSelectorCard from "../../../components/DateSelectorCard/dateSelectorCard";
 import FHIRConnection from "../../../FHIRCommunication";
@@ -27,7 +26,6 @@ class InsulinInsight extends Component {
             <GraphCard datatype={INSULIN} />
             <TrendGoalsCard datatype="Insulin" />
             <PatternCard
-              datatype="Insulin"
               triangle={"down"}
               fluctuation={fluctuationText}
               greatestChange={greatestChangeText}

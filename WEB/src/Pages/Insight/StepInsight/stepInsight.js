@@ -27,7 +27,6 @@ class StepInsight extends Component {
             <GraphCard datatype={STEPS} />
             <TrendGoalsCard datatype="Skritt" />
             <PatternCard
-              datatype="Skritt"
               triangle={"up"}
               fluctuation={fluctuationText}
               greatestChange={greatestChangeText}

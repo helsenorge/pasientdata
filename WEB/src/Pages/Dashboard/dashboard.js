@@ -9,7 +9,6 @@ import changeGoalsContent from "./DashboardContent/changeGoalsContent";
 import compareDataContent from "./DashboardContent/compareDataContent";
 import DashboardGraphCard from "./DashboardContent/dashboardGraphCard";
 import {
-  BLOODSUGAR,
   INSULIN,
   STEPS,
   WEIGHT,

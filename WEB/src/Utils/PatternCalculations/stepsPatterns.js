@@ -1,6 +1,4 @@
-import findStartAndEndIndex from "../findStartAndEndIndex";
 //import Trends from "../trends";
-import aggregateData from "../aggregateData";
 import moment from "moment";
 import periodFromView from "../periodFromView";
 

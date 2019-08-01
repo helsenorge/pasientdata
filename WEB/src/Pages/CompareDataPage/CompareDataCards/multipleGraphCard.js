@@ -21,19 +21,6 @@ import { getAggregatedDataForDataType } from "../../../Utils/aggregatedDataForDa
 
 class MultipleGraphCard extends Component {
   makeGraph = dataType => {
-    let { periodName, intervalName } = periodFromView(this.props.baseInfo.view);
-    let { start, end } = getStartEndTimes(
-      this.props.baseInfo.view,
-      this.props.baseInfo.nrOfIntervalsBack
-    );
-    if (
-      this.props.baseInfo.view === "custom" &&
-      this.props.baseInfo.start !== "" &&
-      this.props.baseInfo.end !== ""
-    ) {
-      start = this.props.baseInfo.start;
-      end = this.props.baseInfo.end;
-    }
     const aggregatedData = getAggregatedDataForDataType(
       this.props.baseInfo,
       this.props.patient.datasets,
@@ -47,9 +34,6 @@ class MultipleGraphCard extends Component {
 
   makePeriodStepper = data => {
     if (data) {
-      let { periodName, intervalName } = periodFromView(
-        this.props.baseInfo.view
-      );
       let { start, end } = getStartEndTimes(
         this.props.baseInfo.view,
         this.props.baseInfo.nrOfIntervalsBack

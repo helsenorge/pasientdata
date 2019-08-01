@@ -30,7 +30,7 @@ class GoalContent extends Component {
         return "/dag";
       case "BlodsukkerAvg":
         return "mmol/l";
-      case "Skritt":
+      case "skritt/dag":
         return "skritt";
       case "Vekt":
         return "kilogram";
@@ -85,13 +85,12 @@ class GoalContent extends Component {
         lowerLimit = goalValue / 5;
         currentValue =
           (timeWithin * 100) / (timeAbove + timeWithin + timeBelow);
-        unit = this.props.patient.goals.BloodSugarWithinRangePercentageGoal
-          .unit;
+        unit = "%";
         break;
       case "BlodsukkerAvg":
         COLORS = generalColors;
         goalValue = this.props.patient.goals.MeanGlucoseGoal.value;
-        unit = this.props.patient.goals.MeanGlucoseGoal.unit;
+        unit = "mmol/l";
         xPos = 51;
         data = FakeGlucoseData();
         upperLimit = goalValue * 2;
@@ -120,13 +119,13 @@ class GoalContent extends Component {
         trends = Trends(aggregated, upperLimit, lowerLimit);
         mean = trends.mean;
         currentValue = mean;
-        unit = this.props.patient.goals.StepsGoal.unit;
+        unit = "skritt";
         break;
       case "Vekt":
         dataSet = [{ value: 2 }, { value: 2 }, { value: 1 }];
         COLORS = underColors;
         goalValue = this.props.patient.goals.WeightGoal.value;
-        unit = this.props.patient.goals.WeightGoal.unit;
+        unit = "kg";
         xPos = 67;
         data = this.props.patient.datasets[1].measurements;
         upperLimit = goalValue;
@@ -139,7 +138,7 @@ class GoalContent extends Component {
         COLORS = overColors;
         dataSet = [{ value: 1 }, { value: 1 }, { value: 3 }];
         goalValue = this.props.patient.goals.PhysicalActivityGoal.value;
-        unit = this.props.patient.goals.PhysicalActivityGoal.unit;
+        unit = "min";
         xPos = 58;
         data = this.props.patient.datasets[2].measurements;
         upperLimit = goalValue;
@@ -157,7 +156,7 @@ class GoalContent extends Component {
       case "Karbohydrater":
         COLORS = generalColors;
         goalValue = this.props.patient.goals.CarbsGoal.value;
-        unit = this.props.patient.goals.CarbsGoal.unit;
+        unit = "g";
         xPos = 70;
         break;
       default:

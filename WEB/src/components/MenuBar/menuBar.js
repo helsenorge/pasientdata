@@ -4,7 +4,7 @@ import Menu from "@helsenorge/toolkit/components/icons/Menu";
 import Tiles from "@helsenorge/toolkit/components/icons/Tiles";
 import ChevronDownRounded from "@helsenorge/toolkit/components/icons/ChevronDownRounded";
 import { connect } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import { onLoggedIn } from "../../Redux/actions";
 
 /*
@@ -66,7 +66,7 @@ class MenuBar extends Component {
     let menu;
     let menu2;
 
-    // Tried to make a inner dropdown, does not work with fliped horizontal view,
+    // Tried to make a inner dropdown, does not work with flipped horizontal view,
     // and does not close outer dropdown when clicked on inner buttons
 
     if (this.state.isToggleOn2) {
@@ -225,9 +225,9 @@ class MenuBar extends Component {
         <div ref={this.setWrapperRef}>
           <div className="bar navbar">
             <div className="menuPos textStyle">
-              <a className="aStyle" href="/dashboard">
+              <Link className="aStyle" to="/dashboard">
                 Helseinnsikt
-              </a>
+              </Link>
             </div>
             <div className="menuPos">
               <button className="button" onClick={this.toggle}>

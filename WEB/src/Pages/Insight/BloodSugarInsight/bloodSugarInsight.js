@@ -30,7 +30,6 @@ class BloodSugarInsight extends Component {
           <GraphCard datatype={BLOODSUGAR} />
           <TrendGoalsCard datatype="Blodsukker" />
           <PatternCard
-            datatype="Blodsukker"
             triangle={"up"}
             fluctuation={fluctuationText}
             greatestChange={greatestChangeText}
