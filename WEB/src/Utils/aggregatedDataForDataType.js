@@ -97,7 +97,7 @@ export const getAggregatedDataForDataType = (
             intervalName
           );
           return filteredActivityByDate.length > 0
-            ? filterActivityByDate
+            ? filterActivityByDate(data, start, end, format, intervalName)
             : aggregateData(data, intervalName, start, end, format);
         }
       case BLOODSUGAR:
@@ -121,7 +121,6 @@ export const getAggregatedDataForDataType = (
   };
 
   let aggregated = getAggregatedData();
-
   const noRecentData = aggregated.filter(data => data.y > 0).length === 0;
   //Fake data to present in prototype
   if (noRecentData) {
