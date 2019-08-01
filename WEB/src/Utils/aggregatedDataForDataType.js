@@ -72,6 +72,8 @@ export const getAggregatedDataForDataType = (
       case BLOODSUGAR:
         //if data is missing, generate empty datapoints to present in prototype
         return [];
+      default:
+        return "DataType not found";
     }
   }
   let data = getData();
@@ -98,6 +100,8 @@ export const getAggregatedDataForDataType = (
         return aggregateData(data, intervalName, start, end, format);
       case WEIGHT:
         return averageData(data, intervalName, start, end, format);
+      default:
+        return;
     }
   }
   const fakeDataForDataType = {

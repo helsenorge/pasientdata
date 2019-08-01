@@ -1,9 +1,6 @@
 import React, { Component } from "react";
 import CardComponent from "../../../components/Card/cardComponent";
-// import { FormCheckbox } from "shards-react";
-import CheckBoxGroup, {
-  Option
-} from "@helsenorge/toolkit/components/atoms/checkbox-group";
+import CheckBoxGroup from "@helsenorge/toolkit/components/atoms/checkbox-group";
 import "./compareDataCards.css";
 import { connect } from "react-redux";
 import {
@@ -56,8 +53,9 @@ class DataTypeCard extends Component {
 
   handleChange = id => {
     let counter = this.state.numberChecked;
-    let changed;
-    let newCheckboxes = this.state.checkboxes.map(e => {
+    let checkboxArray = this.state.checkboxes;
+
+    checkboxArray.forEach(e => {
       if (e.id === id) {
         if (this.state.numberChecked < 6 || e.checked === true) {
           if (e.checked === true) {
@@ -66,7 +64,6 @@ class DataTypeCard extends Component {
             counter += 1;
           }
           e.checked = !e.checked;
-          changed = e;
           this.setState({ errorMessage: false });
         } else {
           this.setState({ errorMessage: true });
@@ -95,6 +92,8 @@ class DataTypeCard extends Component {
             this.props.setCarbohydratesChecked(
               this.state.checkboxes[5].checked
             );
+            break;
+          default:
             break;
         }
       }

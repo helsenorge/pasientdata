@@ -27,7 +27,6 @@ class CarbohydrateInsight extends Component {
             <GraphCard datatype={CARBOHYDRATES} />
             <TrendGoalsCard datatype="Karbohydrater" />
             <PatternCard
-              datatype="Karbohydrater"
               triangle={"down"}
               fluctuation={fluctuationText}
               greatestChange={greatestChangeText}

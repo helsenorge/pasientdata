@@ -28,7 +28,7 @@ class BloodSugarPopupContent extends Component {
       };
       this.props.changeGoal("BloodSugarRangeGoal", goalRange);
 
-      let percentGoal = { type: "lower", value: this.state.percentGoal };
+      let percentGoal = { type: "lower", value: this.state.percentGoal, unit: "%" };
       this.props.changeGoal("BloodSugarWithinRangePercentageGoal", percentGoal);
 
       addGoal(

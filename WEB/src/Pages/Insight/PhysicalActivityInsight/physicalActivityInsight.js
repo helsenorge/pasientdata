@@ -26,7 +26,6 @@ class PhysicalActivityInsight extends Component {
             <GraphCard datatype={PHYSICAL_ACTIVITY} />
             <TrendGoalsCard datatype="FysiskAktivitet" />
             <PatternCard
-              datatype="FysiskAktivitet"
               triangle={"up"}
               fluctuation={"none"}
               greatestChange={"none"}
