@@ -62,6 +62,7 @@ class DataTypeCard extends Component {
             counter = counter - 1;
           } else {
             counter += 1;
+            document.getElementById("filterCard").scrollIntoView();
           }
           e.checked = !e.checked;
           this.setState({ errorMessage: false });
@@ -180,7 +181,7 @@ class DataTypeCard extends Component {
 
   makeContent = () => {
     return (
-      <div>
+      <div id="filterCard">
         <div className="flex-container-datatypes">
           {this.makeColorCategories()}
           <div className="flex-children-datatypes-checkboxes">
