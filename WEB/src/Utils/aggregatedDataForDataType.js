@@ -96,7 +96,9 @@ export const getAggregatedDataForDataType = (
             format,
             intervalName
           );
-          return filteredActivityByDate;
+          return filteredActivityByDate.length > 0
+            ? filterActivityByDate
+            : aggregateData(data, intervalName, start, end, format);
         }
       case BLOODSUGAR:
       case INSULIN:

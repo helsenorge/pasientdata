@@ -8,7 +8,6 @@ export default function filterActivityByDate(
   outputFormat,
   interval
 ) {
-
   const { startIndex, endIndex } = findStartAndEndIndex(
     inData,
     startString,
@@ -16,7 +15,9 @@ export default function filterActivityByDate(
   );
 
   let slicedData = inData.slice(startIndex, endIndex);
-
+  if (slicedData === undefined || slicedData.length === 0) {
+    return [];
+  }
   let data = slicedData.map(item => ({
     x: moment(item.start, "YYYY-MM-DDTHH:mm:ss").format("YYYY-MM-DD"),
     y: item.value
@@ -33,7 +34,7 @@ export default function filterActivityByDate(
 
   if (
     moment().isAfter(
-      moment(concatenatedData[concatenatedData.length - 1].x),
+      moment(concatenatedData[concatenatedData.length].x),
       interval
     )
   ) {
