@@ -50,7 +50,6 @@ const DashboardGraph = ({ aggregatedData, dataType, patient }) => {
     <ReferenceLine
       y={refValue}
       stroke="#999999"
-      //strokeDasharray="3 3"
       label={{
         value: refLabel,
         position: "right",

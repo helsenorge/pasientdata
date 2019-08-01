@@ -1,13 +1,5 @@
 import React, { Component } from "react";
-import {
-  Card,
-  //CardHeader,
-  CardTitle,
-  //CardImg,
-  CardBody
-  //CardFooter,
-  //Button
-} from "shards-react";
+import { Card, CardTitle, CardBody } from "shards-react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "shards-ui/dist/css/shards.min.css";
 

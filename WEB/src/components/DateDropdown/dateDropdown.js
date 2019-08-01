@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-//import { Dropdown } from "@helsenorge/toolkit/components/atoms/dropdown";
 import { FormSelect } from "shards-react";
 import { connect } from "react-redux";
 import { setView } from "../../Redux/actions";

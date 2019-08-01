@@ -19,6 +19,12 @@ class NavigationBar extends Component {
     x.scrollBy({ top: 0, left: -100, behavior: "smooth" });
   }
 
+  componentDidMount() {
+    const currentPage = window.location.pathname.split('/')[1];
+    var x = document.getElementById("tab_list");
+    x.scrollBy({ top: 0, left: scrollPositions[currentPage]});
+  }
+
   render() {
     return (
       <div className="menu-button-row row navbar d-block max-width-wrapper">
@@ -90,3 +96,12 @@ class NavigationBar extends Component {
 }
 
 export default NavigationBar;
+
+const scrollPositions = {
+  "bloodsugar": 0,
+  "insulin": 0,
+  "steps": 100,
+  "weight": 200,
+  "physicalactivity": 300,
+  "carbohydrates": 400
+}
