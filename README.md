@@ -25,7 +25,7 @@ Both programs can be downloaded here:
 When you have completed you can clone [our repo](https://github.com/helsenorgelab/pasientdata.git) and follow the setup for [backend](https://github.com/helsenorgelab/pasientdata#backend-setup) and then [frontend](https://github.com/helsenorgelab/pasientdata#frontend-setup)
 
 ## Backend setup: ##
-***The backend is now running on a server, but we also have a local version. If you want to run it locally, follow the steps below.***
+<!-- ***The backend is now running on a server, but we also have a local version. If you want to run it locally, follow the steps below.*** -->
 
 * Download and install the .NET core sdk 2.2 from their website: https://dotnet.microsoft.com/download
 * Then open the [spark.sln](https://github.com/helsenorgelab/pasientdata/blob/master/src/Spark/Spark.sln) file in Visual Studio, which is located in the Spark folder within the first src file in the repo.
