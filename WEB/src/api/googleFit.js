@@ -8,9 +8,9 @@ import moment from "moment";
 var urlBase =
   "https://www.googleapis.com/fitness/v1/users/me/dataSources/derived:com.google.";
 
-//1560981600000000000-1735686000000000000 - 20.06.19-01.01.25
+//1533122511000000000-1564658652000000000 - 01.01.18-01.01.19
 
-var startEndDate = "1560981600000000000-" + Date.now() * 1000000;
+var startEndDate = (moment().subtract(1, "year").format("X") + "000000000") + "-" + (moment().format("X") + "000000000");
 
 export function getUserSteps(response) {
   return axios.get(
