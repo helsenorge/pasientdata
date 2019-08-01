@@ -7,7 +7,11 @@ export const initialState = {
   lastname: "",
   fullname: "",
   email: "",
-  datasets: [],
+  datasets: [
+    { name: "55423-8", measurements: [] },
+    { name: "29463-7", measurements: [] },
+    { name: "77595-7", measurements: [] }
+  ],
   goals: defaultGoals
 };
 

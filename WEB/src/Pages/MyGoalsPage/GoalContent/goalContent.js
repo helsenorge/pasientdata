@@ -9,6 +9,14 @@ import FakeGlucoseData from "../../../Utils/fakeGlucose";
 import Trends from "../../../Utils/trends";
 import aggregateData from "../../../Utils/aggregateData";
 import sortActivity from "../../../Utils/sortActivity";
+import { getAggregatedDataForDataType } from "../../../Utils/aggregatedDataForDataType";
+import {
+  STEPS,
+  WEIGHT,
+  BLOODSUGAR,
+  PHYSICAL_ACTIVITY,
+  CARBOHYDRATES
+} from "../../../dataTypes";
 
 class GoalContent extends Component {
   CustomLabel(value1, value2, xPos) {
@@ -80,7 +88,12 @@ class GoalContent extends Component {
         goalValue = this.props.patient.goals.BloodSugarWithinRangePercentageGoal
           .value;
         xPos = 72;
-        data = FakeGlucoseData();
+        data = getAggregatedDataForDataType(
+          this.props.baseInfo,
+          this.props.patient.datasets,
+          BLOODSUGAR,
+          "goal"
+        );
         upperLimit = goalValue;
         lowerLimit = goalValue / 5;
         currentValue =
@@ -92,7 +105,12 @@ class GoalContent extends Component {
         goalValue = this.props.patient.goals.MeanGlucoseGoal.value;
         unit = "mmol/l";
         xPos = 51;
-        data = FakeGlucoseData();
+        data = getAggregatedDataForDataType(
+          this.props.baseInfo,
+          this.props.patient.datasets,
+          BLOODSUGAR,
+          "goal"
+        );
         upperLimit = goalValue * 2;
         lowerLimit = goalValue / 2;
         trends = Trends(data, upperLimit, lowerLimit);
@@ -106,15 +124,12 @@ class GoalContent extends Component {
         xPos = 48;
         data = this.props.patient.datasets[0].measurements;
         upperLimit = goalValue;
-        lowerLimit = goalValue / 6.5;
-        let aggregated = aggregateData(
-          data,
-          "day",
-          moment()
-            .subtract(2, "week")
-            .format("YYYY-MM-DDTHH:mm:ss"),
-          moment().format("YYYY-MM-DDTHH:mm:ss"),
-          "ddd"
+        lowerLimit = goalValue / 5;
+        let aggregated = getAggregatedDataForDataType(
+          this.props.baseInfo,
+          this.props.patient.datasets,
+          STEPS,
+          "goal"
         );
         trends = Trends(aggregated, upperLimit, lowerLimit);
         mean = trends.mean;
@@ -127,7 +142,12 @@ class GoalContent extends Component {
         goalValue = this.props.patient.goals.WeightGoal.value;
         unit = "kg";
         xPos = 67;
-        data = this.props.patient.datasets[1].measurements;
+        data = getAggregatedDataForDataType(
+          this.props.baseInfo,
+          this.props.patient.datasets,
+          WEIGHT,
+          "goal"
+        );
         upperLimit = goalValue;
         lowerLimit = goalValue / 5;
         trends = Trends(data, upperLimit, lowerLimit);
@@ -140,24 +160,33 @@ class GoalContent extends Component {
         goalValue = this.props.patient.goals.PhysicalActivityGoal.value;
         unit = "min";
         xPos = 58;
-        data = this.props.patient.datasets[2].measurements;
-        upperLimit = goalValue;
-        lowerLimit = 285;
-        let sortedActivity = sortActivity(
-          data,
-          moment()
-            .subtract(2, "week")
-            .format("YYYY-MM-DDTHH:mm:ss"),
-          moment().format("YYYY-MM-DDTHH:mm:ss"),
-          true
+        data = getAggregatedDataForDataType(
+          this.props.baseInfo,
+          this.props.patient.datasets,
+          PHYSICAL_ACTIVITY,
+          "goal"
         );
-        currentValue = sortedActivity.length / 7;
+        let activeMin = 0;
+        for (let i = 0; i < data.length; i++) {
+          activeMin += data[i].y;
+        }
+        upperLimit = goalValue;
+        lowerLimit = goalValue / 5;
+        currentValue = activeMin;
         break;
       case "Karbohydrater":
         COLORS = generalColors;
         goalValue = this.props.patient.goals.CarbsGoal.value;
         unit = "g";
         xPos = 70;
+        data = getAggregatedDataForDataType(
+          this.props.baseInfo,
+          this.props.patient.datasets,
+          CARBOHYDRATES,
+          "goal"
+        );
+        upperLimit = goalValue;
+        lowerLimit = goalValue / 5;
         break;
       default:
         return;
