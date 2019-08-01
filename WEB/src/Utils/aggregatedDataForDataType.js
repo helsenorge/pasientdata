@@ -90,7 +90,8 @@ export const getAggregatedDataForDataType = (
           data,
           start,
           end,
-          format
+          format,
+          intervalName
         );
         return filteredActivityByDate;
       case BLOODSUGAR:

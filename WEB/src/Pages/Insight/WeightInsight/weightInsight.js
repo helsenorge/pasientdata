@@ -6,10 +6,6 @@ import PatternCard from "../InsightCards/patternCard";
 import ViewCard from "../InsightCards/viewCard";
 import CompareDataCard from "../InsightCards/compareDataCard";
 import GoalCard from "../InsightCards/goalCard";
-// import {
-//   bloodSugarGreatestChange,
-//   bloodSugarFluctuations
-// } from "../../../Utils/PatternCalculations/bloodSugarPatterns";
 import { connect } from "react-redux";
 import DateSelectorCard from "../../../components/DateSelectorCard/dateSelectorCard";
 import FHIRConnection from "../../../FHIRCommunication";

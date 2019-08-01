@@ -5,10 +5,10 @@ export default function fakeCarbData(startString, endString) {
   let end;
   let value;
   let data = [];
-  const percentage = 0.15;
+  const percentage = 0.18;
   let prefix = 0;
-  const mean = 55;
-  const range = 10;
+  const mean = 70;
+  const range = 3;
   let dataLength =
     moment(endString, "YYYY-MM-DDTHH:mm:ss").diff(
       moment(startString, "YYYY-MM-DDTHH:mm:ss"),
@@ -16,7 +16,7 @@ export default function fakeCarbData(startString, endString) {
     ) + 1;
 
   for (let i = 0; i < dataLength; i++) {
-    if (Math.random() < 0.3) {
+    if (Math.random() < 0.5) {
       prefix = -1;
     } else {
       prefix = 1;
