@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import CardComponent from "../../../components/Card/cardComponent";
-import DateDropdown from "../../../components/DateDropdown/dateDropdown";
+import CardComponent from "../../../Components/Card/cardComponent";
+import DateDropdown from "../../../Components/DateDropdown/dateDropdown";
 import "./insightCards.css";
 
 class ViewCard extends Component {

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { GoogleLogin } from "react-google-login";
 import moment from "moment";
 import { connect } from "react-redux";
-import { responseGoogle } from "../../api/googleFit";
+import { responseGoogle } from "../../API/googleFit";
 import { addInfo, onLoggedIn } from "../../Redux/actions";
 import "./loginPage.css";
 

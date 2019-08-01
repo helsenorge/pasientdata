@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import "./dashboard.css";
 import FHIRConnection from "../../FHIRCommunication";
-import CardComponent from "../../components/Card/cardComponent";
+import CardComponent from "../../Components/Card/cardComponent";
 import BloodSugarContent from "./DashboardContent/bloodSugarContent";
 import AddDataContent from "./DashboardContent/addDataContent";
 import changeGoalsContent from "./DashboardContent/changeGoalsContent";

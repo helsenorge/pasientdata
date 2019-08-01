@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import CardComponent from "../../../components/Card/cardComponent";
+import CardComponent from "../../../Components/Card/cardComponent";
 import getStartEndTimes from "../../../Utils/getStartEndTimes";
 import periodFromView from "../../../Utils/periodFromView";
 import { connect } from "react-redux";
-import PeriodStepper from "../../../components/PeriodStepper/periodStepper";
+import PeriodStepper from "../../../Components/PeriodStepper/periodStepper";
 import InsightGraph from "./insightGraph";
 import { getAggregatedDataForDataType } from "../../../Utils/aggregatedDataForDataType";
 

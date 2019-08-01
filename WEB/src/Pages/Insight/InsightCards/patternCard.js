@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import CardComponent from "../../../components/Card/cardComponent";
+import CardComponent from "../../../Components/Card/cardComponent";
 import "./patternCard.css";
 import { getAggregatedDataForDataType } from "../../../Utils/aggregatedDataForDataType";
 import { connect } from "react-redux";

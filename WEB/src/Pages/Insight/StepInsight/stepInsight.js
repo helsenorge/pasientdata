@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import NavigationBar from "../../../components/NavigationBar/navigationBar.js";
+import NavigationBar from "../../../Components/NavigationBar/navigationBar.js";
 import TrendGoalsCard from "../InsightCards/trendGoalsCard";
 import GraphCard from "../InsightCards/graphCard";
 import PatternCard from "../InsightCards/patternCard";
@@ -8,7 +8,7 @@ import CompareDataCard from "../InsightCards/compareDataCard";
 import GoalCard from "../InsightCards/goalCard";
 import { stepsGreatestPeriod } from "../../../Utils/PatternCalculations/stepsPatterns";
 import { connect } from "react-redux";
-import DateSelectorCard from "../../../components/DateSelectorCard/dateSelectorCard";
+import DateSelectorCard from "../../../Components/DateSelectorCard/dateSelectorCard";
 import FHIRConnection from "../../../FHIRCommunication";
 import { STEPS } from "../../../dataTypes";
 

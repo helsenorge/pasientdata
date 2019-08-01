@@ -3,7 +3,7 @@ import ViewCard from "../Insight/InsightCards/viewCard";
 import MultipleGraphCard from "./CompareDataCards/multipleGraphCard";
 import DataTypeCard from "./CompareDataCards/dataTypeCard";
 import GoToInsightCard from "./CompareDataCards/goToInsightCard";
-import DateSelectorCard from "../../components/DateSelectorCard/dateSelectorCard";
+import DateSelectorCard from "../../Components/DateSelectorCard/dateSelectorCard";
 import FHIRConnection from "../../FHIRCommunication";
 import { connect } from "react-redux";
 

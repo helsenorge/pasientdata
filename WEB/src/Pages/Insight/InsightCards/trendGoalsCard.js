@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import CardComponent from "../../../components/Card/cardComponent";
+import CardComponent from "../../../Components/Card/cardComponent";
 import FakeGlucoseData from "../../../Utils/fakeGlucose";
 import Trends from "../../../Utils/trends";
 import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";

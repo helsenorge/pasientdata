@@ -5,6 +5,7 @@
   "dependencies": {
     "@helsenorge/toolkit": "6.0.0",
     "axios": "^0.19.0",
+    "bootstrap": "^4.3.1",
     "fhirclient": "^2.0.7",
     "fstream": "^1.0.12",
     "install": "^0.12.2",
