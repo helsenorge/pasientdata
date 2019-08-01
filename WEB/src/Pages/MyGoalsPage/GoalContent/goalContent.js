@@ -1,14 +1,11 @@
 import "./goalContent.css";
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import moment from "moment";
 import ChangeGoalButton from "../../../Components/ChangeGoalButton/changeGoalButton";
 import { PieChart, Pie, Cell, Label, ResponsiveContainer } from "recharts";
 import CardComponent from "../../../Components/Card/cardComponent";
 import FakeGlucoseData from "../../../Utils/fakeGlucose";
 import Trends from "../../../Utils/trends";
-import aggregateData from "../../../Utils/aggregateData";
-import sortActivity from "../../../Utils/sortActivity";
 import { getAggregatedDataForDataType } from "../../../Utils/aggregatedDataForDataType";
 import {
   STEPS,
