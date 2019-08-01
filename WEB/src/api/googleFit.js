@@ -9,14 +9,16 @@ var urlBase =
   "https://www.googleapis.com/fitness/v1/users/me/dataSources/derived:com.google.";
 
 //1533122511000000000-1564658652000000000 - 01.01.18-01.01.19
+var startDate = moment().subtract(1, "year").format("X") + "000000000"
+var endDate = moment().format("X") + "000000000"
+var dataSetInterval = startDate + "-" + endDate;
 
-var startEndDate = (moment().subtract(1, "year").format("X") + "000000000") + "-" + (moment().format("X") + "000000000");
 
 export function getUserSteps(response) {
   return axios.get(
     urlBase +
       "step_count.delta:com.google.android.gms:estimated_steps/datasets/" +
-      startEndDate,
+      dataSetInterval,
     { headers: { Authorization: "Bearer " + response.accessToken } }
   );
 }
@@ -25,7 +27,7 @@ export function getUserWeight(response) {
   return axios.get(
     urlBase +
       "weight:com.google.android.gms:merge_weight/datasets/" +
-      startEndDate,
+      dataSetInterval,
     { headers: { Authorization: "Bearer " + response.accessToken } }
   );
 }
@@ -33,7 +35,7 @@ export function getUserWeight(response) {
 // export function getUserHeight(response) {
 //   return axios.get(
 //     urlBase +
-//       "height:com.google.android.gms:merge_height/datasets/" + startEndDate,
+//       "height:com.google.android.gms:merge_height/datasets/" + dataSetInterval,
 //     { headers: { Authorization: "Bearer " + response.accessToken } }
 //   );
 // }
@@ -41,7 +43,7 @@ export function getUserWeight(response) {
 // export function getUserHeartBeat(response) {
 //   return axios.get(
 //     urlBase +
-//       "heart_rate.bpm:com.google.android.gms:merge_heart_rate_bpm/datasets/" + startEndDate,
+//       "heart_rate.bpm:com.google.android.gms:merge_heart_rate_bpm/datasets/" + dataSetInterval,
 //     { headers: { Authorization: "Bearer " + response.accessToken } }
 //   );
 // }
@@ -49,7 +51,7 @@ export function getUserWeight(response) {
 // export function getUserBloodPressure(response) {
 //   return axios.get(
 //     urlBase +
-//       "blood_pressure:com.google.android.gms:merged/datasets/" + startEndDate,
+//       "blood_pressure:com.google.android.gms:merged/datasets/" + dataSetInterval,
 //     { headers: { Authorization: "Bearer " + response.accessToken } }
 //   );
 // }
@@ -57,7 +59,7 @@ export function getUserWeight(response) {
 // export function getUserBloodGlucose(response) {
 //   return axios.get(
 //     urlBase +
-//       "blood_glucose:com.google.android.gms:merged/datasets/" + startEndDate,
+//       "blood_glucose:com.google.android.gms:merged/datasets/" + dataSetInterval,
 //     { headers: { Authorization: "Bearer " + response.accessToken } }
 //   );
 // }
@@ -66,7 +68,7 @@ export function getUserActivities(response) {
   return axios.get(
     urlBase +
       "activity.segment:com.google.android.gms:merge_activity_segments/datasets/" +
-      startEndDate,
+      dataSetInterval,
     { headers: { Authorization: "Bearer " + response.accessToken } }
   );
 }
@@ -74,7 +76,7 @@ export function getUserActivities(response) {
 // export function getUserBatchedActivity(response) {
 //   return axios.get(
 //     urlBase +
-//       "activity.segment:com.google.android.gms:session_activity_segment/datasets/" + startEndDate,
+//       "activity.segment:com.google.android.gms:session_activity_segment/datasets/" + dataSetInterval,
 //     { headers: { Authorization: "Bearer " + response.accessToken } }
 //   );
 // }
