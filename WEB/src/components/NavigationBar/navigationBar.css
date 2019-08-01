@@ -131,18 +131,6 @@ a:hover {
     border-bottom: 1px solid;
   }
 
-  .a:link,
-  a:visited,
-  .tab-anchor {
-    border-bottom: 0;
-    text-align: center;
-    font-size: 18px;
-    font-weight: 400;
-    color: #006d84;
-    flex: none;
-    border: 2px solid transparent;
-  }
-
   /* Next & previous buttons */
   .prev,
   .next {

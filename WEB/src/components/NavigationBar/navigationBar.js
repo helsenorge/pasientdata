@@ -84,12 +84,12 @@ class NavigationBar extends Component {
             </NavLink>
           </li>
         </ul>
-        <a className="prev" onClick={() => this.scrollLeft()}>
+        <span className="prev" onClick={() => this.scrollLeft()}>
           &#10094;
-        </a>
-        <a className="next" onClick={() => this.scrollRight()}>
+        </span>
+        <span className="next" onClick={() => this.scrollRight()}>
           &#10095;
-        </a>
+        </span>
       </div>
     );
   }

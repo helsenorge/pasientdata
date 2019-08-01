@@ -1,6 +1,4 @@
-import findStartAndEndIndex from "./findStartAndEndIndex";
-
-export default function sortActivity(inData, startString, endString, spliced) {
+export default function sortActivity(inData) {
   let sleepArray = [];
   let activityArray = [];
   let notActiveArray = [];
@@ -60,18 +58,6 @@ export default function sortActivity(inData, startString, endString, spliced) {
       notClassifiedArray.push(inData[i]);
     }
   }
-  const { startIndex, endIndex } = findStartAndEndIndex(
-    activityArray,
-    startString,
-    endString
-  );
 
-  let slicedData = activityArray.slice(startIndex, endIndex);
-
-  switch (spliced) {
-    case true:
-      return slicedData;
-    default:
-      return activityArray;
-  }
+  return activityArray;
 }
