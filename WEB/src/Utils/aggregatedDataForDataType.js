@@ -86,14 +86,18 @@ export const getAggregatedDataForDataType = (
     const format = dateFormat || getFormat(periodName, intervalName);
     switch (dataType) {
       case PHYSICAL_ACTIVITY:
-        let filteredActivityByDate = filterActivityByDate(
-          data,
-          start,
-          end,
-          format,
-          intervalName
-        );
-        return filteredActivityByDate;
+        if (data === undefined || data.length === 0) {
+          return [];
+        } else {
+          let filteredActivityByDate = filterActivityByDate(
+            data,
+            start,
+            end,
+            format,
+            intervalName
+          );
+          return filteredActivityByDate;
+        }
       case BLOODSUGAR:
       case INSULIN:
       case STEPS:
