@@ -14,9 +14,11 @@ class MyGoals extends Component {
     if (this.props.baseInfo.isLoggedin) {
       return (
         <div>
-          <div className="row headtStyle">
-            <h1 className="h1Style">Sett mål</h1>
-            <div className="breadText">Viser status fra siste to uker</div>
+          <div className="insight-header">
+            <h1 className="header-container">Sett mål</h1>
+            <div className="status-container">
+              Viser status fra siste 7 dager
+            </div>
           </div>
           <GoalContent
             datatype="Blodsukker"
