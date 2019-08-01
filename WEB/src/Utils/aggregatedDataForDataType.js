@@ -58,12 +58,7 @@ export const getAggregatedDataForDataType = (
       case WEIGHT:
         return dataSets[1].measurements;
       case PHYSICAL_ACTIVITY:
-        let sortedActivity = sortActivity(
-          dataSets[2].measurements,
-          start,
-          end,
-          true
-        );
+        let sortedActivity = sortActivity(dataSets[2].measurements);
         return sortedActivity;
       case CARBOHYDRATES:
         return fakeCarbData(start, end);
@@ -91,7 +86,12 @@ export const getAggregatedDataForDataType = (
     const format = dateFormat || getFormat(periodName, intervalName);
     switch (dataType) {
       case PHYSICAL_ACTIVITY:
-        let filteredActivityByDate = filterActivityByDate(data);
+        let filteredActivityByDate = filterActivityByDate(
+          data,
+          start,
+          end,
+          format
+        );
         return filteredActivityByDate;
       case BLOODSUGAR:
       case INSULIN:
