@@ -23,7 +23,6 @@ class PatternCard extends Component {
     );
 
     let fluctuationText;
-    let fluctuationValue;
     if (this.props.fluctuation !== "none") {
       fluctuationText = this.props.fluctuation(view, aggregatedData, goals);
     } else {

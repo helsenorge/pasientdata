@@ -1,10 +1,28 @@
 import moment from "moment";
+import findStartAndEndIndex from "./findStartAndEndIndex";
 
-export default function filterActivityByDate(inData) {
-  let data = inData.map(item => ({
-    x: moment(item.start, "YYYY-MM-DDTHH:mm:ss").format("YYYY-MM-DD"),
+export default function filterActivityByDate(
+  inData,
+  startString,
+  endString,
+  outputFormat
+) {
+  const { startIndex, endIndex } = findStartAndEndIndex(
+    inData,
+    startString,
+    endString
+  );
+
+  let slicedData = inData.slice(startIndex, endIndex);
+
+  console.log(slicedData);
+
+
+  let data = slicedData.map(item => ({
+    x: moment(item.start, "YYYY-MM-DDTHH:mm:ss").format(outputFormat),
     y: item.value
   }));
+  console.log(data);
 
   // fillters based on date which is the x value and increments for each instance which is the y value.
   let filteredArray = Object.values(
@@ -15,5 +33,6 @@ export default function filterActivityByDate(inData) {
     }, {})
   );
 
+  console.log(filteredArray);
   return filteredArray;
 }

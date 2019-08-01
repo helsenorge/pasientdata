@@ -30,7 +30,6 @@ class WeightInsight extends Component {
             <GraphCard datatype={WEIGHT} />
             <TrendGoalsCard datatype="Vekt" />
             <PatternCard
-              datatype="Vekt"
               triangle={"down"}
               fluctuation={fluctuationText}
               greatestChange={greatestChangeText}

@@ -8,7 +8,6 @@ import { connect } from "react-redux";
 import aggregateData from "../../../Utils/aggregateData";
 import getStartEndTimes from "../../../Utils/getStartEndTimes";
 import findStartAndEndIndex from "../../../Utils/findStartAndEndIndex";
-import averageDataFunction from "../../../Utils/averageData";
 import sortActivity from "../../../Utils/sortActivity";
 
 /*
@@ -25,7 +24,7 @@ class TrendGoalsCard extends Component {
         return "";
       case "Skritt":
         return "skritt/dag";
-      case "Blodsukker":
+      case "Vekt":
         return "";
       case "FysiskAktivitet":
         return "";
@@ -56,11 +55,9 @@ class TrendGoalsCard extends Component {
     let unitMiddle = "%";
     let trends;
     let hasUpperLimit = true;
-    //let percentGoal;
     let upperGoal = 80;
     let lowerGoal = 70;
     let pieSideSize = 20;
-    //let { intervalName } = periodFromView(this.props.baseInfo.view);
 
     let { start, end } = getStartEndTimes(
       this.props.baseInfo.view,
@@ -75,13 +72,11 @@ class TrendGoalsCard extends Component {
     switch (this.props.datatype) {
       case "Blodsukker":
         data = FakeGlucoseData();
-        //percentGoal = 65;
         trendValue = 2;
         goalValue = this.props.patient.goals.BloodSugarWithinRangePercentageGoal
           .value;
         lowerLimit = this.props.patient.goals.BloodSugarRangeGoal.lower;
         upperLimit = this.props.patient.goals.BloodSugarRangeGoal.upper;
-        let averageData = averageDataFunction(data, "hour", start, end, "ddd");
         trends = Trends(data, upperLimit, lowerLimit);
         mean = trends.mean;
         timeAbove = trends.timeAbove;
@@ -381,7 +376,6 @@ class TrendGoalsCard extends Component {
                       dominantBaseline="end"
                       className="caption" // "distance-to-goal-text"
                     >
-                      {/* {goalText - Math.floor(currentValue)} skritt fra målet */}
                       {goalValue - Math.floor(currentValue) > 0
                         ? Math.abs(goalValue - Math.floor(currentValue)) +
                           " " +
