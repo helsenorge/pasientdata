@@ -37,7 +37,7 @@ export default function addGoal(
       lastUpdated: moment().format("YYYY-MM-DDThh:mm:ss")
     },
     subject: {
-      reference: fhirUrl + "/Patient/" + googleId
+      reference: fhirUrl() + "/Patient/" + googleId
     },
     target: target,
     note: { text: goal.type },
