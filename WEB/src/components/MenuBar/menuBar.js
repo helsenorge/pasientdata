@@ -66,7 +66,7 @@ class MenuBar extends Component {
     let menu;
     let menu2;
 
-    // Tried to make a inner dropdown, does not work with fliped horizontal view,
+    // Tried to make a inner dropdown, does not work with flipped horizontal view,
     // and does not close outer dropdown when clicked on inner buttons
 
     if (this.state.isToggleOn2) {
