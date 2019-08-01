@@ -105,11 +105,13 @@ class FHIRCommunication extends React.Component {
       ]
     };
     let optionsPatient = {
-      method: "POST",
+      method: "PUT",
       url: fhirUrl() + "/Patient/" + this.props.patient.googleId,
       headers: {
+        "cache-control": "no-cache",
         Connection: "keep-alive",
         "accept-encoding": "gzip, deflate",
+        Accept: "*/*",
         "Content-Type": "application/json"
       },
       body: JSON.stringify(patientJSON)
@@ -209,11 +211,13 @@ class FHIRCommunication extends React.Component {
       };
 
       let optionsObservation = {
-        method: "POST",
+        method: "PUT",
         url: fhirUrl() + "/Observation/" + observationId,
         headers: {
+          "cache-control": "no-cache",
           Connection: "keep-alive",
           "accept-encoding": "gzip, deflate",
+          Accept: "*/*",
           "Content-Type": "application/json"
         },
         body: JSON.stringify(observationJSON)

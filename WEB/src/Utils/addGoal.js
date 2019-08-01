@@ -46,11 +46,13 @@ export default function addGoal(
   };
 
   let goalOptions = {
-    method: "POST",
+    method: "PUT",
     url: fhirUrl() + "/Goal/" + goalId,
     headers: {
+      "cache-control": "no-cache",
       Connection: "keep-alive",
       "accept-encoding": "gzip, deflate",
+      Accept: "*/*",
       "Content-Type": "application/json"
     },
     body: JSON.stringify(goalJSON)
