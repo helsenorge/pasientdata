@@ -8,10 +8,15 @@ import moment from "moment";
 var urlBase =
   "https://www.googleapis.com/fitness/v1/users/me/dataSources/derived:com.google.";
 
+//1560981600000000000-1735686000000000000 - 20.06.19-01.01.25
+
+var startEndDate = "1560981600000000000-" + Date.now() * 1000000;
+
 export function getUserSteps(response) {
   return axios.get(
     urlBase +
-      "step_count.delta:com.google.android.gms:estimated_steps/datasets/631148400000000000-1735686000000000000",
+      "step_count.delta:com.google.android.gms:estimated_steps/datasets/" +
+      startEndDate,
     { headers: { Authorization: "Bearer " + response.accessToken } }
   );
 }
@@ -19,7 +24,8 @@ export function getUserSteps(response) {
 export function getUserWeight(response) {
   return axios.get(
     urlBase +
-      "weight:com.google.android.gms:merge_weight/datasets/631148400000000000-1735686000000000000",
+      "weight:com.google.android.gms:merge_weight/datasets/" +
+      startEndDate,
     { headers: { Authorization: "Bearer " + response.accessToken } }
   );
 }
@@ -27,7 +33,7 @@ export function getUserWeight(response) {
 // export function getUserHeight(response) {
 //   return axios.get(
 //     urlBase +
-//       "height:com.google.android.gms:merge_height/datasets/631148400000000000-1735686000000000000",
+//       "height:com.google.android.gms:merge_height/datasets/" + startEndDate,
 //     { headers: { Authorization: "Bearer " + response.accessToken } }
 //   );
 // }
@@ -35,7 +41,7 @@ export function getUserWeight(response) {
 // export function getUserHeartBeat(response) {
 //   return axios.get(
 //     urlBase +
-//       "heart_rate.bpm:com.google.android.gms:merge_heart_rate_bpm/datasets/631148400000000000-1735686000000000000",
+//       "heart_rate.bpm:com.google.android.gms:merge_heart_rate_bpm/datasets/" + startEndDate,
 //     { headers: { Authorization: "Bearer " + response.accessToken } }
 //   );
 // }
@@ -43,7 +49,7 @@ export function getUserWeight(response) {
 // export function getUserBloodPressure(response) {
 //   return axios.get(
 //     urlBase +
-//       "blood_pressure:com.google.android.gms:merged/datasets/631148400000000000-1735686000000000000",
+//       "blood_pressure:com.google.android.gms:merged/datasets/" + startEndDate,
 //     { headers: { Authorization: "Bearer " + response.accessToken } }
 //   );
 // }
@@ -51,7 +57,7 @@ export function getUserWeight(response) {
 // export function getUserBloodGlucose(response) {
 //   return axios.get(
 //     urlBase +
-//       "blood_glucose:com.google.android.gms:merged/datasets/631148400000000000-1735686000000000000",
+//       "blood_glucose:com.google.android.gms:merged/datasets/" + startEndDate,
 //     { headers: { Authorization: "Bearer " + response.accessToken } }
 //   );
 // }
@@ -59,7 +65,8 @@ export function getUserWeight(response) {
 export function getUserActivities(response) {
   return axios.get(
     urlBase +
-      "activity.segment:com.google.android.gms:merge_activity_segments/datasets/631148400000000000-1735686000000000000",
+      "activity.segment:com.google.android.gms:merge_activity_segments/datasets/" +
+      startEndDate,
     { headers: { Authorization: "Bearer " + response.accessToken } }
   );
 }
@@ -67,7 +74,7 @@ export function getUserActivities(response) {
 // export function getUserBatchedActivity(response) {
 //   return axios.get(
 //     urlBase +
-//       "activity.segment:com.google.android.gms:session_activity_segment/datasets/631148400000000000-1735686000000000000",
+//       "activity.segment:com.google.android.gms:session_activity_segment/datasets/" + startEndDate,
 //     { headers: { Authorization: "Bearer " + response.accessToken } }
 //   );
 // }
@@ -169,7 +176,6 @@ export function responseGoogle(response) {
         // batchedActivities
       ) => {
         let datasets = [];
-        const pic = response.profileObj.imageUrl + "?sz=200";
 
         let stepMeasurement = structureDatasets(steps);
         let weightMeasurement = structureDatasets(weight);
@@ -196,7 +202,6 @@ export function responseGoogle(response) {
           response.profileObj.givenName,
           response.profileObj.familyName,
           response.profileObj.email,
-          pic,
           datasets
         );
 

@@ -7,7 +7,6 @@ export const initialState = {
   lastname: "",
   fullname: "",
   email: "",
-  image: "",
   datasets: [],
   goals: defaultGoals
 };
@@ -22,7 +21,6 @@ export default function patientReducer(state = initialState, action) {
         lastname: action.lastname,
         fullname: action.firstname + " " + action.lastname,
         email: action.email,
-        image: action.image,
         datasets: action.datasets
       };
     }

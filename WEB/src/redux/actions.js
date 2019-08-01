@@ -15,14 +15,7 @@ import {
   CHANGE_GOAL
 } from "./actionType";
 
-export const addInfo = (
-  googleId,
-  firstname,
-  lastname,
-  email,
-  image,
-  datasets
-) => {
+export const addInfo = (googleId, firstname, lastname, email, datasets) => {
   return dispatch =>
     dispatch({
       type: SET_PATIENT,
@@ -30,7 +23,6 @@ export const addInfo = (
       firstname,
       lastname,
       email,
-      image,
       datasets
     });
 };
