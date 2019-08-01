@@ -39,6 +39,8 @@ export default function averageDataFunctions(
   start = moment(data[0].x, inputFormat).startOf(interval);
   sum = data[0].y;
 
+  //add null if dates are before the first measurements
+  //add the last measurement data before start time of the date period
   if (moment(endTime).isBefore(inData[0].start)) {
     while (moment(start).diff(startTime, interval + "s") - added > 0) {
       time = moment(startTime)
@@ -74,9 +76,9 @@ export default function averageDataFunctions(
     }
   }
 
+  //average data for each interval if there are more measurements in each interval
   let counter = 1;
   for (let i = 1; i < slicedLength; i++) {
-    // console.log("sliced length: ", slicedLength);
     currentDataTime = moment(data[i].x, inputFormat);
     if (
       moment(start).diff(currentDataTime.startOf(interval), interval + "s") ===
@@ -91,7 +93,6 @@ export default function averageDataFunctions(
         y: sum,
         x: start.format(outputFormat)
       });
-      //console.log(start.format(outputFormat));
       counter = 1;
       while (
         moment(start).diff(currentDataTime, interval + "s") + skipped <
@@ -106,19 +107,12 @@ export default function averageDataFunctions(
         });
         skipped++;
       }
-      //   console.log(
-      //     "for løkke: ",
-      //     moment(start)
-      //       .add(skipped, interval + "s")
-      //       .startOf(interval)
-      //       .format(outputFormat)
-      //   );
-      //console.log("sum etter else: ", sum);
       sum = data[i].y;
       start = currentDataTime.startOf(interval);
-      //console.log(start);
     }
   }
+
+  //add values at end of period
   if (sum !== null) {
     aggregated.push({ y: sum, x: start.format(outputFormat) });
   }
