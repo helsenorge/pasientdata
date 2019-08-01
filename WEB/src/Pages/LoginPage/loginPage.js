@@ -60,7 +60,7 @@ class LoginPage extends Component {
                 onFailure={responseGoogle.bind(this)}
                 responseType="id_token"
                 className="google-login-button"
-                buttonText="Sign in with you google account"
+                buttonText="Sign in with your google account"
               />
             }
           </div>
