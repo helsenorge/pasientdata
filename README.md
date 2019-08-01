@@ -25,7 +25,7 @@ Both programs can be downloaded here:
 When you have completed you can clone [our repo](https://github.com/helsenorgelab/pasientdata.git) and follow the setup for [backend](https://github.com/helsenorgelab/pasientdata#backend-setup) and then [frontend](https://github.com/helsenorgelab/pasientdata#frontend-setup)
 
 ## Backend setup: ##
-<!-- ***The backend is now running on a server, but we also have a local version. If you want to run it locally, follow the steps below.*** -->
+***The backend is now running on a server, but we also have a local version. If you want to run it locally, follow the steps below.***
 
 * Download and install the .NET core sdk 2.2 from their website: https://dotnet.microsoft.com/download
 * Then open the [spark.sln](https://github.com/helsenorgelab/pasientdata/blob/master/src/Spark/Spark.sln) file in Visual Studio, which is located in the Spark folder within the first src file in the repo.
@@ -38,7 +38,8 @@ When you have completed you can clone [our repo](https://github.com/helsenorgela
 * When you have chosen "Spark.NetCore" as your run module you can run and see a webpage with "localhost:5001" showing up.
 * Now the backend is setup and you can move to the [next section](https://github.com/helsenorgelab/pasientdata#frontend-setup).
 
-*If you are running the server externally, you need to change the useLocalServer variable to "false" in the file called [fhirUrl.js](https://github.com/helsenorgelab/pasientdata/blob/dev/WEB/src/fhirUrl.js).
+*If you want to run the server locally, you need to change the useLocalServer variable to "true" in the file called [fhirUrl.js](https://github.com/helsenorgelab/pasientdata/blob/dev/WEB/src/fhirUrl.js).
+<!-- *If you are running the server externally, you need to change the useLocalServer variable to "false" in the file called [fhirUrl.js](https://github.com/helsenorgelab/pasientdata/blob/dev/WEB/src/fhirUrl.js). -->
 
 ## Frontend setup: ##
 
