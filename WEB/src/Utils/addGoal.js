@@ -46,17 +46,12 @@ export default function addGoal(
   };
 
   let goalOptions = {
-    method: "PUT",
+    method: "POST",
     url: fhirUrl() + "/Goal/" + goalId,
     headers: {
-      "cache-control": "no-cache",
       Connection: "keep-alive",
       "accept-encoding": "gzip, deflate",
-      Host: "localhost:5000",
-      "Cache-Control": "no-cache",
-      Accept: "*/*",
-      "Content-Type": "application/json",
-      "User-Agent": "PostmanRuntime/7.15.0"
+      "Content-Type": "application/json"
     },
     body: JSON.stringify(goalJSON)
   };

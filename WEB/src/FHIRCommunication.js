@@ -105,7 +105,7 @@ class FHIRCommunication extends React.Component {
       ]
     };
     let optionsPatient = {
-      method: "PUT",
+      method: "POST",
       url: fhirUrl() + "/Patient/" + this.props.patient.googleId,
       headers: {
         Connection: "keep-alive",
@@ -209,7 +209,7 @@ class FHIRCommunication extends React.Component {
       };
 
       let optionsObservation = {
-        method: "PUT",
+        method: "POST",
         url: fhirUrl() + "/Observation/" + observationId,
         headers: {
           Connection: "keep-alive",
@@ -291,7 +291,7 @@ class FHIRCommunication extends React.Component {
           {/* moved them here, seems to have solved some issues, gets called after login has saved info to redux */}
           {this.addPatientIfNeeded()}
           {this.addObservations()}
-          {/* {this.readAllObservations()} */}
+          {this.readAllObservations()}
           {this.readAllGoals()}
           <Redirect to="/dashboard" />
         </div>
