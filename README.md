@@ -24,17 +24,6 @@ Both programs can be downloaded here:
 
 When you have completed you can clone [our repo](https://github.com/helsenorgelab/pasientdata.git) and follow the setup for [backend](https://github.com/helsenorgelab/pasientdata#backend-setup) and then [frontend](https://github.com/helsenorgelab/pasientdata#frontend-setup)
 
-<<<<<<< HEAD
-## Backend setup:
-
-The backend is now running on a server, but we also have a local version. If you want to run it locally, follow the steps below.
-
-- Download and install the .NET core sdk 2.2 from their website: https://dotnet.microsoft.com/download
-- Then open the [spark.sln](https://github.com/helsenorgelab/pasientdata/blob/master/src/Spark/Spark.sln) file in Visual Studio, which is located in the Spark folder within the first src file in the repo.
--
-- This should trigger some error, in which you click on the error and try to restore the packages (you might need to restart Visual Studio if you installed the sdk while having Visual Studio open)
-- When the packages are restored and the sdk is install, you can click on the arrow down button right next to the run button and change it to "Spark.NetCore" (see image below)
-=======
 ## Backend setup: ##
 ***The backend is now running on a server, but we also have a local version. If you want to run it locally, follow the steps below.***
 
@@ -42,7 +31,6 @@ The backend is now running on a server, but we also have a local version. If you
 * Then open the [spark.sln](https://github.com/helsenorgelab/pasientdata/blob/master/src/Spark/Spark.sln) file in Visual Studio, which is located in the Spark folder within the first src file in the repo.
   * This could trigger some error, in which case you should try to restore the packages (you might need to restart Visual Studio if you installed the sdk while having Visual Studio open)
 * When the packages are restored and the sdk is install, you can click on the arrow down button right next to the run button and change it to "Spark.NetCore" (see image below)
->>>>>>> dea0624d34bb97e11f4421b052572cf19617965b
 
 ![picture alt](https://github.com/helsenorgelab/pasientdata/blob/master/Documentation%20images/runBefore.PNG "This is how it should look when you start")
 ![picture alt](https://github.com/helsenorgelab/pasientdata/blob/master/Documentation%20images/runAfter.PNG "This is how it should look after you have changed to Spark.NetCore")
@@ -50,7 +38,7 @@ The backend is now running on a server, but we also have a local version. If you
 * When you have chosen "Spark.NetCore" as your run module you can run and see a webpage with "localhost:5001" showing up.
 * Now the backend is setup and you can move to the [next section](https://github.com/helsenorgelab/pasientdata#frontend-setup).
 
-\*If you are running the server externally, you need to change the useLocalServer variable to "false" in the file called [fhirUrl.js](https://github.com/helsenorgelab/pasientdata/blob/dev/WEB/src/fhirUrl.js).
+*If you are running the server externally, you need to change the useLocalServer variable to "false" in the file called [fhirUrl.js](https://github.com/helsenorgelab/pasientdata/blob/dev/WEB/src/fhirUrl.js).
 
 ## Frontend setup:
 
@@ -70,7 +58,7 @@ How to install packages:
 npm install
 ```
 
-\*if missing packages, install the package manually with:
+*if missing packages, install the package manually with:
 
 ```
 npm install --save "name_of_package"
@@ -84,8 +72,8 @@ To access google data you will need to log into: [concole.developers.google.com]
 <br/>
 How to set up credentials:
 
-* Select a project \*> new project
-  * set project name (let location be default: No organization) \*> create
+* Select a project -> new project
+  * set project name (let location be default: No organization) -> create
 * Select your [new project](https://console.developers.google.com/projectcreate?previousPage=%2Fapis%2Fdashboard%3Fproject%3Dehelse*247812&folder=&organizationId=0)
   * Click "APIs & Services" on the left
     * Click "+ ENABLE APIS AND SERVICES"
@@ -115,38 +103,6 @@ To retrieve information from Google, you can use a get request with the API call
 Here are some of the datasources regarding Google fit:
 
 **Get steps:**
-<<<<<<< HEAD
-
-- Endpoint: derived:com.google.step_count.delta:com.google.android.gms:estimated_steps
-
-**Get body weight:**
-
-- Endpoint: derived:com.google.weight:com.google.android.gms:merge_weight
-
-**Get height:**
-
-- Endpoint: derived:com.google.height:com.google.android.gms:merge_height
-
-**Get Heart beats:**
-
-- Endpoint: derived:com.google.heart_rate.bpm:com.google.android.gms:merge_heart_rate_bpm
-
-**Get Blood pressure:**
-
-- Endpoint: derived:com.google.blood_pressure:com.google.android.gms:merged
-
-**Get Blood glucose:**
-
-- Endpoint: derived:com.google.blood_glucose:com.google.android.gms:merged
-
-**Get Activities:**
-
-- Endpoint: derived:com.google.activity.segment:com.google.android.gms:merge_activity_segments
-
-**Get Batched Activities:**
-
-- Endpoint: derived:com.google.activity.segment:com.google.android.gms:session_activity_segment
-=======
 * Endpoint: derived:com.google.step_count.delta:com.google.android.gms:estimated_steps
 
 **Get body weight:**
@@ -169,7 +125,6 @@ Here are some of the datasources regarding Google fit:
 
 **Get Batched Activities:**
 * Endpoint: derived:com.google.activity.segment:com.google.android.gms:session_activity_segment
->>>>>>> dea0624d34bb97e11f4421b052572cf19617965b
 
 **List of activity types:**
 https://developers.google.com/fit/rest/v1/reference/activity-types
