@@ -9,6 +9,15 @@ import aggregateData from "../../../Utils/aggregateData";
 import getStartEndTimes from "../../../Utils/getStartEndTimes";
 import findStartAndEndIndex from "../../../Utils/findStartAndEndIndex";
 import sortActivity from "../../../Utils/sortActivity";
+import {
+  INSULIN,
+  STEPS,
+  WEIGHT,
+  CARBOHYDRATES,
+  PHYSICAL_ACTIVITY,
+  BLOODSUGAR
+} from "../../../dataTypes";
+import { getAggregatedDataForDataType } from "../../../Utils/aggregatedDataForDataType";
 
 /*
  * Calculates trends and renders the trend card. Most of the calculations is figuring out the
@@ -71,7 +80,12 @@ class TrendGoalsCard extends Component {
     let lowerIsBetter = false;
     switch (this.props.datatype) {
       case "Blodsukker":
-        data = FakeGlucoseData();
+        data = getAggregatedDataForDataType(
+          this.props.baseInfo,
+          this.props.patient.datasets,
+          BLOODSUGAR,
+          "trend"
+        );
         trendValue = 2;
         goalValue = this.props.patient.goals.BloodSugarWithinRangePercentageGoal
           .value;
@@ -88,7 +102,12 @@ class TrendGoalsCard extends Component {
         hasUpperLimit = false;
         break;
       case "Insulin":
-        data = this.props.patient.datasets[0].measurements;
+        data = getAggregatedDataForDataType(
+          this.props.baseInfo,
+          this.props.patient.datasets,
+          INSULIN,
+          "trend"
+        );
         upperLimit = 20;
         lowerLimit = 5;
         trendValue = 2;
@@ -110,7 +129,12 @@ class TrendGoalsCard extends Component {
         break;
       case "Skritt":
         hasUpperLimit = false;
-        data = this.props.patient.datasets[0].measurements;
+        data = getAggregatedDataForDataType(
+          this.props.baseInfo,
+          this.props.patient.datasets,
+          STEPS,
+          "trend"
+        );
         upperLimit = 10000000;
         lowerLimit = 15000;
         goalValue = this.props.patient.goals.StepsGoal.value;
@@ -140,12 +164,23 @@ class TrendGoalsCard extends Component {
         unit = " kg";
         unitMiddle = "kg";
         pieSideSize = 20;
-        data = this.props.patient.datasets[1].measurements;
+        data = getAggregatedDataForDataType(
+          this.props.baseInfo,
+          this.props.patient.datasets,
+          WEIGHT,
+          "trend"
+        );
         goalValue = this.props.patient.goals.WeightGoal.value;
         hasUpperLimit = false;
         lowerIsBetter = true;
         break;
       case "Karbohydrater":
+        data = getAggregatedDataForDataType(
+          this.props.baseInfo,
+          this.props.patient.datasets,
+          CARBOHYDRATES,
+          "trend"
+        );
         goalValue = 280;
         unitMiddle = "g";
         goalValue = this.props.patient.goals.CarbsGoal.value;
@@ -156,7 +191,12 @@ class TrendGoalsCard extends Component {
       case "FysiskAktivitet":
         unitMiddle = "min";
         unit = " min";
-        data = this.props.patient.datasets[2].measurements;
+        data = getAggregatedDataForDataType(
+          this.props.baseInfo,
+          this.props.patient.datasets,
+          PHYSICAL_ACTIVITY,
+          "trend"
+        );
         goalValue = this.props.patient.goals.PhysicalActivityGoal.value;
         hasUpperLimit = false;
         let sortedActivity = sortActivity(

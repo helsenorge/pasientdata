@@ -115,9 +115,9 @@ export const getAggregatedDataForDataType = (
     [BLOODSUGAR]: FakeGlucoseData().map(data => data.value),
     [INSULIN]: [25, 22, 30, 32, 28, 25, 33, 35, 28],
     [WEIGHT]: [72, 72, 72, 69, 69, 68, 70, 72, 72, 72, 69, 69, 68, 70],
-    [PHYSICAL_ACTIVITY]: [40, 28, 0, 45, 0, 0, 55, 65, 36],
+    [PHYSICAL_ACTIVITY]: [40, 84, 32, 45, 18, 71, 55, 65, 36],
     [CARBOHYDRATES]: [250, 260, 220, 270, 300, 230, 150, 180],
-    [STEPS]: [2500, 2600, 2200, 2700, 3000, 2300, 1500, 1800]
+    [STEPS]: [5000, 3600, 4200, 6700, 7000, 4600, 3000, 2200]
   };
 
   let aggregated = getAggregatedData();
