@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import moment from "moment";
-import CardComponent from "../../../Components/Card/cardComponent";
+import CardComponent from "../../../components/Card/cardComponent";
 import { connect } from "react-redux";
 import { XAxis, BarChart, ResponsiveContainer } from "recharts";
-import PeriodStepper from "../../../Components/PeriodStepper/periodStepper";
+import PeriodStepper from "../../../components/PeriodStepper/periodStepper";
 import periodFromView from "../../../Utils/periodFromView";
 import aggregateData from "../../../Utils/aggregateData";
 import getStartEndTimes from "../../../Utils/getStartEndTimes";

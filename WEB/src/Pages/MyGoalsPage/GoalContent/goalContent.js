@@ -1,9 +1,9 @@
 import "./goalContent.css";
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import ChangeGoalButton from "../../../Components/ChangeGoalButton/changeGoalButton";
+import ChangeGoalButton from "../../../components/ChangeGoalButton/changeGoalButton";
 import { PieChart, Pie, Cell, Label, ResponsiveContainer } from "recharts";
-import CardComponent from "../../../Components/Card/cardComponent";
+import CardComponent from "../../../components/Card/cardComponent";
 import FakeGlucoseData from "../../../Utils/fakeGlucose";
 import Trends from "../../../Utils/trends";
 import { getAggregatedDataForDataType } from "../../../Utils/aggregatedDataForDataType";

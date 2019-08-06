@@ -15,7 +15,7 @@ import CompareData from "./Pages/CompareDataPage/compareDataPage";
 
 import FHIRCommunication from "./FHIRCommunication";
 import NotFoundPage from "./Pages/NotFoundPage/NotFoundPage";
-import MenuBar from "./Components/MenuBar/menuBar";
+import MenuBar from "./components/MenuBar/menuBar";
 import StartFromTop from "./StartFromTop";
 import { connect } from "react-redux";
 
