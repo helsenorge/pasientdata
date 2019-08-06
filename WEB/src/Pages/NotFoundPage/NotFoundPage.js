@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import PageNotFound from "../../Images/medError.jpg";
+import PageNotFound from "../../Images/medErrorImage.jpg";
 import "./NotFoundPage.css";
 
 /*
