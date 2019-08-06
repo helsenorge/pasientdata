@@ -16,11 +16,23 @@ npm start
 
 #### How to deploy
 
-Standing in the WEB folder, execute the following command: npm run-script build
+Standing in the WEB folder, execute the following command:
 
-Then install surge: npm i --global surge
+```
+npm run-script build
+```
 
-Run surge: surge
+Then install surge:
+
+```
+npm i --global surge
+```
+
+Run surge:
+
+```
+surge
+```
 
 Then make a surge user through the terminal by following the instructions given there.
 
