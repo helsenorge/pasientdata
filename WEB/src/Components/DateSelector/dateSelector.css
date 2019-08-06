@@ -1,0 +1,5 @@
+tbody td {
+  white-space: nowrap !important;
+  text-align: center;
+  padding-left: 6px;
+}
