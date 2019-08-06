@@ -42,6 +42,13 @@ export const getAggregatedDataForDataType = (
       .add(1, "day");
     end = moment();
     intervalName = "day";
+  } else if(pageType === "prevInnsight") {
+    let {startPrev, endPrev } = getStartEndTimes(
+      baseInfo.view,
+      parseInt(baseInfo.nrOfIntervalsBack, 10) + 1
+    );
+    start = startPrev;
+    end = endPrev;
   }
   if (
     baseInfo.view === "custom" &&

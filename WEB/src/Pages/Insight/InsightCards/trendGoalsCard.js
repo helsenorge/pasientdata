@@ -5,17 +5,12 @@ import Trends from "../../../Utils/trends";
 import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
 import "./trendGoalsCard.css";
 import { connect } from "react-redux";
-import aggregateData from "../../../Utils/aggregateData";
-import getStartEndTimes from "../../../Utils/getStartEndTimes";
-import findStartAndEndIndex from "../../../Utils/findStartAndEndIndex";
-import sortActivity from "../../../Utils/sortActivity";
 import {
   INSULIN,
   STEPS,
   WEIGHT,
   CARBOHYDRATES,
-  PHYSICAL_ACTIVITY,
-  BLOODSUGAR
+  PHYSICAL_ACTIVITY
 } from "../../../dataTypes";
 import { getAggregatedDataForDataType } from "../../../Utils/aggregatedDataForDataType";
 
@@ -67,25 +62,10 @@ class TrendGoalsCard extends Component {
     let upperGoal = 80;
     let lowerGoal = 70;
     let pieSideSize = 20;
-
-    let { start, end } = getStartEndTimes(
-      this.props.baseInfo.view,
-      this.props.baseInfo.nrOfIntervalsBack
-    );
-
-    let { start: startPrev, end: endPrev } = getStartEndTimes(
-      this.props.baseInfo.view,
-      parseInt(this.props.baseInfo.nrOfIntervalsBack, 10) + 1
-    );
     let lowerIsBetter = false;
     switch (this.props.datatype) {
       case "Blodsukker":
-        data = getAggregatedDataForDataType(
-          this.props.baseInfo,
-          this.props.patient.datasets,
-          BLOODSUGAR,
-          "trend"
-        );
+        data = FakeGlucoseData();
         trendValue = 2;
         goalValue = this.props.patient.goals.BloodSugarWithinRangePercentageGoal
           .value;
@@ -112,10 +92,7 @@ class TrendGoalsCard extends Component {
         lowerLimit = 5;
         trendValue = 2;
         goalValue = 75;
-        const { startIndex, endIndex } = findStartAndEndIndex(data, start, end);
-
-        let slicedData = data.slice(startIndex, endIndex);
-        trends = Trends(slicedData, upperLimit, lowerLimit);
+        trends = Trends(data, upperLimit, lowerLimit);
         mean = trends.mean;
         timeAbove = trends.timeAbove;
         timeWithin = trends.timeWithin;
@@ -129,7 +106,7 @@ class TrendGoalsCard extends Component {
         break;
       case "Skritt":
         hasUpperLimit = false;
-        data = getAggregatedDataForDataType(
+        aggregated = getAggregatedDataForDataType(
           this.props.baseInfo,
           this.props.patient.datasets,
           STEPS,
@@ -139,14 +116,12 @@ class TrendGoalsCard extends Component {
         lowerLimit = 15000;
         goalValue = this.props.patient.goals.StepsGoal.value;
         trendValue = 200;
-        aggregated = aggregateData(data, "day", start, end, "ddd");
         trends = Trends(aggregated, upperLimit, lowerLimit);
-        let prevAggregated = aggregateData(
-          data,
-          "day",
-          startPrev,
-          endPrev,
-          "ddd"
+        let prevAggregated = getAggregatedDataForDataType(
+          this.props.baseInfo,
+          this.props.patient.datasets,
+          STEPS,
+          "prevInnsight"
         );
         let prevTrends = Trends(prevAggregated, upperLimit, lowerLimit);
         mean = trends.mean;
@@ -157,10 +132,9 @@ class TrendGoalsCard extends Component {
         trendValue = mean - prevTrends.mean;
         unit = "";
         unitMiddle = "skritt";
-        pieSideSize = 2000;
+        pieSideSize = Math.floor(Math.abs(goalValue - currentValue + 1000) / 1000) * 1000;
         break;
       case "Vekt":
-        goalValue = 65;
         unit = " kg";
         unitMiddle = "kg";
         pieSideSize = 20;
@@ -173,6 +147,9 @@ class TrendGoalsCard extends Component {
         goalValue = this.props.patient.goals.WeightGoal.value;
         hasUpperLimit = false;
         lowerIsBetter = true;
+        currentValue = 0;
+        data.forEach(e => currentValue = currentValue + e.y);
+        currentValue = currentValue / data.length;
         break;
       case "Karbohydrater":
         data = getAggregatedDataForDataType(
@@ -181,12 +158,15 @@ class TrendGoalsCard extends Component {
           CARBOHYDRATES,
           "trend"
         );
-        goalValue = 280;
         unitMiddle = "g";
         goalValue = this.props.patient.goals.CarbsGoal.value;
         unit = " g";
         hasUpperLimit = false;
         lowerIsBetter = true;
+        currentValue = 0;
+        data.forEach(e => currentValue = currentValue + e.y);
+        currentValue = currentValue / data.length;
+        pieSideSize = (Math.floor(Math.abs(goalValue - currentValue + 100) / 100) * 100);
         break;
       case "FysiskAktivitet":
         unitMiddle = "min";
@@ -199,16 +179,15 @@ class TrendGoalsCard extends Component {
         );
         goalValue = this.props.patient.goals.PhysicalActivityGoal.value;
         hasUpperLimit = false;
-        let sortedActivity = sortActivity(
-          this.props.patient.datasets[2].measurements,
-          start,
-          end,
-          true
-        );
-        currentValue = sortedActivity.length;
+        currentValue = 0;
+        data.forEach(e => currentValue = currentValue + e.y);
+        currentValue = currentValue / (data.length / 7);
+        pieSideSize = Math.floor(Math.abs(goalValue - currentValue + 100) / 100) * 100;
         break;
       default:
     }
+
+    pieSideSize = pieSideSize || 20;
 
     // Deciding which colors to use.
 
