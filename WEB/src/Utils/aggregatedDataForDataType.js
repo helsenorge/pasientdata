@@ -42,8 +42,8 @@ export const getAggregatedDataForDataType = (
       .add(1, "day");
     end = moment();
     intervalName = "day";
-  } else if(pageType === "prevInnsight") {
-    let {startPrev, endPrev } = getStartEndTimes(
+  } else if (pageType === "prevInnsight") {
+    let { startPrev, endPrev } = getStartEndTimes(
       baseInfo.view,
       parseInt(baseInfo.nrOfIntervalsBack, 10) + 1
     );
@@ -134,7 +134,7 @@ export const getAggregatedDataForDataType = (
     const fakeData = fakeDataForDataType[dataType];
     aggregated = aggregated.map((data, index) => ({
       x: data.x,
-      y: fakeData[index % fakeData.length]
+      y: Math.floor(fakeData[index % fakeData.length])
     }));
   }
   return aggregated;
