@@ -4,7 +4,10 @@
 
 This is a project done by 5 summer interns, who will find and create a solution for finding and collecting data from devices that patients use. They will do user tests as well as develop a webapp for visualising and storing data with the FHIR standard.
 
-**Demo:** http://helseinnsikt.surge.sh/
+### Demo ### 
+** Disclaimer: we do not reccomend logging in with your own Google account if you do not want to share information about your steps, physical activity minutes and weight.
+
+Link: http://helseinnsikt.surge.sh/
 
 #### How to run
 
