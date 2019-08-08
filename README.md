@@ -16,7 +16,7 @@ npm start
 
 #### How to deploy
 
-Standing in the WEB folder, execute the following command:
+Standing in the /src/citizenapp folder, execute the following command:
 
 ```
 npm run-script build
