@@ -53,6 +53,25 @@ class LoginPage extends Component {
             <p>Logg inn for å registrere din data</p>
           </div>
           <div className="col-sm-12 col-md-12 login-button">
+            <div className="skipLink">
+              <br />
+              <div className="warining-text">Advarsel:</div> Prøv gjerne
+              løsningen, men den kjører på usikker infrastruktur, bruk helst
+              eksempeldata. Hvis du vil teste innlogging med Google og
+              synkronisering av data så må du lage en egen konto som du bruker
+              for å teste løsningen slik at ikke dine personopplysninger deles.
+              <div>
+                <br />
+                <Link to="/dashboard">
+                  <span onClick={this.skipPressed}> Klikk her</span>
+                </Link>
+                <span className="skipText">
+                  for å bruke siden uten Google konto med eksempeldata.
+                </span>
+              </div>
+            </div>
+          </div>
+          <div className="col-sm-12 col-md-12 login-button">
             {
               <GoogleLogin
                 autoLoad={false}
@@ -71,19 +90,6 @@ class LoginPage extends Component {
                 buttonText="Logg inn med din Google-konto"
               />
             }
-          </div>
-          <div className="col-sm-12 col-md-12 login-button">
-            <div className="skipLink">
-            <Link to="/dashboard">
-              <span onClick={this.skipPressed}>
-                Klikk her 
-              </span>
-              {/* <button >
-                Hopp over Google Logg in
-              </button> */}
-            </Link>
-            <span className="skipText">for å bruke siden uten Google konto med falsk data.</span>
-            </div>
           </div>
         </div>
       </div>
