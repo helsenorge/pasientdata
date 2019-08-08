@@ -59,8 +59,8 @@ When you have completed you can clone [our repo](https://github.com/helsenorgela
   - This could trigger some error, in which case you should try to restore the packages (you might need to restart Visual Studio if you installed the sdk while having Visual Studio open)
 - When the packages are restored and the sdk is install, you can click on the arrow down button right next to the run button and change it to "Spark.NetCore" (see image below)
 
-![picture alt](https://github.com/helsenorgelab/pasientdata/blob/master/Documentation%20images/runBefore.PNG "This is how it should look when you start")
-![picture alt](https://github.com/helsenorgelab/pasientdata/blob/master/Documentation%20images/runAfter.PNG "This is how it should look after you have changed to Spark.NetCore")
+![picture alt](https://github.com/helsenorgelab/pasientdata/blob/master/docs/images/runBefore.PNG "This is how it should look when you start")
+![picture alt](https://github.com/helsenorgelab/pasientdata/blob/master/docs/images/runAfter.PNG "This is how it should look after you have changed to Spark.NetCore")
 
 - When you have chosen "Spark.NetCore" as your run module you can run and see a webpage with "localhost:5001" showing up.
 - Now the backend is setup and you can move to the [next section](https://github.com/helsenorgelab/pasientdata#frontend-setup).
