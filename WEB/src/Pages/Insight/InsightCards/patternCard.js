@@ -73,7 +73,7 @@ class PatternCard extends Component {
               className="flex-children-pattern-text"
               style={{ color: "black" }}
             >
-              {greatestChangeText}
+              {fluctuationText}
             </div>
           </div>
           <br />
@@ -86,7 +86,7 @@ class PatternCard extends Component {
               />
             </div>
             <div className="flex-children-pattern-text">
-              <div style={{ color: "black" }}>{fluctuationText}</div>
+              <div style={{ color: "black" }}>{greatestChangeText}</div>
             </div>
           </div>
           <div />

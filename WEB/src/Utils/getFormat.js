@@ -73,6 +73,6 @@ export default function getFormat(view, interval) {
           return;
       }
     default:
-      return "YYYY-MM-DDTHH:mm:ss";
+      return "DD.MM.YY";
   }
 }
