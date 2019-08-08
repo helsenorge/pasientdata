@@ -54,6 +54,7 @@ class LoginPage extends Component {
           </div>
           <div className="col-sm-12 col-md-12 login-button">
             <div className="skipLink">
+              <br />
               <div className="warining-text">Advarsel:</div> Prøv gjerne
               løsningen, men den kjører på usikker infrastruktur, bruk helst
               eksempeldata. Hvis du vil teste innlogging med Google og
