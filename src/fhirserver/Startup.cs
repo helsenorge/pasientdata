@@ -36,6 +36,17 @@ namespace fhirserver
             
             StoreSettings storeSettings = new StoreSettings();
             Configuration.Bind("StoreSettings", storeSettings);
+
+            // Set up a default policy for CORS that accepts any origin, method and header.
+            // only for test purposes.
+            services.AddCors(options =>
+                options.AddDefaultPolicy(policy =>
+                {
+                    policy.AllowAnyOrigin();
+                    policy.AllowAnyMethod();
+                    policy.AllowAnyHeader();
+                })
+            );
       
             services.AddMongoFhirStore(storeSettings);
             services.AddFhir(sparkSettings);
@@ -71,6 +82,8 @@ namespace fhirserver
             app.UseStaticFiles();
             app.UseCookiePolicy();
 
+            app.UseCors();
+            
             app.UseFhir(routes =>
             {
                 routes.MapRoute(
