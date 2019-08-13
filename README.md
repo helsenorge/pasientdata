@@ -60,14 +60,8 @@ When you have completed you can clone [our repo](https://github.com/helsenorgela
 **_The backend is now running on a server, but we also have a local version. If you want to run it locally, follow the steps below._**
 
 - Download and install the .NET core sdk 2.2 from their website: https://dotnet.microsoft.com/download
-- Then open the [spark.sln](https://github.com/helsenorgelab/pasientdata/blob/master/src/Spark/Spark.sln) file in Visual Studio, which is located in the Spark folder within the first src file in the repo.
-  - This could trigger some error, in which case you should try to restore the packages (you might need to restart Visual Studio if you installed the sdk while having Visual Studio open)
-- When the packages are restored and the sdk is install, you can click on the arrow down button right next to the run button and change it to "Spark.NetCore" (see image below)
-
-![picture alt](https://github.com/helsenorgelab/pasientdata/blob/master/docs/images/runBefore.PNG "This is how it should look when you start")
-![picture alt](https://github.com/helsenorgelab/pasientdata/blob/master/docs/images/runAfter.PNG "This is how it should look after you have changed to Spark.NetCore")
-
-- When you have chosen "Spark.NetCore" as your run module you can run and see a webpage with "localhost:5001" showing up.
+- Open a terminal in `src/fhirserver` folder, and start the FHIR server with command `dotnet run`
+- Check that the Spark FHIR Server is running, by opening `https:\\localhost:5001` in your browser
 - Now the backend is setup and you can move to the [next section](https://github.com/helsenorgelab/pasientdata#frontend-setup).
 
 \*If you want to run the server locally, you need to change the useLocalServer variable to "true" in the file called [fhirUrl.js](https://github.com/helsenorgelab/pasientdata/blob/dev/WEB/src/fhirUrl.js).
@@ -126,47 +120,4 @@ How to set up credentials:
       - Add "Authorized redirect URIs" (also http://localhost:3000 if you have a single page app)
 - Copy your clientID and paste it over the clientID in the "[googleFit.js](https://github.com/helsenorgelab/pasientdata/blob/master/WEB/src/api/googleFit.js)" file under the [api folder](https://github.com/helsenorgelab/pasientdata/tree/master/WEB/src/api).
 
-# Additional information
 
-## Google Fit Endpoints:
-
-To retrieve information from Google, you can use a get request with the API call: "https://www.googleapis.com/fitness/v1/users/me/dataSources/". This will output all the datasources you have available, you will need to define the scope to the type of dataSources you want. After you have specified the dataSource, you can ask for a specific dataSet which will be a set between a specific timeintervall in nanoseconds (e.g. from: 631148400000000000 = 01/01/1990 00:00 GMT+1, to 1735686000000000000 = 01/01/2025 00:00 GMT+1).
-
-### Datasources:
-
-Here are some of the datasources regarding Google fit:
-
-**Get steps:**
-
-- Endpoint: derived:com.google.step_count.delta:com.google.android.gms:estimated_steps
-
-**Get body weight:**
-
-- Endpoint: derived:com.google.weight:com.google.android.gms:merge_weight
-
-**Get height:**
-
-- Endpoint: derived:com.google.height:com.google.android.gms:merge_height
-
-**Get Heart beats:**
-
-- Endpoint: derived:com.google.heart_rate.bpm:com.google.android.gms:merge_heart_rate_bpm
-
-**Get Blood pressure:**
-
-- Endpoint: derived:com.google.blood_pressure:com.google.android.gms:merged
-
-**Get Blood glucose:**
-
-- Endpoint: derived:com.google.blood_glucose:com.google.android.gms:merged
-
-**Get Activities:**
-
-- Endpoint: derived:com.google.activity.segment:com.google.android.gms:merge_activity_segments
-
-**Get Batched Activities:**
-
-- Endpoint: derived:com.google.activity.segment:com.google.android.gms:session_activity_segment
-
-**List of activity types:**
-https://developers.google.com/fit/rest/v1/reference/activity-types
