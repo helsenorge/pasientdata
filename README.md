@@ -1,5 +1,7 @@
 # Helseinnsikt
 
+**Pasientdata er kildekoden fra sommerstudentprosjektet 2019. Prosjektet vedlikeholdes ikke, og er ikke ment for bruk med reelle personopplysninger.**
+
 ### About the project
 
 This is a project done by 5 summer interns, who will find and create a solution for finding and collecting data from devices that patients use. They will do user tests as well as develop a webapp for visualising and storing data with the FHIR standard.
